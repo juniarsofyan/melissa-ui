@@ -22,10 +22,65 @@ export default {
             }
         ],
         link: [{
-            rel: 'icon',
-            type: 'image/x-icon',
-            href: '/favicon.ico'
-        }]
+                rel: 'icon',
+                type: 'image/x-icon',
+                href: '/favicon.ico'
+            },
+            {
+                rel: 'stylesheet',
+                type: 'text/css',
+                href: 'https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i%7CLato:300,300i,400,400i,700,700i,900%7COpen+Sans:300,300i,400,400i,600,600i,700,700i,800',
+            }
+        ],
+        script: [{
+                src: 'assets/js/jquery-3.3.1.min.js'
+            },
+            {
+                src: 'assets/js/bootstrap.min.js'
+            },
+            {
+                src: 'assets/js/owl.carousel.min.js'
+            },
+            {
+                src: 'assets/js/magnific-popup.min.js'
+            },
+            {
+                src: 'assets/js/isotope.min.js'
+            },
+            {
+                src: 'assets/js/jquery.mCustomScrollbar.min.js'
+            },
+            {
+                src: 'assets/js/jquery-ui.min.js'
+            },
+            {
+                src: 'assets/js/mobilemenu.js'
+            },
+            {
+                src: 'assets/js/chosen.jquery.min.js'
+            },
+            {
+                src: 'assets/js/slick.min.js'
+            },
+            {
+                src: 'assets/js/jquery.elevateZoom.min.js'
+            },
+            {
+                src: 'assets/js/jquery.actual.min.js'
+            },
+            {
+                src: 'assets/js/jquery.fancybox.js'
+            },
+            {
+                src: 'assets/js/lightbox.min.js'
+            },
+            {
+                src: 'assets/js/jquery.mCustomScrollbar.min.js'
+            },
+            {
+                src: 'assets/js/frontend-plugin.js'
+            }
+        ]
     },
     /*
      ** Customize the progress-bar color
@@ -36,7 +91,22 @@ export default {
     /*
      ** Global CSS
      */
-    css: [],
+    css: [
+        '@/assets/css/bootstrap.min.css',
+        '@/assets/css/font-awesome.min.css',
+        '@/assets/css/owl.carousel.min.css',
+        '@/assets/css/animate.min.css',
+        '@/assets/css/jquery-ui.css',
+        '@/assets/css/slick.css',
+        '@/assets/css/chosen.min.css',
+        '@/assets/css/pe-icon-7-stroke.css',
+        '@/assets/css/magnific-popup.min.css',
+        '@/assets/css/lightbox.min.css',
+        '@/assets/css/jquery.fancybox.css',
+        '@/assets/css/jquery.mCustomScrollbar.min.css',
+        '@/assets/css/style.css',
+        '@/assets/css/style-custom.css'
+    ],
     /*
      ** Plugins to load before mounting the App
      */
