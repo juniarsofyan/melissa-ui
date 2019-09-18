@@ -7,7 +7,9 @@
         <SlideBanner />
 
         <!--shop title-->
-        <h3 class="custom_blog_title">#Brightening</h3>
+        <nuxt-link to="/products/brightening" tag="h3" class="custom_blog_title">
+            <a href="#">#Brightening</a>
+        </nuxt-link>
 
         <!--product lists-->
         <ul class="row list-products auto-clear equal-container product-grid">
@@ -17,7 +19,9 @@
         </ul>
 
         <!--shop title-->
-        <h3 class="custom_blog_title">#Purifying</h3>
+        <nuxt-link to="/products/purify" tag="h3" class="custom_blog_title">
+            <a href="#">#Purify</a>
+        </nuxt-link>
         
         <!--product lists-->
         <ul class="row list-products auto-clear equal-container product-grid">
@@ -27,7 +31,9 @@
         </ul>
 
         <!--shop title-->
-        <h3 class="custom_blog_title">#Decorative</h3>
+        <nuxt-link to="/products/decorative" tag="h3" class="custom_blog_title">
+            <a href="#">#Decorative</a>
+        </nuxt-link>
         
         <!--product lists-->
         <ul class="row list-products auto-clear equal-container product-grid">
@@ -37,7 +43,9 @@
         </ul>
 
         <!--shop title-->
-        <h3 class="custom_blog_title">#ExtraCare</h3>
+        <nuxt-link to="/products/extra care" tag="h3" class="custom_blog_title">
+            <a href="#">#ExtraCare</a>
+        </nuxt-link>
         
         <!--product lists-->
         <ul class="row list-products auto-clear equal-container product-grid">

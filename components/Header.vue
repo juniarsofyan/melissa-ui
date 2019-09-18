@@ -220,18 +220,18 @@
                     <div class="container-wapper">
                         <ul class="clone-main-menu turan-nav main-menu" id="menu-main-menu">
                             <nuxt-link to="/" tag="li" class="menu-item">
-                                <a href="#" class="kt-item-title" title="Shop">All Products</a>
+                                <a href="#" class="kt-item-title" title="Shop">Home</a>
                             </nuxt-link>
-                            <nuxt-link to="/brightening" tag="li" class="menu-item">
+                            <nuxt-link to="/products/brightening" tag="li" class="menu-item">
                                 <a href="#" class="kt-item-title" title="Brightening">Brightening</a>
                             </nuxt-link>
-                            <nuxt-link to="/purifying" tag="li" class="menu-item">
+                            <nuxt-link to="/products/purify" tag="li" class="menu-item">
                                 <a href="#" class="kt-item-title" title="Purify">Purify</a>
                             </nuxt-link>
-                            <nuxt-link to="/decorative" tag="li" class="menu-item">
+                            <nuxt-link to="/products/decorative" tag="li" class="menu-item">
                                 <a href="#" class="kt-item-title" title="Decorative">Decorative</a>
                             </nuxt-link>
-                            <nuxt-link to="/extra-care" tag="li" class="menu-item">
+                            <nuxt-link to="/products/extra care" tag="li" class="menu-item">
                                 <a href="#" class="kt-item-title" title="Extra Care">Extra Care</a>
                             </nuxt-link>
                         </ul>

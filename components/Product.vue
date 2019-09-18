@@ -16,7 +16,7 @@
       <div class="product-thumb">
         <div class="thumb-inner">
           <a href="#">
-            <img :src="`${$axios.defaults.baseURL}assets/img/products/${product.pic}.jpg`" alt />
+            <img :src="`${$axios.defaults.baseURL}assets/img/thumbnails/${product.pic}.jpg`" alt />
           </a>
         </div>
         <a href="#" class="button quick-wiew-button"></a>
