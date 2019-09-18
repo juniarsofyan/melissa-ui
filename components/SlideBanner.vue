@@ -38,3 +38,15 @@
     </div>
   </div>
 </template>
+
+<style>
+
+.full-width .item-banner.style1 .inner{
+     background-image: url('/assets/img/slider/banner1.jpg') !important;
+}
+
+.full-width .item-banner.style2 .inner{
+     background-image: url('/assets/img/slider/banner2.jpg') !important;
+}
+
+</style>
