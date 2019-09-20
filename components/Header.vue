@@ -234,6 +234,9 @@
                             <nuxt-link to="/products/extra care" tag="li" class="menu-item">
                                 <a href="#" class="kt-item-title" title="Extra Care">Extra Care</a>
                             </nuxt-link>
+                            <nuxt-link to="/products/promoted" tag="li" class="menu-item">
+                                <a href="#" class="kt-item-title" title="Promoted">Promoted</a>
+                            </nuxt-link>
                         </ul>
                     </div>
                 </div>
