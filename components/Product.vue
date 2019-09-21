@@ -1,5 +1,9 @@
 <template>
-  <li class="product-item product-type-variable col-lg-3 col-md-4 col-sm-6 col-xs-6 style-1">
+  <nuxt-link
+    :to="`/products/${product.kode_barang}/detail`"
+    tag="li"
+    class="product-item product-type-variable col-lg-3 col-md-4 col-sm-6 col-xs-6 style-1"
+  >
     <div class="product-inner equal-element">
       <!-- <div class="product-top">
         <div class="flash">
@@ -19,7 +23,7 @@
             <img :src="`${$axios.defaults.baseURL}assets/img/thumbnails/${product.pic}.jpg`" alt />
           </a>
         </div>
-        <a href="#" class="button quick-wiew-button"></a>
+        <!-- <a href="#" class="button quick-wiew-button"></a> -->
       </div>
       <div class="product-info">
         <h5 class="product-name product_title">
@@ -78,11 +82,11 @@
         </form>
       </div>
     </div>
-  </li>
+  </nuxt-link>
 </template>
 
 <script>
 export default {
-    props: ['product']
+  props: ['product']
 }
 </script>
