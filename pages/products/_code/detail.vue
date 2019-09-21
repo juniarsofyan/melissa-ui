@@ -1,4 +1,22 @@
 <template>
+<div>
+	     <!-- breadcrumb -->
+                <div class="breadcrumb-trail breadcrumbs">
+                    <ul class="trail-items breadcrumb">
+                        <li class="trail-item trail-begin">
+                            <a href="">
+                                <span>
+                                    Home
+                                </span>
+                            </a>
+                        </li>
+                        <li class="trail-item trail-end active">
+                            <span>
+                                Shopping Cart
+                            </span>
+                        </li>
+                    </ul>
+                </div>
   <!-- main content -->
 			<div class="row">
 
@@ -479,6 +497,7 @@
 
 				<!-- full width layout have no sidebar-->
 
+			</div>
 			</div>
 </template>
 

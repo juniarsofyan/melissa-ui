@@ -90,3 +90,8 @@ export default {
   props: ['product']
 }
 </script>
+
+<style>
+
+
+</style>
