@@ -333,3 +333,15 @@
 							</div>
 						</div>
 </template>
+
+<script>
+export default {
+	props: ["products"],
+	components: {
+        // // Product: () => import('~/components/Product')
+    },
+    methods: {
+        
+    },
+}
+</script>
