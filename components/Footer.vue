@@ -8,9 +8,10 @@
               <div class="widget-box">
                 <div class="single-img">
                   <a href="index.html">
-                    <img src="~/assets/images/logo-footer.png" alt />
+                    <img src="~/assets/img/logo-bellezkin.png" width="200px" alt="Bellezkin" />
                   </a>
                 </div>
+                <p>&nbsp;</p>
                 <div class="text-content-elememnt">
                   <p>
                     Shop the latest products right from
@@ -25,19 +26,22 @@
                 <h2 class="widgettitle">Links</h2>
                 <ul class="menu">
                   <li class="menu-item">
-                    <a href="#">Beard Oil & Balm</a>
+                    <a href="#">Home</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Beard Wash</a>
+                    <a href="#">Brightening</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Grooming</a>
+                    <a href="#">Purify</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Gift Vouchers</a>
+                    <a href="#">Decorative</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Accessories</a>
+                    <a href="#">Extra Care</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">Promo</a>
                   </li>
                 </ul>
               </div>
@@ -125,25 +129,14 @@
           </div>
           <div class="footer-end">
             <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="coppyright">
-                  Copyright © 2018
-                  <a href="#">TuranOutfit</a>
-                  . All rights reserved
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="turan-payment">
-                  <img src="~/assets/images/payments.png" alt />
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="demos">
-                  <a href="#">
-                    Demo
-                    <span>(1)</span>
-                  </a>
-                </div>
+              <div>
+                <center>
+                  <div class="coppyright">
+                    Copyright © 2019
+                    <a href="https://bellezkin.com">Bellezkin</a>
+                    . All rights reserved
+                  </div>
+                </center>
               </div>
             </div>
           </div>
