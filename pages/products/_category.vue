@@ -7,7 +7,6 @@
             <div class="site-main">
                 <!-- Slide Banner -->
                 <SlideBanner />
-                {{ items }}
                 <!--shop title-->
                 <h3 class="custom_blog_title">#{{ productTitle }}</h3>
 

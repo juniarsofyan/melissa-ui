@@ -81,20 +81,29 @@
                                 <div class="quantity-add-to-cart">
                                     <div class="quantity">
                                         <div class="control">
-                                            <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                            <span
+                                                class="btn-number qtyminus quantity-minus"
+                                                @click="minQty"
+                                            >-</span>
                                             <input
                                                 type="text"
                                                 data-step="1"
-                                                data-min="0"
-                                                value="1"
+                                                data-min="1"
+                                                v-model="qty"
                                                 title="Qty"
                                                 class="input-qty qty"
                                                 size="4"
                                             />
-                                            <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                            <span
+                                                class="btn-number qtyplus quantity-plus"
+                                                @click="addQty"
+                                            >+</span>
                                         </div>
                                     </div>
-                                    <button class="single_add_to_cart_button button">Add to cart</button>
+                                    <button
+                                        class="single_add_to_cart_button button"
+                                        @click="addItem"
+                                    >Add to cart</button>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +162,8 @@ export default {
             dataLoaded: false,
             code: this.$route.params.code,
             product: [],
-            related_products: []
+            related_products: [],
+            qty: 1
         }
     },
     head() {
@@ -208,6 +218,19 @@ export default {
                 .catch((e) => {
                     console.log(e)
                 })
+        },
+        addQty: function() {
+            this.qty++
+        },
+        minQty: function() {
+            if (this.qty > 1) {
+                this.qty--
+            }
+        },
+        addItem: function() {
+            this.product.qty = this.qty
+            this.$store.dispatch('cart/addItem', this.product)
+            this.qty = 1
         }
     }
 }
