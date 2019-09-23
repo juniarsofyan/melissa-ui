@@ -48,32 +48,41 @@
 
                                 <div class="block-minicart turan-mini-cart block-header turan-dropdown">
                                     <a href="javascript:void(0);" class="shopcart-icon"
-                                        data-turan="turan-dropdown">Cart<span class="count">3</span></a>
+                                        data-turan="turan-dropdown">My Cart<span class="count">{{ cart_count }}</span></a>
                                     <div class="shopcart-description turan-submenu">
-                                        <div class="content-wrap">
-                                            <h3 class="title">Shopping Cart</h3>
+                                        <div class="content-wrap" v-if="items.length>0">
+                                            <h3 class="title">My Shopping Cart</h3>
                                             <ul class="minicart-items">
-                                                <li class="product-cart mini_cart_item">
-                                                    <a href="#" class="product-media">
-                                                        <img src="~/assets/images/item-minicart-1.jpg" alt="">
-                                                    </a>
+                                                <li class="product-cart mini_cart_item" v-for="item in items" :key="item.product_code">
+                                                    <nuxt-link :to="`/products/${item.product_code}/detail`" tag="a" class="product-media">
+                                                        <img :src="`${$axios.defaults.baseURL}assets/img/thumbnails/${item.picture}.jpg`" alt="">
+                                                    </nuxt-link>
                                                     <div class="product-details">
-                                                        <h5 class="product-name"><a href="#">Beard Tumbleweed Oil</a>
+                                                        <h5 class="product-name">
+                                                            <nuxt-link :to="`/products/${item.product_code}/detail`" tag="a">
+                                                                {{ item.product_name }}
+                                                            </nuxt-link>
                                                         </h5>
                                                         <div class="variations">
-                                                            <span class="attribute_color"><a href="#">Black</a></span>,
-                                                            <span class="attribute_size"><a href="#">300ml</a></span>
+                                                            <span class="attribute_color">
+                                                                <nuxt-link :to="`/products/${item.category}`" tag="a">
+                                                                    {{ item.category }}
+                                                                </nuxt-link>
+                                                            </span>
+                                                            <!-- ,<span class="attribute_size"><a href="#">300ml</a></span> -->
                                                         </div>
                                                         <span class="product-price"><span
-                                                                class="price"><span>€45</span></span></span>
-                                                        <span class="product-quantity"> x 1</span>
+                                                                class="price"><span>IDR. {{ item.price }}</span></span></span>
+                                                        <span class="product-quantity"> x {{ item.qty }}</span>
                                                         <div class="product-remove">
-                                                            <a href=""><i class="fa fa-trash-o"
-                                                                    aria-hidden="true"></i></a>
+                                                            <span @click="removeItem(item.product_code)">
+                                                                <i class="fa fa-trash-o"
+                                                                    aria-hidden="true"></i>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li class="product-cart mini_cart_item">
+                                                <!-- <li class="product-cart mini_cart_item">
                                                     <a href="#" class="product-media">
                                                         <img src="~/assets/images/item-minicart-2.jpg" alt="">
                                                     </a>
@@ -113,18 +122,24 @@
                                                                     aria-hidden="true"></i></a>
                                                         </div>
                                                     </div>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                             <div class="subtotal">
                                                 <span class="total-title">Subtotal: </span><span
-                                                    class="total-price"><span class="Price-amount">€135</span></span>
+                                                    class="total-price"><span class="Price-amount">IDR. {{ subtotal }}</span></span>
                                             </div>
                                             <div class="actions">
-                                                <a class="button button-viewcart" href="shoppingcart.html"><span>View
-                                                        Bag</span></a>
-                                                <a href="checkout.html"
-                                                    class="button button-checkout"><span>Checkout</span></a>
+                                                <nuxt-link :to="`/cart`" tag="a" class="button button-viewcart">
+                                                    <span>View My Cart</span>
+                                                </nuxt-link>
+
+                                                <nuxt-link :to="`/cart`" tag="a" class="button button-checkout">
+                                                    <span>Checkout Now</span>
+                                                </nuxt-link>
                                             </div>
+                                        </div>
+                                        <div class="content-wrap" v-else>
+                                            <h3 class="title">No item available</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -234,8 +249,8 @@
                             <nuxt-link to="/products/extra care" tag="li" class="menu-item">
                                 <a href="#" class="kt-item-title" title="Extra Care">Extra Care</a>
                             </nuxt-link>
-                            <nuxt-link to="/products/promoted" tag="li" class="menu-item">
-                                <a href="#" class="kt-item-title" title="Promoted">Promoted</a>
+                            <nuxt-link to="/products/promo" tag="li" class="menu-item">
+                                <a href="#" class="kt-item-title" title="Promo">Promo</a>
                             </nuxt-link>
                         </ul>
                     </div>
@@ -246,3 +261,24 @@
         </header>
     </div>
 </template>
+
+<script>
+export default {
+    computed: {
+        cart_count: function() {
+            return this.$store.getters['cart/count']
+        },
+        items: function() {
+            return this.$store.getters['cart/items']
+        },
+        subtotal: function() {
+            return this.$store.getters['cart/subtotal']
+        }
+    },
+    methods: {
+        removeItem: function(product_code) {
+            this.$store.dispatch('cart/removeItem', product_code)
+        }
+    }
+}
+</script>

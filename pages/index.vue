@@ -1,61 +1,79 @@
 <template>
-  <div class="row">
-    <!--site main area -->
-    <div class="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <div class="site-main">
-        <!-- Slide Banner -->
-        <SlideBanner />
+    <div class="row">
+        <!--site main area -->
+        <div
+            class="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12"
+        >
+            <div class="site-main">
+                <!-- Slide Banner -->
+                <SlideBanner />
 
-        <!--shop title-->
-        <nuxt-link to="/products/brightening" tag="h3" class="custom_blog_title">
-            <a href="#">#Brightening</a>
-        </nuxt-link>
+                <!--shop title-->
+                <nuxt-link to="/products/brightening" tag="h3" class="custom_blog_title">
+                    <a href="#">#Brightening</a>
+                </nuxt-link>
 
-        <!--product lists-->
-        <ul class="row list-products auto-clear equal-container product-grid">
-          <template v-if="brightenings">
-            <Product v-for="brightening in brightenings" :key="brightening.id" :product="brightening" />
-          </template>
-        </ul>
+                <!--product lists-->
+                <ul class="row list-products auto-clear equal-container product-grid">
+                    <template v-if="brightenings">
+                        <Product
+                            v-for="brightening in brightenings"
+                            :key="brightening.id"
+                            :product="brightening"
+                        />
+                    </template>
+                </ul>
 
-        <!--shop title-->
-        <nuxt-link to="/products/purify" tag="h3" class="custom_blog_title">
-            <a href="#">#Purify</a>
-        </nuxt-link>
-        
-        <!--product lists-->
-        <ul class="row list-products auto-clear equal-container product-grid">
-          <template v-if="purifyings">
-            <Product v-for="purifying in purifyings" :key="purifying.id" :product="purifying" />
-          </template>
-        </ul>
+                <!--shop title-->
+                <nuxt-link to="/products/purify" tag="h3" class="custom_blog_title">
+                    <a href="#">#Purify</a>
+                </nuxt-link>
 
-        <!--shop title-->
-        <nuxt-link to="/products/decorative" tag="h3" class="custom_blog_title">
-            <a href="#">#Decorative</a>
-        </nuxt-link>
-        
-        <!--product lists-->
-        <ul class="row list-products auto-clear equal-container product-grid">
-          <template v-if="decoratives">
-            <Product v-for="decorative in decoratives" :key="decorative.id" :product="decorative" />
-          </template>
-        </ul>
+                <!--product lists-->
+                <ul class="row list-products auto-clear equal-container product-grid">
+                    <template v-if="purifyings">
+                        <Product
+                            v-for="purifying in purifyings"
+                            :key="purifying.id"
+                            :product="purifying"
+                        />
+                    </template>
+                </ul>
 
-        <!--shop title-->
-        <nuxt-link to="/products/extra care" tag="h3" class="custom_blog_title">
-            <a href="#">#ExtraCare</a>
-        </nuxt-link>
-        
-        <!--product lists-->
-        <ul class="row list-products auto-clear equal-container product-grid">
-          <template v-if="extracares">
-            <Product v-for="extracare in extracares" :key="extracare.id" :product="extracare" />
-          </template>
-        </ul>
-      </div>
+                <!--shop title-->
+                <nuxt-link to="/products/decorative" tag="h3" class="custom_blog_title">
+                    <a href="#">#Decorative</a>
+                </nuxt-link>
+
+                <!--product lists-->
+                <ul class="row list-products auto-clear equal-container product-grid">
+                    <template v-if="decoratives">
+                        <Product
+                            v-for="decorative in decoratives"
+                            :key="decorative.id"
+                            :product="decorative"
+                        />
+                    </template>
+                </ul>
+
+                <!--shop title-->
+                <nuxt-link to="/products/extra care" tag="h3" class="custom_blog_title">
+                    <a href="#">#ExtraCare</a>
+                </nuxt-link>
+
+                <!--product lists-->
+                <ul class="row list-products auto-clear equal-container product-grid">
+                    <template v-if="extracares">
+                        <Product
+                            v-for="extracare in extracares"
+                            :key="extracare.id"
+                            :product="extracare"
+                        />
+                    </template>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -89,8 +107,7 @@ export default {
     methods: {
         getProducts: function(category) {
             return this.$axios.get(`/products/${category}/0/4`)
-        },
-        
+        }
     },
     created() {
         this.getProducts('BRIGHTENING').then((response) => {

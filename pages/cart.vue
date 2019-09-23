@@ -1,22 +1,17 @@
 <template>
     <div class="site-content">
-        <main class="site-main  main-container no-sidebar">
+        <main class="site-main main-container no-sidebar">
             <div class="container">
-
                 <!-- breadcrumb -->
                 <div class="breadcrumb-trail breadcrumbs">
                     <ul class="trail-items breadcrumb">
                         <li class="trail-item trail-begin">
-                            <a href="">
-                                <span>
-                                    Home
-                                </span>
+                            <a href>
+                                <span>Home</span>
                             </a>
                         </li>
                         <li class="trail-item trail-end active">
-                            <span>
-                                Shopping Cart
-                            </span>
+                            <span>Shopping Cart</span>
                         </li>
                     </ul>
                 </div>
@@ -41,25 +36,29 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <ItemCart />
-                                            <ItemCart />
+                                            <CartItem
+                                                v-for="item in items"
+                                                :key="item.product_code"
+                                                :item="item"
+                                            />
                                             <tr>
                                                 <td class="actions">
-                                                    <div class="coupon">
+                                                    <!-- <div class="coupon">
                                                         <label class="coupon_code">Coupon Code:</label>
                                                         <div class="coupon-wrapp">
-                                                            <input type="text" class="input-text"
-                                                                placeholder="Promotion code here">
+                                                            <input
+                                                                type="text"
+                                                                class="input-text"
+                                                                placeholder="Promotion code here"
+                                                            />
                                                             <a href="#" class="button"></a>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                     <div class="order-total">
-                                                        <span class="title">
-                                                            Total Price:
-                                                        </span>
-                                                        <span class="total-price">
-                                                            Rp.95
-                                                        </span>
+                                                        <span class="title">Total Price:</span>
+                                                        <span
+                                                            class="total-price"
+                                                        >IDR. {{ subtotal }}</span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -67,12 +66,8 @@
                                     </table>
                                 </form>
                                 <div class="control-cart">
-                                    <button class="button btn-continue-shopping">
-                                        CONTINUE SHOPPING
-                                    </button>
-                                    <button class="button btn-cart-to-checkout">
-                                        CHECK OUT
-                                    </button>
+                                    <button class="button btn-continue-shopping">CONTINUE SHOPPING</button>
+                                    <button class="button btn-cart-to-checkout">CHECKOUT NOW</button>
                                 </div>
                             </div>
                         </div>
@@ -80,22 +75,29 @@
                 </div>
 
                 <!-- full width layout have no sidebar-->
-
             </div>
         </main>
     </div>
 </template>
 
 <script>
-    import ItemCart from '~/components/ItemCart.vue'
-    export default {
-        components: {
-            ItemCart,
+import CartItem from '~/components/CartItem.vue'
+
+export default {
+    layout: 'products',
+    components: {
+        CartItem
+    },
+    computed: {
+        items: function() {
+            return this.$store.getters['cart/items']
         },
-        layout: 'products'
+        subtotal: function() {
+            return this.$store.getters['cart/subtotal']
+        }
     }
+}
 </script>
 
 <style>
-
 </style>
