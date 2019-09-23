@@ -48,10 +48,10 @@
 
                                 <div class="block-minicart turan-mini-cart block-header turan-dropdown">
                                     <a href="javascript:void(0);" class="shopcart-icon"
-                                        data-turan="turan-dropdown">Cart<span class="count">{{ cart_count }}</span></a>
+                                        data-turan="turan-dropdown">My Cart<span class="count">{{ cart_count }}</span></a>
                                     <div class="shopcart-description turan-submenu">
                                         <div class="content-wrap" v-if="items.length>0">
-                                            <h3 class="title">Shopping Cart</h3>
+                                            <h3 class="title">My Shopping Cart</h3>
                                             <ul class="minicart-items">
                                                 <li class="product-cart mini_cart_item" v-for="item in items" :key="item.product_code">
                                                     <nuxt-link :to="`/products/${item.product_code}/detail`" tag="a" class="product-media">
@@ -129,10 +129,13 @@
                                                     class="total-price"><span class="Price-amount">IDR. {{ subtotal }}</span></span>
                                             </div>
                                             <div class="actions">
-                                                <a class="button button-viewcart" href="shoppingcart.html"><span>View
-                                                        Bag</span></a>
-                                                <a href="checkout.html"
-                                                    class="button button-checkout"><span>Checkout</span></a>
+                                                <nuxt-link :to="`/cart`" tag="a" class="button button-viewcart">
+                                                    <span>View My Cart</span>
+                                                </nuxt-link>
+
+                                                <nuxt-link :to="`/cart`" tag="a" class="button button-checkout">
+                                                    <span>Checkout Now</span>
+                                                </nuxt-link>
                                             </div>
                                         </div>
                                         <div class="content-wrap" v-else>
