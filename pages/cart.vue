@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="trail-item trail-end active">
-                            <span>Shopping Cart</span>
+                            <span>My Cart</span>
                         </li>
                     </ul>
                 </div>
@@ -19,7 +19,7 @@
                 <!-- main content -->
                 <div class="row">
                     <div class="main-content-cart main-content col-sm-12">
-                        <h3 class="custom_blog_title">#Shopping Cart</h3>
+                        <h3 class="custom_blog_title">#MyCart</h3>
 
                         <div class="page-main-content">
                             <div class="shoppingcart-content">
@@ -58,12 +58,12 @@
                                                         <span class="title">Total Price:</span>
                                                         <span
                                                             class="total-price"
-                                                        >IDR. {{ subtotal }}</span>
+                                                        >{{ subtotal | rupiah }}</span>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <hr>
-                                             <tr class="grand total">
+                                            <hr />
+                                            <tr class="grand total">
                                                 <td class="actions">
                                                     <!-- <div class="coupon">
                                                         <label class="coupon_code">Coupon Code:</label>
@@ -80,7 +80,7 @@
                                                         <span class="title">Grand Total :</span>
                                                         <span
                                                             class="total-price"
-                                                        >IDR. {{ subtotal }}</span>
+                                                        >{{ subtotal | rupiah }}</span>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -88,8 +88,17 @@
                                     </table>
                                 </form>
                                 <div class="control-cart">
-                                    <button class="button btn-continue-shopping">CONTINUE SHOPPING</button>
-                                    <button class="button btn-cart-to-checkout">CHECKOUT NOW</button>
+                                    <nuxt-link
+                                        :to="`/`"
+                                        tag="button"
+                                        class="button btn-continue-shopping"
+                                    >CONTINUE SHOPPING</nuxt-link>
+
+                                    <nuxt-link
+                                        :to="`/checkout`"
+                                        tag="button"
+                                        class="button btn-cart-to-checkout"
+                                    >CHECKOUT NOW</nuxt-link>
                                 </div>
                             </div>
                         </div>

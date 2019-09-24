@@ -45,7 +45,7 @@
 								<a href="#">{{ product.kode_barang }}</a>
 							</div>
 							<div class="price">
-								<span>IDR. {{ product.harga }}</span>
+								<span>{{ product.harga | rupiah }}</span>
 							</div>
 							<div class="product-details-description">
 								<p class="desc">3Pack Tshirt is Crew-neck T-shirts in soft organic cotton jersey.

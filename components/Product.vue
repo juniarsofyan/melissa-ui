@@ -40,10 +40,10 @@
             <div class="count-star">(7)</div>
                     </div>-->
                     <div class="price" v-if="product.harga_diskon > 0">
-                        <del>IDR. {{ product.harga }}</del>
-                        <ins>IDR. {{ product.harga_diskon }}</ins>
+                        <del>{{ product.harga | rupiah }}</del>
+                        <ins>{{ product.harga_diskon | rupiah }}</ins>
                     </div>
-                    <div class="price" v-else>IDR. {{ product.harga }}</div>
+                    <div class="price" v-else>{{ product.harga | rupiah }}</div>
                 </div>
             </div>
             <div class="loop-form-add-to-cart">

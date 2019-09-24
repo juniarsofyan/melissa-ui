@@ -39,14 +39,15 @@ const cart = {
 
             window.localStorage.setItem('items', JSON.stringify(state.items))
         },
-        ModifyQty(state, item) { // state.items.push(item)
+        updateQty(state, item) { // state.items.push(item)
+
             let item_exists = state.items.find(product => product.product_code == item.product_code)
 
             if (item_exists) {
                 item_exists.qty = parseInt(item.qty)
                 item_exists.subtotal = parseInt(item.qty) * parseInt(item_exists.price)
                 item_exists.grand_total = parseInt(item_exists.grand_total) + parseInt(item.price_discount) * parseInt(item.qty)
-                item_exists.total_weight = item.qty * item_exists.weight
+                item_exists.total_weight = parseInt(item.qty) * item_exists.weight
             } else {
                 let product = {
                     product_code: item.kode_barang,
@@ -112,6 +113,15 @@ const cart = {
             payload
         ) {
             commit('removeItem', payload)
+        },
+        updateQty(
+            {
+                state,
+                commit
+            },
+            payload
+        ) {
+            commit('updateQty', payload)
         }
     }
 }

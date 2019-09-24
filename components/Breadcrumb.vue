@@ -1,14 +1,18 @@
 <template>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="breadcrumb-trail breadcrumbs">
+    <div class="breadcrumb-trail breadcrumbs">
         <ul class="trail-items breadcrumb">
-          <li class="trail-item trail-begin">
-            <a href="index.html">Home</a>
-          </li>
-          <li class="trail-item trail-end active">Grid Products</li>
+            <span v-for="slug in slugs" :key="slug.title">
+                <li class="trail-item trail-end active" v-if="slug.active">{{ slug.title }}</li>
+                <li class="trail-item trail-begin" v-else>
+                    <nuxt-link :to="slug.url" tag="a">{{ slug.title }}</nuxt-link>
+                </li>
+            </span>
         </ul>
-      </div>
     </div>
-  </div>
 </template>
+
+<script>
+export default {
+    props: ['slugs']
+}
+</script>

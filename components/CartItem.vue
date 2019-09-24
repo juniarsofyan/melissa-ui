@@ -15,7 +15,7 @@
                 tag="a"
                 class="title"
             >{{ item.product_name }}</nuxt-link>
-            <span class="attributes-select attributes-color">IDR. {{ item.price }}</span>
+            <span class="attributes-select attributes-color">{{ item.price | rupiah }}</span>
             <!-- <span class="attributes-select attributes-size">, XS</span> -->
         </td>
         <td class="product-quantity" data-title="Quantity">
@@ -30,6 +30,7 @@
                         title="Qty"
                         class="input-qty qty"
                         size="4"
+                        @input="updateQty"
                     />
                     <span class="btn-number qtyplus quantity-plus" @click="addQty">+</span>
                 </div>
@@ -51,7 +52,7 @@
                         </strike>
                     </sub>
                 </span>
-                <p>IDR. {{ item.subtotal }}</p>
+                <p>{{ item.subtotal | rupiah }}</p>
             </span>
         </td>
         <td class="product-remove">
@@ -69,20 +70,20 @@ export default {
         }
     },
     methods: {
-        modifyQty: function() {
-            this.$store.dispatch('cart/modifyQty', {
+        updateQty: function() {
+            this.$store.dispatch('cart/updateQty', {
                 product_code: this.item.product_code,
                 qty: this.qty
             })
         },
         addQty: function() {
             this.qty++
-            this.modifyQty()
+            this.updateQty()
         },
         minQty: function() {
             if (this.qty > 1) {
                 this.qty--
-                // this.modifyQty()
+                this.updateQty()
             }
         },
         addItem: function() {

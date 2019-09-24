@@ -126,7 +126,13 @@ export default {
      */
     plugins: [
         // { src: '~/plugins/vue-carousel.js', },
-        { src: '~/plugins/slick.js', ssr: false },
+        {
+            src: '~/plugins/slick.js',
+            ssr: false
+        }, {
+            src: '~/plugins/currency.js',
+            ssr: false
+        },
     ],
     /*
      ** Nuxt.js dev-modules

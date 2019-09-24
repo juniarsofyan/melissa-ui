@@ -72,7 +72,7 @@
                                                             <!-- ,<span class="attribute_size"><a href="#">300ml</a></span> -->
                                                         </div>
                                                         <span class="product-price"><span
-                                                                class="price"><span>IDR. {{ item.price }}</span></span></span>
+                                                                class="price"><span>{{ item.price | rupiah }}</span></span></span>
                                                         <span class="product-quantity"> x {{ item.qty }}</span>
                                                         <div class="product-remove">
                                                             <span @click="removeItem(item.product_code)">
@@ -126,7 +126,7 @@
                                             </ul>
                                             <div class="subtotal">
                                                 <span class="total-title">Subtotal: </span><span
-                                                    class="total-price"><span class="Price-amount">IDR. {{ subtotal }}</span></span>
+                                                    class="total-price"><span class="Price-amount">{{ subtotal | rupiah }}</span></span>
                                             </div>
                                             <div class="actions">
                                                 <nuxt-link :to="`/cart`" tag="a" class="button button-viewcart">
