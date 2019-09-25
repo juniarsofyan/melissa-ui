@@ -9,7 +9,7 @@
                         <div class="breadcrumb-trail breadcrumbs" style="text-align:center;">
                             <ul class="trail-items breadcrumb" >
                                 <li class="trail-item trail-end " style="font-size:30px;">
-                                   <nuxt-link :to="'/checkout/1'">Checkout </nuxt-link> 
+                                   <nuxt-link :to="'/checkout/'+ 1 +'/'">Checkout </nuxt-link> 
                                 </li>
                                 <li class="trail-item trail-end " style="font-size:30px;">
                                    <nuxt-link :to="'payment'">Payment </nuxt-link>
