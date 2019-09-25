@@ -1,23 +1,25 @@
 <template>
-    <div class="main-content main-content-checkout">
+    <!--wrap main content-->
+	<div class="main-content main-content-checkout">
 
 		<div class="container">
 
             <!--breadcrumb-->
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-lg-12">
-					<!--<div class="breadcrumb-trail breadcrumbs">
+              
+					<div class="breadcrumb-trail breadcrumbs">
 						<ul class="trail-items breadcrumb">
 							<li class="trail-item trail-begin"><a href="index.html">Home</a></li>
 							<li class="trail-item trail-end active">Checkout</li>
 						</ul>
-					</div>-->
-                    <Breadcrumb :slugs="slug" />
+					</div>
+               
 				</div>
-			</div>
+			</div> -->
 
             <!--page title-->
-			<h3 class="custom_blog_title">#Checkout</h3>
+			<!-- <h3 class="custom_blog_title">#Checkout</h3> -->
 
             <!--checkout input form-->
 			<div class="checkout-wrapp">
@@ -163,15 +165,22 @@
 
 					</div>
 
-					<a href="#" class="button button-payment">PAYMENT</a>
+					  <nuxt-link :to="`payment`" class="button button-payment">PAYMENT</nuxt-link>
 
 				</div>
+
+                <!--payment method-->
+				
+              
+                
 
 			</div>
 
 		</div>
 
 	</div>
+
+	
 </template>
 
 <script>
