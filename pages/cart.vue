@@ -36,11 +36,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <CartItem
-                                                v-for="item in items"
-                                                :key="item.product_code"
-                                                :item="item"
-                                            />
+                                            <CartItem v-for="item in items" :key="item.product_code" :item="item" />
                                             <tr>
                                                 <td class="actions">
                                                     <!-- <div class="coupon">
@@ -54,51 +50,48 @@
                                                             <a href="#" class="button"></a>
                                                         </div>
                                                     </div>-->
-                                                    <div class="order-total">
-                                                        <span class="title">Total Price:</span>
-                                                        <span
-                                                            class="total-price"
-                                                        >{{ subtotal | rupiah }}</span>
-                                                    </div>
+                                                    <table style="width:0; border:none; float:right;">
+                                                        <tr >
+                                                            <td style="text-align:right !important">
+                                                                <span class="title"><h5><b>Total Price :</b></h5></span>
+                                                            </td>
+                                                            <td style="text-align:right !important">
+                                                                <span
+                                                                    class="total-price "><h4><b>{{ subtotal | rupiah }}</b></h4></span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr >
+                                                            <td style="text-align:right !important">
+                                                                <span class="title"><h5><b>Save :</b></h5></span>
+                                                            </td>
+                                                            <td style="text-align:right !important">
+                                                                <span class="total-price"><h4><b>IDR 10.000</b></h4></span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align:right !important">
+                                                                <span class="title"><h5><b>Grand Total :</b></h5></span>
+                                                            </td>
+                                                            <td style="text-align:right !important">
+                                                                <span
+                                                                    class="total-price"><h4><b>{{ subtotal | rupiah }}</b></h4></span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    
                                                 </td>
                                             </tr>
-                                            <hr />
-                                            <tr class="grand total">
-                                                <td class="actions">
-                                                    <!-- <div class="coupon">
-                                                        <label class="coupon_code">Coupon Code:</label>
-                                                        <div class="coupon-wrapp">
-                                                            <input
-                                                                type="text"
-                                                                class="input-text"
-                                                                placeholder="Promotion code here"
-                                                            />
-                                                            <a href="#" class="button"></a>
-                                                        </div>
-                                                    </div>-->
-                                                    <div class="order-total">
-                                                        <span class="title">Grand Total :</span>
-                                                        <span
-                                                            class="total-price"
-                                                        >{{ subtotal | rupiah }}</span>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                           
+                                           
                                         </tbody>
                                     </table>
                                 </form>
                                 <div class="control-cart">
-                                    <nuxt-link
-                                        :to="`/`"
-                                        tag="button"
-                                        class="button btn-continue-shopping"
-                                    >CONTINUE SHOPPING</nuxt-link>
+                                    <nuxt-link :to="`/`" tag="button" class="button btn-continue-shopping">CONTINUE
+                                        SHOPPING</nuxt-link>
 
-                                    <nuxt-link
-                                        :to="`/checkout`"
-                                        tag="button"
-                                        class="button btn-cart-to-checkout"
-                                    >CHECKOUT NOW</nuxt-link>
+                                    <nuxt-link :to="`/checkout`" tag="button" class="button btn-cart-to-checkout">
+                                        CHECKOUT NOW</nuxt-link>
                                 </div>
                             </div>
                         </div>
@@ -112,22 +105,22 @@
 </template>
 
 <script>
-import CartItem from '~/components/CartItem.vue'
+    import CartItem from '~/components/CartItem.vue'
 
-export default {
-    layout: 'products',
-    components: {
-        CartItem
-    },
-    computed: {
-        items: function() {
-            return this.$store.getters['cart/items']
+    export default {
+        layout: 'products',
+        components: {
+            CartItem
         },
-        subtotal: function() {
-            return this.$store.getters['cart/subtotal']
+        computed: {
+            items: function () {
+                return this.$store.getters['cart/items']
+            },
+            subtotal: function () {
+                return this.$store.getters['cart/subtotal']
+            }
         }
     }
-}
 </script>
 
 <style>
