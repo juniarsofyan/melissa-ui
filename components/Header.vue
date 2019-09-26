@@ -167,7 +167,7 @@
                                         <i class="fa fa-user-o" aria-hidden="true"></i>
                                     </a>
                                     <div class="header-account turan-submenu">
-                                        <div class="header-user-form-tabs" v-if="!loggedIn">
+                                        <div class="header-user-form-tabs" v-if="!isAuthenticated">
                                             <ul class="tab-link">
                                                 <li class="active">
                                                     <a data-toggle="tab" aria-expanded="true"
@@ -219,6 +219,15 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <div class="header-user-form-tabs" v-else>
+                                            <ul class="tab-link">
+                                                <li class="active">
+                                                    <a data-toggle="tab" aria-expanded="true"
+                                                        href="#header-tab-login"><input type="button" class="button" value="Logout" @click="logout"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -266,6 +275,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
     data() {
         return {
@@ -281,6 +292,7 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['isAuthenticated', 'loggedInUser']),
         cart_count: function() {
             return this.$store.getters['cart/count']
         },
@@ -317,6 +329,9 @@ export default {
             this.$router.push({
                 path: '/'
             });
+        },
+        async logout() {
+            await this.$auth.logout();
         }
     }
 }

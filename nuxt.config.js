@@ -11,10 +11,12 @@ export default {
         meta: [
             {
                 charset: 'utf-8'
-            }, {
+            },
+            {
                 name: 'viewport',
                 content: 'width=device-width, initial-scale=1'
-            }, {
+            },
+            {
                 hid: 'description',
                 name: 'description',
                 content: process.env.npm_package_description || ''
@@ -25,44 +27,66 @@ export default {
                 rel: 'icon',
                 type: 'image/x-icon',
                 href: '/favicon.ico'
-            }, {
+            },
+            {
                 rel: 'stylesheet',
                 type: 'text/css',
-                href: 'https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i%7CLato:300,300i,400,400i,700,700i,900%7COpen+Sans:300,300i,400,400i,600,600i,700,700i,800'
+                href:
+                    'https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i%7CLato:300,300i,400,400i,700,700i,900%7COpen+Sans:300,300i,400,400i,600,600i,700,700i,800'
             }
         ],
         script: [
             {
                 src: process.env.BASE_URL + 'assets/js/jquery-3.3.1.min.js'
-            }, {
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/bootstrap.min.js'
-            }, {
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/owl.carousel.min.js'
-            }, {
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/magnific-popup.min.js'
-            }, {
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/isotope.min.js'
-            }, {
-                src: process.env.BASE_URL + 'assets/js/jquery.mCustomScrollbar.min.js'
-            }, {
+            },
+            {
+                src:
+                    process.env.BASE_URL +
+                    'assets/js/jquery.mCustomScrollbar.min.js'
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/jquery-ui.min.js'
-            }, {
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/mobilemenu.js'
-            }, {
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/chosen.jquery.min.js'
-            }, {
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/slick.min.js'
-            }, {
-                src: process.env.BASE_URL + 'assets/js/jquery.elevateZoom.min.js'
-            }, {
+            },
+            {
+                src:
+                    process.env.BASE_URL + 'assets/js/jquery.elevateZoom.min.js'
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/jquery.actual.min.js'
-            }, {
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/jquery.fancybox.js'
-            }, {
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/lightbox.min.js'
-            }, {
-                src: process.env.BASE_URL + 'assets/js/jquery.mCustomScrollbar.min.js'
-            }, {
+            },
+            {
+                src:
+                    process.env.BASE_URL +
+                    'assets/js/jquery.mCustomScrollbar.min.js'
+            },
+            {
                 src: process.env.BASE_URL + 'assets/js/frontend-plugin.js'
             }
         ]
@@ -80,26 +104,32 @@ export default {
             }
 
             const findEl = async (hash, x) => {
-                return document.querySelector(hash) || new Promise((resolve, reject) => {
-                    if (x > 50) {
-                        return resolve()
-                    }
-                    setTimeout(() => {
-                        resolve(findEl(hash, ++ x || 1))
-                    }, 100)
-                })
+                return (
+                    document.querySelector(hash) ||
+                    new Promise((resolve, reject) => {
+                        if (x > 50) {
+                            return resolve()
+                        }
+                        setTimeout(() => {
+                            resolve(findEl(hash, ++x || 1))
+                        }, 100)
+                    })
+                )
             }
 
             if (to.hash) {
                 let el = await findEl(to.hash)
                 if ('scrollBehavior' in document.documentElement.style) {
-                    return window.scrollTo({top: el.offsetTop, behavior: 'smooth'})
+                    return window.scrollTo({
+                        top: el.offsetTop,
+                        behavior: 'smooth'
+                    })
                 } else {
                     return window.scrollTo(0, el.offsetTop)
                 }
             }
 
-            return {x: 0, y: 0}
+            return { x: 0, y: 0 }
         }
     },
     /*
@@ -129,11 +159,11 @@ export default {
         {
             src: '~/plugins/slick.js',
             ssr: false
-        }, {
+        },
+        {
             src: '~/plugins/currency.js',
             ssr: false
-        },
-        '~plugins/mixins/user.js'
+        }
     ],
     /*
      ** Nuxt.js dev-modules
@@ -152,7 +182,8 @@ export default {
         '@nuxtjs/pwa',
         // https://github.com/nuxt-community/dotenv-module
         [
-            '@nuxtjs/dotenv', {
+            '@nuxtjs/dotenv',
+            {
                 filename: '.env'
             }
         ]
@@ -189,7 +220,8 @@ export default {
     /*
      ** Build configuration
      */
-    build: { /*
+    build: {
+        /*
          ** You can extend webpack config here
          */
         extend(config, ctx) {}
