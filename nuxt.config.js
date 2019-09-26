@@ -133,6 +133,7 @@ export default {
             src: '~/plugins/currency.js',
             ssr: false
         },
+        '~plugins/mixins/user.js'
     ],
     /*
      ** Nuxt.js dev-modules
@@ -146,6 +147,7 @@ export default {
      */
     modules: [
         // Doc: https://axios.nuxtjs.org/usage
+        '@nuxtjs/auth',
         '@nuxtjs/axios',
         '@nuxtjs/pwa',
         // https://github.com/nuxt-community/dotenv-module
@@ -161,6 +163,25 @@ export default {
      */
     axios: {
         baseURL: process.env.API_BASE_URL
+    },
+    auth: {
+        strategies: {
+            local: {
+                endpoints: {
+                    login: {
+                        url: 'api/login',
+                        method: 'post',
+                        propertyName: 'meta.token'
+                    },
+                    user: {
+                        url: 'api/user',
+                        method: 'get',
+                        propertyName: 'data'
+                    },
+                    logout: {}
+                }
+            }
+        }
     },
     /*
      ** Build configuration

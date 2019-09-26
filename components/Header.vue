@@ -180,13 +180,13 @@
                                             </ul>
                                             <div class="tab-container">
                                                 <div id="header-tab-login" class="tab-panel active">
-                                                    <form method="post" class="login form-login">
+                                                    <form @submit.prevent="loginUser" class="login form-login">
                                                         <p class="form-row form-row-wide">
-                                                            <input type="email" placeholder="Email" class="input-text">
+                                                            <input type="email" placeholder="Email" class="input-text" v-model="loginForm.email">
                                                         </p>
                                                         <p class="form-row form-row-wide">
                                                             <input type="password" class="input-text"
-                                                                placeholder="Password">
+                                                                placeholder="Password" v-model="loginForm.password">
                                                         </p>
                                                         <p class="form-row">
                                                             <label class="form-checkbox">
@@ -201,13 +201,13 @@
                                                     </form>
                                                 </div>
                                                 <div id="header-tab-rigister" class="tab-panel">
-                                                    <form method="post" class="register form-register">
+                                                    <form @submit.prevent="registerUser" class="register form-register">
                                                         <p class="form-row form-row-wide">
-                                                            <input type="email" placeholder="Email" class="input-text">
+                                                            <input type="email" placeholder="Email" class="input-text" v-model="registerForm.email">
                                                         </p>
                                                         <p class="form-row form-row-wide">
                                                             <input type="password" class="input-text"
-                                                                placeholder="Password">
+                                                                placeholder="Password"  v-model="registerForm.password">
                                                         </p>
                                                         <p class="form-row">
                                                             <input type="submit" class="button" value="Register">
@@ -264,6 +264,18 @@
 
 <script>
 export default {
+    data() {
+        return {
+            loginForm: {
+                email: '',
+                password: ''
+            },
+            registerForm: {
+                email: '',
+                password: ''
+            }
+        }
+    },
     computed: {
         cart_count: function() {
             return this.$store.getters['cart/count']
@@ -278,6 +290,28 @@ export default {
     methods: {
         removeItem: function(product_code) {
             this.$store.dispatch('cart/removeItem', product_code)
+        },
+        async loginUser() {
+            await this.$auth.login({
+                data: this.loginForm
+            });
+
+            this.$router.push({
+                path: '/'
+            });
+        },
+        async registerUser() {
+            await this.$axios.post('api/register', this.registerForm);
+            
+            this.$auth.login({
+                data: {
+                    email: this.registerForm.email,
+                    password: this.registerForm.password
+                }
+            })
+            this.$router.push({
+                path: '/'
+            });
         }
     }
 }
