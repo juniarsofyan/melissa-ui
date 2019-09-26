@@ -16613,7 +16613,7 @@ iframe {
 /* customize */
 
 .single_add_to_cart_button {
-     background-color: #111 !important;     
+     background-color: #111 !important;
      border: none !important;
      color: white !important;
 }
@@ -16638,4 +16638,13 @@ iframe {
 
 .custom_blog_title a:hover {
      color: #ec268f !important;
+}
+
+#about-us {
+     font-size: 14px !important;
+     text-align: justify !important;
+}
+
+#logo-comp {
+     width: 80px !important;
 }
