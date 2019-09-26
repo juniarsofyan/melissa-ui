@@ -167,7 +167,7 @@
                                         <i class="fa fa-user-o" aria-hidden="true"></i>
                                     </a>
                                     <div class="header-account turan-submenu">
-                                        <div class="header-user-form-tabs">
+                                        <div class="header-user-form-tabs" v-if="!loggedIn">
                                             <ul class="tab-link">
                                                 <li class="active">
                                                     <a data-toggle="tab" aria-expanded="true"
@@ -202,6 +202,9 @@
                                                 </div>
                                                 <div id="header-tab-rigister" class="tab-panel">
                                                     <form @submit.prevent="registerUser" class="register form-register">
+                                                        <p class="form-row form-row-wide">
+                                                            <input type="text" placeholder="Name" class="input-text" v-model="registerForm.name">
+                                                        </p>
                                                         <p class="form-row form-row-wide">
                                                             <input type="email" placeholder="Email" class="input-text" v-model="registerForm.email">
                                                         </p>
@@ -271,6 +274,7 @@ export default {
                 password: ''
             },
             registerForm: {
+                name: '',
                 email: '',
                 password: ''
             }
@@ -301,10 +305,11 @@ export default {
             });
         },
         async registerUser() {
-            await this.$axios.post('api/register', this.registerForm);
+            await this.$axios.post(`${process.env.AUTH_BASE_URL}api/register`, this.registerForm);
             
             this.$auth.login({
                 data: {
+                    name: this.registerForm.name,
                     email: this.registerForm.email,
                     password: this.registerForm.password
                 }

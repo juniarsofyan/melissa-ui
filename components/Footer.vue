@@ -58,22 +58,13 @@
                                         <a href="#">FAQs</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="#">Track Order</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="#">Delivery</a>
-                                    </li>
-                                    <li class="menu-item">
                                         <a href="#">Contact Us</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="#">Return</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="box-footer col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                            <div class="turan-newsletter style1">
+                            <!-- <div class="turan-newsletter style1">
                                 <div class="newsletter-head">
                                     <h3 class="title">Subscribe our Newsletter</h3>
                                 </div>
@@ -109,8 +100,11 @@
                                     />
                                     <button class="button btn-submit submit-newsletter">SUBSCRIBE</button>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="turan-socials">
+                                <div class="newsletter-head">
+                                    <h3 class="title" style="color:white">Connect with us</h3>
+                                </div>
                                 <ul class="socials">
                                     <li>
                                         <a href="#" class="social-item" target="_blank">

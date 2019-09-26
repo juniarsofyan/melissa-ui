@@ -169,16 +169,19 @@ export default {
             local: {
                 endpoints: {
                     login: {
-                        url: 'api/login',
+                        url: process.env.AUTH_BASE_URL + 'api/login',
                         method: 'post',
                         propertyName: 'meta.token'
                     },
                     user: {
-                        url: 'api/user',
+                        url: process.env.AUTH_BASE_URL + 'api/user',
                         method: 'get',
                         propertyName: 'data'
                     },
-                    logout: {}
+                    logout: {
+                        url: 'logout',
+                        method: 'post'
+                    }
                 }
             }
         }
