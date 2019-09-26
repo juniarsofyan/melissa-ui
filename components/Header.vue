@@ -133,7 +133,7 @@
                                                     <span>View My Cart</span>
                                                 </nuxt-link>
 
-                                                <nuxt-link :to="`/cart`" tag="a" class="button button-checkout">
+                                                <nuxt-link :to="`/checkout`" tag="a" class="button button-checkout">
                                                     <span>Checkout Now</span>
                                                 </nuxt-link>
                                             </div>
