@@ -11,13 +11,11 @@
                     <img src="~/assets/img/logo-bellezkin.png" width="200px" alt="Bellezkin" />
                   </a>
                 </div>
-                <p>&nbsp;</p>
+                <br />
                 <div class="text-content-elememnt">
-                  <p>
-                    Shop the latest products right from
-                    your home with TuranOutfit.
-                  </p>
-                  <p>We have beard supplies & accessories from top brands.</p>
+                  <p
+                    id="about-us"
+                  >Bellezkin adalah brand perawatan kecantikan yang berdiri tahun 2014. Mengutamakan pelayanan konsultasi dengan beauty consultant professional dan dengan dukungan tenaga ahli.</p>
                 </div>
               </div>
             </div>
@@ -26,22 +24,22 @@
                 <h2 class="widgettitle">Links</h2>
                 <ul class="menu">
                   <li class="menu-item">
-                    <a href="#">Home</a>
+                    <a href="/">Home</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Brightening</a>
+                    <a href="./brightening">Brightening</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Purify</a>
+                    <a href="./purify">Purify</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Decorative</a>
+                    <a href="./decorative">Decorative</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Extra Care</a>
+                    <a href="./extra care">Extra Care</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Promo</a>
+                    <a href="./promo">Promo</a>
                   </li>
                 </ul>
               </div>
@@ -51,19 +49,16 @@
                 <h2 class="widgettitle">Information</h2>
                 <ul class="menu">
                   <li class="menu-item">
-                    <a href="#">FAQs</a>
+                    <a href="/faq">FAQ's</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Track Order</a>
+                    <a
+                      href="https://api.whatsapp.com/send?phone=628112288142&text=Halo!%0ASaya%20ingin%20ingin%20konsultasi%20lebih%20lanjut%20mengenai%20produk%20Bellezkin"
+                      target="_blank"
+                    >Beauty Consultant</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Delivery</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#">Contact Us</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#">Return</a>
+                    <a href="/return-policy">Return Policy</a>
                   </li>
                 </ul>
               </div>
@@ -71,40 +66,17 @@
             <div class="box-footer col-xs-12 col-sm-6 col-md-6 col-lg-4">
               <div class="turan-newsletter style1">
                 <div class="newsletter-head">
-                  <h3 class="title">Subscribe our Newsletter</h3>
-                </div>
-                <div class="newsletter-form-wrap">
-                  <div class="list">
-                    <span class="text">Im interested in:</span>
-                    <label for="radio-footer-1">
-                      <input
-                        checked
-                        id="radio-footer-1"
-                        type="radio"
-                        name="list_id"
-                        value="radio-footer-1"
-                      />
-
-                      <span class="text">Accessories</span>
-                    </label>
-                    <label for="radio-footer-2">
-                      <input id="radio-footer-2" type="radio" name="list_id" value="radio-footer-2" />
-
-                      <span class="text">Grooming</span>
-                    </label>
-                  </div>
-                  <input
-                    type="email"
-                    class="input-text email email-newsletter"
-                    placeholder="Your email letter"
-                  />
-                  <button class="button btn-submit submit-newsletter">SUBSCRIBE</button>
+                  <h3 class="title">Follow Us</h3>
                 </div>
               </div>
               <div class="turan-socials">
                 <ul class="socials">
                   <li>
-                    <a href="#" class="social-item" target="_blank">
+                    <a
+                      href="https://www.facebook.com/bellezkincare.natural/"
+                      class="social-item"
+                      target="_blank"
+                    >
                       <i class="icon fa fa-facebook-square"></i>
                     </a>
                   </li>
@@ -114,18 +86,48 @@
                     </a>
                   </li>
                   <li>
-                    <a href="#" class="social-item" target="_blank">
+                    <a
+                      href="https://www.instagram.com/bellezkin/"
+                      class="social-item"
+                      target="_blank"
+                    >
                       <i class="icon fa fa-instagram"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.youtube.com/channel/UCE0Hte0fUMeWhGrVn5zgwRQ"
+                      class="social-item"
+                      target="_blank"
+                    >
+                      <i class="icon fa fa-youtube"></i>
                     </a>
                   </li>
                 </ul>
               </div>
+              <p>&nbsp;</p>
+              <a
+                href="https://cekbpom.pom.go.id/index.php/home/produk/vs9849n2dm48o0fiffkavi2d92/all/row/10/page/1/order/4/DESC/search/2/bellezkin"
+                target="_blank"
+              >
+                <img src="../assets/img/bpom.png" id="logo-comp" />
+              </a>
+              <a
+                href="http://www.halalmui.org/mui14/index.php/main/ceklogin_halal/produk_halal_masuk/1"
+                target="_blank"
+              >
+                <img src="../assets/img/logo-halal.png" id="logo-comp" />
+              </a>
             </div>
           </div>
           <div class="row">
+            <!--
             <div class="col-sm-12 border-custom">
               <span></span>
             </div>
+            -->
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
           </div>
           <div class="footer-end">
             <div class="row">
