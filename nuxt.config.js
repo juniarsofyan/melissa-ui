@@ -210,7 +210,7 @@ export default {
                         propertyName: 'data'
                     },
                     logout: {
-                        url: 'logout',
+                        url: process.env.AUTH_BASE_URL + 'api/logout',
                         method: 'post'
                     }
                 }
