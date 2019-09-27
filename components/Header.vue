@@ -275,7 +275,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
     data() {
@@ -293,6 +293,7 @@ export default {
     },
     computed: {
         ...mapGetters(['isAuthenticated', 'loggedInUser']),
+        ...mapGetters("profile", ['personal']),
         cart_count: function() {
             return this.$store.getters['cart/count']
         },
@@ -304,6 +305,9 @@ export default {
         }
     },
     methods: {
+        /* ...mapActions({
+            "updateProfile": ["updateProfile"]
+        }), */
         removeItem: function(product_code) {
             this.$store.dispatch('cart/removeItem', product_code)
         },
@@ -315,6 +319,8 @@ export default {
             this.$router.push({
                 path: '/'
             });
+
+            this.getUserProfile();
         },
         async registerUser() {
             await this.$axios.post(`${process.env.AUTH_BASE_URL}api/register`, this.registerForm);
@@ -332,6 +338,21 @@ export default {
         },
         async logout() {
             await this.$auth.logout();
+            
+            this.$store.dispatch("profile/updateProfile", false)
+        },
+        getUserProfile() {
+            this.$axios.post(`${process.env.API_BASE_URL}profile/get`, { email: this.loginForm.email}).then((response) => {
+
+                this.$store.dispatch("profile/updateProfile", {
+                    member_no: response.data.data.no_member,
+                    nik: response.data.data.nik,
+                    name: response.data.data.nama,
+                    birthdate: response.data.data.tgl_lahir,
+                    phone: response.data.data.telp,
+                    email: response.data.data.email
+                })
+            });
         }
     }
 }

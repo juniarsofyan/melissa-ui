@@ -1,10 +1,12 @@
 import Vuex from 'vuex'
 import cart from './modules/cart'
+import profile from './modules/profile'
 
 const store = () => {
     return new Vuex.Store({
         modules: {
-            cart
+            cart,
+            profile
         },
         state: {},
         mutations: {},
