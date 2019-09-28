@@ -28,29 +28,25 @@
                                                    
                                                     <p class="col-12">
                                                         <label class="text">No KTP</label>
-                                                        <input type="text" style="width:100%" class="input-text">
+                                                        <input type="text" style="width:100%" class="input-text" v-model="profile.nik">
                                                     </p>
                                                     <p class="col-12">
                                                         <label class="text">Nama</label>
-                                                        <input type="text" style="width:100%" class="input-text">
+                                                        <input type="text" style="width:100%" class="input-text" v-model="profile.name">
                                                     </p>
-
-
                                                     <p class="col-12">
                                                         <label class="text">Tanggal Lahir</label>
-                                                        <input type="date" style="width:100%" class="form-control">
+                                                        <input type="date" style="width:100%" class="form-control" v-model="profile.birthdate">
                                                     </p>
-
                                                     <p class="col-12">
                                                         <label class="text">Telepon</label>
-                                                        <input type="text" style="width:100%" class="input-text">
+                                                        <input type="text" style="width:100%" class="input-text" v-model="profile.phone">
                                                     </p>
-
                                                     <p class="col-12">
                                                         <label class="text">Email</label>
-                                                        <input type="email" style="width:100%" class="input-text">
+                                                        <input type="email" style="width:100%" class="input-text" v-model="profile.email" readonly>
                                                     </p>
-                                                    <nuxt-link to="#" class="button ">Simpan</nuxt-link>
+                                                    <button class="button" @click="updateProfile">Save</button>
                                                 </div>
                                             </div>
                                         </div>
