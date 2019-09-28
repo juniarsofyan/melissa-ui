@@ -9,14 +9,10 @@ const cart = {
         addItem(state, item) {
             let item_exists = state.items.find((product) => product.product_code == item.kode_barang)
 
-            if (item_exists) { // SAMPE SINI
-                console.log(parseInt(item_exists.grand_total))
-                console.log(parseInt(item.price_discount))
-                console.log(parseInt(item.qty))
-
+            if (item_exists) {
                 item_exists.qty = parseInt(item_exists.qty) + parseInt(item.qty)
                 item_exists.subtotal = parseInt(item_exists.qty) * parseInt(item_exists.price)
-                item_exists.grand_total = parseInt(item_exists.grand_total) + parseInt(item.price_discount) * parseInt(item.qty)
+                item_exists.grand_total = parseInt(item_exists.grand_total) + parseInt(item_exists.price_discount) * parseInt(item.qty)
                 item_exists.total_weight = item_exists.qty * item_exists.weight
             } else {
                 let product = {
@@ -50,7 +46,7 @@ const cart = {
             if (item_exists) {
                 item_exists.qty = parseInt(item.qty)
                 item_exists.subtotal = parseInt(item.qty) * parseInt(item_exists.price)
-                item_exists.grand_total = parseInt(item_exists.grand_total) + parseInt(item.price_discount) * parseInt(item.qty)
+                item_exists.grand_total = parseInt(item_exists.grand_total) + parseInt(item_exists.price_discount) * parseInt(item.qty)
                 item_exists.total_weight = parseInt(item.qty) * item_exists.weight
             } else {
                 let product = {
