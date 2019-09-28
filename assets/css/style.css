@@ -16675,3 +16675,14 @@ iframe {
      font-size: 20px !important;
      font-weight: normal;
 }
+
+.botton-toolcart {
+     font-size: 11px !important;
+     background-color: #333 !important;
+     color: white;
+}
+
+.botton-toolcart:hover {
+     background-color: #ec268f !important;
+     color: white !important;
+}
