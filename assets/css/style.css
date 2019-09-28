@@ -16337,7 +16337,7 @@ iframe {
 
      .main-content-details:not(.left-sidebar):not(.right-sidebar) .details-thumd {
           width: 50%;
-         /*  padding-right: 165px;
+          /*  padding-right: 165px;
           padding-left: 70px;
           padding-top: 50px;  */
      }
@@ -16651,4 +16651,27 @@ iframe {
 
 .contact-bc {
      margin-top: 50px !important;
+}
+
+.single_bc_button {
+     background-color: #1C9E06 !important;
+     text-transform: none !important;
+     font-size: 16px !important;
+     font-weight: normal !important;
+     border: none !important;
+     color: white !important;
+}
+
+.single_bc_button:hover {
+     background-color: #27C109 !important;
+     text-transform: none !important;
+     font-size: 16px !important;
+     font-weight: normal !important;
+     border: none !important;
+     color: white !important;
+}
+
+.logo_bc {
+     font-size: 20px !important;
+     font-weight: normal;
 }
