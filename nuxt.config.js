@@ -8,8 +8,7 @@ export default {
      */
     head: {
         title: process.env.npm_package_name || '',
-        meta: [
-            {
+        meta: [{
                 charset: 'utf-8'
             },
             {
@@ -22,8 +21,7 @@ export default {
                 content: process.env.npm_package_description || ''
             }
         ],
-        link: [
-            {
+        link: [{
                 rel: 'icon',
                 type: 'image/x-icon',
                 href: '/favicon.ico'
@@ -31,12 +29,16 @@ export default {
             {
                 rel: 'stylesheet',
                 type: 'text/css',
-                href:
-                    'https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i%7CLato:300,300i,400,400i,700,700i,900%7COpen+Sans:300,300i,400,400i,600,600i,700,700i,800'
+                href: 'https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i%7CLato:300,300i,400,400i,700,700i,900%7COpen+Sans:300,300i,400,400i,600,600i,700,700i,800'
+            },
+            {
+                rel: 'stylesheet',
+                href: 'https://use.fontawesome.com/releases/v5.3.1/css/all.css',
+                integrity: 'sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU',
+                crossorigin: 'anonymous'
             }
         ],
-        script: [
-            {
+        script: [{
                 src: process.env.BASE_URL + 'assets/js/jquery-3.3.1.min.js'
             },
             {
@@ -52,8 +54,7 @@ export default {
                 src: process.env.BASE_URL + 'assets/js/isotope.min.js'
             },
             {
-                src:
-                    process.env.BASE_URL +
+                src: process.env.BASE_URL +
                     'assets/js/jquery.mCustomScrollbar.min.js'
             },
             {
@@ -69,8 +70,7 @@ export default {
                 src: process.env.BASE_URL + 'assets/js/slick.min.js'
             },
             {
-                src:
-                    process.env.BASE_URL + 'assets/js/jquery.elevateZoom.min.js'
+                src: process.env.BASE_URL + 'assets/js/jquery.elevateZoom.min.js'
             },
             {
                 src: process.env.BASE_URL + 'assets/js/jquery.actual.min.js'
@@ -82,8 +82,7 @@ export default {
                 src: process.env.BASE_URL + 'assets/js/lightbox.min.js'
             },
             {
-                src:
-                    process.env.BASE_URL +
+                src: process.env.BASE_URL +
                     'assets/js/jquery.mCustomScrollbar.min.js'
             },
             {
@@ -129,7 +128,10 @@ export default {
                 }
             }
 
-            return { x: 0, y: 0 }
+            return {
+                x: 0,
+                y: 0
+            }
         }
     },
     /*

@@ -72,7 +72,11 @@
                                                 <div class="shipping-address">
                                                     <p class="col-12">
                                                         <label class="text">Nama</label>
-                                                        <input type="text" style="width:100%" class="input-text">
+                                                        <input
+                                                            type="text"
+                                                            style="width:100%"
+                                                            class="input-text"
+                                                        />
                                                     </p>
 
                                                     <p class="col-12">
@@ -82,17 +86,21 @@
                                                             <option value="United States">London</option>
                                                             <option value="United Kingdom">tokyo</option>
                                                             <option value="Afghanistan">Seoul</option>
-                                                            <option value="Aland Islands">Mexico city</option>
+                                                            <option
+                                                                value="Aland Islands"
+                                                            >Mexico city</option>
                                                             <option value="Albania">Mumbai</option>
                                                             <option value="Algeria">Delhi</option>
                                                             <option value="American Samoa">New York</option>
                                                             <option value="Andorra">Jakarta</option>
                                                             <option value="Angola">Sao Paulo</option>
                                                             <option value="Anguilla">Osaka</option>
-                                                            <option value="Antarctica">Karachi </option>
-                                                            <option value="Antigua and Barbuda">Matx-cơ-va</option>
-                                                            <option value="Argentina">Toronto </option>
-                                                            <option value="Armenia">Boston </option>
+                                                            <option value="Antarctica">Karachi</option>
+                                                            <option
+                                                                value="Antigua and Barbuda"
+                                                            >Matx-cơ-va</option>
+                                                            <option value="Argentina">Toronto</option>
+                                                            <option value="Armenia">Boston</option>
                                                         </select>
                                                     </p>
 
@@ -103,17 +111,21 @@
                                                             <option value="United States">London</option>
                                                             <option value="United Kingdom">tokyo</option>
                                                             <option value="Afghanistan">Seoul</option>
-                                                            <option value="Aland Islands">Mexico city</option>
+                                                            <option
+                                                                value="Aland Islands"
+                                                            >Mexico city</option>
                                                             <option value="Albania">Mumbai</option>
                                                             <option value="Algeria">Delhi</option>
                                                             <option value="American Samoa">New York</option>
                                                             <option value="Andorra">Jakarta</option>
                                                             <option value="Angola">Sao Paulo</option>
                                                             <option value="Anguilla">Osaka</option>
-                                                            <option value="Antarctica">Karachi </option>
-                                                            <option value="Antigua and Barbuda">Matx-cơ-va</option>
-                                                            <option value="Argentina">Toronto </option>
-                                                            <option value="Armenia">Boston </option>
+                                                            <option value="Antarctica">Karachi</option>
+                                                            <option
+                                                                value="Antigua and Barbuda"
+                                                            >Matx-cơ-va</option>
+                                                            <option value="Argentina">Toronto</option>
+                                                            <option value="Armenia">Boston</option>
                                                         </select>
                                                     </p>
 
@@ -124,47 +136,46 @@
                                                             <option value="United States">London</option>
                                                             <option value="United Kingdom">tokyo</option>
                                                             <option value="Afghanistan">Seoul</option>
-                                                            <option value="Aland Islands">Mexico city</option>
+                                                            <option
+                                                                value="Aland Islands"
+                                                            >Mexico city</option>
                                                             <option value="Albania">Mumbai</option>
                                                             <option value="Algeria">Delhi</option>
                                                             <option value="American Samoa">New York</option>
                                                             <option value="Andorra">Jakarta</option>
                                                             <option value="Angola">Sao Paulo</option>
                                                             <option value="Anguilla">Osaka</option>
-                                                            <option value="Antarctica">Karachi </option>
-                                                            <option value="Antigua and Barbuda">Matx-cơ-va</option>
-                                                            <option value="Argentina">Toronto </option>
-                                                            <option value="Armenia">Boston </option>
+                                                            <option value="Antarctica">Karachi</option>
+                                                            <option
+                                                                value="Antigua and Barbuda"
+                                                            >Matx-cơ-va</option>
+                                                            <option value="Argentina">Toronto</option>
+                                                            <option value="Armenia">Boston</option>
                                                         </select>
                                                     </p>
 
-
                                                     <p class="col-12">
                                                         <label class="text">Alamat</label>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                            rows="3"></textarea>
+                                                        <textarea
+                                                            class="form-control"
+                                                            id="exampleFormControlTextarea1"
+                                                            rows="3"
+                                                        ></textarea>
                                                     </p>
                                                     <p class="col-12">
                                                         <label class="text">Kode Pos</label>
-                                                        <input type="number" style="width:100%" class="form-control">
+                                                        <input
+                                                            type="number"
+                                                            style="width:100%"
+                                                            class="form-control"
+                                                        />
                                                     </p>
 
-
-
-
-                                                    <nuxt-link to="#" class="button ">Simpan</nuxt-link>
-
+                                                    <nuxt-link to="#" class="button">Simpan</nuxt-link>
                                                 </div>
                                             </div>
-
-
-
                                         </div>
-
-
-
                                     </div>
-
                                 </div>
                             </div>
                             <div id="semua" class="tab-panel">  
@@ -211,20 +222,48 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-
     </div>
 </template>
 
 <script>
-    import CartItem from '~/components/CartItem.vue'
+import { mapGetters } from 'vuex'
 
-    export default {
-        layout: 'products',
-        components: {
-            CartItem
+export default {
+    layout: 'products',
+    data() {
+        return {
+            profile: this.$store.getters['profile/personal']
+        }
+    },
+    methods: {
+        async updateProfile() {
+            await this.$axios.post(
+                `${process.env.API_BASE_URL}profile/update`,
+                {
+                    nik: this.profile.nik,
+                    name: this.profile.name,
+                    birthdate: this.profile.birthdate,
+                    phone: this.profile.phone,
+                    email: this.profile.email
+                }
+            )
+
+            await this.$axios
+                .post(`${process.env.API_BASE_URL}profile/get`, {
+                    email: this.profile.email
+                })
+                .then((response) => {
+                    this.$store.dispatch('profile/updateProfile', {
+                        member_no: response.data.data.no_member,
+                        nik: response.data.data.nik,
+                        name: response.data.data.nama,
+                        birthdate: response.data.data.tgl_lahir,
+                        phone: response.data.data.telp,
+                        email: response.data.data.email
+                    })
+                })
         }
     }
+}
 </script>

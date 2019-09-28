@@ -66,13 +66,22 @@
 									<div class="quantity">
 										<div class="control">
 											<span class="btn-number qtyminus quantity-minus" @click="minQty">-</span>
-											<input type="text" data-step="1" data-min="1" v-model="qty" title="Qty"
-												class="input-qty qty" size="4" />
+											<input type="text" data-step="1" data-min="1" v-model="qty" title="Qty" class="input-qty qty" size="4" />
 											<span class="btn-number qtyplus quantity-plus" @click="addQty">+</span>
 										</div>
 									</div>
-									<button class="single_add_to_cart_button button" @click="addItem">Add to
-										cart</button>
+									<button class="single_add_to_cart_button button" @click="addItem">Add to cart</button>
+								</div>
+
+								<p>&nbsp;</p>
+								<p>&nbsp;</p>
+
+								<div class="contact-bc">
+									<p>Mengalami kesulitan untuk menentukan produk yang sesuai dengan kebutuhan kulit Anda? Untuk pengalaman terbaik konsultasikan kebutuhan kulit Anda kepada Beauty Consultant kami.</p>
+									<a :href="`https://api.whatsapp.com/send?phone=628112288142&text=Halo!%0ASaya%20ingin%20ingin%20konsultasi%20lebih%20lanjut%20mengenai%20produk%20Bellezkin%0ASource : ${url}`" class="single_bc_button button" target="_blank">
+									<i class="fab fa-whatsapp logo_bc"></i>&nbsp; 
+									Contact Beauty Consultant
+									</a>
 								</div>
 							</div>
 						</div>
@@ -874,6 +883,7 @@
 				product: [],
 				related_products: [],
 				qty: 1,
+				url: document.URL,
 				slickOptions: {
 					infinite: false,
 					dots: false,
