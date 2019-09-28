@@ -29,7 +29,7 @@
                 <!-- <a href="#" class="button quick-wiew-button"></a> -->
             </div>
             <div class="product-info">
-                <h5 class="product-name product_title">
+                <h5 class="product-name product_title fix-product-name">
                     <a href="#">{{ product.nama }}</a>
                 </h5>
                 <div class="group-info">

@@ -16686,3 +16686,9 @@ iframe {
      background-color: #ec268f !important;
      color: white !important;
 }
+
+.fix-product-name {
+     font-size: 12px !important;
+     font-weight: bold !important;
+     margin-bottom: 10px !important;
+}
