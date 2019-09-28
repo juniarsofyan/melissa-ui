@@ -1551,10 +1551,11 @@ table tr:last-child th {
      padding: 0 15px;
 }
 
-.slick-slider .slick-arrow {
+
+/* .slick-slider .slick-arrow {
      display: inline-block;
      position: absolute;
-     top: 0;
+     top: 50%;
      right: 0;
      font-size: 24px;
      line-height: 1;
@@ -1562,11 +1563,39 @@ table tr:last-child th {
      background-color: rgba(0, 0, 0, 0.33);
      z-index: 1;
      cursor: pointer;
-}
+     padding: 5px 15px;
+     border-radius: 5px;
+ } */
 
-.slick-slider .slick-arrow:first-child {
-     right: 29px;
-}
+ span.fa.fa-angle-right.next.slick-arrow {
+     display: inline-block;
+     position: absolute;
+     top: 48%;
+     right: 0;
+     font-size: 24px;
+     line-height: 1;
+     color: #fff;
+     background-color: rgba(0, 0, 0, 0.33);
+     z-index: 1;
+     cursor: pointer;
+     padding: 5px 15px;
+     border-radius: 5px;
+ }
+
+ span.fa.fa-angle-left.pre.slick-arrow {
+     display: inline-block;
+     position: absolute;
+     top: 48%;
+     left:  0;
+     font-size: 24px;
+     line-height: 1;
+     color: #fff;
+     background-color: rgba(0, 0, 0, 0.33);
+     z-index: 1;
+     cursor: pointer;
+     padding: 5px 15px;
+     border-radius: 5px;
+ }
 
 .slick-vertical .slick-slide {
      border: none;

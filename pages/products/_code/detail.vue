@@ -85,442 +85,281 @@
 							<center>
 								<h3> Promote Product </h3>
 							</center>
-							<slick ref="slick" :options="slickOptions">
+							<div class="row">
 								<!-- item Also Like start-->
-								<div class="product-item default-layout product-type-variable">
-									<div class="product-inner equal-element">
-										<div class="product-top">
-											<div class="flash">
-												<span class="onnew">
-													<span class="text">
-														new
+								<div class="col-lg-4">
+									<div class="product-item default-layout product-type-variable">
+										<div class="product-inner equal-element">
+											<div class="product-top">
+												<div class="flash">
+													<span class="onnew">
+														<span class="text">
+															new
+														</span>
 													</span>
-												</span>
-											</div>
-											<div class="yith-wcwl-add-to-wishlist">
-												<div class="yith-wcwl-add-button">
-													<a href="#">Add to Wishlist</a>
 												</div>
-											</div>
-										</div>
-										<div class="product-thumb">
-											<div class="thumb-inner">
-												<a href="#">
-													<img src="https://givecatsabetterlife.com/wp-content/uploads/2018/10/ybJsG7Zty1s_hqdefault.jpg"
-														alt="">
-												</a>
-											</div>
-											<a href="#" class="button quick-wiew-button">Quick View</a>
-										</div>
-										<div class="product-info">
-											<h5 class="product-name product_title">
-												<a href="#">Beard Tumbleweed Oil</a>
-											</h5>
-											<div class="group-info">
-												<div class="stars-rating">
-													<div class="star-rating">
-														<span class="star-3"></span>
-													</div>
-													<div class="count-star">
-														(3)
+												<div class="yith-wcwl-add-to-wishlist">
+													<div class="yith-wcwl-add-button">
+														<a href="#">Add to Wishlist</a>
 													</div>
 												</div>
-												<div class="price">
-													<del>
-														€65
-													</del>
-													<ins>
-														€45
-													</ins>
-												</div>
 											</div>
-										</div>
-										<div class="loop-form-add-to-cart">
-											<form class="cart">
-												<div class="single_variation_wrap">
-													<div class="quantity">
-														<div class="control">
-															<a class="btn-number qtyminus quantity-minus" href="#">-</a>
-															<input type="text" data-step="1" data-min="0" value="1"
-																title="Qty" class="input-qty qty" size="4">
-															<a href="#" class="btn-number qtyplus quantity-plus">+</a>
+											<div class="product-thumb">
+												<div class="thumb-inner">
+													<a href="#">
+														<img src="https://givecatsabetterlife.com/wp-content/uploads/2018/10/ybJsG7Zty1s_hqdefault.jpg"
+															alt="">
+													</a>
+												</div>
+												<a href="#" class="button quick-wiew-button">Quick View</a>
+											</div>
+											<div class="product-info">
+												<h5 class="product-name product_title">
+													<a href="#">Beard Tumbleweed Oil</a>
+												</h5>
+												<div class="group-info">
+													<div class="stars-rating">
+														<div class="star-rating">
+															<span class="star-3"></span>
+														</div>
+														<div class="count-star">
+															(3)
 														</div>
 													</div>
-													<button class="single_add_to_cart_button button">Add to
-														cart</button>
-												</div>
-												<div class="variations">
-													<div class="variation">
-														<label class="variation-label">
-															Capacity:
-														</label>
-														<div class="variation-value">
-															<a href="#" class="change-value text">
-																<span>10ml</span>
-															</a>
-															<a href="#" class="change-value text">
-																<span>20ml</span>
-															</a>
-															<a href="#" class="change-value text">
-																<span>50ml</span>
-															</a>
-														</div>
+													<div class="price">
+														<del>
+															€65
+														</del>
+														<ins>
+															€45
+														</ins>
 													</div>
 												</div>
-											</form>
+											</div>
+											<div class="loop-form-add-to-cart">
+												<form class="cart">
+													<div class="single_variation_wrap">
+														<div class="quantity">
+															<div class="control">
+																<a class="btn-number qtyminus quantity-minus"
+																	href="#">-</a>
+																<input type="text" data-step="1" data-min="0" value="1"
+																	title="Qty" class="input-qty qty" size="4">
+																<a href="#"
+																	class="btn-number qtyplus quantity-plus">+</a>
+															</div>
+														</div>
+														<button class="single_add_to_cart_button button">Add to
+															cart</button>
+													</div>
+													<div class="variations">
+														<div class="variation">
+															<label class="variation-label">
+																Capacity:
+															</label>
+															<div class="variation-value">
+																<a href="#" class="change-value text">
+																	<span>10ml</span>
+																</a>
+																<a href="#" class="change-value text">
+																	<span>20ml</span>
+																</a>
+																<a href="#" class="change-value text">
+																	<span>50ml</span>
+																</a>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- item promoted end-->
+								<!-- item Also Like start-->
+								<div class="col-lg-4">
+									<div class="product-item default-layout product-type-variable">
+										<div class="product-inner equal-element">
+											<div class="product-top">
+												<div class="flash">
+													<span class="onnew">
+														<span class="text">
+															new
+														</span>
+													</span>
+												</div>
+												<div class="yith-wcwl-add-to-wishlist">
+													<div class="yith-wcwl-add-button">
+														<a href="#">Add to Wishlist</a>
+													</div>
+												</div>
+											</div>
+											<div class="product-thumb">
+												<div class="thumb-inner">
+													<a href="#">
+														<img src="https://givecatsabetterlife.com/wp-content/uploads/2018/10/ybJsG7Zty1s_hqdefault.jpg"
+															alt="">
+													</a>
+												</div>
+												<a href="#" class="button quick-wiew-button">Quick View</a>
+											</div>
+											<div class="product-info">
+												<h5 class="product-name product_title">
+													<a href="#">Beard Tumbleweed Oil</a>
+												</h5>
+												<div class="group-info">
+													<div class="stars-rating">
+														<div class="star-rating">
+															<span class="star-3"></span>
+														</div>
+														<div class="count-star">
+															(3)
+														</div>
+													</div>
+													<div class="price">
+														<del>
+															€65
+														</del>
+														<ins>
+															€45
+														</ins>
+													</div>
+												</div>
+											</div>
+											<div class="loop-form-add-to-cart">
+												<form class="cart">
+													<div class="single_variation_wrap">
+														<div class="quantity">
+															<div class="control">
+																<a class="btn-number qtyminus quantity-minus"
+																	href="#">-</a>
+																<input type="text" data-step="1" data-min="0" value="1"
+																	title="Qty" class="input-qty qty" size="4">
+																<a href="#"
+																	class="btn-number qtyplus quantity-plus">+</a>
+															</div>
+														</div>
+														<button class="single_add_to_cart_button button">Add to
+															cart</button>
+													</div>
+													<div class="variations">
+														<div class="variation">
+															<label class="variation-label">
+																Capacity:
+															</label>
+															<div class="variation-value">
+																<a href="#" class="change-value text">
+																	<span>10ml</span>
+																</a>
+																<a href="#" class="change-value text">
+																	<span>20ml</span>
+																</a>
+																<a href="#" class="change-value text">
+																	<span>50ml</span>
+																</a>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- item promoted end-->
+								<!-- item Also Like start-->
+								<div class="col-lg-4">
+									<div class="product-item default-layout product-type-variable">
+										<div class="product-inner equal-element">
+											<div class="product-top">
+												<div class="flash">
+													<span class="onnew">
+														<span class="text">
+															new
+														</span>
+													</span>
+												</div>
+												<div class="yith-wcwl-add-to-wishlist">
+													<div class="yith-wcwl-add-button">
+														<a href="#">Add to Wishlist</a>
+													</div>
+												</div>
+											</div>
+											<div class="product-thumb">
+												<div class="thumb-inner">
+													<a href="#">
+														<img src="https://givecatsabetterlife.com/wp-content/uploads/2018/10/ybJsG7Zty1s_hqdefault.jpg"
+															alt="">
+													</a>
+												</div>
+												<a href="#" class="button quick-wiew-button">Quick View</a>
+											</div>
+											<div class="product-info">
+												<h5 class="product-name product_title">
+													<a href="#">Beard Tumbleweed Oil</a>
+												</h5>
+												<div class="group-info">
+													<div class="stars-rating">
+														<div class="star-rating">
+															<span class="star-3"></span>
+														</div>
+														<div class="count-star">
+															(3)
+														</div>
+													</div>
+													<div class="price">
+														<del>
+															€65
+														</del>
+														<ins>
+															€45
+														</ins>
+													</div>
+												</div>
+											</div>
+											<div class="loop-form-add-to-cart">
+												<form class="cart">
+													<div class="single_variation_wrap">
+														<div class="quantity">
+															<div class="control">
+																<a class="btn-number qtyminus quantity-minus"
+																	href="#">-</a>
+																<input type="text" data-step="1" data-min="0" value="1"
+																	title="Qty" class="input-qty qty" size="4">
+																<a href="#"
+																	class="btn-number qtyplus quantity-plus">+</a>
+															</div>
+														</div>
+														<button class="single_add_to_cart_button button">Add to
+															cart</button>
+													</div>
+													<div class="variations">
+														<div class="variation">
+															<label class="variation-label">
+																Capacity:
+															</label>
+															<div class="variation-value">
+																<a href="#" class="change-value text">
+																	<span>10ml</span>
+																</a>
+																<a href="#" class="change-value text">
+																	<span>20ml</span>
+																</a>
+																<a href="#" class="change-value text">
+																	<span>50ml</span>
+																</a>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
 								<!-- item promoted end-->
 
-								<!-- item promoted start-->
-								<div class="product-item default-layout product-type-variable">
-									<div class="product-inner equal-element">
-										<div class="product-top">
-											<div class="flash">
-												<span class="onnew">
-													<span class="text">
-														new
-													</span>
-												</span>
-											</div>
-											<div class="yith-wcwl-add-to-wishlist">
-												<div class="yith-wcwl-add-button">
-													<a href="#">Add to Wishlist</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-thumb">
-											<div class="thumb-inner">
-												<a href="#">
-													<img src="https://givecatsabetterlife.com/wp-content/uploads/2018/10/ybJsG7Zty1s_hqdefault.jpg"
-														alt="">
-												</a>
-											</div>
-											<a href="#" class="button quick-wiew-button">Quick View</a>
-										</div>
-										<div class="product-info">
-											<h5 class="product-name product_title">
-												<a href="#">Beard Tumbleweed Oil</a>
-											</h5>
-											<div class="group-info">
-												<div class="stars-rating">
-													<div class="star-rating">
-														<span class="star-3"></span>
-													</div>
-													<div class="count-star">
-														(3)
-													</div>
-												</div>
-												<div class="price">
-													<del>
-														€65
-													</del>
-													<ins>
-														€45
-													</ins>
-												</div>
-											</div>
-										</div>
-										<div class="loop-form-add-to-cart">
-											<form class="cart">
-												<div class="single_variation_wrap">
-													<div class="quantity">
-														<div class="control">
-															<a class="btn-number qtyminus quantity-minus" href="#">-</a>
-															<input type="text" data-step="1" data-min="0" value="1"
-																title="Qty" class="input-qty qty" size="4">
-															<a href="#" class="btn-number qtyplus quantity-plus">+</a>
-														</div>
-													</div>
-													<button class="single_add_to_cart_button button">Add to
-														cart</button>
-												</div>
-												<div class="variations">
-													<div class="variation">
-														<label class="variation-label">
-															Capacity:
-														</label>
-														<div class="variation-value">
-															<a href="#" class="change-value text">
-																<span>10ml</span>
-															</a>
-															<a href="#" class="change-value text">
-																<span>20ml</span>
-															</a>
-															<a href="#" class="change-value text">
-																<span>50ml</span>
-															</a>
-														</div>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-								<!-- item promoted end-->
 
-								<!-- item promoted start-->
-								<div class="product-item default-layout product-type-variable">
-									<div class="product-inner equal-element">
-										<div class="product-top">
-											<div class="flash">
-												<span class="onnew">
-													<span class="text">
-														new
-													</span>
-												</span>
-											</div>
-											<div class="yith-wcwl-add-to-wishlist">
-												<div class="yith-wcwl-add-button">
-													<a href="#">Add to Wishlist</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-thumb">
-											<div class="thumb-inner">
-												<a href="#">
-													<img src="https://givecatsabetterlife.com/wp-content/uploads/2018/10/ybJsG7Zty1s_hqdefault.jpg"
-														alt="">
-												</a>
-											</div>
-											<a href="#" class="button quick-wiew-button">Quick View</a>
-										</div>
-										<div class="product-info">
-											<h5 class="product-name product_title">
-												<a href="#">Beard Tumbleweed Oil</a>
-											</h5>
-											<div class="group-info">
-												<div class="stars-rating">
-													<div class="star-rating">
-														<span class="star-3"></span>
-													</div>
-													<div class="count-star">
-														(3)
-													</div>
-												</div>
-												<div class="price">
-													<del>
-														€65
-													</del>
-													<ins>
-														€45
-													</ins>
-												</div>
-											</div>
-										</div>
-										<div class="loop-form-add-to-cart">
-											<form class="cart">
-												<div class="single_variation_wrap">
-													<div class="quantity">
-														<div class="control">
-															<a class="btn-number qtyminus quantity-minus" href="#">-</a>
-															<input type="text" data-step="1" data-min="0" value="1"
-																title="Qty" class="input-qty qty" size="4">
-															<a href="#" class="btn-number qtyplus quantity-plus">+</a>
-														</div>
-													</div>
-													<button class="single_add_to_cart_button button">Add to
-														cart</button>
-												</div>
-												<div class="variations">
-													<div class="variation">
-														<label class="variation-label">
-															Capacity:
-														</label>
-														<div class="variation-value">
-															<a href="#" class="change-value text">
-																<span>10ml</span>
-															</a>
-															<a href="#" class="change-value text">
-																<span>20ml</span>
-															</a>
-															<a href="#" class="change-value text">
-																<span>50ml</span>
-															</a>
-														</div>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-								<!-- item promoted end-->
 
-								<!-- item promoted start-->
-								<div class="product-item default-layout product-type-variable">
-									<div class="product-inner equal-element">
-										<div class="product-top">
-											<div class="flash">
-												<span class="onnew">
-													<span class="text">
-														new
-													</span>
-												</span>
-											</div>
-											<div class="yith-wcwl-add-to-wishlist">
-												<div class="yith-wcwl-add-button">
-													<a href="#">Add to Wishlist</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-thumb">
-											<div class="thumb-inner">
-												<a href="#">
-													<img src="https://givecatsabetterlife.com/wp-content/uploads/2018/10/ybJsG7Zty1s_hqdefault.jpg"
-														alt="">
-												</a>
-											</div>
-											<a href="#" class="button quick-wiew-button">Quick View</a>
-										</div>
-										<div class="product-info">
-											<h5 class="product-name product_title">
-												<a href="#">Beard Tumbleweed Oil</a>
-											</h5>
-											<div class="group-info">
-												<div class="stars-rating">
-													<div class="star-rating">
-														<span class="star-3"></span>
-													</div>
-													<div class="count-star">
-														(3)
-													</div>
-												</div>
-												<div class="price">
-													<del>
-														€65
-													</del>
-													<ins>
-														€45
-													</ins>
-												</div>
-											</div>
-										</div>
-										<div class="loop-form-add-to-cart">
-											<form class="cart">
-												<div class="single_variation_wrap">
-													<div class="quantity">
-														<div class="control">
-															<a class="btn-number qtyminus quantity-minus" href="#">-</a>
-															<input type="text" data-step="1" data-min="0" value="1"
-																title="Qty" class="input-qty qty" size="4">
-															<a href="#" class="btn-number qtyplus quantity-plus">+</a>
-														</div>
-													</div>
-													<button class="single_add_to_cart_button button">Add to
-														cart</button>
-												</div>
-												<div class="variations">
-													<div class="variation">
-														<label class="variation-label">
-															Capacity:
-														</label>
-														<div class="variation-value">
-															<a href="#" class="change-value text">
-																<span>10ml</span>
-															</a>
-															<a href="#" class="change-value text">
-																<span>20ml</span>
-															</a>
-															<a href="#" class="change-value text">
-																<span>50ml</span>
-															</a>
-														</div>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-								<!-- item promoted end-->
-
-								<!-- item promoted start-->
-								<div class="product-item default-layout product-type-variable">
-									<div class="product-inner equal-element">
-										<div class="product-top">
-											<div class="flash">
-												<span class="onnew">
-													<span class="text">
-														new
-													</span>
-												</span>
-											</div>
-											<div class="yith-wcwl-add-to-wishlist">
-												<div class="yith-wcwl-add-button">
-													<a href="#">Add to Wishlist</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-thumb">
-											<div class="thumb-inner">
-												<a href="#">
-													<img src="https://givecatsabetterlife.com/wp-content/uploads/2018/10/ybJsG7Zty1s_hqdefault.jpg"
-														alt="">
-												</a>
-											</div>
-											<a href="#" class="button quick-wiew-button">Quick View</a>
-										</div>
-										<div class="product-info">
-											<h5 class="product-name product_title">
-												<a href="#">Beard Tumbleweed Oil</a>
-											</h5>
-											<div class="group-info">
-												<div class="stars-rating">
-													<div class="star-rating">
-														<span class="star-3"></span>
-													</div>
-													<div class="count-star">
-														(3)
-													</div>
-												</div>
-												<div class="price">
-													<del>
-														€65
-													</del>
-													<ins>
-														€45
-													</ins>
-												</div>
-											</div>
-										</div>
-										<div class="loop-form-add-to-cart">
-											<form class="cart">
-												<div class="single_variation_wrap">
-													<div class="quantity">
-														<div class="control">
-															<a class="btn-number qtyminus quantity-minus" href="#">-</a>
-															<input type="text" data-step="1" data-min="0" value="1"
-																title="Qty" class="input-qty qty" size="4">
-															<a href="#" class="btn-number qtyplus quantity-plus">+</a>
-														</div>
-													</div>
-													<button class="single_add_to_cart_button button">Add to
-														cart</button>
-												</div>
-												<div class="variations">
-													<div class="variation">
-														<label class="variation-label">
-															Capacity:
-														</label>
-														<div class="variation-value">
-															<a href="#" class="change-value text">
-																<span>10ml</span>
-															</a>
-															<a href="#" class="change-value text">
-																<span>20ml</span>
-															</a>
-															<a href="#" class="change-value text">
-																<span>50ml</span>
-															</a>
-														</div>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-								<!-- item promoted end-->
-							</slick>
+							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="tab-details-product" style="margin-bottom:30px;">
@@ -1039,8 +878,9 @@
 					infinite: false,
 					dots: false,
 					autoplay: true,
-					prevArrow: '<small> < </small>',
-					nextArrow: '<small> > </small>',
+					arrows:false,
+					// prevArrow: '<small> < </small>',
+					// nextArrow: '<small> > </small>',
 					responsive: [{
 
 							breakpoint: 5121,
@@ -1203,10 +1043,10 @@
 		text-transform: captialize;
 	}
 
-	button.slick-next.slick-arrow {
+	/* button.slick-next.slick-arrow {
 		right: 0 !important;
 		position: absolute;
-	}
+	} */
 
 
 
@@ -1215,10 +1055,12 @@
 		position: relative;
 		margin-bottom: 10px;
 	} */
-
+/* 
 	.slick-slider .slick-arrow:first-child {
 		left: -5px;
 		position: relative;
 		margin-bottom: 10px;
-	}
+	} */
+
+
 </style>
