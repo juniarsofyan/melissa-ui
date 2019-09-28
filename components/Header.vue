@@ -133,7 +133,7 @@
                                                     <span>View My Cart</span>
                                                 </nuxt-link>
 
-                                                <nuxt-link :to="`/cart`" tag="a" class="button button-checkout">
+                                                <nuxt-link :to="`/checkout`" tag="a" class="button button-checkout">
                                                     <span>Checkout Now</span>
                                                 </nuxt-link>
                                             </div>
@@ -167,7 +167,7 @@
                                         <i class="fa fa-user-o" aria-hidden="true"></i>
                                     </a>
                                     <div class="header-account turan-submenu">
-                                        <div class="header-user-form-tabs" v-if="!loggedIn">
+                                        <div class="header-user-form-tabs" v-if="!isAuthenticated">
                                             <ul class="tab-link">
                                                 <li class="active">
                                                     <a data-toggle="tab" aria-expanded="true"
@@ -219,6 +219,15 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <div class="header-user-form-tabs" v-else>
+                                            <ul class="tab-link">
+                                                <li class="active">
+                                                    <a data-toggle="tab" aria-expanded="true"
+                                                        href="#header-tab-login"><input type="button" class="button" value="Logout" @click="logout"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -266,6 +275,8 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex'
+
 export default {
     data() {
         return {
@@ -281,6 +292,8 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['isAuthenticated', 'loggedInUser']),
+        ...mapGetters("profile", ['personal']),
         cart_count: function() {
             return this.$store.getters['cart/count']
         },
@@ -292,6 +305,9 @@ export default {
         }
     },
     methods: {
+        /* ...mapActions({
+            "updateProfile": ["updateProfile"]
+        }), */
         removeItem: function(product_code) {
             this.$store.dispatch('cart/removeItem', product_code)
         },
@@ -303,6 +319,8 @@ export default {
             this.$router.push({
                 path: '/'
             });
+
+            this.getUserProfile();
         },
         async registerUser() {
             await this.$axios.post(`${process.env.AUTH_BASE_URL}api/register`, this.registerForm);
@@ -316,6 +334,24 @@ export default {
             })
             this.$router.push({
                 path: '/'
+            });
+        },
+        async logout() {
+            await this.$auth.logout();
+            
+            this.$store.dispatch("profile/updateProfile", false)
+        },
+        getUserProfile() {
+            this.$axios.post(`${process.env.API_BASE_URL}profile/get`, { email: this.loginForm.email}).then((response) => {
+
+                this.$store.dispatch("profile/updateProfile", {
+                    member_no: response.data.data.no_member,
+                    nik: response.data.data.nik,
+                    name: response.data.data.nama,
+                    birthdate: response.data.data.tgl_lahir,
+                    phone: response.data.data.telp,
+                    email: response.data.data.email
+                })
             });
         }
     }
