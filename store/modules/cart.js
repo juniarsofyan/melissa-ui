@@ -6,10 +6,14 @@ const cart = {
         items: items ? JSON.parse(items) : []
     },
     mutations: {
-        addItem(state, item) { // state.items.push(item)
-            let item_exists = state.items.find(product => product.product_code == item.kode_barang)
+        addItem(state, item) {
+            let item_exists = state.items.find((product) => product.product_code == item.kode_barang)
 
-            if (item_exists) {
+            if (item_exists) { // SAMPE SINI
+                console.log(parseInt(item_exists.grand_total))
+                console.log(parseInt(item.price_discount))
+                console.log(parseInt(item.qty))
+
                 item_exists.qty = parseInt(item_exists.qty) + parseInt(item.qty)
                 item_exists.subtotal = parseInt(item_exists.qty) * parseInt(item_exists.price)
                 item_exists.grand_total = parseInt(item_exists.grand_total) + parseInt(item.price_discount) * parseInt(item.qty)
@@ -22,16 +26,16 @@ const cart = {
                     price: parseInt(item.harga),
                     price_bonus_calculation: item.h_hpb,
                     discount: item.diskon,
-                    price_discount: parseInt(item.harga_diskon),
+                    price_discount: item.harga_diskon ? parseInt(item.harga_diskon) : 0,
                     qty: parseInt(item.qty),
                     subtotal: parseInt(item.harga) * parseInt(item.qty),
-                    grand_total: parseInt(item.harga_diskon) * parseInt(item.qty),
+                    grand_total: item.harga_diskon ? parseInt(item.harga_diskon) * parseInt(item.qty) : parseInt(item.harga) * parseInt(item.qty),
                     total_weight: parseInt(item.qty) * item.berat,
                     image: item.pic,
                     unit: item.unit,
                     category: item.jenis,
-                    picture: item.pic ? item.pic : "",
-                    note: item.note ? item.note : ""
+                    picture: item.pic ? item.pic : '',
+                    note: item.note ? item.note : ''
                 }
 
                 state.items.push(product)
@@ -41,7 +45,7 @@ const cart = {
         },
         updateQty(state, item) { // state.items.push(item)
 
-            let item_exists = state.items.find(product => product.product_code == item.product_code)
+            let item_exists = state.items.find((product) => product.product_code == item.product_code)
 
             if (item_exists) {
                 item_exists.qty = parseInt(item.qty)
@@ -56,16 +60,16 @@ const cart = {
                     price: parseInt(item.harga),
                     price_bonus_calculation: item.h_hpb,
                     discount: item.diskon,
-                    price_discount: parseInt(item.harga_diskon),
+                    price_discount: item.harga_diskon ? parseInt(item.harga_diskon) : 0,
                     qty: parseInt(item.qty),
                     subtotal: parseInt(item.harga) * parseInt(item.qty),
-                    grand_total: parseInt(item.harga_diskon) * parseInt(item.qty),
+                    grand_total: item.harga_diskon ? parseInt(item.harga_diskon) * parseInt(item.qty) : parseInt(item.harga) * parseInt(item.qty),
                     total_weight: parseInt(item.qty) * item.berat,
                     image: item.pic,
                     unit: item.unit,
                     category: item.jenis,
-                    picture: item.pic ? item.pic : "",
-                    note: item.note ? item.note : ""
+                    picture: item.pic ? item.pic : '',
+                    note: item.note ? item.note : ''
                 }
 
                 state.items.push(product)
@@ -74,7 +78,7 @@ const cart = {
             window.localStorage.setItem('items', JSON.stringify(state.items))
         },
         removeItem(state, product_code) {
-            let item = state.items.find(product => product.product_code == product_code)
+            let item = state.items.find((product) => product.product_code == product_code)
 
             if (item) {
                 let index = state.items.indexOf(item)
@@ -93,6 +97,9 @@ const cart = {
         },
         subtotal(state) {
             return state.items.reduce((accumulator, item) => accumulator + parseInt(item.subtotal), 0)
+        },
+        grand_total(state) {
+            return state.items.reduce((accumulator, item) => accumulator + parseInt(item.grand_total), 0)
         }
     },
     actions: {
