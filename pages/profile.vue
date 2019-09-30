@@ -298,6 +298,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
+    middleware: 'auth0',
     layout: 'products',
     data() {
         return {
