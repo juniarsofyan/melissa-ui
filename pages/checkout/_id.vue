@@ -4,7 +4,7 @@
         <div class="main-content-checkout">
             <div class="container">
                 <!--breadcrumb-->
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-lg-12">
                         <div class="breadcrumb-trail breadcrumbs" style="text-align:center;">
                             <ul class="trail-items breadcrumb">
@@ -20,7 +20,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
         <nuxt-child />

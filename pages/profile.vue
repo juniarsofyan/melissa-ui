@@ -4,66 +4,104 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <hr>
+                    <hr />
                     <div class="tab-details-product" style="margin-bottom:30px;margin-top:0px;">
                         <ul class="tab-link">
                             <li class="active">
-                                <a data-toggle="tab" aria-expanded="true" href="#profil">Profil </a>
+                                <a data-toggle="tab" aria-expanded="true" href="#profil">My Profile</a>
                             </li>
-                           
                             <li>
-                                <a data-toggle="tab" aria-expanded="true" href="#semua ">Daftar alamat</a>
+                                <a
+                                    data-toggle="tab"
+                                    aria-expanded="true"
+                                    href="#semua "
+                                >Address Book</a>
                             </li>
                         </ul>
 
                         <div class="tab-container">
                             <div id="profil" class="tab-panel active">
-                                <div class="col-md-6 col-md-offset-3">
+                                <div class="col-md-10 col-md-offset-1">
                                     <div class="shipping-address-form-wrapp">
-                                        <div class="shipping-address-form  checkout-form"
-                                            style="padding: 35px 27px 20px 27px !important;">
-
+                                        <div
+                                            class="shipping-address-form checkout-form"
+                                            style="padding: 35px 27px 20px 27px !important; border:0px;"
+                                        >
                                             <div class="col-12">
                                                 <div class="shipping-address">
-                                                   
                                                     <p class="col-12">
                                                         <label class="text">No KTP</label>
-                                                        <input type="text" style="width:100%" class="input-text" v-model="profile.nik">
+                                                        <input
+                                                            type="text"
+                                                            style="width:100%"
+                                                            class="input-text"
+                                                            v-model="profile.nik"
+                                                        />
                                                     </p>
                                                     <p class="col-12">
                                                         <label class="text">Nama</label>
-                                                        <input type="text" style="width:100%" class="input-text" v-model="profile.name">
+                                                        <input
+                                                            type="text"
+                                                            style="width:100%"
+                                                            class="input-text"
+                                                            v-model="profile.name"
+                                                        />
                                                     </p>
                                                     <p class="col-12">
                                                         <label class="text">Tanggal Lahir</label>
-                                                        <input type="date" style="width:100%" class="form-control" v-model="profile.birthdate">
+                                                        <input
+                                                            type="date"
+                                                            style="width:100%"
+                                                            class="form-control"
+                                                            v-model="profile.birthdate"
+                                                        />
                                                     </p>
                                                     <p class="col-12">
                                                         <label class="text">Telepon</label>
-                                                        <input type="text" style="width:100%" class="input-text" v-model="profile.phone">
+                                                        <input
+                                                            type="text"
+                                                            style="width:100%"
+                                                            class="input-text"
+                                                            v-model="profile.phone"
+                                                        />
                                                     </p>
                                                     <p class="col-12">
                                                         <label class="text">Email</label>
-                                                        <input type="email" style="width:100%" class="input-text" v-model="profile.email" readonly>
+                                                        <input
+                                                            type="email"
+                                                            style="width:100%"
+                                                            class="input-text"
+                                                            v-model="profile.email"
+                                                            readonly
+                                                        />
                                                     </p>
-                                                    <button class="button" @click="updateProfile">Save</button>
+                                                    <button
+                                                        class="button"
+                                                        @click="updateProfile"
+                                                    >Save</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="buat-baru" class="tab-panel ">
-                                <div class="col-md-6 col-md-offset-3">
-
-                                      <a class="button single_add_to_cart_button" data-toggle="tab" aria-expanded="true" href="#semua">Daftar Alamat </a>
-                                 <br>
-                            <br>
+                            <div id="buat-baru" class="tab-panel">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <a
+                                        class="button single_add_to_cart_button"
+                                        data-toggle="tab"
+                                        aria-expanded="true"
+                                        href="#semua"
+                                    >
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp; Back to List
+                                    </a>
+                                    <br />
+                                    <br />
                                     <div class="shipping-address-form-wrapp">
-
-                                        <div class="shipping-address-form  checkout-form"
-                                            style="padding: 35px 27px 20px 27px !important;">
-
+                                        <div
+                                            class="shipping-address-form checkout-form"
+                                            style="padding: 35px 27px 20px 27px !important; border:0px;"
+                                        >
                                             <div class="col-12">
                                                 <div class="shipping-address">
                                                     <p class="col-12">
@@ -76,9 +114,14 @@
                                                     </p>
 
                                                     <p class="col-12">
-                                                        <label class="text">Provinsi</label><br>
-                                                        <select style="width:100%;" data-placeholder="London"
-                                                            class="form-control" tabindex="1">
+                                                        <label class="text">Provinsi</label>
+                                                        <br />
+                                                        <select
+                                                            style="width:100%;"
+                                                            data-placeholder="London"
+                                                            class="form-control"
+                                                            tabindex="1"
+                                                        >
                                                             <option value="United States">London</option>
                                                             <option value="United Kingdom">tokyo</option>
                                                             <option value="Afghanistan">Seoul</option>
@@ -101,9 +144,14 @@
                                                     </p>
 
                                                     <p class="col-12">
-                                                        <label class="text">Kota</label><br>
-                                                        <select style="width:100%;" data-placeholder="London"
-                                                            class="form-control" tabindex="1">
+                                                        <label class="text">Kota</label>
+                                                        <br />
+                                                        <select
+                                                            style="width:100%;"
+                                                            data-placeholder="London"
+                                                            class="form-control"
+                                                            tabindex="1"
+                                                        >
                                                             <option value="United States">London</option>
                                                             <option value="United Kingdom">tokyo</option>
                                                             <option value="Afghanistan">Seoul</option>
@@ -126,9 +174,14 @@
                                                     </p>
 
                                                     <p class="col-12">
-                                                        <label class="text">Kecamatan</label><br>
-                                                        <select style="width:100%;" data-placeholder="London"
-                                                            class="form-control" tabindex="1">
+                                                        <label class="text">Kecamatan</label>
+                                                        <br />
+                                                        <select
+                                                            style="width:100%;"
+                                                            data-placeholder="London"
+                                                            class="form-control"
+                                                            tabindex="1"
+                                                        >
                                                             <option value="United States">London</option>
                                                             <option value="United Kingdom">tokyo</option>
                                                             <option value="Afghanistan">Seoul</option>
@@ -174,45 +227,64 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="semua" class="tab-panel">  
-                               
-                                  <a class="button single_add_to_cart_button" data-toggle="tab" aria-expanded="true" href="#buat-baru">Tambah Alamat </a>
-                                 <br>
-                   
-                                <hr>
+                            <div id="semua" class="tab-panel">
+                                <a
+                                    class="button single_add_to_cart_button"
+                                    data-toggle="tab"
+                                    aria-expanded="true"
+                                    href="#buat-baru"
+                                >Add New Address</a>
+                                <br />
+
+                                <hr />
                                 <div class="per-item">
                                     <div class="row">
                                         <div class="col-lg-9">
-                                             <p>
-                                        <b>Alamat rumah </b><br>
-                                        jl.peta bandung no 15. <br>
-                                        084232
-                                    </p>
+                                            <p>
+                                                <b>Alamat rumah</b>
+                                                <br />jl.peta bandung no 15.
+                                                <br />084232
+                                            </p>
                                         </div>
                                         <div class="col-lg-3">
-                                             <a class="button single_add_to_cart_button" data-toggle="tab" aria-expanded="true" >Edit </a>
-                                              <a class="button single_add_to_cart_button" data-toggle="tab" aria-expanded="true" >Hapus </a>
+                                            <a
+                                                class="button single_add_to_cart_button"
+                                                data-toggle="tab"
+                                                aria-expanded="true"
+                                            >Edit</a>
+                                            <a
+                                                class="button single_add_to_cart_button"
+                                                data-toggle="tab"
+                                                aria-expanded="true"
+                                            >Hapus</a>
                                         </div>
                                     </div>
-                                    <hr>
+                                    <hr />
                                 </div>
-                                 <div class="per-item">
+                                <div class="per-item">
                                     <div class="row">
                                         <div class="col-lg-9">
-                                             <p>
-                                        <b>Alamat rumah </b><br>
-                                        jl.peta bandung no 15. <br>
-                                        084232
-                                    </p>
+                                            <p>
+                                                <b>Alamat rumah</b>
+                                                <br />jl.peta bandung no 15.
+                                                <br />084232
+                                            </p>
                                         </div>
                                         <div class="col-lg-3">
-                                             <a class="button single_add_to_cart_button" data-toggle="tab" aria-expanded="true" >Edit </a>
-                                              <a class="button single_add_to_cart_button" data-toggle="tab" aria-expanded="true" >Hapus </a>
+                                            <a
+                                                class="button single_add_to_cart_button"
+                                                data-toggle="tab"
+                                                aria-expanded="true"
+                                            >Edit</a>
+                                            <a
+                                                class="button single_add_to_cart_button"
+                                                data-toggle="tab"
+                                                aria-expanded="true"
+                                            >Hapus</a>
                                         </div>
                                     </div>
-                                    <hr>
+                                    <hr />
                                 </div>
-
                             </div>
                         </div>
                     </div>
