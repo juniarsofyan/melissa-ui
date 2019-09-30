@@ -169,18 +169,17 @@
                                         <div class="header-user-form-tabs" v-if="!isAuthenticated">
                                             <ul class="tab-link">
                                                 <li class="active">
-                                                    <a data-toggle="tab" aria-expanded="true"
-                                                        href="#header-tab-login">Login</a>
+                                                    <!-- <a data-toggle="tab" aria-expanded="true" href="#header-tab-login">Login</a> -->
                                                 </li>
-                                                <li>
+                                                <!-- <li>
                                                     <a data-toggle="tab" aria-expanded="true"
                                                         href="#header-tab-rigister">Register</a>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                             <div class="tab-container">
                                                 <div id="header-tab-login" class="tab-panel active">
                                                     <form @submit.prevent="loginUser" class="login form-login">
-                                                        <p class="form-row form-row-wide">
+                                                        <!-- <p class="form-row form-row-wide">
                                                             <input type="email" placeholder="Email" class="input-text" v-model="loginForm.email">
                                                         </p>
                                                         <p class="form-row form-row-wide">
@@ -193,9 +192,13 @@
                                                                     class="input-checkbox"><span>Remember me</span>
                                                             </label>
                                                             <input type="submit" class="button" value="Login">
+                                                            <input type="button" class="button" value="Login" @click="auth0Login()">
                                                         </p>
                                                         <p class="lost_password">
                                                             <a href="#">Lost your password?</a>
+                                                        </p> -->
+                                                        <p class="form-row">
+                                                            <input type="button" class="button" value="Login or Register" @click="auth0Login()">
                                                         </p>
                                                     </form>
                                                 </div>
@@ -352,6 +355,10 @@ export default {
                     email: response.data.data.email
                 })
             });
+        },
+        auth0Login() {
+            this.$store.dispatch("auth0Login");
+            // console.log("we are in auth0Login");
         }
     }
 }
