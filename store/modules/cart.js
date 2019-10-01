@@ -96,6 +96,20 @@ const cart = {
         },
         grand_total(state) {
             return state.items.reduce((accumulator, item) => accumulator + parseInt(item.grand_total), 0)
+        },
+        itemsSummary(state) {
+            let products = []
+
+            state.items.map(item => {
+                let product = {
+                    product_code: item["product_code"],
+                    qty: item["qty"],
+                    unit: item["unit"]
+                }
+                products.push(product)
+            })
+
+            return products
         }
     },
     actions: {

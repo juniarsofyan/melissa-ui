@@ -52,6 +52,7 @@
                                             v-for="branch in sales_branches"
                                             :key="branch.code"
                                             :value="branch.code"
+                                            :disabled="branch.disabled"
                                         >{{ branch.city_name }} - {{ branch.subdistrict_name }}</option>
                                     </select>
                                 </p>
@@ -101,7 +102,6 @@
                             </div>
                         </div>
                     </div>
-
                     <nuxt-link :to="`payment`" class="button button-payment">PAYMENT</nuxt-link>
                 </div>
 
@@ -112,6 +112,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
     layout: 'products',
     data() {
@@ -256,12 +258,41 @@ export default {
         }
     },
     computed: {
+        ...mapGetters({
+            itemsSummary: 'cart/itemsSummary'
+        }),
         items: function() {
             return this.$store.getters['cart/items']
         },
         subtotal: function() {
             return this.$store.getters['cart/subtotal']
         }
+    },
+    methods: {
+        checkAvailableBranches() {
+            this.$axios
+                .post(`transaction/check-sales-branches-stock`, {
+                    products: this.itemsSummary
+                })
+                .then((response) => {
+                    if (response.data.data != 0) {
+                        let result = response.data.data
+
+                        result.forEach((item) => {
+                            let found = this.sales_branches.find(
+                                (product) => product.code == item.code
+                            )
+
+                            if (found) {
+                                found.disabled = item.disabled
+                            }
+                        })
+                    }
+                })
+        }
+    },
+    created() {
+        this.checkAvailableBranches()
     }
 }
 </script>
