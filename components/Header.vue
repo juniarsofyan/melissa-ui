@@ -166,67 +166,23 @@
                                         <i class="fa fa-user-o" aria-hidden="true"></i>
                                     </a>
                                     <div class="header-account turan-submenu">
-                                        <div class="header-user-form-tabs" v-if="!isAuthenticated">
+                                        <div class="header-user-form-tabs" v-if="!userIsAuthorized">
                                             <ul class="tab-link">
                                                 <li class="active">
-                                                    <!-- <a data-toggle="tab" aria-expanded="true" href="#header-tab-login">Login</a> -->
+                                                    <a data-toggle="tab" aria-expanded="true" href="#header-tab-login">You have not login</a>
                                                 </li>
-                                                <!-- <li>
-                                                    <a data-toggle="tab" aria-expanded="true"
-                                                        href="#header-tab-rigister">Register</a>
-                                                </li> -->
                                             </ul>
                                             <div class="tab-container">
                                                 <div id="header-tab-login" class="tab-panel active">
-                                                    <form @submit.prevent="loginUser" class="login form-login">
-                                                        <!-- <p class="form-row form-row-wide">
-                                                            <input type="email" placeholder="Email" class="input-text" v-model="loginForm.email">
-                                                        </p>
-                                                        <p class="form-row form-row-wide">
-                                                            <input type="password" class="input-text"
-                                                                placeholder="Password" v-model="loginForm.password">
-                                                        </p>
-                                                        <p class="form-row">
-                                                            <label class="form-checkbox">
-                                                                <input type="checkbox"
-                                                                    class="input-checkbox"><span>Remember me</span>
-                                                            </label>
-                                                            <input type="submit" class="button" value="Login">
-                                                            <input type="button" class="button" value="Login" @click="auth0Login()">
-                                                        </p>
-                                                        <p class="lost_password">
-                                                            <a href="#">Lost your password?</a>
-                                                        </p> -->
-                                                        <p class="form-row">
-                                                            <input type="button" class="button" value="Login or Register" @click="auth0Login()">
-                                                        </p>
-                                                    </form>
-                                                </div>
-                                                <div id="header-tab-rigister" class="tab-panel">
-                                                    <form @submit.prevent="registerUser" class="register form-register">
-                                                        <p class="form-row form-row-wide">
-                                                            <input type="text" placeholder="Name" class="input-text" v-model="registerForm.name">
-                                                        </p>
-                                                        <p class="form-row form-row-wide">
-                                                            <input type="email" placeholder="Email" class="input-text" v-model="registerForm.email">
-                                                        </p>
-                                                        <p class="form-row form-row-wide">
-                                                            <input type="password" class="input-text"
-                                                                placeholder="Password"  v-model="registerForm.password">
-                                                        </p>
-                                                        <p class="form-row">
-                                                            <input type="submit" class="button" value="Register">
-                                                        </p>
-                                                    </form>
+                                                    <input type="button" class="button" value="Login" @click="auth0Login()">
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                         <div class="header-user-form-tabs" v-else>
                                             <ul class="tab-link">
                                                 <li class="active">
                                                     <a data-toggle="tab" aria-expanded="true"
-                                                        href="#header-tab-login"><input type="button" class="button" value="Logout" @click="logout"></a>
+                                                        href="#header-tab-login"><input type="button" class="button" value="Logout" @click="auth0Logout"></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -294,7 +250,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['isAuthenticated', 'loggedInUser']),
+        ...mapGetters("authentication", ['userIsAuthorized']),
         ...mapGetters("profile", ['personal']),
         cart_count: function() {
             return this.$store.getters['cart/count']
@@ -307,41 +263,8 @@ export default {
         }
     },
     methods: {
-        /* ...mapActions({
-            "updateProfile": ["updateProfile"]
-        }), */
         removeItem: function(product_code) {
             this.$store.dispatch('cart/removeItem', product_code)
-        },
-        async loginUser() {
-            await this.$auth.login({
-                data: this.loginForm
-            });
-
-            this.$router.push({
-                path: '/'
-            });
-
-            this.getUserProfile();
-        },
-        async registerUser() {
-            await this.$axios.post(`${process.env.AUTH_BASE_URL}api/register`, this.registerForm);
-            
-            this.$auth.login({
-                data: {
-                    name: this.registerForm.name,
-                    email: this.registerForm.email,
-                    password: this.registerForm.password
-                }
-            })
-            this.$router.push({
-                path: '/'
-            });
-        },
-        async logout() {
-            await this.$auth.logout();
-            
-            this.$store.dispatch("profile/updateProfile", false)
         },
         getUserProfile() {
             this.$axios.post(`${process.env.API_BASE_URL}profile/get`, { email: this.loginForm.email}).then((response) => {
@@ -357,9 +280,11 @@ export default {
             });
         },
         auth0Login() {
-            this.$store.dispatch("auth0Login");
-            // console.log("we are in auth0Login");
-        }
+            this.$store.dispatch("authentication/auth0Login");
+        },
+        auth0Logout() {
+            this.$store.dispatch("authentication/auth0Logout");
+        },
     }
 }
 </script>

@@ -1,0 +1,408 @@
+[33mcommit 771115d2a6e64359749fea418b9799079267e152[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Tue Oct 1 06:10:13 2019 +0700
+
+    Save login data
+
+[33mcommit fc537b7e89d3eefaf4b263f10e849d26d30f8df5[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Mon Sep 30 18:53:33 2019 +0700
+
+    Login with Auth0 Provider
+
+[33mcommit f069a7a0b9cf8d770c41852707cab1d24062648b[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Mon Sep 30 18:08:54 2019 +0700
+
+    Re-design Profile page & BreadCrumb on checkout page
+
+[33mcommit 01c2daba26aabf605ab70180f874d3015eb7f733[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Sat Sep 28 20:38:42 2019 +0700
+
+    Profile page
+    - Get profile
+    - Update profile
+
+[33mcommit db67ac7283286b0080fb321238584ff74843e0fb[m
+Merge: 2f93ecb 7147bcd
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Sat Sep 28 16:28:34 2019 +0700
+
+    revisi profil
+
+[33mcommit 2f93ecb04486aa54042ab27eda90a3526970ada8[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Sat Sep 28 16:26:39 2019 +0700
+
+    revisi profil
+
+[33mcommit 7147bcd670d37a820b9c26479c71139b6d43dfa7[m[33m ([m[1;31morigin/pak-alan[m[33m, [m[1;32mpak-alan[m[33m)[m
+Merge: f56b5bc ed1862f
+Author: oleguns <37364801+oleguns@users.noreply.github.com>
+Date:   Sat Sep 28 16:01:40 2019 +0700
+
+    Merge branch 'master' into pak-alan
+
+[33mcommit ed1862fafdf4b3906857a6a68f8df8131855abe5[m
+Merge: e8470bb 7542f70
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Sat Sep 28 15:42:12 2019 +0700
+
+    Merge branch 'master' of Bang gigih
+    - Prev/Next button
+    - History Order
+
+[33mcommit e8470bb35a79f83c685465306592f10d75e7e893[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Sat Sep 28 15:40:28 2019 +0700
+
+    Profile show & update
+
+[33mcommit 7542f7006675f73b7bd5fa1c5ca1a113fdb0d6e4[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Sat Sep 28 15:38:24 2019 +0700
+
+    slider panah, order history
+
+[33mcommit f56b5bc93efc200ad27e2c8ca232648059c3d1b4[m
+Author: oleguns <37364801+oleguns@users.noreply.github.com>
+Date:   Sat Sep 28 15:26:06 2019 +0700
+
+    Label Product
+    
+    - product.vue
+    - style.css
+
+[33mcommit 6547724963c258cb58e16cde8fcd2ba9e37d1f02[m
+Author: oleguns <37364801+oleguns@users.noreply.github.com>
+Date:   Sat Sep 28 13:50:25 2019 +0700
+
+    Header
+    
+    dropbox my cart / checkout
+    - header.vue
+    - style.css
+
+[33mcommit 2c89be5b4eaf8247b1175e3631b2d8c2c2010b2c[m
+Author: oleguns <37364801+oleguns@users.noreply.github.com>
+Date:   Sat Sep 28 12:57:08 2019 +0700
+
+    Detail Product
+    
+    tombol contact BC
+    - nuxt.config.js
+    - style.css
+    - detail.vue
+
+[33mcommit 867b668fe7fce3581c320471a5faa12b4aef95ec[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Sat Sep 28 11:24:31 2019 +0700
+
+    Fix grand total count
+
+[33mcommit d8b7e6d2db28a6eaef379eabfc477c6e1a8d05aa[m
+Merge: ea2f472 f0b342e
+Author: oleguns <37364801+oleguns@users.noreply.github.com>
+Date:   Sat Sep 28 11:13:01 2019 +0700
+
+    merge master
+
+[33mcommit f0b342e8564ceb031c256b39610e9fe0a709427e[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Sat Sep 28 09:27:33 2019 +0700
+
+    Minor updates
+
+[33mcommit 7fc0bdf24fd954fb1b1f0c950521d2d59994350f[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Fri Sep 27 17:10:49 2019 +0700
+
+    Vuex for profile page & new banner images
+
+[33mcommit f078d0d2d369a68bf754517fb6dcb3d761e87d3f[m
+Merge: ac355bc ca7ba12
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Fri Sep 27 10:10:57 2019 +0700
+
+    Merge Branch design-help
+    - Order History page
+
+[33mcommit ac355bc22fa3e3f1bd549c5d99e43ee3d38d384e[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Fri Sep 27 10:06:18 2019 +0700
+
+    Minor updates
+    - fix logout API URL
+
+[33mcommit ca7ba1256de926fad3efb47ad790a2f5c89517f8[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Fri Sep 27 10:04:26 2019 +0700
+
+    button fix
+
+[33mcommit 8e9880b4d5d96d64a092d79bb47f7b35c17ef199[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Fri Sep 27 06:56:26 2019 +0700
+
+    Minor updates
+
+[33mcommit 9b1ecc1f888aaf10648f00292891d2f3920079d6[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Thu Sep 26 16:52:48 2019 +0700
+
+    Logout functionality
+    - Logout
+    - Modify coding for login
+
+[33mcommit ea2f472fddb7d173f7385e78b5b2d694a7fab0ed[m
+Author: oleguns <37364801+oleguns@users.noreply.github.com>
+Date:   Thu Sep 26 14:25:03 2019 +0700
+
+    Detail Product
+    
+    - tambah tombol contact BC
+    - update style.css
+
+[33mcommit 7506ffa773bc86b67e0713b39fb9dac13831e8c0[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Thu Sep 26 13:19:02 2019 +0700
+
+    Fix Footer.vue
+
+[33mcommit 332bbefb6082ff63b17cbfca5151fbbe8a3d6cdd[m
+Merge: 9a107fd 185d49d
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Thu Sep 26 13:08:35 2019 +0700
+
+    Manual merge Footer.vue from branch pak-alan
+
+[33mcommit 9a107fdf4a7b957c225deeec090e01c9d4e04abb[m
+Merge: 0447958 6f4d86e
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Thu Sep 26 13:05:08 2019 +0700
+
+    Merge branch 'design-help'
+
+[33mcommit 0447958f554cc250617544aaf7d8796f0c33cb30[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Thu Sep 26 13:04:25 2019 +0700
+
+    Fix Register & Login
+
+[33mcommit 6f4d86e4bf01ff469470ea9be727df3d429f3925[m[33m ([m[1;31morigin/design-help[m[33m, [m[1;32mdesign-help[m[33m)[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Thu Sep 26 11:35:05 2019 +0700
+
+    profile
+
+[33mcommit 185d49d45960a0d385478260f229a24ad9259c1a[m
+Author: oleguns <37364801+oleguns@users.noreply.github.com>
+Date:   Thu Sep 26 11:31:28 2019 +0700
+
+    Update Footer
+    
+    - logo bpom
+    - logo halal
+    - links
+    - info
+    - style.css
+    - jeng sajabana
+
+[33mcommit 73f142cf80928ef1a128df7d52c70594b2f3045a[m
+Merge: 0328fa3 20f297b
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Thu Sep 26 10:08:04 2019 +0700
+
+    Merge branch 'design-help'
+
+[33mcommit 0328fa3679f481e38317ec242bf93637902ebb0e[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Thu Sep 26 10:07:07 2019 +0700
+
+    Login & Register
+
+[33mcommit 20f297b33186e343acb3514490977225001b2a02[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Thu Sep 26 03:49:38 2019 +0700
+
+    revisi product detail
+
+[33mcommit d785a5b5641fd63e074d37d8e23879e933967b06[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Thu Sep 26 03:10:17 2019 +0700
+
+    perbaikan grand total
+
+[33mcommit fbef038be53a0c326d85f7157874887afd170a0c[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Thu Sep 26 02:03:48 2019 +0700
+
+    checkout wizard
+
+[33mcommit 28a41e98c6210bb3259f7e7a82e15b2195046eff[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Thu Sep 26 02:02:17 2019 +0700
+
+    checkout wizard
+
+[33mcommit 0ce6b02bd17978a6d91f7763fa08a8e95b9bcf6d[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Tue Sep 24 18:35:27 2019 +0700
+
+    Cart Improvement & Format currency display
+    - Update Qty
+    - Create vue filter for currecy formatting
+
+[33mcommit 046e6fee7c9cc83b30a3bb577e95d8c885a967da[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Tue Sep 24 02:51:12 2019 +0700
+
+    slider in promote item and you may like
+
+[33mcommit c7eae1045ec398713dcfca726fec664cf6d6dca8[m
+Merge: 620652d 3dca7f5
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Tue Sep 24 01:10:49 2019 +0700
+
+    -
+
+[33mcommit 620652dae7576e4da185de8388262d0143beadf8[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Mon Sep 23 23:52:19 2019 +0700
+
+    -
+
+[33mcommit 3dca7f53f25a21f5bdffdcd35da6f732de85df05[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Mon Sep 23 19:38:40 2019 +0700
+
+    Minor updates
+
+[33mcommit d2c9fcaa553f1f4021d59fb587a77406879ae4e7[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Mon Sep 23 16:10:38 2019 +0700
+
+    Cart functionalities
+    - On menu bar cart
+    - Count subtotal
+
+[33mcommit 64d46fa2f8dd9ecd34e11b08bb0cca1511a38d60[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Mon Sep 23 14:45:00 2019 +0700
+
+    Add Item on Product Detail Page
+
+[33mcommit f5dd06f7c830eacaa9a5ba8896d0182fab1abdc9[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Mon Sep 23 14:35:58 2019 +0700
+
+    Cart Vuex Store
+    - Add or substract qty in textbox
+    - Add Product to Cart
+
+[33mcommit 0844c78c4d00391fe5c8c5b23a7cb4a3730d446e[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Mon Sep 23 09:51:57 2019 +0700
+
+    Minor updates
+
+[33mcommit 71d9a16a36425f2c0fdff14280c9fac6778af770[m
+Merge: 9c3136e 5239a33
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Sun Sep 22 15:52:19 2019 +0700
+
+    Merge branch 'pak-alan'
+
+[33mcommit 9c3136e7134e99ac78dfd8538696ef8cb1041552[m
+Merge: 2763fce d97e369
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Sun Sep 22 15:51:16 2019 +0700
+
+    Product detail from real data
+
+[33mcommit 2763fce69cf1860f85fb59a58db7eb21555c1e45[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Sun Sep 22 07:14:36 2019 +0700
+
+    Minor changes
+
+[33mcommit 5239a33f547d638c1c7a679096560d15e50a44b9[m
+Author: oleguns <37364801+oleguns@users.noreply.github.com>
+Date:   Sat Sep 21 17:37:49 2019 +0700
+
+    Customize Style
+    
+    Ganti logo footer dan rubah hover link color
+
+[33mcommit d97e369b937a55b718f82634005529a6581d33bb[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Sat Sep 21 15:53:05 2019 +0700
+
+    padding product foto fixed
+
+[33mcommit e6e169b0596a038acd928d93e213a5a75694c67e[m
+Merge: 6625c96 b092064
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Sat Sep 21 11:30:17 2019 +0700
+
+    Merge branch 'design-help'
+
+[33mcommit 6625c962d2c116c6c459f79f8ab96e5a583cae82[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Sat Sep 21 11:30:03 2019 +0700
+
+    Product Detail Page
+
+[33mcommit b092064b80fcf0fa20a34737d044dc3e2bea10a1[m
+Author: Recito Gigih P <recitogigih9@gmail.com>
+Date:   Sat Sep 21 03:08:18 2019 +0700
+
+    shopping cart
+
+[33mcommit 5cd7463b047f3ef9bfa25141f0baf4d18fab3cb5[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Fri Sep 20 16:25:36 2019 +0700
+
+    Minor update
+    - Add promo menu in header component
+
+[33mcommit 4d1c55e7dd80d210fd630a5fcc9977dcc649b2d9[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Wed Sep 18 17:40:49 2019 +0700
+
+    Minor change
+    - Vue router scroll behaviour
+
+[33mcommit 10c72ff91e9765e8e704888637d93c608e66d134[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Wed Sep 18 17:29:55 2019 +0700
+
+    Products Page & Home Page
+
+[33mcommit 940b896319cb8c9acfc101053e5bdfdcee1a2b15[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Wed Sep 18 14:17:56 2019 +0700
+
+    Home Page
+
+[33mcommit 952ac0f639ac27d07b4bbaeb3a7ecf90f820ddcd[m
+Author: Choerul Sofyan Muhammad Falih <choerulsofyanmf@gmail.com>
+Date:   Fri Sep 13 14:35:31 2019 +0700
+
+    Basic Components
+    - Breadcrumb
+    - Footer
+    - Footer Mobile
+    - Header
+    - Header Mobile
+    - Slide Banner
+    - Topbar
+    - Single Product Component
+    - Products Page
+
+[33mcommit 4b1c08ecd7b907d701a56f85ac385ad1f8ce3200[m
+Author: juniarsofyan <choerulsofyanmf@gmail.com>
+Date:   Mon Sep 9 13:58:14 2019 +0700
+
+    Initial commit & setup
