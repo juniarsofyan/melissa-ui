@@ -8,7 +8,7 @@
                     <li class="trail-item trail-begin active">
                         <span>My Cart</span>
                     </li>
-                    <li class="trail-item trail-end">
+                    <li class="trail-item trail-end active">
                         <span>Checkout</span>
                     </li>
                     <li class="trail-item trail-end">
@@ -45,15 +45,22 @@
                                 <p class="form-row form-row-first">
                                     <label class="text">Select SPB (Sales Point Branch)</label>
                                     <select
-                                        data-placeholder="-- Choose One --"
+                                        data-placeholder="-- Choose SPB --"
                                         class="chosen-select"
+                                        id="branches"
+                                        ref="branches"
+                                        v-model="selected_branch"
+                                        @change="checkOngkir($event)"
                                     >
                                         <option
-                                            v-for="branch in sales_branches"
-                                            :key="branch.code"
-                                            :value="branch.code"
-                                            :disabled="branch.disabled"
-                                        >{{ branch.city_name }} - {{ branch.subdistrict_name }}</option>
+                                            v-for="sales_branch in sales_branches"
+                                            :key="sales_branch.code"
+                                            :value="sales_branch.code"
+                                            :disabled="sales_branch.disabled"
+                                            :data-city-id="sales_branch.city_id"
+                                            :data-subdistrict-id="sales_branch.subdistrict_id"
+                                            :selected="selected_branch == sales_branch.code"
+                                        >{{ sales_branch.city_name }} - {{ sales_branch.subdistrict_name }}</option>
                                     </select>
                                 </p>
                             </div>
@@ -85,19 +92,24 @@
                         <div class="row-col-2 row-col">
                             <div class="your-order">
                                 <h3 class="title-form">Order Summary</h3>
-                                <hr />Total items : Xpcs
-                                <br />Total weight : Xkg
+                                <hr />
+                                Total items : {{ count }}pcs
+                                <br />
+                                Total weight : {{ total_weight }}kg
                                 <hr />
                                 <br />Grand total
-                                <b>IDR. xxx.xxx.xxx</b>
+                                <b>{{ grand_total | rupiah }}</b>
                                 <br />Shipping Fee
-                                <b>IDR. xx.xxx</b>
+                                <b>IDR. xxx.xxx.xxx</b>
                                 <br />Unique Code
-                                <b>245</b>
+                                <b>{{ unique_code }}</b>
                                 <hr />
                                 <div class="order-total">
                                     <span class="title">Total Payment:</span>
-                                    <span class="total-price" style="color:red;">IDR. XXX.XXX.XXX</span>
+                                    <span
+                                        class="total-price"
+                                        style="color:red;"
+                                    >{{ total_payment | rupiah }}</span>
                                 </div>
                             </div>
                         </div>
@@ -118,11 +130,13 @@ export default {
     layout: 'products',
     data() {
         return {
-            slugs: [
-                { title: 'Home', url: '/' },
-                { title: 'My Cart', url: '/cart' },
-                { title: 'Check Out', url: '/checkout', active: true }
-            ],
+            current_shipping_address : {
+                kota_id: 79,
+                kecamatan_id: 1063
+            },
+            curent_shipping_address: [],
+            jnt: [],
+            jne: [],
             sales_branches: [
                 {
                     code: '00000',
@@ -261,11 +275,34 @@ export default {
         ...mapGetters({
             itemsSummary: 'cart/itemsSummary'
         }),
-        items: function() {
-            return this.$store.getters['cart/items']
-        },
-        subtotal: function() {
-            return this.$store.getters['cart/subtotal']
+        ...mapGetters({
+            subtotal: 'cart/subtotal'
+        }),
+        ...mapGetters({
+            grand_total: 'cart/grand_total'
+        }),
+        ...mapGetters({
+            count: 'cart/count'
+        }),
+        ...mapGetters({
+            total_weight: 'cart/total_weight'
+        }),
+        ...mapGetters({
+            unique_code: 'cart/unique_code'
+        }),
+        ...mapGetters({
+            total_payment: 'cart/total_payment'
+        }),
+        ...mapGetters({
+            items: 'cart/items'
+        }),
+        selected_branch: {
+            get() {
+                return this.$store.getters['spb/selected_branch']
+            },
+            set(value) {
+                this.$store.commit('spb/setBranch', value)
+            }
         }
     },
     methods: {
@@ -289,6 +326,50 @@ export default {
                         })
                     }
                 })
+        },
+        checkOngkir: function(event) {
+            
+            let branch_city_id = event.target.options[event.target.options.selectedIndex].dataset.cityId
+            let branch_subdistrict_id = event.target.options[event.target.options.selectedIndex].dataset.subdistrictId
+
+            this.$axios
+                .post(`ongkir/cost`, {
+                    destination_city_id: parseInt(this.current_shipping_address.kota_id),
+                    destination_subdistrict_id: parseInt(this.current_shipping_address.kecamatan_id),
+                    origin_city_id: parseInt(branch_city_id),
+                    origin_subdistrict_id: parseInt(branch_subdistrict_id),
+                    weight: parseInt(this.total_weight),
+                    courier: 'jne'
+                })
+                .then((response) => {
+                    if (response.data.data != 0) {
+                        this.jne =  {
+                            fee: response.data.data.costs[0].cost[0].value,
+                            etd: response.data.data.costs[0].cost[0].etd
+                        }
+                    }
+                })
+
+            this.$axios
+                .post(`ongkir/cost`, {
+                    destination_city_id: parseInt(this.current_shipping_address.kota_id),
+                    destination_subdistrict_id: parseInt(this.current_shipping_address.kecamatan_id),
+                    origin_city_id: parseInt(branch_city_id),
+                    origin_subdistrict_id: parseInt(branch_subdistrict_id),
+                    weight: parseInt(this.total_weight),
+                    courier: 'jnt'
+                })
+                .then((response) => {
+                    if (response.data.data != 0) {
+                        this.jne =  {
+                            fee: response.data.data.costs[0].cost[0].value,
+                            etd: response.data.data.costs[0].cost[0].etd
+                        }
+                    }
+                })
+
+                // console.log(jne)
+                // console.log(jnt)
         }
     },
     created() {

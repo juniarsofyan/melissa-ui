@@ -1,19 +1,19 @@
-let branch = window.localStorage.getItem('branch')
+let selected_branch = window.localStorage.getItem('selected_branch')
 
 const spb = {
     namespaced: true,
     state: {
-        branch: branch ? branch : false
+        selected_branch: selected_branch ? selected_branch : false
     },
     mutations: {
-        setBranch(state, branch) {
-            state.branch = branch
-            window.localStorage.setItem('branch', branch)
+        setBranch(state, selected_branch) {
+            state.selected_branch = selected_branch
+            window.localStorage.setItem('selected_branch', selected_branch)
         }
     },
     getters: {
-        branch(state) {
-            return state.branch
+        selected_branch(state) {
+            return state.selected_branch
         }
     },
     actions: {
@@ -24,6 +24,7 @@ const spb = {
             },
             payload
         ) {
+            alert(payload)
             commit('setBranch', payload)
         }
     }

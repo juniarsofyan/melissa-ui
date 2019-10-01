@@ -97,6 +97,20 @@ const cart = {
         grand_total(state) {
             return state.items.reduce((accumulator, item) => accumulator + parseInt(item.grand_total), 0)
         },
+        total_weight(state) {
+            const weight = state.items.reduce((accumulator, item) => accumulator + parseInt(item.weight), 0)
+            return(weight / 1000).toFixed(2)
+        },
+        unique_code(state) {
+            return Math.floor(100 + Math.random() * 900)
+        },
+        total_payment(state, getters) {
+            let totalpay = parseInt(getters.grand_total) + parseInt(getters.unique_code)
+            totalpay = totalpay.toString().slice(0, -3)
+            totalpay = parseInt(totalpay) + "" + parseInt(getters.unique_code)
+            totalpay = parseInt(totalpay)
+            return totalpay
+        },
         itemsSummary(state) {
             let products = []
 
