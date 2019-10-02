@@ -44,22 +44,19 @@
                                 <h3 class="title-form">Checkout</h3>
                                 <p class="form-row form-row-first">
                                     <label class="text">Select SPB (Sales Point Branch)</label>
+                                    <!-- class="chosen-select" -->
                                     <select
                                         data-placeholder="-- Choose SPB --"
-                                        class="chosen-select"
                                         id="branches"
                                         ref="branches"
                                         v-model="selected_branch"
-                                        @change="checkOngkir($event)"
                                     >
                                         <option
                                             v-for="sales_branch in sales_branches"
                                             :key="sales_branch.code"
-                                            :value="sales_branch.code"
+                                            :value="sales_branch"
                                             :disabled="sales_branch.disabled"
-                                            :data-city-id="sales_branch.city_id"
-                                            :data-subdistrict-id="sales_branch.subdistrict_id"
-                                            :selected="selected_branch == sales_branch.code"
+                                            :selected="selected_branch.code == sales_branch.code"
                                         >{{ sales_branch.city_name }} - {{ sales_branch.subdistrict_name }}</option>
                                     </select>
                                 </p>
@@ -78,13 +75,19 @@
                             <div class="shipping-address">
                                 <p class="form-row form-row-first">
                                     <label class="text">Select Courier</label>
+                                    <!-- class="chosen-select" -->
                                     <select
                                         data-placeholder="-- Choose One --"
-                                        class="chosen-select"
+                                        v-model="courier"
                                     >
-                                        <option value="JNE">JNE</option>
-                                        <option value="JNT">JNT</option>
+                                        <option value="jne">JNE</option>
+                                        <option value="jnt">JNT</option>
                                     </select>
+                                    <br />
+                                    <span v-if="ongkir.fee">
+                                        Fee: {{ ongkir.fee }} <br />
+                                        Etd: {{ ongkir.etd }}
+                                    </span>
                                 </p>
                             </div>
                         </div>
@@ -125,18 +128,20 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import axios from 'axios'
+import ongkir from '~/plugins/ongkir'
 
 export default {
     layout: 'products',
     data() {
         return {
-            current_shipping_address : {
-                kota_id: 79,
-                kecamatan_id: 1063
+            shipping_address : {
+                city_id: 79,
+                subdistrict_id: 1063
             },
-            curent_shipping_address: [],
-            jnt: [],
-            jne: [],
+            selected_branch: [],
+            ongkir: [],
+            courier: "",
             sales_branches: [
                 {
                     code: '00000',
@@ -295,17 +300,27 @@ export default {
         }),
         ...mapGetters({
             items: 'cart/items'
-        }),
-        selected_branch: {
-            get() {
-                return this.$store.getters['spb/selected_branch']
-            },
-            set(value) {
-                this.$store.commit('spb/setBranch', value)
-            }
+        })
+    },
+    watch: {
+        courier: function() {
+            this.checkOngkir()
         }
     },
     methods: {
+        async checkOngkir (event) {
+
+            let shipment = {
+                destination_city_id: this.shipping_address.city_id,
+                destination_subdistrict_id: this.shipping_address.subdistrict_id,
+                origin_city_id: this.selected_branch.city_id,
+                origin_subdistrict_id: this.selected_branch.subdistrict_id,
+                weight: this.total_weight,
+                courier: this.courier
+            }
+
+            this.ongkir = await ongkir.estimate(shipment)
+        },
         checkAvailableBranches() {
             this.$axios
                 .post(`transaction/check-sales-branches-stock`, {
@@ -326,50 +341,6 @@ export default {
                         })
                     }
                 })
-        },
-        checkOngkir: function(event) {
-            
-            let branch_city_id = event.target.options[event.target.options.selectedIndex].dataset.cityId
-            let branch_subdistrict_id = event.target.options[event.target.options.selectedIndex].dataset.subdistrictId
-
-            this.$axios
-                .post(`ongkir/cost`, {
-                    destination_city_id: parseInt(this.current_shipping_address.kota_id),
-                    destination_subdistrict_id: parseInt(this.current_shipping_address.kecamatan_id),
-                    origin_city_id: parseInt(branch_city_id),
-                    origin_subdistrict_id: parseInt(branch_subdistrict_id),
-                    weight: parseInt(this.total_weight),
-                    courier: 'jne'
-                })
-                .then((response) => {
-                    if (response.data.data != 0) {
-                        this.jne =  {
-                            fee: response.data.data.costs[0].cost[0].value,
-                            etd: response.data.data.costs[0].cost[0].etd
-                        }
-                    }
-                })
-
-            this.$axios
-                .post(`ongkir/cost`, {
-                    destination_city_id: parseInt(this.current_shipping_address.kota_id),
-                    destination_subdistrict_id: parseInt(this.current_shipping_address.kecamatan_id),
-                    origin_city_id: parseInt(branch_city_id),
-                    origin_subdistrict_id: parseInt(branch_subdistrict_id),
-                    weight: parseInt(this.total_weight),
-                    courier: 'jnt'
-                })
-                .then((response) => {
-                    if (response.data.data != 0) {
-                        this.jne =  {
-                            fee: response.data.data.costs[0].cost[0].value,
-                            etd: response.data.data.costs[0].cost[0].etd
-                        }
-                    }
-                })
-
-                // console.log(jne)
-                // console.log(jnt)
         }
     },
     created() {
