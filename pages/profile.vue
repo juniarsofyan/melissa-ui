@@ -237,13 +237,22 @@
                                 <br />
 
                                 <hr />
-                                <div class="per-item">
+                                <div class="per-item" v-for="address in shipping_addresses" :key="address.id">
                                     <div class="row">
                                         <div class="col-lg-9">
                                             <p>
-                                                <b>Alamat rumah</b>
-                                                <br />jl.peta bandung no 15.
-                                                <br />084232
+                                                <b>{{ address.nama }}</b>
+                                                <br />
+                                                {{ address.alamat }}
+                                                <br />
+                                                {{ address.kecamatan_nama }}
+                                                <br />
+                                                {{ address.kota_nama }}
+                                                <br />
+                                                {{ address.kode_pos }}
+                                                <br />
+                                                <br />
+                                                {{ address.telp }}
                                             </p>
                                         </div>
                                         <div class="col-lg-3">
@@ -251,35 +260,13 @@
                                                 class="button single_add_to_cart_button"
                                                 data-toggle="tab"
                                                 aria-expanded="true"
+                                                @click="editAddress()"
                                             >Edit</a>
                                             <a
                                                 class="button single_add_to_cart_button"
                                                 data-toggle="tab"
                                                 aria-expanded="true"
-                                            >Hapus</a>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                </div>
-                                <div class="per-item">
-                                    <div class="row">
-                                        <div class="col-lg-9">
-                                            <p>
-                                                <b>Alamat rumah</b>
-                                                <br />jl.peta bandung no 15.
-                                                <br />084232
-                                            </p>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <a
-                                                class="button single_add_to_cart_button"
-                                                data-toggle="tab"
-                                                aria-expanded="true"
-                                            >Edit</a>
-                                            <a
-                                                class="button single_add_to_cart_button"
-                                                data-toggle="tab"
-                                                aria-expanded="true"
+                                                @click="deleteAddress()"
                                             >Hapus</a>
                                         </div>
                                     </div>
@@ -302,7 +289,9 @@ export default {
     layout: 'products',
     data() {
         return {
-            profile: this.$store.getters['profile/personal']
+            // profile: this.$store.getters['profile/personal']
+            profile: [],
+            shipping_addresses: []
         }
     },
     methods: {
@@ -332,7 +321,38 @@ export default {
                         email: response.data.data.email
                     })
                 })
+        },
+        async getProfile() {
+            await this.$axios.post(`${process.env.API_BASE_URL}profile/get`, {
+                email: window.localStorage.getItem('email')
+            })
+            .then((response) => {
+                this.profile =  {
+                    member_no: response.data.data.no_member,
+                    nik: response.data.data.nik,
+                    name: response.data.data.nama,
+                    birthdate: response.data.data.tgl_lahir,
+                    phone: response.data.data.telepon,
+                    email: response.data.data.email
+                }
+            })
+
+            this.$axios.post(`${process.env.API_BASE_URL}shipping-address/get`, {
+                email: window.localStorage.getItem('email')
+            })
+            .then((response) => {
+                this.shipping_addresses = response.data.data
+            })
+        },
+        editAddress() {
+
+        },
+        deleteAddress() {
+            
         }
-    }
+    },
+    created() {
+        this.getProfile()
+    },
 }
 </script>

@@ -36,6 +36,7 @@ const authentication = {
                     let expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime())
 
                     // save the tokens locally
+                    localStorage.setItem('email', authResult.idTokenPayload.email)
                     localStorage.setItem('access_token', authResult.accessToken)
                     localStorage.setItem('id_token', authResult.idToken)
                     localStorage.setItem('expires_at', expiresAt)
