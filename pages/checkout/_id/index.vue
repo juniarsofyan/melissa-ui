@@ -17,20 +17,6 @@
                 </ul>
             </div>
 
-            <!--breadcrumb-->
-            <!-- <div class="row">
-				<div class="col-lg-12">
-              
-					<div class="breadcrumb-trail breadcrumbs">
-						<ul class="trail-items breadcrumb">
-							<li class="trail-item trail-begin"><a href="index.html">Home</a></li>
-							<li class="trail-item trail-end active">Checkout</li>
-						</ul>
-					</div>
-               
-				</div>
-            </div>-->
-
             <!--page title-->
             <!-- <h3 class="custom_blog_title">#Checkout</h3> -->
 
@@ -49,14 +35,14 @@
                                         data-placeholder="-- Choose SPB --"
                                         id="branches"
                                         ref="branches"
-                                        v-model="selected_branch"
+                                        v-model="branch"
                                     >
                                         <option
                                             v-for="sales_branch in sales_branches"
                                             :key="sales_branch.code"
                                             :value="sales_branch"
                                             :disabled="sales_branch.disabled"
-                                            :selected="selected_branch.code == sales_branch.code"
+                                            :selected="branch.code ? branch.code == sales_branch.code : ''"
                                         >{{ sales_branch.city_name }} - {{ sales_branch.subdistrict_name }}</option>
                                     </select>
                                 </p>
@@ -64,15 +50,11 @@
                             <div class="shipping-address">
                                 <p class="form-row form-row-first">
                                     <label class="text">Shipping Method</label>
-                                    <input type="radio" name="shipping_method" value="EXPEDITION" /> Courier
-                                    <input
-                                        type="radio"
-                                        name="shipping_method"
-                                        value="IMMEDIATE"
-                                    />Immediate
+                                    <input type="radio" name="shipping_method" value="EXPEDITION" v-model="shipping_method"/> Courier
+                                    <input type="radio" name="shipping_method" value="IMMEDIATE" v-model="shipping_method" />Immediate
                                 </p>
                             </div>
-                            <div class="shipping-address">
+                            <div class="shipping-address" v-if="shipping_method == 'EXPEDITION'">
                                 <p class="form-row form-row-first">
                                     <label class="text">Select Courier</label>
                                     <!-- class="chosen-select" -->
@@ -84,13 +66,15 @@
                                         <option value="jnt">JNT</option>
                                     </select>
                                     <br />
-                                    <span v-if="ongkir.fee">
-                                        Fee: {{ ongkir.fee }} <br />
-                                        Etd: {{ ongkir.etd }}
+                                    <span v-if="shipment.fee">
+                                        Fee: {{ shipment.fee }} <br />
+                                        Etd: {{ shipment.etd }}
                                     </span>
                                 </p>
                             </div>
                         </div>
+
+                        <!-- Branch : {{ branch }} -->
 
                         <div class="row-col-2 row-col">
                             <div class="your-order">
@@ -102,8 +86,10 @@
                                 <hr />
                                 <br />Grand total
                                 <b>{{ grand_total | rupiah }}</b>
-                                <br />Shipping Fee
-                                <b>IDR. xxx.xxx.xxx</b>
+                                <span v-if="shipment.fee">
+                                    <br />Shipping Fee
+                                    <b>{{ shipment.fee | rupiah }}</b>
+                                </span>
                                 <br />Unique Code
                                 <b>{{ unique_code }}</b>
                                 <hr />
@@ -127,7 +113,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import axios from 'axios'
 import ongkir from '~/plugins/ongkir'
 
@@ -135,13 +121,10 @@ export default {
     layout: 'products',
     data() {
         return {
-            shipping_address : {
-                city_id: 79,
-                subdistrict_id: 1063
-            },
-            selected_branch: [],
-            ongkir: [],
-            courier: "",
+            // shipping_address : {
+            //     city_id: 79,
+            //     subdistrict_id: 1063
+            // },
             sales_branches: [
                 {
                     code: '00000',
@@ -277,49 +260,83 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({
-            itemsSummary: 'cart/itemsSummary'
-        }),
-        ...mapGetters({
-            subtotal: 'cart/subtotal'
-        }),
-        ...mapGetters({
-            grand_total: 'cart/grand_total'
-        }),
-        ...mapGetters({
-            count: 'cart/count'
-        }),
-        ...mapGetters({
-            total_weight: 'cart/total_weight'
-        }),
-        ...mapGetters({
-            unique_code: 'cart/unique_code'
-        }),
-        ...mapGetters({
-            total_payment: 'cart/total_payment'
-        }),
-        ...mapGetters({
-            items: 'cart/items'
-        })
+        ...mapGetters(
+            'cart', [
+                'items',
+                'itemsSummary',
+                'subtotal',
+                'grand_total',
+                'count',
+                'total_weight'
+        ]),
+        ...mapGetters(
+            'checkout', [ 
+                'shipping_address', 
+                'unique_code',
+                'shipment',
+                'total_payment'
+        ]),
+        courier: {
+            get () {
+                return this.$store.getters['checkout/courier']
+            },
+            set (value) {
+                this.$store.dispatch('checkout/setCourier', value)
+            }
+        },
+        branch: {
+            get () {
+                return this.$store.getters['checkout/branch']
+            },
+            set (value) {
+                this.$store.dispatch('checkout/setBranch', value)
+            }
+        },
+        shipping_method: {
+            get () {
+                return this.$store.getters['checkout/shipping_method']
+            },
+            set (value) {
+                this.$store.dispatch('checkout/setShippingMethod', value)
+            }
+        }
     },
     watch: {
         courier: function() {
             this.checkOngkir()
+        },
+        shipping_method: function() {
+            if (this.shipping_method == 'IMMEDIATE') {
+
+                this.$store.dispatch('checkout/setShipment', { 
+                    etd: "",
+                    fee: 0
+                })
+
+                this.setTotalPayment()
+            }
         }
     },
     methods: {
+        generateUniqueCode() {
+            const random_number = Math.floor(100 + Math.random() * 900)
+            this.$store.dispatch('checkout/setUniqueCode', random_number)
+            this.setTotalPayment()
+        },
         async checkOngkir (event) {
 
             let shipment = {
-                destination_city_id: this.shipping_address.city_id,
-                destination_subdistrict_id: this.shipping_address.subdistrict_id,
-                origin_city_id: this.selected_branch.city_id,
-                origin_subdistrict_id: this.selected_branch.subdistrict_id,
+                destination_city_id: 23, // this.shipping_address.city_id,
+                destination_subdistrict_id: 345, // this.shipping_address.subdistrict_id,
+                origin_city_id: this.branch.city_id,
+                origin_subdistrict_id: this.branch.subdistrict_id,
                 weight: this.total_weight,
                 courier: this.courier
             }
 
-            this.ongkir = await ongkir.estimate(shipment)
+            const shipment_result = await ongkir.estimate(shipment)
+            this.$store.dispatch('checkout/setShipment', shipment_result)
+            this.setTotalPayment()
         },
         checkAvailableBranches() {
             this.$axios
@@ -341,10 +358,15 @@ export default {
                         })
                     }
                 })
+        },
+        setTotalPayment() {
+            const total_payment = this.grand_total + this.unique_code + this.shipment.fee
+            this.$store.dispatch('checkout/setTotalPayment', total_payment)
         }
     },
     created() {
         this.checkAvailableBranches()
+        this.generateUniqueCode()
     }
 }
 </script>

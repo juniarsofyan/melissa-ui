@@ -3,6 +3,7 @@ import authentication from './modules/authentication'
 import cart from './modules/cart'
 import profile from './modules/profile'
 import spb from './modules/spb'
+import checkout from './modules/checkout'
 
 const store = () => {
     return new Vuex.Store({
@@ -10,7 +11,8 @@ const store = () => {
             authentication,
             cart,
             profile,
-            spb
+            spb,
+            checkout,
         },
         state: {},
         mutations: {},

@@ -48,20 +48,16 @@
 								<span>{{ product.harga | rupiah }}</span>
 							</div>
 							<div class="product-details-description">
-								<p class="desc">3Pack Tshirt is Crew-neck T-shirts in soft organic cotton jersey.
-									Regular fit.</p>
-								<ul>
-									<li>100% cotton. Machine wash warm</li>
-									<li>Imported</li>
-									<li>Art.No. 06-7680</li>
-								</ul>
+								<p class="desc">{{ product.des_singkat }}</p>
+								<p class="desc" v-html="product.manfaat"></p>
+								<br />
 							</div>
 							<div class="group-button">
-								<div class="yith-wcwl-add-to-wishlist">
+								<!-- <div class="yith-wcwl-add-to-wishlist">
 									<div class="yith-wcwl-add-button">
 										<a href="#">Add to Wishlist</a>
 									</div>
-								</div>
+								</div> -->
 								<div class="quantity-add-to-cart">
 									<div class="quantity">
 										<div class="control">
