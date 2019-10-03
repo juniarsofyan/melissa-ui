@@ -105,11 +105,12 @@
                                             <div class="col-12">
                                                 <div class="shipping-address">
                                                     <p class="col-12">
-                                                        <label class="text">Nama</label>
+                                                        <label class="text">Name</label>
                                                         <input
                                                             type="text"
                                                             style="width:100%"
                                                             class="input-text"
+                                                            v-model="address_form.nama"
                                                         />
                                                     </p>
 
@@ -121,6 +122,30 @@
                                                             data-placeholder="London"
                                                             class="form-control"
                                                             tabindex="1"
+                                                            v-model="address_form.provinsi"
+                                                        >
+                                                            <option disabled selected>- Choose Province -</option>
+
+                                                            {{ provinces }}
+                                                            <option
+                                                                v-for="province in provinces"
+                                                                :key="province.province_id"
+                                                                :value="province"
+                                                                :selected="province.province_id === address_form.provinsi_id"
+                                                            >{{ province.province }}
+                                                            </option>
+                                                        </select>
+                                                    </p>
+
+                                                    <p class="col-12">
+                                                        <label class="text">City</label>
+                                                        <br />
+                                                        <select
+                                                            style="width:100%;"
+                                                            data-placeholder="London"
+                                                            class="form-control"
+                                                            tabindex="1"
+                                                            v-model="address_form.kota_id"
                                                         >
                                                             <option value="United States">London</option>
                                                             <option value="United Kingdom">tokyo</option>
@@ -144,43 +169,14 @@
                                                     </p>
 
                                                     <p class="col-12">
-                                                        <label class="text">Kota</label>
+                                                        <label class="text">Subdisctrict</label>
                                                         <br />
                                                         <select
                                                             style="width:100%;"
                                                             data-placeholder="London"
                                                             class="form-control"
                                                             tabindex="1"
-                                                        >
-                                                            <option value="United States">London</option>
-                                                            <option value="United Kingdom">tokyo</option>
-                                                            <option value="Afghanistan">Seoul</option>
-                                                            <option
-                                                                value="Aland Islands"
-                                                            >Mexico city</option>
-                                                            <option value="Albania">Mumbai</option>
-                                                            <option value="Algeria">Delhi</option>
-                                                            <option value="American Samoa">New York</option>
-                                                            <option value="Andorra">Jakarta</option>
-                                                            <option value="Angola">Sao Paulo</option>
-                                                            <option value="Anguilla">Osaka</option>
-                                                            <option value="Antarctica">Karachi</option>
-                                                            <option
-                                                                value="Antigua and Barbuda"
-                                                            >Matx-cơ-va</option>
-                                                            <option value="Argentina">Toronto</option>
-                                                            <option value="Armenia">Boston</option>
-                                                        </select>
-                                                    </p>
-
-                                                    <p class="col-12">
-                                                        <label class="text">Kecamatan</label>
-                                                        <br />
-                                                        <select
-                                                            style="width:100%;"
-                                                            data-placeholder="London"
-                                                            class="form-control"
-                                                            tabindex="1"
+                                                            v-model="address_form.kecamatan_id"
                                                         >
                                                             <option value="United States">London</option>
                                                             <option value="United Kingdom">tokyo</option>
@@ -209,6 +205,7 @@
                                                             class="form-control"
                                                             id="exampleFormControlTextarea1"
                                                             rows="3"
+                                                            v-model="address_form.alamat"
                                                         ></textarea>
                                                     </p>
                                                     <p class="col-12">
@@ -217,6 +214,7 @@
                                                             type="number"
                                                             style="width:100%"
                                                             class="form-control"
+                                                            v-model="address_form.kode_pos"
                                                         />
                                                     </p>
 
@@ -250,7 +248,7 @@
                                                 {{ address.kota_nama }}
                                                 <br />
                                                 {{ address.kode_pos }}
-                                                <br />
+                                                <br />sdfsdfsdf
                                                 <br />
                                                 {{ address.telp }}
                                             </p>
@@ -260,14 +258,15 @@
                                                 class="button single_add_to_cart_button"
                                                 data-toggle="tab"
                                                 aria-expanded="true"
-                                                @click="editAddress()"
+                                                href="#buat-baru"
+                                                @click="editAddress(address)"
                                             >Edit</a>
                                             <a
                                                 class="button single_add_to_cart_button"
                                                 data-toggle="tab"
                                                 aria-expanded="true"
-                                                @click="deleteAddress()"
-                                            >Hapus</a>
+                                                @click="deleteAddress(address.id)"
+                                            >Delete</a>
                                         </div>
                                     </div>
                                     <hr />
@@ -291,7 +290,11 @@ export default {
         return {
             // profile: this.$store.getters['profile/personal']
             profile: [],
-            shipping_addresses: []
+            shipping_addresses: [],
+            address_form : {},
+            provinces: [],
+            cities: [],
+            subdistricts: []
         }
     },
     methods: {
@@ -322,8 +325,8 @@ export default {
                     })
                 })
         },
-        async getProfile() {
-            await this.$axios.post(`${process.env.API_BASE_URL}profile/get`, {
+        getProfile() {
+            this.$axios.post(`${process.env.API_BASE_URL}profile/get`, {
                 email: window.localStorage.getItem('email')
             })
             .then((response) => {
@@ -335,8 +338,11 @@ export default {
                     phone: response.data.data.telepon,
                     email: response.data.data.email
                 }
-            })
 
+                this.getShippingAddresses()
+            })
+        },
+        getShippingAddresses() {
             this.$axios.post(`${process.env.API_BASE_URL}shipping-address/get`, {
                 email: window.localStorage.getItem('email')
             })
@@ -344,12 +350,195 @@ export default {
                 this.shipping_addresses = response.data.data
             })
         },
-        editAddress() {
+        editAddress(address) {
+            this.address_form = address
+            this.getRegionalData()
+        },
+        deleteAddress(address_id) {
+            this.$swal({
+                // title: "",
+                text: "Are you sure want to delete this address?",
+                type: "question",
+                showCancelButton: true,
+                // confirmButtonClass: "btn-danger",
+                confirmButtonColor: "#d33",
+                confirmButtonText: "Delete",
+                cancelButtonText: "Cancel",
+                cancelButtonColor: "#3085d6",
+            }).then(isConfirm => {
+                if (isConfirm.value) {
+                    this.$swal({
+                        // title: "",
+                        text: "Deleteting",
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                        onOpen: () => {
+                            this.$swal.showLoading()
+                        },
+                    })
+
+                    this.$axios.get(`shipping-address/delete/` + address_id)
+                        .then(response => {
+                            if (response.data.data == 1) {
+                                this.$swal({
+                                    // title: "",
+                                    text: "Address deleted!",
+                                    type: "success",
+                                })
+
+                                this.getShippingAddresses()
+                                // this.$store.commit("resetShippingPreferences")
+                            }
+                        })
+                        .catch(e => {
+                            console.log(e)
+
+                            this.$swal({
+                                // title: "",
+                                text:
+                                    "Cannot connect to the server, please try again later",
+                                type: "error",
+                                onOpen: () => {
+                                    this.$swal.hideLoading()
+                                },
+                            })
+                        })
+                }
+            })
+        },
+        async getRegionalData() {
+            this.provinces = await this.$axios.get(`ongkir/provinces`)
+                .then(response => {
+                    if (response.data.data != 0) {
+                        this.provinces = response.data.data
+                        console.log(this.provinces)
+                    } else {
+                        this.provinces = []
+                    }
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+
+            this.cities = await this.$axios.get(`ongkir/province/` + this.address_form.province_id + `/cities`)
+                .then(response => {
+                    if (response.data.data != 0) {
+                        var cities = response.data.data
+                        var data = []
+
+                        for (var city in cities) {
+                            data.push({
+                                city_id: cities[city].city_id,
+                                city_name:
+                                    cities[city].type +
+                                    " " +
+                                    cities[city].city_name,
+                            })
+                        }
+                        this.cities = data
+                    } else {
+                        this.cities = []
+                    }
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+
+            this.subdistricts = await this.$axios.get(`ongkir/city/` + this.address_form.kota_id + `/subdistricts`)
+                .then(response => {
+                    if (response.data.data != 0) {
+                        var subdistricts = response.data.data
+
+                        var data = []
+                        for (var subdistrict in subdistricts) {
+                            data.push({
+                                subdistrict_id:
+                                    subdistricts[subdistrict].subdistrict_id,
+                                subdistrict_name:
+                                    subdistricts[subdistrict].subdistrict_name,
+                            })
+                        }
+
+                        this.subdistricts = data
+
+                    } else {
+                        this.subdistricts = []
+                    }
+                })
+                .catch(e => {
+                    console.log(e)
+                })
 
         },
-        deleteAddress() {
-            
-        }
+        getCities: function(province_id) {
+            this.$axios.get( this.$store.getters.api_url + `ongkir/province/` + province_id + `/cities` )
+                .then(response => {
+                    if (response.data.data != 0) {
+                        var cities = response.data.data
+                        var data = []
+
+                        for (var city in cities) {
+                            data.push({
+                                city_id: cities[city].city_id,
+                                city_name:
+                                    cities[city].type +
+                                    " " +
+                                    cities[city].city_name,
+                            })
+                        }
+                        this.sa_city_options = data
+                    } else {
+                        this.sa_city_options = []
+                    }
+                })
+                .catch(e => {
+                    console.log(e)
+
+                    this.$swal({
+                        // title: "",
+                        text:
+                            "Tidak dapat terhubung ke server, Silahkan coba lagi nanti",
+                        type: "error",
+                        onOpen: () => {
+                            this.$swal.hideLoading()
+                        },
+                    })
+                })
+        },
+        getSubdistricts: function(city_id) {
+            this.$axios.get( this.$store.getters.api_url + `ongkir/city/` + city_id + `/subdistricts` )
+                .then(response => {
+                    if (response.data.data != 0) {
+                        var subdistricts = response.data.data
+
+                        var data = []
+                        for (var subdistrict in subdistricts) {
+                            data.push({
+                                subdistrict_id:
+                                    subdistricts[subdistrict].subdistrict_id,
+                                subdistrict_name:
+                                    subdistricts[subdistrict].subdistrict_name,
+                            })
+                        }
+                        this.sa_subdistrict_options = data
+                    } else {
+                        this.sa_subdistrict_options = []
+                    }
+                })
+                .catch(e => {
+                    console.log(e)
+
+                    this.$swal({
+                        // title: "",
+                        text:
+                            "Tidak dapat terhubung ke server, Silahkan coba lagi nanti",
+                        type: "error",
+                        onOpen: () => {
+                            this.$swal.hideLoading()
+                        },
+                    })
+                })
+        },
     },
     created() {
         this.getProfile()

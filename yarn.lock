@@ -8099,9 +8099,9 @@ svgo@^1.0.0:
     util.promisify "~1.0.0"
 
 sweetalert2@8.x:
-  version "8.17.1"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-8.17.1.tgz#0c691ce4181661182ad4bc5312aa25e44479a650"
-  integrity sha512-aCPXmK1YyVUfsw36iDETzUnYj1fxwXSY/dkt8cnqViv7f5sOS5i37LXIf9LLiDCd99EbY4d4kvZkyWYlJZ79Xw==
+  version "8.18.0"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-8.18.0.tgz#e8536aa0b1a1474ef36e5350ff4ae0cf473478b3"
+  integrity sha512-t8r4oIisUd/fPsd4/YKuiWTKnrxZsolUVk/w7nGhMu5MKsuGh6J5sQ9Jtio+5xKg/w5QOJpH8TUhb5INuVo/YQ==
 
 table@^5.2.3:
   version "5.4.6"

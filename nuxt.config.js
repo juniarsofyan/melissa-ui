@@ -160,7 +160,8 @@ export default {
             '@nuxtjs/dotenv', {
                 filename: '.env'
             }
-        ]
+        ],
+        'vue-sweetalert2/nuxt'
     ],
     /*
      ** Axios module configuration
