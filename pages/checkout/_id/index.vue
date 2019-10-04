@@ -51,7 +51,7 @@
                                 </p>
                             </div>
                             <div class="shipping-address" v-if="shipping_method == 'EXPEDITION'">
-                                <p class="form-row form-row-first">
+                                <div class="form-row form-row-first">
                                     <label class="text">Select Courier</label>
                                     <!-- class="chosen-select" -->
                                     <select style="width:100%;" data-placeholder="-- Choose One --" v-model="courier">
@@ -59,11 +59,12 @@
                                         <option value="jnt">JNT</option>
                                     </select>
                                     <br />
+                                    <br>
                                     <div v-if="shipment.fee">
                                       <p>  Fee : {{ shipment.fee }} </p>
                                       <p>  Etd : {{ shipment.etd }} </p>
                                     </div>
-                                </p>
+                                </div>
                             </div>
                         </div>
 
