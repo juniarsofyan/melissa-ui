@@ -62,21 +62,26 @@
 									<div class="quantity">
 										<div class="control">
 											<span class="btn-number qtyminus quantity-minus" @click="minQty">-</span>
-											<input type="text" data-step="1" data-min="1" v-model="qty" title="Qty" class="input-qty qty" size="4" />
+											<input type="text" data-step="1" data-min="1" v-model="qty" title="Qty"
+												class="input-qty qty" size="4" />
 											<span class="btn-number qtyplus quantity-plus" @click="addQty">+</span>
 										</div>
 									</div>
-									<button class="single_add_to_cart_button button" @click="addItem">Add to cart</button>
+									<button class="single_add_to_cart_button button" @click="addItem">Add to
+										cart</button>
 								</div>
 
 								<p>&nbsp;</p>
 								<p>&nbsp;</p>
 
 								<div class="contact-bc">
-									<p>Mengalami kesulitan untuk menentukan produk yang sesuai dengan kebutuhan kulit Anda? Untuk pengalaman terbaik konsultasikan kebutuhan kulit Anda kepada Beauty Consultant kami.</p>
-									<a :href="`https://api.whatsapp.com/send?phone=628112288142&text=Halo!%0ASaya%20ingin%20ingin%20konsultasi%20lebih%20lanjut%20mengenai%20produk%20Bellezkin%0ASource : ${url}`" class="single_bc_button button" target="_blank">
-									<i class="fab fa-whatsapp logo_bc"></i>&nbsp; 
-									Contact Beauty Consultant
+									<p>Mengalami kesulitan untuk menentukan produk yang sesuai dengan kebutuhan kulit
+										Anda? Untuk pengalaman terbaik konsultasikan kebutuhan kulit Anda kepada Beauty
+										Consultant kami.</p>
+									<a :href="`https://api.whatsapp.com/send?phone=628112288142&text=Halo!%0ASaya%20ingin%20ingin%20konsultasi%20lebih%20lanjut%20mengenai%20produk%20Bellezkin%0ASource : ${url}`"
+										class="single_bc_button button" target="_blank">
+										<i class="fab fa-whatsapp logo_bc"></i>&nbsp;
+										Contact Beauty Consultant
 									</a>
 								</div>
 							</div>
@@ -394,23 +399,39 @@
 									<center>
 										<h3> You May Also Like </h3>
 									</center>
-									
-									<RelatedProducts :products="related_products" />
 
+									<slick ref="slick" :options="slickOptions">
+										<div class="product-item default-layout product-type-variable"
+											v-for="product in related_products" :key="product.kode_barang">
+											<div class="product-inner equal-element">
+												<div class="product-thumb">
+													<div class="thumb-inner">
+														<a href="#">
+															<img :src="`${$axios.defaults.baseURL}assets/img/thumbnails/${product.pic}.jpg`"
+																:alt="product.nama" />
+														</a>
+													</div>
+												</div>
+												<div class="text-center">
+													<h5 class="product-name product_title">
+														<a href="#">{{ product.nama }}</a>
+													</h5>
+													<div class="group-info">
+														<div class="price">
+															<!-- <del>€65</del> -->
+															<ins>{{ product.harga | rupiah }}</ins>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</slick>
 								</div>
 							</div>
-
 						</div>
 					</div>
-
-
-					<!-- reset floading -->
-
-
 				</div>
 			</div>
-
-			<!-- full width layout have no sidebar-->
 		</div>
 	</div>
 </template>
@@ -421,7 +442,7 @@
 	export default {
 		layout: 'product',
 		components: {
-			RelatedProducts: () => import('~/components/RelatedProducts')
+			// RelatedProducts: () => import('~/components/RelatedProducts')
 		},
 		data() {
 			return {
@@ -430,7 +451,71 @@
 				product: [],
 				related_products: [],
 				qty: 1,
-				url: document.URL
+				url: document.URL,
+				slickOptions: {
+					infinite: false,
+					dots: false,
+					autoplay: true,
+					arrows: false,
+					prevArrow: '<small> < </small>',
+					nextArrow: '<small> > </small>',
+					responsive: [{
+							breakpoint: 5121,
+							settings: {
+								slidesToShow: 3,
+								slidesToScroll: 1
+							}
+						},
+						{
+							breakpoint: 2561,
+							settings: {
+								slidesToShow: 3,
+								slidesToScroll: 1
+							}
+						},
+						{
+							breakpoint: 1441,
+							settings: {
+								slidesToShow: 3,
+								slidesToScroll: 1
+							}
+						},
+						{
+							breakpoint: 1154,
+							settings: {
+								slidesToShow: 3,
+								slidesToScroll: 1
+							}
+						},
+						{
+							breakpoint: 1025,
+							settings: {
+								slidesToShow: 3,
+								slidesToScroll: 1
+							}
+						},
+						{
+							breakpoint: 769,
+							settings: {
+								slidesToShow: 3,
+								slidesToScroll: 1
+							}
+						},
+						{
+							breakpoint: 425,
+							settings: {
+								slidesToShow: 3,
+								slidesToScroll: 1
+							}
+						},
+						{
+							breakpoint: 376,
+							settings: {
+								slidesToShow: 3
+							}
+						}
+					]
+				}
 			}
 		},
 		head() {
@@ -480,6 +565,8 @@
 					.then((response) => {
 						if (response.data.data != 0) {
 							this.related_products = response.data.data
+							// this.complete = true;
+							this.reInit();
 						}
 					})
 					.catch((e) => {
@@ -505,6 +592,7 @@
 			prev() {
 				this.$refs.slick.prev();
 			},
+
 			reInit() {
 				let currIndex = this.$refs.slick.currentSlide()
 				this.$refs.slick.destroy()
@@ -521,25 +609,4 @@
 	.custom_blog_title {
 		text-transform: captialize;
 	}
-
-	/* button.slick-next.slick-arrow {
-		right: 0 !important;
-		position: absolute;
-	} */
-
-
-
-	/* .slick-slider .slick-arrow:first-child {
-		left: 0;
-		position: relative;
-		margin-bottom: 10px;
-	} */
-/* 
-	.slick-slider .slick-arrow:first-child {
-		left: -5px;
-		position: relative;
-		margin-bottom: 10px;
-	} */
-
-
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <slick ref="slick" :options="slickOptions">
+        <!-- <slick ref="slick" :options="slickOptions"> -->
             <!-- item Also Like start-->
             <div
                 class="product-item default-layout product-type-variable"
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <!-- item Also Like end-->
-        </slick>
+        <!-- </slick> -->
     </div>
 </template>
 
@@ -44,73 +44,94 @@ export default {
     },
     data() {
         return {
-            slickOptions: {
-                infinite: false,
-                dots: false,
-                autoplay: true,
-                arrows: false,
-                // prevArrow: '<small> < </small>',
-                // nextArrow: '<small> > </small>',
-                responsive: [
-                    {
-                        breakpoint: 5121,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 2561,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 1441,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 1154,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 1025,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 769,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 425,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 376,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
-            }
+            // slickOptions: {
+            //     infinite: false,
+            //     dots: false,
+            //     autoplay: true,
+            //     arrows: false,
+            //     // prevArrow: '<small> < </small>',
+            //     // nextArrow: '<small> > </small>',
+            //     responsive: [
+            //         {
+            //             breakpoint: 5121,
+            //             settings: {
+            //                 slidesToShow: 3,
+            //                 slidesToScroll: 1
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 2561,
+            //             settings: {
+            //                 slidesToShow: 3,
+            //                 slidesToScroll: 1
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 1441,
+            //             settings: {
+            //                 slidesToShow: 3,
+            //                 slidesToScroll: 1
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 1154,
+            //             settings: {
+            //                 slidesToShow: 3,
+            //                 slidesToScroll: 1
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 1025,
+            //             settings: {
+            //                 slidesToShow: 3,
+            //                 slidesToScroll: 1
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 769,
+            //             settings: {
+            //                 slidesToShow: 3,
+            //                 slidesToScroll: 1
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 425,
+            //             settings: {
+            //                 slidesToShow: 3,
+            //                 slidesToScroll: 1
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 376,
+            //             settings: {
+            //                 slidesToShow: 3
+            //             }
+            //         }
+            //     ]
+            // }
         }
     },
-    methods: {}
+    // methods: {
+    //     		next() {
+	// 			this.$refs.slick.next();
+	// 		},
+	// 		prev() {
+	// 			this.$refs.slick.prev();
+	// 		},
+
+	// 		reInit() {
+	// 			let currIndex = this.$refs.slick.currentSlide()
+	// 			this.$refs.slick.destroy()
+	// 			this.$nextTick(() => {
+	// 				this.$refs.slick.create()
+	// 				this.$refs.slick.goTo(currIndex, true)
+	// 			})
+	// 		},
+    // }
 }
 </script>
+
+<style>
+
+
+</style>
