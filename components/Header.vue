@@ -21,21 +21,6 @@
                                     </a>
                                 </div>
                             </div>
-                            <!-- <div class="header-language">
-                                <div class="turan-language turan-dropdown">
-                                    <a href="#" class="active language-toggle" data-turan="turan-dropdown">
-                                        <span>French (EUR)</span>
-                                    </a>
-                                    <ul class="turan-submenu">
-                                        <li class="switcher-option">
-                                            <a href="#"><span>English (USD)</span></a>
-                                        </li>
-                                        <li class="switcher-option">
-                                            <a href="#"><span>Japanese (JPY)</span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div> -->
                         </div>
                         <div class="col-lg-4 col-sm-6 col-md-6 col-xs-5 col-ts-12">
                             <div class="logo">
@@ -86,47 +71,6 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <!-- <li class="product-cart mini_cart_item">
-                                                    <a href="#" class="product-media">
-                                                        <img src="~/assets/images/item-minicart-2.jpg" alt="">
-                                                    </a>
-                                                    <div class="product-details">
-                                                        <h5 class="product-name"><a href="#">Soap Grooming Solutions</a>
-                                                        </h5>
-                                                        <div class="variations">
-                                                            <span class="attribute_color"><a href="#">Black</a></span>,
-                                                            <span class="attribute_size"><a href="#">300ml</a></span>
-                                                        </div>
-                                                        <span class="product-price"><span
-                                                                class="price"><span>€45</span></span>
-                                                        </span>
-                                                        <span class="product-quantity"> x 1</span>
-                                                        <div class="product-remove">
-                                                            <a href=""><i class="fa fa-trash-o"
-                                                                    aria-hidden="true"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="product-cart mini_cart_item">
-                                                    <a href="#" class="product-media">
-                                                        <img src="~/assets/images/item-minicart-3.jpg" alt="">
-                                                    </a>
-                                                    <div class="product-details">
-                                                        <h5 class="product-name"><a href="#">Grooming Solutions Soap</a>
-                                                        </h5>
-                                                        <div class="variations">
-                                                            <span class="attribute_color"><a href="#">Black</a></span>,
-                                                            <span class="attribute_size"><a href="#">300ml</a></span>
-                                                        </div>
-                                                        <span class="product-price"><span
-                                                                class="price"><span>€45</span></span></span>
-                                                        <span class="product-quantity"> x 1</span>
-                                                        <div class="product-remove">
-                                                            <a href=""><i class="fa fa-trash-o"
-                                                                    aria-hidden="true"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </li> -->
                                             </ul>
                                             <div class="subtotal">
                                                 <span class="total-title">Subtotal: </span><span
@@ -171,7 +115,7 @@
                                         <i class="fa fa-user-o" aria-hidden="true"></i>
                                     </a>
                                     <div class="header-account turan-submenu">
-                                        <div class="header-user-form-tabs" v-if="userIsAuthorized">
+                                        <div class="header-user-form-tabs" v-if="!userIsAuthorized">
                                             <ul class="tab-link">
                                                 <li class="active">
                                                     <a data-toggle="tab" aria-expanded="true"
@@ -187,9 +131,8 @@
                                         </div>
                                         <div class="header-user-form-tabs" v-else>
                                             <center>
-                                                <img src="https://i.dailymail.co.uk/i/pix/2017/04/20/13/3F6B966D00000578-4428630-image-m-80_1492690622006.jpg"
-                                                    alt="" style="width: 150px; height: 150px;margin-top:10px;object-fit: cover; border-radius: 50%;padding: 10px;">
-                                                  <br>  Budi Sudarsono
+                                                <img :src="user_data.picture" style="width: 150px; height: 150px;margin-top:10px;object-fit: cover; border-radius: 50%;padding: 10px;">
+                                                  <br>  {{ user_data.name }}
                                             </center>
                                             <ul class="tab-link">
                                                 <li class="active" style="position: absolute;right: 0;">
@@ -260,6 +203,7 @@
     export default {
         data() {
             return {
+                user_data: window.localStorage.getItem('user_data') ? JSON.parse(window.localStorage.getItem('user_data')) : [],
                 loginForm: {
                     email: '',
                     password: ''

@@ -12,7 +12,8 @@ const authentication = {
                 responseType: process.env.VUE_APP_AUTH0_CONFIG_RESPONSETYPE,
                 scope: process.env.VUE_APP_AUTH0_CONFIG_SCOPE
             }
-        )
+        ),
+        user_data: []
     },
     mutations: {
         setUserIsAuthenticated(state, replacement) {
@@ -40,12 +41,20 @@ const authentication = {
                     localStorage.setItem('access_token', authResult.accessToken)
                     localStorage.setItem('id_token', authResult.idToken)
                     localStorage.setItem('expires_at', expiresAt)
+
+                    localStorage.setItem('user_data', JSON.stringify({
+                        name: authResult.idTokenPayload.name,
+                        email: authResult.idTokenPayload.email,
+                        picture: authResult.idTokenPayload.picture
+                    }))
                 }
             })
         },
         auth0Logout(context) {
             // No need to update the bearer in global axiosConfig to null because we are redirecting out of the application
             // Clear Access Token and ID Token from local storage
+            localStorage.removeItem('user_data');
+            localStorage.removeItem('email');
             localStorage.removeItem('userIsAuthorized');
             localStorage.removeItem('access_token');
             localStorage.removeItem('id_token');
