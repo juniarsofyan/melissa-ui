@@ -42,12 +42,26 @@
                             </div>
                             <div class="shipping-address">
                                 <p class="form-row form-row-first">
-                                    <label class="text">Shipping Method</label>
-                                    <input style="margin-right:5px;" type="radio" name="shipping_method"
-                                        value="EXPEDITION" v-model="shipping_method" /> <span
-                                        style="margin-right:10px;"> Courier </span>
-                                    <input style="margin-right:5px;" type="radio" name="shipping_method"
-                                        value="IMMEDIATE" v-model="shipping_method" />Immediate
+                                    <span class="text">Shipping Method</span>
+                                    <input 
+                                        type="radio" 
+                                        name="shipping_method" 
+                                        id="expedition"
+                                        style="margin-right:5px;" 
+                                        value="EXPEDITION" 
+                                        v-model="shipping_method" 
+                                    /> 
+                                    <label style="margin-right:10px;" for="expedition">Courier</label>
+
+                                    <input 
+                                        type="radio" 
+                                        name="shipping_method"
+                                        id="immediate"
+                                        style="margin-right:5px;" 
+                                        value="IMMEDIATE" 
+                                        v-model="shipping_method" 
+                                    />
+                                    <label style="margin-right:10px;" for="immediate">Immediate</label>
                                 </p>
                             </div>
                             <div class="shipping-address" v-if="shipping_method == 'EXPEDITION'">
@@ -60,83 +74,80 @@
                                     </select>
                                     <br />
                                     <br>
-                                    <div v-if="shipment.fee">
+                                    <!-- <div v-if="shipment.fee">
                                       <p>  Fee : {{ shipment.fee }} </p>
                                       <p>  Etd : {{ shipment.etd }} </p>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
 
                         <!-- Branch : {{ branch }} -->
 
-                        <div class="row-col-2 row-col checkout-form" style="padding-left: 27px;">
+                        <div class="row-col-2 row-col checkout-form" style="padding-left: 27px;padding-bottom: 0px; padding-top:20px;">
                             <div class="your-order">
-                                <h3 class="title-form" style="margin-bottom:0px;">Order Summary</h3>
+                                <h3 class="title-form text-center" style="margin-bottom:20px;">Order Summary</h3>
                                 <hr style="margin-top: 10px;margin-bottom: 10px;" />
 
                                 <table style="border:none !important;">
                                     <tr style="border:none !important;">
-                                        <td style="border:none !important;"> Total items :</td>
-                                        <td style="border:none !important;" class="text-right">{{ count }}pcs</td>
+                                        <td style="border:none !important;padding-bottom:0px"> Total items :</td>
+                                        <td style="border:none !important;padding-bottom:0px" class="text-right"> <b> {{ count }}pcs </b> </td>
                                     </tr>
                                     <tr style="border:none !important;">
-                                        <td style="border:none !important;">
+                                        <td style="border:none !important;padding-bottom:0px">
                                             Total weight :
                                         </td>
-                                        <td style="border:none !important;" class="text-right">
-                                            {{ total_weight }}kg
+                                        <td style="border:none !important;padding-bottom:0px" class="text-right">
+                                            <b> {{ total_weight }}Kg </b>
                                         </td>
                                     </tr>
                                 </table>
 
-
-
                                 <hr style="margin-top: 10px;margin-bottom: 10px;" />
 
                                 <table style="border:none !important;">
                                     <tr style="border:none !important;">
-                                        <td style="border:none !important;">
+                                        <td style="border:none !important;padding-bottom:0px">
                                             Grand total
                                         </td>
-                                        <td style="border:none !important;" class="text-right">
-                                            {{ grand_total | rupiah }}
+                                        <td style="border:none !important;padding-bottom:0px" class="text-right">
+                                            <b> {{ grand_total | rupiah }} </b>
                                         </td>
                                     </tr>
                                     <tr v-if="shipment.fee" style="border:none !important;">
-                                        <td style="border:none !important;">
+                                        <td style="border:none !important;padding-bottom:0px;color:green;">
                                             Shipping Fee
                                         </td>
-                                        <td style="border:none !important;text-align:right" class="text-right" >
-                                            {{ shipment.fee | rupiah }}
+                                        <td style="border:none !important;text-align:right;padding-bottom:0px;color:green;" class="text-right" >
+                                            <b> {{ shipment.fee | rupiah }} </b>
                                         </td>
                                     </tr>
-                                </table>
-
-                                <table  style="border:none !important;">
                                     <tr style="border:none !important;">
-                                        <td style="border:none !important;">
+                                        <td style="border:none !important;padding-bottom:0px">
                                             Unique Code
                                         </td>
-                                        <td style="border:none !important;"  class="text-right">
-                                            {{ unique_code }}
+                                        <td style="border:none !important;padding-bottom:0px"  class="text-right">
+                                            <b> {{ unique_code }} </b>
                                         </td>
                                     </tr>
                                 </table>
 
                                 <hr style="margin-top: 10px;margin-bottom: 10px;" />
-                                <table  style="border:none !important;">
-                                <tr  style="border:none !important;">
-                                    <td  style="border:none !important;">
-                                        <span class="title">Total Payment:</span>
-                                    </td>
-                                    <td  style="border:none !important;">
-                                        <div class="order-total text-right" >
-                                            <span class="total-price"
-                                                style="color:red;">{{ total_payment | rupiah }}</span>
-                                        </div>
-                                    </td>
-                                </tr>
+
+                                <table style="border:none !important;">
+                                    <tr style="border:none !important;">
+                                        <td style="border:none !important;">
+                                            <span class="title">Total Payment:</span>
+                                        </td>
+                                        <td style="border:none !important;">
+                                            <div class="order-total text-right" >
+                                                <span class="total-price" style="color:red;">
+                                                    <b> {{ total_payment | rupiah }} </b>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
@@ -346,7 +357,7 @@
                 this.checkOngkir()
             },
             shipping_method: function () {
-                if (this.shipping_method == ' IMMEDIATE') {
+                if (this.shipping_method == 'IMMEDIATE') {
 
                     this.$store.dispatch('checkout/setShipment', {
                         etd: "",
