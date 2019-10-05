@@ -171,7 +171,7 @@
                                         <i class="fa fa-user-o" aria-hidden="true"></i>
                                     </a>
                                     <div class="header-account turan-submenu">
-                                        <div class="header-user-form-tabs" v-if="!userIsAuthorized">
+                                        <div class="header-user-form-tabs" v-if="userIsAuthorized">
                                             <ul class="tab-link">
                                                 <li class="active">
                                                     <a data-toggle="tab" aria-expanded="true"
@@ -189,6 +189,7 @@
                                             <center>
                                                 <img src="https://i.dailymail.co.uk/i/pix/2017/04/20/13/3F6B966D00000578-4428630-image-m-80_1492690622006.jpg"
                                                     alt="" style="width: 150px; height: 150px;margin-top:10px;object-fit: cover; border-radius: 50%;padding: 10px;">
+                                                  <br>  Budi Sudarsono
                                             </center>
                                             <ul class="tab-link">
                                                 <li class="active" style="position: absolute;right: 0;">
