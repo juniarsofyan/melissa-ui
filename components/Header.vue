@@ -15,7 +15,8 @@
                                     <a href="https://www.instagram.com/bellezkin/" class="social-item">
                                         <i class="fa fa-instagram"></i>
                                     </a>
-                                    <a href="https://www.youtube.com/channel/UCE0Hte0fUMeWhGrVn5zgwRQ" class="social-item">
+                                    <a href="https://www.youtube.com/channel/UCE0Hte0fUMeWhGrVn5zgwRQ"
+                                        class="social-item">
                                         <i class="fa fa-youtube-square"></i>
                                     </a>
                                 </div>
@@ -47,19 +48,23 @@
                             <div class="header-control">
 
                                 <div class="block-minicart turan-mini-cart block-header turan-dropdown">
-                                    <a href="javascript:void(0);" class="shopcart-icon"
-                                        data-turan="turan-dropdown">My Cart<span class="count">{{ cart_count }}</span></a>
+                                    <a href="javascript:void(0);" class="shopcart-icon" data-turan="turan-dropdown">My
+                                        Cart<span class="count">{{ cart_count }}</span></a>
                                     <div class="shopcart-description turan-submenu">
                                         <div class="content-wrap" v-if="items.length>0">
                                             <h3 class="title">My Shopping Cart</h3>
                                             <ul class="minicart-items">
-                                                <li class="product-cart mini_cart_item" v-for="item in items" :key="item.product_code">
-                                                    <nuxt-link :to="`/products/${item.product_code}/detail`" tag="a" class="product-media">
-                                                        <img :src="`${$axios.defaults.baseURL}assets/img/thumbnails/${item.picture}.jpg`" alt="">
+                                                <li class="product-cart mini_cart_item" v-for="item in items"
+                                                    :key="item.product_code">
+                                                    <nuxt-link :to="`/products/${item.product_code}/detail`" tag="a"
+                                                        class="product-media">
+                                                        <img :src="`${$axios.defaults.baseURL}assets/img/thumbnails/${item.picture}.jpg`"
+                                                            alt="">
                                                     </nuxt-link>
                                                     <div class="product-details">
                                                         <h5 class="product-name">
-                                                            <nuxt-link :to="`/products/${item.product_code}/detail`" tag="a">
+                                                            <nuxt-link :to="`/products/${item.product_code}/detail`"
+                                                                tag="a">
                                                                 {{ item.product_name }}
                                                             </nuxt-link>
                                                         </h5>
@@ -76,8 +81,7 @@
                                                         <span class="product-quantity"> x {{ item.qty }}</span>
                                                         <div class="product-remove">
                                                             <span @click="removeItem(item.product_code)">
-                                                                <i class="fa fa-trash-o"
-                                                                    aria-hidden="true"></i>
+                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -126,7 +130,8 @@
                                             </ul>
                                             <div class="subtotal">
                                                 <span class="total-title">Subtotal: </span><span
-                                                    class="total-price"><span class="Price-amount">{{ subtotal | rupiah }}</span></span>
+                                                    class="total-price"><span
+                                                        class="Price-amount">{{ subtotal | rupiah }}</span></span>
                                             </div>
                                             <div class="actions">
                                                 <nuxt-link :to="`/cart`" tag="a" class="button botton-toolcart">
@@ -169,20 +174,32 @@
                                         <div class="header-user-form-tabs" v-if="!userIsAuthorized">
                                             <ul class="tab-link">
                                                 <li class="active">
-                                                    <a data-toggle="tab" aria-expanded="true" href="#header-tab-login">You have not login</a>
+                                                    <a data-toggle="tab" aria-expanded="true"
+                                                        href="#header-tab-login">You have not login</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-container" style="padding: 20px 20px;">
                                                 <div id="header-tab-login" class="tab-panel active">
-                                                    <input type="button" class="button" value="Login" @click="auth0Login()">
+                                                    <input type="button" class="button" value="Login"
+                                                        @click="auth0Login()">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="header-user-form-tabs" v-else>
+                                            <center>
+                                                <img src="https://i.dailymail.co.uk/i/pix/2017/04/20/13/3F6B966D00000578-4428630-image-m-80_1492690622006.jpg"
+                                                    alt="" style="width: 150px; height: 150px;margin-top:10px;object-fit: cover; border-radius: 50%;padding: 10px;">
+                                            </center>
                                             <ul class="tab-link">
+                                                <li class="active" style="position: absolute;right: 0;">
+                                                    <a data-toggle="tab" aria-expanded="true"
+                                                        href="#header-tab-login"><input type="button" class="button"
+                                                            value="Profile" @click="auth0Logout"></a>
+                                                </li>
                                                 <li class="active">
                                                     <a data-toggle="tab" aria-expanded="true"
-                                                        href="#header-tab-login"><input type="button" class="button" value="Logout" @click="auth0Logout"></a>
+                                                        href="#header-tab-login"><input type="button" class="button"
+                                                            value="Logout" @click="auth0Logout"></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -233,58 +250,64 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
+    import {
+        mapGetters,
+        mapMutations,
+        mapActions
+    } from 'vuex'
 
-export default {
-    data() {
-        return {
-            loginForm: {
-                email: '',
-                password: ''
-            },
-            registerForm: {
-                name: '',
-                email: '',
-                password: ''
+    export default {
+        data() {
+            return {
+                loginForm: {
+                    email: '',
+                    password: ''
+                },
+                registerForm: {
+                    name: '',
+                    email: '',
+                    password: ''
+                }
             }
-        }
-    },
-    computed: {
-        ...mapGetters("authentication", ['userIsAuthorized']),
-        ...mapGetters("profile", ['personal']),
-        cart_count: function() {
-            return this.$store.getters['cart/count']
         },
-        items: function() {
-            return this.$store.getters['cart/items']
+        computed: {
+            ...mapGetters("authentication", ['userIsAuthorized']),
+            ...mapGetters("profile", ['personal']),
+            cart_count: function () {
+                return this.$store.getters['cart/count']
+            },
+            items: function () {
+                return this.$store.getters['cart/items']
+            },
+            subtotal: function () {
+                return this.$store.getters['cart/subtotal']
+            }
         },
-        subtotal: function() {
-            return this.$store.getters['cart/subtotal']
-        }
-    },
-    methods: {
-        removeItem: function(product_code) {
-            this.$store.dispatch('cart/removeItem', product_code)
-        },
-        getUserProfile() {
-            this.$axios.post(`${process.env.API_BASE_URL}profile/get`, { email: this.loginForm.email}).then((response) => {
+        methods: {
+            removeItem: function (product_code) {
+                this.$store.dispatch('cart/removeItem', product_code)
+            },
+            getUserProfile() {
+                this.$axios.post(`${process.env.API_BASE_URL}profile/get`, {
+                    email: this.loginForm.email
+                }).then((response) => {
 
-                this.$store.dispatch("profile/updateProfile", {
-                    member_no: response.data.data.no_member,
-                    nik: response.data.data.nik,
-                    name: response.data.data.nama,
-                    birthdate: response.data.data.tgl_lahir,
-                    phone: response.data.data.telp,
-                    email: response.data.data.email
-                })
-            });
-        },
-        auth0Login() {
-            this.$store.dispatch("authentication/auth0Login");
-        },
-        auth0Logout() {
-            this.$store.dispatch("authentication/auth0Logout");
-        },
+                    this.$store.dispatch("profile/updateProfile", {
+                        member_no: response.data.data.no_member,
+                        nik: response.data.data.nik,
+                        name: response.data.data.nama,
+                        birthdate: response.data.data.tgl_lahir,
+                        phone: response.data.data.telp,
+                        email: response.data.data.email
+                    })
+                });
+            },
+            auth0Login() {
+                this.$store.dispatch("authentication/auth0Login");
+            },
+            auth0Logout() {
+                this.$store.dispatch("authentication/auth0Logout");
+            },
+        }
     }
-}
 </script>
