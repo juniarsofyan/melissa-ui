@@ -172,7 +172,7 @@
                                                     <a data-toggle="tab" aria-expanded="true" href="#header-tab-login">You have not login</a>
                                                 </li>
                                             </ul>
-                                            <div class="tab-container">
+                                            <div class="tab-container" style="padding: 20px 20px;">
                                                 <div id="header-tab-login" class="tab-panel active">
                                                     <input type="button" class="button" value="Login" @click="auth0Login()">
                                                 </div>

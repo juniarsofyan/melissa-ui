@@ -402,7 +402,6 @@
                                 let found = this.sales_branches.find(
                                     (product) => product.code == item.code
                                 )
-
                                 if (found) {
                                     found.disabled = item.disabled
                                 }
