@@ -135,12 +135,12 @@
                                                   <br>  {{ user_data.name }}
                                             </center>
                                             <ul class="tab-link">
+                                                <nuxt-link to="/profile" tag="li" class="active">
+                                                    <a data-toggle="tab" aria-expanded="true" href="#header-tab-login">
+                                                        <input type="button" class="button" value="Profile">
+                                                    </a>
+                                                </nuxt-link>
                                                 <li class="active" style="position: absolute;right: 0;">
-                                                    <a data-toggle="tab" aria-expanded="true"
-                                                        href="#header-tab-login"><input type="button" class="button"
-                                                            value="Profile" @click="auth0Logout"></a>
-                                                </li>
-                                                <li class="active">
                                                     <a data-toggle="tab" aria-expanded="true"
                                                         href="#header-tab-login"><input type="button" class="button"
                                                             value="Logout" @click="auth0Logout"></a>

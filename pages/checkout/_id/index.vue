@@ -80,6 +80,27 @@
                                     </div> -->
                                 </div>
                             </div>
+                            <div class="shipping-address">
+                                <p class="form-row form-row-first">
+                                    <label class="text">
+                                        Deliver to <br/>
+                                        <p> 
+                                            <b>{{ default_shipping_address.nama }}</b>
+                                            <br />
+                                            {{ default_shipping_address.alamat }}
+                                            <br />
+                                            {{ default_shipping_address.kecamatan_nama }}
+                                            <br />
+                                            {{ default_shipping_address.kota_nama }}
+                                            <br />
+                                            {{ default_shipping_address.provinsi_nama }}
+                                            <br />
+                                            {{ default_shipping_address.kode_pos }}
+                                            <!-- <br /> <br /> {{ default_shipping_address.telepon }} -->
+                                        </p>
+                                    </label>
+                                </p>
+                            </div>
                         </div>
 
                         <!-- Branch : {{ branch }} -->
@@ -152,7 +173,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="button-control">
+                    <nuxt-link :to="`/cart`" tag="button" class="button btn-continue-shopping">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        BACK TO MY CART
+                    </nuxt-link>
+
                     <nuxt-link :to="`payment`" class="button button-payment">PAYMENT</nuxt-link>
+                    </div>
                 </div>
 
                 <!--payment method-->
@@ -177,6 +205,9 @@
                 //     city_id: 79,
                 //     subdistrict_id: 1063
                 // },
+                delivery_address: false,
+                default_shipping_address: "",
+                shipping_addresses: [],
                 sales_branches: [{
                         code: '00000',
                         province_id: 9,
@@ -364,8 +395,12 @@
                         fee: 0
                     })
 
+                    this.$store.dispatch('checkout/setDeliveryAddress', "")
                     this.setTotalPayment()
                 }
+            },
+            items: function() {
+                this.checkAvailableBranches()
             }
         },
         methods: {
@@ -377,8 +412,8 @@
             async checkOngkir(event) {
 
                 let shipment = {
-                    destination_city_id: 23, // this.shipping_address.city_id,
-                    destination_subdistrict_id: 345, // this.shipping_address.subdistrict_id,
+                    destination_city_id: this.default_shipping_address.kota_id,
+                    destination_subdistrict_id: this.default_shipping_address.kecamatan_id,
                     origin_city_id: this.branch.city_id,
                     origin_subdistrict_id: this.branch.subdistrict_id,
                     weight: this.total_weight,
@@ -409,14 +444,49 @@
                         }
                     })
             },
+            getShippingAddresses() {
+                this.$axios.post(`shipping-address/get`, {
+                    email: window.localStorage.getItem('email')
+                })
+                .then((response) => {
+                    this.shipping_addresses = response.data.data
+                })
+            },
             setTotalPayment() {
-                const total_payment = this.grand_total + this.unique_code + this.shipment.fee
+
+                let fee = 0
+
+                if (this.shipment && this.shipment.fee) {
+                    fee = this.shipment.fee
+                }
+                
+                const total_payment = parseInt(this.grand_total) + parseInt(this.unique_code) + parseInt(fee)
                 this.$store.dispatch('checkout/setTotalPayment', total_payment)
+            },
+            getDefaultShippingAddresses: function() {
+                const email = localStorage.getItem('email')
+
+                this.$axios.post(`shipping-address/current`, {
+                    email: localStorage.getItem('email')
+                }).then(response => {
+                        if (response.data.data != 0) {
+                            this.default_shipping_address = response.data.data
+                            this.$store.dispatch('checkout/setDeliveryAddress', this.default_shipping_address.id)
+                        } else {
+                            this.$store.dispatch('checkout/setDeliveryAddress', "")
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    })
             }
         },
         created() {
             this.checkAvailableBranches()
+            this.getShippingAddresses()
             this.generateUniqueCode()
+            this.setTotalPayment()
+            this.getDefaultShippingAddresses()
         }
     }
 </script>

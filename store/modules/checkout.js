@@ -5,6 +5,7 @@ let courier = window.localStorage.getItem('courier')
 let shipment = window.localStorage.getItem('shipment')
 let unique_code = window.localStorage.getItem('unique_code')
 let total_payment = window.localStorage.getItem('total_payment')
+let delivery_address = window.localStorage.getItem('delivery_address')
 
 const checkout = {
     namespaced: true,
@@ -13,9 +14,10 @@ const checkout = {
         shipping_method: shipping_method ? shipping_method : false,
         shipping_address: shipping_address ? shipping_address : false,
         courier: courier ? courier : false,
-        shipment: shipment ? JSON.parse(shipment) : false,
+        shipment: shipment ? shipment : false,
         unique_code: unique_code ? unique_code : false,
-        total_payment: total_payment ? total_payment : false
+        total_payment: total_payment ? total_payment : false,
+        delivery_address: delivery_address ? delivery_address : false
     },
     mutations: {
         setBranch(state, branch) {
@@ -45,6 +47,10 @@ const checkout = {
         setTotalPayment(state, total_payment) {
             state.total_payment = total_payment
             window.localStorage.setItem('total_payment', total_payment)
+        },
+        setDeliveryAddress(state, delivery_address) {
+            state.delivery_address = delivery_address
+            window.localStorage.setItem('delivery_address', delivery_address)
         }
     },
     getters: {
@@ -68,6 +74,9 @@ const checkout = {
         },
         total_payment(state) {
             return state.total_payment
+        },
+        delivery_address(state) {
+            return state.delivery_address
         }
     },
     actions: {
@@ -91,6 +100,9 @@ const checkout = {
         },
         setTotalPayment({ state, commit}, payload) {
             commit('setTotalPayment', payload)
+        },
+        setDeliveryAddress({ state, commit}, payload) {
+            commit('setDeliveryAddress', payload)
         }
     }
 }

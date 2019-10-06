@@ -3,7 +3,7 @@ import auth0 from 'auth0-js'
 const authentication = {
     namespaced: true,
     state: {
-        userIsAuthorized: false,
+        userIsAuthorized: localStorage.getItem('userIsAuthorized') ? localStorage.getItem('userIsAuthorized') : false,
         auth0: new auth0.WebAuth(
             {
                 domain: process.env.VUE_APP_AUTH0_CONFIG_DOMAIN,
@@ -35,6 +35,7 @@ const authentication = {
                 if (authResult && authResult.accessToken && authResult.idToken) {
 
                     let expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime())
+                    // let expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime())
 
                     // save the tokens locally
                     localStorage.setItem('email', authResult.idTokenPayload.email)
