@@ -203,13 +203,10 @@
     import ongkir from '~/plugins/ongkir'
 
     export default {
+        middleware: ['traffics'],
         layout: 'products',
         data() {
             return {
-                // shipping_address : {
-                //     city_id: 79,
-                //     subdistrict_id: 1063
-                // },
                 delivery_address: false,
                 default_shipping_address: "",
                 shipping_addresses: [],

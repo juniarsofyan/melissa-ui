@@ -62,7 +62,7 @@
 
 <script>
 	export default {
-		layout: 'products',
-
+    	middleware: ['traffics'],
+		layout: 'products'
 	}
 </script>

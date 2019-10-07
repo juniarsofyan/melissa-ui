@@ -81,22 +81,9 @@ const authentication = {
                 if (authResult && authResult.accessToken && authResult.idToken) {
 
                     let expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime())
-                    // let expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime())
 
                     // save the tokens locally
-                    /* localStorage.setItem('email', authResult.idTokenPayload.email)
-                    localStorage.setItem('access_token', authResult.accessToken)
-                    localStorage.setItem('id_token', authResult.idToken)
-                    localStorage.setItem('expires_at', expiresAt) */
-
-                    /* localStorage.setItem('user_data', JSON.stringify({
-                        name: authResult.idTokenPayload.name,
-                        email: authResult.idTokenPayload.email,
-                        picture: authResult.idTokenPayload.picture
-                    })) */
-
                     // set global ui understanding of authentication
-
                     commit('setEmail', authResult.idTokenPayload.email)
                     commit('setAccessToken', authResult.accessToken)
                     commit('setIdToken', authResult.idToken)
@@ -113,8 +100,7 @@ const authentication = {
             })
         },
         auth0Logout({state, commit}) {
-            // No need to update the bearer in global axiosConfig to null because we are redirecting out of the application
-
+            // set credential data to false in vuex
             commit('setEmail', false)
             commit('setAccessToken', false)
             commit('setIdToken', false)
@@ -122,7 +108,7 @@ const authentication = {
             commit('setUserData', [])
             commit('setUserIsAuthenticated', false)
 
-            // Clear Access Token and ID Token from local storage
+            // Clear credential data from local storage
             localStorage.removeItem('user_data');
             localStorage.removeItem('email');
             localStorage.removeItem('userIsAuthorized');
