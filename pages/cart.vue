@@ -59,14 +59,14 @@
                                                                     class="total-price "><h4><b>{{ subtotal | rupiah }}</b></h4></span>
                                                             </td>
                                                         </tr>
-                                                        <tr >
+                                                        <!-- <tr >
                                                             <td style="text-align:right !important">
                                                                 <span class="title"><h5><b>Save :</b></h5></span>
                                                             </td>
                                                             <td style="text-align:right !important">
                                                                 <span class="total-price"><h4><b>IDR 10.000</b></h4></span>
                                                             </td>
-                                                        </tr>
+                                                        </tr> -->
                                                         <tr>
                                                             <td style="text-align:right !important">
                                                                 <span class="title"><h5><b>Grand Total :</b></h5></span>
