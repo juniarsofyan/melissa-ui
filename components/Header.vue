@@ -183,6 +183,9 @@
                             <nuxt-link to="/products/extra care" tag="li" class="menu-item">
                                 <a href="#" class="kt-item-title" title="Extra Care">Extra Care</a>
                             </nuxt-link>
+                            <nuxt-link to="/products/series" tag="li" class="menu-item">
+                                <a href="#" class="kt-item-title" title="Series">Series</a>
+                            </nuxt-link>
                             <nuxt-link to="/products/promo" tag="li" class="menu-item">
                                 <a href="#" class="kt-item-title" title="Promo">Promo</a>
                             </nuxt-link>
