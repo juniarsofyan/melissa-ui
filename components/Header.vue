@@ -78,10 +78,13 @@
                                                         class="Price-amount">{{ subtotal | rupiah }}</span></span>
                                             </div>
                                             <div class="actions">
-                                                <nuxt-link :to="`/cart`" tag="a" class="button botton-toolcart">
+                                                <!-- <nuxt-link :to="`/cart`" tag="a" class="button botton-toolcart">
                                                     <span>View My Cart</span>
                                                 </nuxt-link>
                                                 <nuxt-link :to="`/checkout`" tag="a" class="button botton-toolcart">
+                                                    <span>Checkout Now</span>
+                                                </nuxt-link> -->
+                                                <nuxt-link :to="`/cart`" tag="a" class="button botton-toolcart">
                                                     <span>Checkout Now</span>
                                                 </nuxt-link>
                                             </div>

@@ -5,13 +5,14 @@
                 <!-- breadcrumb -->
                 <div class="breadcrumb-trail breadcrumbs">
                     <ul class="trail-items breadcrumb">
-                        <li class="trail-item trail-begin">
-                            <a href>
-                                <span>Home</span>
-                            </a>
+                        <li class="trail-item trail-begin active">
+                            <span>My Cart</span>
                         </li>
                         <li class="trail-item trail-end active">
-                            <span>My Cart</span>
+                            <span>Checkout</span>
+                        </li>
+                        <li class="trail-item trail-end">
+                            <span>Payment</span>
                         </li>
                     </ul>
                 </div>
@@ -19,8 +20,6 @@
                 <!-- main content -->
                 <div class="row">
                     <div class="main-content-cart main-content col-sm-12">
-                        <h3 class="custom_blog_title">#MyCart</h3>
-
                         <div class="page-main-content">
                             <div class="shoppingcart-content">
                                 <form action="shoppingcart.html" class="cart-form">

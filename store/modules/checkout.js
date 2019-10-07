@@ -14,7 +14,7 @@ const checkout = {
         shipping_method: shipping_method ? shipping_method : false,
         shipping_address: shipping_address ? shipping_address : false,
         courier: courier ? courier : false,
-        shipment: shipment ? shipment : false,
+        shipment: shipment ? JSON.parse(shipment) : false,
         unique_code: unique_code ? unique_code : false,
         total_payment: total_payment ? total_payment : false,
         delivery_address: delivery_address ? delivery_address : false
@@ -34,7 +34,12 @@ const checkout = {
         },
         setCourier(state, courier) {
             state.courier = courier
-            window.localStorage.setItem('courier', courier)
+
+            if (courier == false) {
+                localStorage.removeItem('courier');
+            } else {
+                window.localStorage.setItem('courier', courier)
+            }
         },
         setShipment(state, shipment) {
             state.shipment = shipment
