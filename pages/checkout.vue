@@ -402,8 +402,10 @@
 
                     this.$store.dispatch('checkout/setCourier', false)
 
-                    this.$store.dispatch('checkout/setDeliveryAddress', "")
+                    this.$store.dispatch('checkout/setDeliveryAddress', false)
                     this.setTotalPayment()
+                } else {
+                    this.getDefaultShippingAddresses()
                 }
             },
             items: function() {
@@ -480,7 +482,7 @@
                             this.default_shipping_address = response.data.data
                             this.$store.dispatch('checkout/setDeliveryAddress', this.default_shipping_address.id)
                         } else {
-                            this.$store.dispatch('checkout/setDeliveryAddress', "")
+                            this.$store.dispatch('checkout/setDeliveryAddress', false)
                         }
                     })
                     .catch(e => {

@@ -244,16 +244,19 @@ export default {
                     onOpen: () => {
                         this.$swal.showLoading()
                     },
-				})
+                })
+                
+                const user_data = JSON.parse(localStorage.getItem('user_data'))
 
                 let transaction_master = {
                     transaction_date: this.current_date,
                     transaction_number: this.transaction_number,
                     customer_id: 1, //this.$store.getters.customer_id,
-                    customer_name: 2, //this.$store.getters.customer_name,
+                    customer_email: user_data.email, //this.$store.getters.customer_name,
+                    customer_name: user_data.name, //this.$store.getters.customer_name,
                     shipping_method: this.shipping_method,
-                    courier: this.courier,
-                    shipping_address_id: this.delivery_address,
+                    courier: this.courier ? this.courier : "",
+                    shipping_address_id: this.delivery_address ? this.delivery_address : "",
                     subtotal: this.subtotal,
                     shipping_fee: this.shipment.fee,
                     grand_total: this.total_payment,
