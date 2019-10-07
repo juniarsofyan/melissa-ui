@@ -322,7 +322,17 @@ export default {
                 }
             },
             deep: true
+        },
+        'email': {
+            handler(val) {
+                if (val) {
+                    this.getProfile()
+                }
+            }
         }
+    },
+    computed: {
+        ...mapGetters("authentication", ['email'])
     },
     methods: {
         async updateProfile() {
@@ -350,7 +360,8 @@ export default {
         },
         getProfile() {
             this.$axios.post(`${process.env.API_BASE_URL}profile/get`, {
-                email: window.localStorage.getItem('email')
+                // email: window.localStorage.getItem('email')
+                email: this.email
             })
             .then((response) => {
                 

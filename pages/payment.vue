@@ -4,9 +4,7 @@
         <hr />
         <!--wrap main content-->
         <div class="main-content main-content-checkout">
-
             <div class="container">
-
                 <!-- breadcrumb -->
                 <div class="breadcrumb-trail breadcrumbs">
                     <ul class="trail-items breadcrumb">
@@ -21,18 +19,13 @@
                         </li>
                     </ul>
                 </div>
-
                 <!--page title-->
                 <!-- <h3 class="custom_blog_title">#Payment</h3> -->
 
                 <!--checkout input form-->
                 <div class="checkout-wrapp">
-
-                
-
                     <!--payment method-->
                     <div class="payment-method-wrapp">
-
                         <div class="payment-method-form checkout-form">
                             <div class="row-col-1 row-col">
                                 <div class="payment-method">
@@ -130,15 +123,9 @@
                             <nuxt-link :to="`checkout`" class="button btn-back-to-shipping">BACK TO CHECKOUT</nuxt-link>
                             <button class="button btn-pay-now" @click="completeCheckout()">COMPLETE CHECKOUT</button>
                         </div>
-
                     </div>
-
-                
-
                 </div>
-
             </div>
-
         </div>
     </div>
 </template>

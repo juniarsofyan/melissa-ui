@@ -26,11 +26,6 @@
 
                 <!--checkout input form-->
                 <div class="checkout-wrapp">
-
-
-
-
-
                     <!--last process-->
                     <div class="end-checkout-wrapp">
                         <div class="end-checkout checkout-form">
