@@ -37,11 +37,9 @@
                             <div class="icon"></div>
                             <h3 class="title-checkend">Congratulation! Your order has been processed.</h3>
                             <div class="sub-title">
-                                Aenean dui mi, tempus non volutpat eget, molestie a orci.
-                                Nullam eget sem et eros laoreet rutrum.
-                                Quisque sem ante, feugiat quis lorem in.
+                                If user doesn't make a payment in 24 hours, the transaction will automatically canceled.
                             </div>
-                            <a href="#" class="button btn-return">Return to Store</a>
+                            <nuxt-link :to="`/`" tag="a" class="button btn-return">Return to Store</nuxt-link>
                         </div>
                     </div>
 

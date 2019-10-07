@@ -82,6 +82,10 @@ const cart = {
             }
 
             window.localStorage.setItem('items', JSON.stringify(state.items))
+        },
+        reset(state) {
+            state.items = []
+            window.localStorage.removeItem('items')
         }
     },
     getters: {
@@ -127,32 +131,17 @@ const cart = {
         }
     },
     actions: {
-        addItem(
-            {
-                state,
-                commit
-            },
-            payload
-        ) {
+        addItem( {state, commit}, payload) {
             commit('addItem', payload)
         },
-        removeItem(
-            {
-                state,
-                commit
-            },
-            payload
-        ) {
+        removeItem( {state, commit}, payload) {
             commit('removeItem', payload)
         },
-        updateQty(
-            {
-                state,
-                commit
-            },
-            payload
-        ) {
+        updateQty({ state, commit }, payload) {
             commit('updateQty', payload)
+        },
+        reset({ state, commit }) {
+            commit('reset')
         }
     }
 }

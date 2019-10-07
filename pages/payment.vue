@@ -277,9 +277,12 @@ export default {
                                 text: "Transaction saved!",
                                 type: "success",
                             }).then(() => {
-                                // this.$store.commit("resetTransaction")
+
+                                this.$store.dispatch('cart/reset')
+                                this.$store.dispatch('checkout/reset')
+
                                 this.$router.push({
-                                    name: "HistoryOrder",
+                                    name: "transaction-complete",
                                 })
                             })
                         }

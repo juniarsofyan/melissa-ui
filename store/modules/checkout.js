@@ -56,6 +56,26 @@ const checkout = {
         setDeliveryAddress(state, delivery_address) {
             state.delivery_address = delivery_address
             window.localStorage.setItem('delivery_address', delivery_address)
+        },
+        reset(state) {
+
+            state.branch = []
+            state.shipping_method = false
+            state.shipping_address = false
+            state.courier = false
+            state.shipment = false,
+            state.unique_code = false,
+            state.total_payment = false,
+            state.delivery_address = false
+
+            window.localStorage.removeItem('branch')
+            window.localStorage.removeItem('shipping_method')
+            window.localStorage.removeItem('shipping_address')
+            window.localStorage.removeItem('courier')
+            window.localStorage.removeItem('shipment')
+            window.localStorage.removeItem('unique_code')
+            window.localStorage.removeItem('total_payment')
+            window.localStorage.removeItem('delivery_address')
         }
     },
     getters: {
@@ -108,6 +128,9 @@ const checkout = {
         },
         setDeliveryAddress({ state, commit}, payload) {
             commit('setDeliveryAddress', payload)
+        },
+        reset({ state, commit}) {
+            commit('reset')
         }
     }
 }
