@@ -75,9 +75,9 @@
 								<p>&nbsp;</p>
 
 								<div class="contact-bc">
-									<p>Mengalami kesulitan untuk menentukan produk yang sesuai dengan kebutuhan kulit
-										Anda? Untuk pengalaman terbaik konsultasikan kebutuhan kulit Anda kepada Beauty
-										Consultant kami.</p>
+									<p>
+										Temukan produk perawatan yang sesuai dengan kebutuhanmu hanya Bersama Bellezkin. Dapatkan gratis konsultasi bersama Beauty Consultant kami :)
+									</p>
 									<a :href="`https://api.whatsapp.com/send?phone=628112288142&text=Halo!%0ASaya%20ingin%20ingin%20konsultasi%20lebih%20lanjut%20mengenai%20produk%20Bellezkin%0ASource : ${url}`"
 										class="single_bc_button button" target="_blank">
 										<i class="fab fa-whatsapp logo_bc"></i>&nbsp;
