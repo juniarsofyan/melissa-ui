@@ -4,9 +4,7 @@
         <hr />
         <!--wrap main content-->
         <div class="main-content main-content-checkout">
-
             <div class="container">
-
                 <!-- breadcrumb -->
                 <div class="breadcrumb-trail breadcrumbs">
                     <ul class="trail-items breadcrumb">
@@ -21,18 +19,13 @@
                         </li>
                     </ul>
                 </div>
-
                 <!--page title-->
                 <!-- <h3 class="custom_blog_title">#Payment</h3> -->
 
                 <!--checkout input form-->
                 <div class="checkout-wrapp">
-
-                
-
                     <!--payment method-->
                     <div class="payment-method-wrapp">
-
                         <div class="payment-method-form checkout-form">
                             <div class="row-col-1 row-col">
                                 <div class="payment-method">
@@ -130,15 +123,9 @@
                             <nuxt-link :to="`checkout`" class="button btn-back-to-shipping">BACK TO CHECKOUT</nuxt-link>
                             <button class="button btn-pay-now" @click="completeCheckout()">COMPLETE CHECKOUT</button>
                         </div>
-
                     </div>
-
-                
-
                 </div>
-
             </div>
-
         </div>
     </div>
 </template>
@@ -147,6 +134,7 @@
 import { mapGetters, mapActions } from 'vuex'
 	
 export default {
+    middleware: ['traffics'],
     layout: 'products',
 	data() {
 		return {
@@ -244,16 +232,19 @@ export default {
                     onOpen: () => {
                         this.$swal.showLoading()
                     },
-				})
+                })
+                
+                const user_data = JSON.parse(localStorage.getItem('user_data'))
 
                 let transaction_master = {
                     transaction_date: this.current_date,
                     transaction_number: this.transaction_number,
                     customer_id: 1, //this.$store.getters.customer_id,
-                    customer_name: 2, //this.$store.getters.customer_name,
+                    customer_email: user_data.email, //this.$store.getters.customer_name,
+                    customer_name: user_data.name, //this.$store.getters.customer_name,
                     shipping_method: this.shipping_method,
-                    courier: this.courier,
-                    shipping_address_id: this.delivery_address,
+                    courier: this.courier ? this.courier : "",
+                    shipping_address_id: this.delivery_address ? this.delivery_address : "",
                     subtotal: this.subtotal,
                     shipping_fee: this.shipment.fee,
                     grand_total: this.total_payment,

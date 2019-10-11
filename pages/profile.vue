@@ -293,7 +293,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-    middleware: 'authentication',
+    middleware: ['authentication', 'traffics'],
     layout: 'products',
     data() {
         return {
@@ -322,7 +322,17 @@ export default {
                 }
             },
             deep: true
+        },
+        'email': {
+            handler(val) {
+                if (val) {
+                    this.getProfile()
+                }
+            }
         }
+    },
+    computed: {
+        ...mapGetters("authentication", ['email'])
     },
     methods: {
         async updateProfile() {
@@ -350,7 +360,8 @@ export default {
         },
         getProfile() {
             this.$axios.post(`${process.env.API_BASE_URL}profile/get`, {
-                email: window.localStorage.getItem('email')
+                // email: window.localStorage.getItem('email')
+                email: this.email
             })
             .then((response) => {
                 
@@ -428,7 +439,7 @@ export default {
                         console.log(e)
                     })
             } else {
-                alert('lalsd')
+                
             }
         },
         validateAddress() {
@@ -445,22 +456,18 @@ export default {
             }
 
             if (!this.address_form.hasOwnProperty('city') || this.address_form.city == "") {
-                alert('city')
                 return false
             }
 
             if (!this.address_form.hasOwnProperty('subdistrict') || this.address_form.subdistrict == "") {
-                alert('subdistrict')
                 return false
             }
 
             if (!this.address_form.hasOwnProperty('address') || this.address_form.address == "") {
-                alert('address')
                 return false
             }
 
             if (!this.address_form.hasOwnProperty('postcode') || this.address_form.postcode == "") {
-                alert('postcode')
                 return false
             }
 

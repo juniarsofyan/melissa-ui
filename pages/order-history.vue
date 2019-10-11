@@ -2,54 +2,52 @@
 	<ul class="row list-products auto-clear equal-container product-list">
 		<li class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
 
-			<div class="card" style="border-radius:5px;">
+			<div class="card" style="border-radius:5px;" v-for="order in order_histories" :key="order.transaction.transaksi_id">
+				<br /><br />
+				
+				<b>Order number: {{ order.transaction.nomor_transaksi }} </b>
 
-				<b>Order no:
-					<br>
-					34242424
-				</b><br><br>
-				<button class=" button" style="background:pink">Place Order <br>
-					04-03-2019</button>
-				<br><br>
-				<b><i>Details Orders</i></b>
-				<br><br>
+				<OrderBreadcrumb :progresses="order.progresses" />
+
 				<div class="row">
+					<div class="col-md-4">
+						<div class="row" v-for="item in order.items" :key="item.kode_barang">
+							<div class="col-md-6">
+								<img :src="`${$axios.defaults.baseURL}assets/img/thumbnails/${item.pic}.jpg`">
+							</div>
 
-					<div class="col-lg-2">
-						<img src="https://media.suara.com/pictures/480x260/2017/04/25/34971-alat-kosmetik.jpg" alt="">
+							<div class="col-md-6">
+								<b>Description </b><br />
+								Item : {{ item.nama }} <br/>
+								Code: {{ item.kode_barang }} <br />
+								Qty : {{ item.qty }}
+							</div>
+						</div>
 					</div>
 
-					<div class="col-lg-2">
-						Produk <br>
-						<b>Eye Bag Gel </b><br><br>
-						Kode <br>
-						<b>08001 </b><br><br>
-						Qty <br>
-						<b>1</b>
-					</div>
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-4">
+								<b> SPB: </b> <br />
+								Bandung, Lengkong
+							</div>
 
-					<div class="col-lg-2">
-						<b> Get from SPB : </b> <br>
-						Bandung, Lengkong
-					</div>
-
-					<div class="col-lg-3">
-						<b>Ship to:</b> <br>
-						Imas <br>
-						<br>
-						Jl.ABC <br>
-						Jawa barat <br>
-						Kota Bandung <br>
-						Bandung wetan <br>
-						402625
-
-
-					</div>
-					<div class="col-lg-2">
-						<b>Grand Total:</b> <br>
-						Rp.13244 <br><br>
-						<b>Kode Unik:</b> <br>
-						3244
+							<div class="col-md-4">
+								<b>Ship to:</b> <br />
+								<u>{{ order.transaction.nama }}</u> <br />
+								{{ order.transaction.alamat }} <br />
+								{{ order.transaction.provinsi_nama }} <br />
+								{{ order.transaction.kota_nama }} <br />
+								{{ order.transaction.kecamatan_nama }} <br />
+								{{ order.transaction.kode_pos }} <br /> 
+							</div>
+							<div class="col-md-4">
+								<b>Grand Total:</b> <br />
+								{{ order.transaction.grand_total | rupiah }} <br /><br />
+								<b>Unique Code:</b> <br />
+								{{ order.transaction.kode_unik_transfer }}
+							</div>
+						</div>
 					</div>
 
 				</div>
@@ -62,7 +60,41 @@
 
 <script>
 	export default {
+    	middleware: ['traffics'],
 		layout: 'products',
+		components: {
+			OrderBreadcrumb: () => import("@/components/OrderBreadcrumb.vue")
+		},
+		data() {
+			return {
+				order_histories: [],
+				transactions: [],
+				order_progress: [],
+				order_items: []
+			}
+		},
+		methods: {
+			getOrderHistory: function() {
 
+				const user_data = JSON.parse(localStorage.getItem('user_data'))
+
+				this.$axios.post(`transaction/history`, {
+					email: user_data.email
+				}).then(response => {
+					if (response.data.data != 0) {
+						let result = response.data.data
+						/* this.transactions = result.transactions
+						this.order_progress = result.order_progress
+						this.order_items = result.order_items */
+						this.order_histories = result
+					}
+				}).catch(e => {
+					console.log(e)
+				})
+			},
+		},
+		created() {
+			this.getOrderHistory()
+		},
 	}
 </script>

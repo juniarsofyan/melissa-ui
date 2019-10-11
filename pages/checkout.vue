@@ -18,10 +18,8 @@
                         </li>
                     </ul>
                 </div>
-
                 <!--page title-->
                 <!-- <h3 class="custom_blog_title">#Checkout</h3> -->
-
                 <!--checkout input form-->
                 <div class="checkout-wrapp">
                     <!--shipping address-->
@@ -38,35 +36,34 @@
                                             <option v-for="sales_branch in sales_branches" :key="sales_branch.code"
                                                 :value="sales_branch" :disabled="sales_branch.disabled"
                                                 :selected="branch.code ? branch.code == sales_branch.code : ''">
-                                                {{ sales_branch.city_name }} - {{ sales_branch.subdistrict_name }}</option>
+                                            {{ sales_branch.city_name }} - {{ sales_branch.subdistrict_name }}</option>
                                         </select>
                                     </p>
                                 </div>
                                 <div class="shipping-address">
                                     <p class="form-row form-row-first">
                                         <span class="text">Shipping Method</span>
-                                        <input 
-                                            type="radio" 
-                                            name="shipping_method" 
+                                        <input
+                                            type="radio"
+                                            name="shipping_method"
                                             id="expedition"
-                                            style="margin-right:5px;" 
-                                            value="EXPEDITION" 
-                                            v-model="shipping_method" 
-                                        /> 
+                                            style="margin-right:5px;"
+                                            value="EXPEDITION"
+                                            v-model="shipping_method"
+                                        />
                                         <label style="margin-right:10px;" for="expedition">Courier</label>
-
-                                        <input 
-                                            type="radio" 
+                                        <input
+                                            type="radio"
                                             name="shipping_method"
                                             id="immediate"
-                                            style="margin-right:5px;" 
-                                            value="IMMEDIATE" 
-                                            v-model="shipping_method" 
+                                            style="margin-right:5px;"
+                                            value="IMMEDIATE"
+                                            v-model="shipping_method"
                                         />
                                         <label style="margin-right:10px;" for="immediate">Immediate</label>
                                     </p>
                                 </div>
-                                <span v-if="shipping_method == 'EXPEDITION'">    
+                                <span v-if="shipping_method == 'EXPEDITION'">
                                     <div class="shipping-address">
                                         <div class="form-row form-row-first">
                                             <label class="text">Select Courier</label>
@@ -78,42 +75,39 @@
                                             <br />
                                             <br>
                                             <!-- <div v-if="shipment.fee">
-                                            <p>  Fee : {{ shipment.fee }} </p>
-                                            <p>  Etd : {{ shipment.etd }} </p>
+                                                <p>  Fee : {{ shipment.fee }} </p>
+                                                <p>  Etd : {{ shipment.etd }} </p>
                                             </div> -->
                                         </div>
                                     </div>
                                     <div class="shipping-address">
-                                        <p class="form-row form-row-first">
+                                        <p class="form-row form-row-first" v-if="default_shipping_address">
                                             <label class="text">
                                                 Deliver to <br/>
-                                                <p> 
-                                                    <b>{{ default_shipping_address.nama }}</b>
-                                                    <br />
-                                                    {{ default_shipping_address.alamat }}
-                                                    <br />
-                                                    {{ default_shipping_address.kecamatan_nama }}
-                                                    <br />
-                                                    {{ default_shipping_address.kota_nama }}
-                                                    <br />
-                                                    {{ default_shipping_address.provinsi_nama }}
-                                                    <br />
+                                                <p>
+                                                    <b>{{ default_shipping_address.nama }}</b> <br />
+                                                    {{ default_shipping_address.alamat }} <br />
+                                                    {{ default_shipping_address.kecamatan_nama }} <br />
+                                                    {{ default_shipping_address.kota_nama }} <br />
+                                                    {{ default_shipping_address.provinsi_nama }} <br />
                                                     {{ default_shipping_address.kode_pos }}
                                                     <!-- <br /> <br /> {{ default_shipping_address.telepon }} -->
                                                 </p>
                                             </label>
                                         </p>
+                                        <p class="form-row form-row-first" v-else>
+                                            <label class="text">
+                                                <button class="btn-sm" @click="showModal=true">Add shipping address</button>
+                                            </label>
+                                        </p>
                                     </div>
                                 </span>
                             </div>
-
                             <!-- Branch : {{ branch }} -->
-
                             <div class="row-col-2 row-col checkout-form" style="padding-left: 27px;padding-bottom: 0px; padding-top:20px;">
                                 <div class="your-order">
                                     <h3 class="title-form text-center" style="margin-bottom:20px;">Order Summary</h3>
                                     <hr style="margin-top: 10px;margin-bottom: 10px;" />
-
                                     <table style="border:none !important;">
                                         <tr style="border:none !important;">
                                             <td style="border:none !important;padding-bottom:0px"> Total items :</td>
@@ -128,9 +122,7 @@
                                             </td>
                                         </tr>
                                     </table>
-
                                     <hr style="margin-top: 10px;margin-bottom: 10px;" />
-
                                     <table style="border:none !important;">
                                         <tr style="border:none !important;">
                                             <td style="border:none !important;padding-bottom:0px">
@@ -157,9 +149,7 @@
                                             </td>
                                         </tr>
                                     </table>
-
                                     <hr style="margin-top: 10px;margin-bottom: 10px;" />
-
                                     <table style="border:none !important;">
                                         <tr style="border:none !important;">
                                             <td style="border:none !important;">
@@ -178,15 +168,77 @@
                             </div>
                         </div>
                         <div class="button-control">
-                        <nuxt-link :to="`/cart`" tag="button" class="button btn-continue-shopping">
-                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                            BACK TO MY CART
-                        </nuxt-link>
-
-                        <nuxt-link :to="`payment`" class="button button-payment">PAYMENT</nuxt-link>
+                            <nuxt-link :to="`/cart`" tag="button" class="button btn-continue-shopping">
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    BACK TO MY CART
+                            </nuxt-link>
+                            <nuxt-link :to="`payment`" class="button button-payment">PAYMENT</nuxt-link>
+                            
+                            <transition name="modal" v-if="showModal">
+                                <div class="modal-mask">
+                                    <div class="modal-wrapper">
+                                        <div class="modal-container">
+                                            <div class="modal-header">
+                                                <slot name="header"> <b> ADD SHIPPING ADDRESS </b> </slot>
+                                            </div>
+                                            <div class="modal-body">
+                                                <slot name="body">
+                                                    <input type="text" name="name" v-model="address_form.name" placeholder="Name"/> &nbsp;
+                                                    <input type="text" name="phone" v-model="address_form.phone" placeholder="Phone"/>
+                                                    <br /> <br />
+                                                    <select v-model="address_form.province">
+                                                        <option value="" selected>-- Province --</option>
+                                                        <option
+                                                            v-for="province in provinces"
+                                                            :key="province.province_id"
+                                                            :value="province"
+                                                            :selected="province.province_id === address_form.provinsi_id"
+                                                        >{{ province.province }}
+                                                        </option>
+                                                    </select>
+                                                    &nbsp;
+                                                    <select v-model="address_form.city">
+                                                        <option value="" selected>-- City --</option>
+                                                        <option
+                                                            v-for="city in cities"
+                                                            :key="city.city_id"
+                                                            :value="city"
+                                                            :selected="city.city_id === address_form.city_id"
+                                                        >{{ city.city_name }}
+                                                        </option>
+                                                    </select>
+                                                    &nbsp;
+                                                    <select v-model="address_form.subdistrict">
+                                                        <option value="" selected>-- Subdistrict --</option>
+                                                        <option
+                                                            v-for="subdistrict in subdistricts"
+                                                            :key="subdistrict.subdistrict_id"
+                                                            :value="subdistrict"
+                                                            :selected="subdistrict.subdistrict_id === address_form.subdistrict_id"
+                                                        >{{ subdistrict.subdistrict_name }}
+                                                        </option>
+                                                    </select>
+                                                    <br /> <br />
+                                                    <textarea id="address" v-model="address_form.address" placeholder="address"></textarea>
+                                                    <br /> <br />
+                                                    <input type="text" name="postcode" v-model="address_form.postcode" placeholder="postcode"/>
+                                                    &nbsp;&nbsp;
+                                                    <input class="form-check-input" type="checkbox" id="is-default-address" value="1" v-model="address_form.is_default">
+                                                    <label for="is-default-address">Set as default</label>
+                                                </slot>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <slot name="footer">
+                                                    <button class="modal-default-button btn-sm" @click="showModal=false">Cancel</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <button class="modal-default-button btn-sm" @click="addNewAddress()">Save</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                </slot>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </transition>
                         </div>
                     </div>
-
                     <!--payment method-->
                 </div>
             </div>
@@ -203,13 +255,24 @@
     import ongkir from '~/plugins/ongkir'
 
     export default {
+        middleware: ['traffics'],
         layout: 'products',
         data() {
             return {
-                // shipping_address : {
-                //     city_id: 79,
-                //     subdistrict_id: 1063
-                // },
+                address_form: {
+                    name: "",
+                    phone: "",
+                    province: "",
+                    city: "",
+                    subdistrict: "",
+                    address: "",
+                    postcode: "",
+                    is_default: ""
+                },
+                provinces: [],
+                cities: [],
+                subdistricts: [],
+                showModal: false,
                 delivery_address: false,
                 default_shipping_address: "",
                 shipping_addresses: [],
@@ -402,13 +465,31 @@
 
                     this.$store.dispatch('checkout/setCourier', false)
 
-                    this.$store.dispatch('checkout/setDeliveryAddress', "")
+                    this.$store.dispatch('checkout/setDeliveryAddress', false)
                     this.setTotalPayment()
+                } else {
+                    this.getDefaultShippingAddresses()
                 }
             },
             items: function() {
                 this.checkAvailableBranches()
-            }
+            },
+            'address_form.province': {
+                handler(val) {
+                    if (val) {
+                        this.getCities(val.province_id)
+                    }
+                },
+                deep: true
+            },
+            'address_form.city': {
+                handler(val) {
+                    if (val) {
+                        this.getSubdistricts(val.city_id)
+                    }
+                },
+                deep: true
+            },
         },
         methods: {
             generateUniqueCode() {
@@ -480,17 +561,161 @@
                             this.default_shipping_address = response.data.data
                             this.$store.dispatch('checkout/setDeliveryAddress', this.default_shipping_address.id)
                         } else {
-                            this.$store.dispatch('checkout/setDeliveryAddress', "")
+                            this.$store.dispatch('checkout/setDeliveryAddress', false)
                         }
                     })
                     .catch(e => {
                         console.log(e)
                     })
-            }
+            },
+            getProvinces() {
+                this.provinces = this.$axios.get(`ongkir/provinces`)
+                    .then(response => {
+                        if (response.data.data != 0) {
+                            this.provinces = response.data.data
+                        } else {
+                            this.provinces = []
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    })
+            },
+            getCities: function(province_id) {
+                this.$axios.get(`ongkir/province/` + province_id + `/cities` )
+                    .then(response => {
+                        if (response.data.data != 0) {
+                            var cities = response.data.data
+                            var data = []
+
+                            for (var city in cities) {
+                                data.push({
+                                    city_id: cities[city].city_id,
+                                    city_name: cities[city].type + " " + cities[city].city_name,
+                                })
+                            }
+                            this.cities = data
+                        } else {
+                            this.cities = []
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    })
+
+                    this.subdistricts = []
+            },
+            getSubdistricts: function(city_id) {
+                this.$axios.get(`ongkir/city/` + city_id + `/subdistricts` )
+                    .then(response => {
+                        if (response.data.data != 0) {
+                            var subdistricts = response.data.data
+                            var data = []
+                            for (var subdistrict in subdistricts) {
+                                data.push({
+                                    subdistrict_id: subdistricts[subdistrict].subdistrict_id,
+                                    subdistrict_name: subdistricts[subdistrict].subdistrict_name
+                                })
+                            }
+                            this.subdistricts = data
+                        } else {
+                            this.subdistricts = []
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    })
+            },
+            addNewAddress() {
+                // this.address_form = address
+
+                if (this.validateAddress()) {
+
+                    this.showModal = false
+
+                    this.$swal({
+                        // title: "",
+                        text: "Saving address",
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                        onOpen: () => {
+                            this.$swal.showLoading()
+                        },
+                    })
+
+                    this.$axios.post(`shipping-address/add`, {
+                        email : window.localStorage.getItem('email'),
+                        name : this.address_form.name,
+                        phone : this.address_form.phone,
+                        province_id : this.address_form.province.province_id,
+                        province_name : this.address_form.province.province,
+                        city_id : this.address_form.city.city_id,
+                        city_name : this.address_form.city.city_name,
+                        subdistrict_id : this.address_form.subdistrict.subdistrict_id,
+                        subdistrict_name : this.address_form.subdistrict.subdistrict_name,
+                        address : this.address_form.address,
+                        postcode : this.address_form.postcode,
+                        is_default : this.address_form.is_default
+                    }).then(response => {
+                            if (response.data.data == 1) {
+                                
+                                this.address_form = []
+
+                                this.$swal({
+                                    // title: "",
+                                    text: "Shipping address added!",
+                                    type: "success",
+                                }).then(response => {
+
+                                    // this.$router.push('/profile')
+                                    // window.location.reload()
+
+                                })
+                            }
+                        })
+                        .catch(e => {
+                            console.log(e)
+                        })
+                } else {
+                    
+                }
+            },
+            validateAddress() {
+                if (!this.address_form.hasOwnProperty('name') || this.address_form.name == "") {
+                    return false
+                }
+
+                if (!this.address_form.hasOwnProperty('phone') || this.address_form.phone == "") {
+                    return false
+                }
+
+                if (!this.address_form.hasOwnProperty('province') || this.address_form.province == "") {
+                    return false
+                }
+
+                if (!this.address_form.hasOwnProperty('city') || this.address_form.city == "") {
+                    return false
+                }
+
+                if (!this.address_form.hasOwnProperty('subdistrict') || this.address_form.subdistrict == "") {
+                    return false
+                }
+
+                if (!this.address_form.hasOwnProperty('address') || this.address_form.address == "") {
+                    return false
+                }
+
+                if (!this.address_form.hasOwnProperty('postcode') || this.address_form.postcode == "") {
+                    return false
+                }
+
+                return true
+            },
         },
         created() {
             this.checkAvailableBranches()
             this.getShippingAddresses()
+            this.getProvinces()
             this.generateUniqueCode()
             this.setTotalPayment()
             this.getDefaultShippingAddresses()
@@ -499,4 +724,65 @@
 </script>
 
 <style>
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: table;
+    transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.modal-container {
+    width: 50%;
+    margin: 0px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+    margin-top: 0;
+    color: #42b983;
+}
+
+.modal-body {
+    margin: 20px 0;
+}
+
+.modal-default-button {
+    float: right;
+}
+
+/*
+* The following styles are auto-applied to elements with
+* transition="modal" when their visibility is toggled
+* by Vue.js.
+*
+* You can easily play with the modal transition by editing
+* these styles.
+*/
+.modal-enter {
+    opacity: 0;
+}
+
+.modal-leave-active {
+    opacity: 0;
+}
+
+.modal-enter .modal-container, .modal-leave-active .modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
 </style>
