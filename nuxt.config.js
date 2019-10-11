@@ -135,8 +135,13 @@ export default {
         {
             src: '~/plugins/slick.js',
             ssr: false
-        }, {
+        }, 
+        {
             src: '~/plugins/currency.js',
+            ssr: false
+        },
+        {
+            src: '~/plugins/vmodal.js',
             ssr: false
         }
     ],

@@ -8,7 +8,7 @@
                         <li class="trail-item trail-begin active">
                             <span>My Cart</span>
                         </li>
-                        <li class="trail-item trail-end active">
+                        <li class="trail-item trail-end">
                             <span>Checkout</span>
                         </li>
                         <li class="trail-item trail-end">
@@ -89,8 +89,12 @@
                                     <nuxt-link :to="`/`" tag="button" class="button btn-continue-shopping">CONTINUE
                                         SHOPPING</nuxt-link>
 
-                                    <nuxt-link :to="`/checkout`" tag="button" class="button btn-cart-to-checkout">
-                                        CHECKOUT NOW</nuxt-link>
+                                    <button v-if="!userIsAuthorized" @click="warnSignIn" class="button btn-cart-to-checkout">
+                                        CHECKOUT NOW
+                                    </button>
+                                    <nuxt-link v-else :to="`/checkout`" tag="button" class="button btn-cart-to-checkout">
+                                        CHECKOUT NOW
+                                    </nuxt-link>
                                 </div>
                             </div>
                         </div>
@@ -104,22 +108,34 @@
 </template>
 
 <script>
-    import CartItem from '~/components/CartItem.vue'
+import { mapGetters } from 'vuex'
+import CartItem from '~/components/CartItem.vue'
 
-    export default {
-        layout: 'products',
-        components: {
-            CartItem
+export default {
+    layout: 'products',
+    components: {
+        CartItem
+    },
+    computed: {
+        ...mapGetters("authentication", ['userIsAuthorized']),
+        items: function () {
+            return this.$store.getters['cart/items']
         },
-        computed: {
-            items: function () {
-                return this.$store.getters['cart/items']
-            },
-            subtotal: function () {
-                return this.$store.getters['cart/subtotal']
-            }
+        subtotal: function () {
+            return this.$store.getters['cart/subtotal']
+        }
+    },
+    methods: {
+        warnSignIn() {
+            this.$swal({
+                title: "Oops!",
+                text: "Please sign in to continue",
+                type: "warning",
+            })
         }
     }
+        
+}
 </script>
 
 <style>

@@ -439,7 +439,7 @@ export default {
                         console.log(e)
                     })
             } else {
-                alert('lalsd')
+                
             }
         },
         validateAddress() {
@@ -456,22 +456,18 @@ export default {
             }
 
             if (!this.address_form.hasOwnProperty('city') || this.address_form.city == "") {
-                alert('city')
                 return false
             }
 
             if (!this.address_form.hasOwnProperty('subdistrict') || this.address_form.subdistrict == "") {
-                alert('subdistrict')
                 return false
             }
 
             if (!this.address_form.hasOwnProperty('address') || this.address_form.address == "") {
-                alert('address')
                 return false
             }
 
             if (!this.address_form.hasOwnProperty('postcode') || this.address_form.postcode == "") {
-                alert('postcode')
                 return false
             }
 
