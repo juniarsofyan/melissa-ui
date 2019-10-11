@@ -86,8 +86,9 @@
                                     </table>
                                 </form>
                                 <div class="control-cart">
-                                    <nuxt-link :to="`/`" tag="button" class="button btn-continue-shopping">CONTINUE
-                                        SHOPPING</nuxt-link>
+                                    <nuxt-link :to="`/`" tag="button" class="button btn-continue-shopping">
+                                        CONTINUE SHOPPING
+                                    </nuxt-link>
 
                                     <button v-if="!userIsAuthorized" @click="warnSignIn" class="button btn-cart-to-checkout">
                                         CHECKOUT NOW
