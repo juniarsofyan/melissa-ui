@@ -81,9 +81,11 @@
 									<a :href="`https://api.whatsapp.com/send?phone=628112288142&text=Halo!%0ASaya%20ingin%20ingin%20konsultasi%20lebih%20lanjut%20mengenai%20produk%20Bellezkin%0ASource : ${url}`"
 										class="single_bc_button button" target="_blank">
 										<i class="fab fa-whatsapp logo_bc"></i>&nbsp;
-										Contact Beauty Consultant
+										Contact Beauty Consultant Bellezkin
 									</a>
 								</div>
+								
+								<p id="warn">&nbsp; Klik <i class="fas fa-arrow-up"></i> untuk langsung terhubung via WhatssApp</p>
 							</div>
 						</div>
 					</div>
