@@ -1,4 +1,5 @@
 import auth0 from 'auth0-js'
+import axios from 'axios'
 
 const authentication = {
     namespaced: true,
@@ -96,6 +97,26 @@ const authentication = {
                     })
 
                     commit('setUserIsAuthenticated', true)
+
+                    // check local profile, if not available then register
+                    axios.post(`${process.env.API_BASE_URL}profile/get`, {
+                        email: authResult.idTokenPayload.email
+                    })
+                    .then((response) => {
+                        if (response.data.data == "0") {
+                            axios.post(`${process.env.API_BASE_URL}profile/register`, {
+                                name: authResult.idTokenPayload.name.toUpperCase(),
+                                email: authResult.idTokenPayload.email
+                            }).then((response) => {
+                                console.log(response.data.data)
+                            })
+                            .catch(e => {
+                                console.log(e)
+                            })
+                        }
+                    }).catch(e => {
+                        console.log(e)
+                    })
                 }
             })
         },
