@@ -19,8 +19,7 @@
                             </li>
                         </ul>
 
-                        <!-- {{ province }} -->
-                        {{ address }}
+                        <!-- {{ address }} -->
 
                         <div class="tab-container">
                             <div id="profil" class="tab-panel active">
@@ -197,7 +196,6 @@ export default {
     layout: 'products',
     data() {
         return {
-            // profile: this.$store.getters['profile/personal']
             profile: [],
             shipping_addresses: [],
             address : {},
@@ -240,12 +238,9 @@ export default {
                 email: this.profile.email
             })
 
-            if (!this.address.province) {
-                alert('blm ada alamat')
-                // this.addNewAddress()
+            if (this.no_address_available) {
+                this.addNewAddress()
             } else {
-                console.log(this.address)
-                alert('udah ada alamat')
                 this.updateAddress()
             }
 
@@ -253,7 +248,6 @@ export default {
         },
         getProfile() {
             this.$axios.post(`profile/get`, {
-                // email: window.localStorage.getItem('email')
                 email: this.email
             })
             .then((response) => {
@@ -295,8 +289,30 @@ export default {
                         postcode: result.kode_pos
                     }
 
-                    this.$store.dispatch('checkout/setDeliveryAddress', this.default_shipping_address.id)
+                    this.no_address_available = false
+
+                    this.$store.dispatch('checkout/setDeliveryAddress', result.id)
                 } else {
+                    this.address = {
+                        id: false,
+                        province : {
+                            province_id : false,
+                            province_name: false
+                        },
+                        city : {
+                            city_id : false,
+                            city_name: false
+                        },
+                        subdistrict : {
+                            subdistrict_id : false,
+                            subdistrict_name: false
+                        },
+                        address: "",
+                        postcode: ""
+                    }
+
+                    this.no_address_available = true
+
                     this.$store.dispatch('checkout/setDeliveryAddress', false)
                 }
             })
@@ -317,20 +333,20 @@ export default {
             this.address.subdistrict.subdistrict_name = event.target.options[event.target.options.selectedIndex].dataset.subdistrictName
         },
         addNewAddress() {
-            if (this.validateAddress()) {
+            // if (this.validateAddress()) {
 
                 this.$axios.post(`shipping-address/add`, {
-                    email : window.localStorage.getItem('email'),
-                    name : this.profile.name,
-                    phone : this.profile.phone,
-                    province_id : this.default_shipping_address.province.province_id,
-                    province_name : this.default_shipping_address.province.province,
-                    city_id : this.default_shipping_address.city.city_id,
-                    city_name : this.default_shipping_address.city.city_name,
-                    subdistrict_id : this.default_shipping_address.subdistrict.subdistrict_id,
-                    subdistrict_name : this.default_shipping_address.subdistrict.subdistrict_name,
-                    address : this.default_shipping_address.address,
-                    postcode : this.default_shipping_address.postcode
+                    email: window.localStorage.getItem('email'),
+                    name: this.profile.name,
+                    phone: this.profile.phone,
+                    province_id: this.address.province.province_id,
+                    province_name: this.address.province.province_name,
+                    city_id: this.address.city.city_id,
+                    city_name: this.address.city.city_name,
+                    subdistrict_id: this.address.subdistrict.subdistrict_id,
+                    subdistrict_name: this.address.subdistrict.subdistrict_name,
+                    address: this.address.address,
+                    postcode: this.address.postcode
                 }).then(response => {
                     if (response.data.data == 1) {
                         this.getDefaultShippingAddresses()
@@ -339,9 +355,9 @@ export default {
                 .catch(e => {
                     console.log(e)
                 })
-            } else {
+            // } else {
                 
-            }
+            // }
         },
         updateAddress() {
             this.$axios.post(`shipping-address/${this.address.id}/update`, {
