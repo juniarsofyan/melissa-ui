@@ -19,6 +19,9 @@
                             </li>
                         </ul>
 
+                        <!-- {{ province }} -->
+                        {{ address }}
+
                         <div class="tab-container">
                             <div id="profil" class="tab-panel active">
                                 <div class="col-md-10 col-md-offset-1">
@@ -29,17 +32,6 @@
                                         >
                                             <div class="col-12">
                                                 <div class="shipping-address">
-                                                    <p class="col-12">
-                                                        <label class="text">No KTP</label>
-                                                        <input
-                                                            type="text"
-                                                            style="width:100%"
-                                                            class="input-text"
-                                                            v-model="profile.nik"
-                                                            id="nik"
-                                                            ref="nik"
-                                                        />
-                                                    </p>
                                                     <p class="col-12">
                                                         <label class="text">Nama</label>
                                                         <input
@@ -85,6 +77,100 @@
                                                             readonly
                                                         />
                                                     </p>
+
+                                                    <template>
+                                                        <br />
+                                                        <hr />
+                                                        <br />
+                                                        <p class="col-12">
+                                                            <label class="text">Province</label>
+                                                            <br />
+                                                            <select
+                                                                style="width:100%;"
+                                                                data-placeholder="London"
+                                                                class="input-text"
+                                                                tabindex="1"
+                                                                @change="setProvinceToModel($event)"
+                                                            >
+                                                                <option disabled selected>- Choose Province -</option>
+                                                                <option
+                                                                    v-for="province in provinces"
+                                                                    :key="province.province_id"
+                                                                    :value="province"
+                                                                    :selected="(address.province ? address.province.province_id == province.province_id : false)"
+                                                                    :data-province-id="province.province_id"
+                                                                    :data-province-name="province.province"
+                                                                >{{ province.province }}
+                                                                </option>
+                                                            </select>
+                                                        </p>
+
+                                                        <p class="col-12">
+                                                            <label class="text">City</label>
+                                                            <br />
+                                                            <select
+                                                                style="width:100%;"
+                                                                data-placeholder="London"
+                                                                class="input-text"
+                                                                tabindex="1"
+                                                                @change="setCityToModel($event)"
+                                                            >
+                                                                <option disabled selected>- Choose City -</option>
+                                                                <option
+                                                                    v-for="city in cities"
+                                                                    :key="city.city_id"
+                                                                    :value="city"
+                                                                    :selected="(address.city ? address.city.city_id == city.city_id : false)"
+                                                                    :data-city-id="city.city_id"
+                                                                    :data-city-name="city.city_name"
+                                                                >{{ city.city_name }}
+                                                                </option>
+                                                            </select>
+                                                        </p>
+
+                                                        <p class="col-12">
+                                                            <label class="text">Subdistrict</label>
+                                                            <br />
+                                                            <select
+                                                                style="width:100%;"
+                                                                data-placeholder="London"
+                                                                class="input-text"
+                                                                tabindex="1"
+                                                                @change="setSubdistrictToModel($event)"
+                                                            >
+                                                                <option disabled selected>- Choose City -</option>
+                                                                <option
+                                                                    v-for="subdistrict in subdistricts"
+                                                                    :key="subdistrict.subdistrict_id"
+                                                                    :value="subdistrict"
+                                                                    :selected="(address.subdistrict ? address.subdistrict.subdistrict_id == subdistrict.subdistrict_id : false)"
+                                                                    :data-subdistrict-id="subdistrict.subdistrict_id"
+                                                                    :data-subdistrict-name="subdistrict.subdistrict_name"
+                                                                >{{ subdistrict.subdistrict_name }}
+                                                                </option>
+                                                            </select>
+                                                        </p>
+
+                                                        <p class="col-12">
+                                                            <label class="text">Address</label>
+                                                            <textarea
+                                                                class="input-text"
+                                                                id="exampleFormControlTextarea1"
+                                                                rows="3"
+                                                                v-model="address.address"
+                                                            ></textarea>
+                                                        </p>
+                                                        <p class="col-12">
+                                                            <label class="text">Post Code</label>
+                                                            <input
+                                                                type="text"
+                                                                style="width:100%"
+                                                                class="input-text"
+                                                                v-model="address.postcode"
+                                                            />
+                                                        </p>
+                                                    </template>
+                                                    
                                                     <button
                                                         class="button"
                                                         @click="updateProfile"
@@ -93,192 +179,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div id="buat-baru" class="tab-panel">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <a
-                                        class="button single_add_to_cart_button"
-                                        data-toggle="tab"
-                                        aria-expanded="true"
-                                        href="#semua"
-                                    >
-                                        <i class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp; Back to List
-                                    </a>
-                                    <br />
-                                    <br />
-                                    <div class="shipping-address-form-wrapp">
-                                        <div
-                                            class="shipping-address-form checkout-form"
-                                            style="padding: 35px 27px 20px 27px !important; border:0px;"
-                                        >
-                                            <div class="col-12">
-                                                <div class="shipping-address">
-                                                    <p class="col-12">
-                                                        <label class="text">Name</label>
-                                                        <input
-                                                            type="text"
-                                                            style="width:100%"
-                                                            class="input-text"
-                                                            v-model="address_form.name"
-                                                        />
-                                                    </p>
-
-                                                    <p class="col-12">
-                                                        <label class="text">Phone</label>
-                                                        <input
-                                                            type="text"
-                                                            style="width:100%"
-                                                            class="input-text"
-                                                            v-model="address_form.phone"
-                                                        />
-                                                    </p>
-
-                                                    <p class="col-12">
-                                                        <label class="text">Provinsi</label>
-                                                        <br />
-                                                        <select
-                                                            style="width:100%;"
-                                                            data-placeholder="London"
-                                                            class="form-control"
-                                                            tabindex="1"
-                                                            v-model="address_form.province"
-                                                        >
-                                                            <option disabled selected>- Choose Province -</option>
-                                                            <option
-                                                                v-for="province in provinces"
-                                                                :key="province.province_id"
-                                                                :value="province"
-                                                                :selected="province.province_id === address_form.provinsi_id"
-                                                            >{{ province.province }}
-                                                            </option>
-                                                        </select>
-                                                    </p>
-
-                                                    <p class="col-12">
-                                                        <label class="text">City</label>
-                                                        <br />
-                                                        <select
-                                                            style="width:100%;"
-                                                            data-placeholder="London"
-                                                            class="form-control"
-                                                            tabindex="1"
-                                                            v-model="address_form.city"
-                                                        >
-                                                            <option disabled selected>- Choose City -</option>
-                                                            <option
-                                                                v-for="city in cities"
-                                                                :key="city.city_id"
-                                                                :value="city"
-                                                                :selected="city.city_id === address_form.city_id"
-                                                            >{{ city.city_name }}
-                                                            </option>
-                                                        </select>
-                                                    </p>
-
-                                                    <p class="col-12">
-                                                        <label class="text">Subdistrict</label>
-                                                        <br />
-                                                        <select
-                                                            style="width:100%;"
-                                                            data-placeholder="London"
-                                                            class="form-control"
-                                                            tabindex="1"
-                                                            v-model="address_form.subdistrict"
-                                                        >
-                                                            <option disabled selected>- Choose City -</option>
-                                                            <option
-                                                                v-for="subdistrict in subdistricts"
-                                                                :key="subdistrict.subdistrict_id"
-                                                                :value="subdistrict"
-                                                                :selected="subdistrict.subdistrict_id === address_form.subdistrict_id"
-                                                            >{{ subdistrict.subdistrict_name }}
-                                                            </option>
-                                                        </select>
-                                                    </p>
-
-                                                    <p class="col-12">
-                                                        <label class="text">Alamat</label>
-                                                        <textarea
-                                                            class="form-control"
-                                                            id="exampleFormControlTextarea1"
-                                                            rows="3"
-                                                            v-model="address_form.address"
-                                                        ></textarea>
-                                                    </p>
-                                                    <p class="col-12">
-                                                        <label class="text">Kode Pos</label>
-                                                        <input
-                                                            type="number"
-                                                            style="width:100%"
-                                                            class="form-control"
-                                                            v-model="address_form.postcode"
-                                                        />
-                                                    </p>
-
-                                                    <button class="button" @click="addNewAddress()">Save</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="semua" class="tab-panel">
-                                <a
-                                    class="button single_add_to_cart_button"
-                                    data-toggle="tab"
-                                    aria-expanded="true"
-                                    href="#buat-baru"
-                                ><i class="fa fa-plus">&nbsp;</i> Add new address</a>
-                                <br />
-
-                                <hr />
-                                <div class="per-item" v-for="address in shipping_addresses" :key="address.id">
-                                    <div class="row">
-                                        <div class="col-lg-9">
-                                            <p>
-                                                <b>{{ address.nama }}</b>
-                                                <br />
-                                                {{ address.alamat }}
-                                                <br />
-                                                {{ address.kecamatan_nama }}
-                                                <br />
-                                                {{ address.kota_nama }}
-                                                <br />
-                                                {{ address.kode_pos }}
-                                                <br />
-                                                <br />
-                                                {{ address.telp }}
-                                            </p>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <button
-                                                class="btn btn-success btn-xs"
-                                                data-toggle="tab"
-                                                aria-expanded="true"
-                                                href="#buat-baru"
-                                                title="Set as default address"
-                                                @click="setDefaultAddress(address.id)"
-                                                v-if="address.is_default != 1"
-                                            ><i class="fa fa-check"></i></button>
-                                            <!-- <button
-                                                class="btn btn-info btn-xs"
-                                                data-toggle="tab"
-                                                aria-expanded="true"
-                                                href="#buat-baru"
-                                                title="Edit address"
-                                                @click="editAddress(address)"
-                                            ><i class="fa fa-pencil"></i></button> -->
-                                            <button
-                                                class="btn btn-danger btn-xs"
-                                                data-toggle="tab"
-                                                aria-expanded="true"
-                                                title="Delete address"
-                                                @click="deleteAddress(address.id)"
-                                            ><i class="fa fa-trash"></i></button>
-                                        </div>
-                                    </div>
-                                    <hr />
                                 </div>
                             </div>
                         </div>
@@ -300,25 +200,22 @@ export default {
             // profile: this.$store.getters['profile/personal']
             profile: [],
             shipping_addresses: [],
-            address_form : {},
+            address : {},
             provinces: [],
             cities: [],
-            subdistricts: []
+            subdistricts: [],
+            province: [],
+            city: [],
+            subdistrict: [],
+            default_shipping_address: []
         }
     },
     watch: {
-        'address_form.province': {
+        'address': {
             handler(val) {
                 if (val) {
-                    this.getCities(val.province_id)
-                }
-            },
-            deep: true
-        },
-        'address_form.city': {
-            handler(val) {
-                if (val) {
-                    this.getSubdistricts(val.city_id)
+                    this.getCities(val.province.province_id)
+                    this.getSubdistricts(val.city.city_id)
                 }
             },
             deep: true
@@ -336,30 +233,26 @@ export default {
     },
     methods: {
         async updateProfile() {
-            await this.$axios.post(`${process.env.API_BASE_URL}profile/update`, {
-                    nik: this.profile.nik,
-                    name: this.profile.name,
-                    birthdate: this.profile.birthdate,
-                    phone: this.profile.phone,
-                    email: this.profile.email
-                }
-            )
+            await this.$axios.post(`profile/update`, {
+                name: this.profile.name,
+                birthdate: this.profile.birthdate,
+                phone: this.profile.phone,
+                email: this.profile.email
+            })
 
-            await this.$axios.post(`${process.env.API_BASE_URL}profile/get`, {
-                    email: this.profile.email
-                })
-                .then((response) => {
-                    this.$store.dispatch('profile/updateProfile', {
-                        nik: response.data.data.nik,
-                        name: response.data.data.nama,
-                        birthdate: response.data.data.tgl_lahir,
-                        phone: response.data.data.telp,
-                        email: response.data.data.email
-                    })
-                })
+            if (!this.address.province) {
+                alert('blm ada alamat')
+                // this.addNewAddress()
+            } else {
+                console.log(this.address)
+                alert('udah ada alamat')
+                this.updateAddress()
+            }
+
+            this.getProfile()
         },
         getProfile() {
-            this.$axios.post(`${process.env.API_BASE_URL}profile/get`, {
+            this.$axios.post(`profile/get`, {
                 // email: window.localStorage.getItem('email')
                 email: this.email
             })
@@ -373,191 +266,135 @@ export default {
                     email: response.data.data.email
                 }
 
-                this.getShippingAddresses()
+                this.getDefaultShippingAddresses()
             })
         },
-        getShippingAddresses() {
-            this.$axios.post(`${process.env.API_BASE_URL}shipping-address/get`, {
-                email: window.localStorage.getItem('email')
-            })
-            .then((response) => {
-                this.shipping_addresses = response.data.data
-            })
-        },
-        addNewAddress(address) {
-            // this.address_form = address
+        getDefaultShippingAddresses() {
+            this.$axios.post(`shipping-address/current`, {
+                email: localStorage.getItem('email')
+            }).then(response => {
+                if (response.data.data != 0) {
+                    
+                    const result = response.data.data
 
+                    this.address = {
+                        id: result.id,
+                        province : {
+                            province_id : parseInt(result.provinsi_id),
+                            province_name: result.provinsi_nama
+                        },
+                        city : {
+                            city_id : parseInt(result.kota_id),
+                            city_name: result.kota_nama
+                        },
+                        subdistrict : {
+                            subdistrict_id : parseInt(result.kecamatan_id),
+                            subdistrict_name: result.kecamatan_nama
+                        },
+                        address: result.alamat,
+                        postcode: result.kode_pos
+                    }
+
+                    this.$store.dispatch('checkout/setDeliveryAddress', this.default_shipping_address.id)
+                } else {
+                    this.$store.dispatch('checkout/setDeliveryAddress', false)
+                }
+            })
+            .catch(e => {
+                console.log(e)
+            })
+        },
+        setProvinceToModel(event) {
+            this.address.province.province_id = parseInt(event.target.options[event.target.options.selectedIndex].dataset.provinceId)
+            this.address.province.province_name = event.target.options[event.target.options.selectedIndex].dataset.provinceName
+        },
+        setCityToModel(event) {
+            this.address.city.city_id = parseInt(event.target.options[event.target.options.selectedIndex].dataset.cityId)
+            this.address.city.city_name = event.target.options[event.target.options.selectedIndex].dataset.cityName
+        },
+        setSubdistrictToModel(event) {
+            this.address.subdistrict.subdistrict_id = parseInt(event.target.options[event.target.options.selectedIndex].dataset.subdistrictId)
+            this.address.subdistrict.subdistrict_name = event.target.options[event.target.options.selectedIndex].dataset.subdistrictName
+        },
+        addNewAddress() {
             if (this.validateAddress()) {
-
-                this.$swal({
-                    // title: "",
-                    text: "Saving address",
-                    allowEscapeKey: false,
-                    allowOutsideClick: false,
-                    onOpen: () => {
-                        this.$swal.showLoading()
-                    },
-                })
 
                 this.$axios.post(`shipping-address/add`, {
                     email : window.localStorage.getItem('email'),
-                    name : this.address_form.name,
-                    phone : this.address_form.phone,
-                    province_id : this.address_form.province.province_id,
-                    province_name : this.address_form.province.province,
-                    city_id : this.address_form.city.city_id,
-                    city_name : this.address_form.city.city_name,
-                    subdistrict_id : this.address_form.subdistrict.subdistrict_id,
-                    subdistrict_name : this.address_form.subdistrict.subdistrict_name,
-                    address : this.address_form.address,
-                    postcode : this.address_form.postcode
+                    name : this.profile.name,
+                    phone : this.profile.phone,
+                    province_id : this.default_shipping_address.province.province_id,
+                    province_name : this.default_shipping_address.province.province,
+                    city_id : this.default_shipping_address.city.city_id,
+                    city_name : this.default_shipping_address.city.city_name,
+                    subdistrict_id : this.default_shipping_address.subdistrict.subdistrict_id,
+                    subdistrict_name : this.default_shipping_address.subdistrict.subdistrict_name,
+                    address : this.default_shipping_address.address,
+                    postcode : this.default_shipping_address.postcode
                 }).then(response => {
-                        if (response.data.data == 1) {
-                            
-                            this.address_form = []
-
-                            this.$swal({
-                                // title: "",
-                                text: "Shipping address added!",
-                                type: "success",
-                            }).then(response => {
-
-                                this.$router.push('/profile')
-                                window.location.reload()
-
-                                /* if (this.previous_route.name == "checkout") {
-                                    this.$router.push({
-                                        name: "checkout",
-                                    })
-                                } */
-                            })
-
-                            this.getShippingAddresses()
-                        }
-                    })
-                    .catch(e => {
-                        console.log(e)
-                    })
-            } else {
-                
-            }
-        },
-        validateAddress() {
-            if (!this.address_form.hasOwnProperty('name') || this.address_form.name == "") {
-                return false
-            }
-
-            if (!this.address_form.hasOwnProperty('phone') || this.address_form.phone == "") {
-                return false
-            }
-
-            if (!this.address_form.hasOwnProperty('province') || this.address_form.province == "") {
-                return false
-            }
-
-            if (!this.address_form.hasOwnProperty('city') || this.address_form.city == "") {
-                return false
-            }
-
-            if (!this.address_form.hasOwnProperty('subdistrict') || this.address_form.subdistrict == "") {
-                return false
-            }
-
-            if (!this.address_form.hasOwnProperty('address') || this.address_form.address == "") {
-                return false
-            }
-
-            if (!this.address_form.hasOwnProperty('postcode') || this.address_form.postcode == "") {
-                return false
-            }
-
-            return true
-        },
-        setDefaultAddress: function(shipping_address_id) {
-            this.$swal({
-                // title: "",
-                text: "Saving",
-                allowEscapeKey: false,
-                allowOutsideClick: false,
-                onOpen: () => {
-                    this.$swal.showLoading()
-                },
-            })
-
-            this.$axios.get(`shipping-address/set-default/${shipping_address_id}`)
-                .then(response => {
                     if (response.data.data == 1) {
-                        this.$swal({
-                            // title: "",
-                            text: "Default address set!",
-                            type: "success",
-                        }).then(response => {
-                            /* if (this.previous_route.name == "checkout") {
-                                this.$router.push({
-                                    name: "checkout",
-                                })
-                            } */
-
-                            this.$router.push('/profile')
-                            window.location.reload()
-                        })
-
-                        this.getShippingAddresses()
+                        this.getDefaultShippingAddresses()
                     }
                 })
                 .catch(e => {
                     console.log(e)
                 })
+            } else {
+                
+            }
         },
-        deleteAddress(address_id) {
-            this.$swal({
-                // title: "",
-                text: "Are you sure want to delete this address?",
-                type: "question",
-                showCancelButton: true,
-                // confirmButtonClass: "btn-danger",
-                confirmButtonColor: "#d33",
-                confirmButtonText: "Delete",
-                cancelButtonText: "Cancel",
-                cancelButtonColor: "#3085d6",
-            }).then(isConfirm => {
-                if (isConfirm.value) {
-                    this.$swal({
-                        // title: "",
-                        text: "Deleteting",
-                        allowEscapeKey: false,
-                        allowOutsideClick: false,
-                        onOpen: () => {
-                            this.$swal.showLoading()
-                        },
-                    })
-
-                    this.$axios.get(`shipping-address/delete/` + address_id)
-                        .then(response => {
-                            if (response.data.data == 1) {
-                                this.$swal({
-                                    // title: "",
-                                    text: "Address deleted!",
-                                    type: "success",
-                                })
-
-                                this.getShippingAddresses()
-                            }
-                        })
-                        .catch(e => {
-                            console.log(e)
-
-                            this.$swal({
-                                // title: "",
-                                text: "Cannot connect to the server, please try again later",
-                                type: "error",
-                                onOpen: () => {
-                                    this.$swal.hideLoading()
-                                },
-                            })
-                        })
+        updateAddress() {
+            this.$axios.post(`shipping-address/${this.address.id}/update`, {
+                name: this.profile.name,
+                phone: this.profile.phone,
+                province_id: this.address.province.province_id,
+                province_name: this.address.province.province_name,
+                city_id: this.address.city.city_id,
+                city_name: this.address.city.city_name,
+                subdistrict_id: this.address.subdistrict.subdistrict_id,
+                subdistrict_name: this.address.subdistrict.subdistrict_name,
+                address: this.address.address,
+                postcode: this.address.postcode
+            })
+            .then(response => {
+                if (response.data.data == 1) {
+                    
                 }
             })
+            .catch(e => {
+                console.log(e)
+            })
+        },
+        validateAddress() {
+            if (!this.address.hasOwnProperty('name') || this.address.name == "") {
+                return false
+            }
+
+            if (!this.address.hasOwnProperty('phone') || this.address.phone == "") {
+                return false
+            }
+
+            if (!this.address.hasOwnProperty('province') || this.address.province == "") {
+                return false
+            }
+
+            if (!this.address.hasOwnProperty('city') || this.address.city == "") {
+                return false
+            }
+
+            if (!this.address.hasOwnProperty('subdistrict') || this.address.subdistrict == "") {
+                return false
+            }
+
+            if (!this.address.hasOwnProperty('address') || this.address.address == "") {
+                return false
+            }
+
+            if (!this.address.hasOwnProperty('postcode') || this.address.postcode == "") {
+                return false
+            }
+
+            return true
         },
         getProvinces() {
             this.provinces = this.$axios.get(`ongkir/provinces`)
@@ -572,7 +409,7 @@ export default {
                     console.log(e)
                 })
         },
-        getCities: function(province_id) {
+        getCities(province_id) {
             this.$axios.get(`ongkir/province/` + province_id + `/cities` )
                 .then(response => {
                     if (response.data.data != 0) {
@@ -596,7 +433,7 @@ export default {
 
                 this.subdistricts = []
         },
-        getSubdistricts: function(city_id) {
+        getSubdistricts(city_id) {
             this.$axios.get(`ongkir/city/` + city_id + `/subdistricts` )
                 .then(response => {
                     if (response.data.data != 0) {
