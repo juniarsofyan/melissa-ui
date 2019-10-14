@@ -54,7 +54,9 @@
 								<b>Grand Total:</b> <br />
 								{{ order.transaction.grand_total | rupiah }} <br /><br />
 								<b>Unique Code:</b> <br />
-								{{ order.transaction.kode_unik_transfer }}
+								{{ order.transaction.kode_unik_transfer }} <br /><br />
+								<b>No. Resi:</b> <br />
+								{{ (order.transaction.resi ? order.transaction.resi : '-') }}
 							</div>
 						</div>
 					</div>
