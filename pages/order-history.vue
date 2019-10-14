@@ -12,6 +12,7 @@
 					</div>
 					<div class="col-md-2">
 						<button class="btn btn-success btn-xs" v-if="!hasbeenTransferred(order.progresses)" @click="confirmPayment(order.transaction.transaksi_id, order.transaction.nomor_transaksi)">Confirm payment</button>
+						<button class="btn btn-danger btn-xs" v-if="!hasShipped(order.progresses)" @click="deleteTransaction(order.transaction.transaksi_id)">Cancel Transaction</button>
 					</div>
 				</div>
 
@@ -159,7 +160,61 @@
 			}, 
 			hasbeenTransferred(order_progress) {
 				return order_progress.find((element) => element.keterangan == "TRANSFERRED")
-			}
+			},
+			hasShipped(order_progress) {
+				return order_progress.find((element) => element.keterangan == "SHIPPED")
+			},
+			deleteTransaction: function(transaction_id) {
+				this.$swal({
+					title: "Cancelation Confirmation",
+					text: "Arey you sure want to cancel this transaction?",
+					type: "question",
+					showCancelButton: true,
+					// confirmButtonClass: "btn-danger",
+					// confirmButtonColor: "#3085d6",
+					confirmButtonText: "Yes",
+					cancelButtonText: "No",
+					// cancelButtonColor: "#d33",
+				}).then(isConfirm => {
+					if (isConfirm.value) {
+						this.$swal({
+							// title: "",
+							text: "Processing",
+							allowEscapeKey: false,
+							allowOutsideClick: false,
+							onOpen: () => {
+								this.$swal.showLoading()
+							},
+						})
+
+						this.$axios
+							.get(`transaction/${transaction_id}/delete`)
+							.then(response => {
+								if (response.data.data == 1) {
+									this.$swal({
+										// title: "",
+										text: "Transaction cancelled",
+										type: "success",
+									})
+
+									this.getOrderHistory()
+								}
+							})
+							.catch(e => {
+								console.log(e)
+
+								this.$swal({
+									// title: "",
+									text: "Cannot connect to the server, please try again later",
+									type: "error",
+									onOpen: () => {
+										this.$swal.hideLoading()
+									},
+								})
+							})
+					}
+				})
+			},
 		},
 		created() {
 			this.getOrderHistory()
