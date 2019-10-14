@@ -5,7 +5,15 @@
 			<div class="card" style="border-radius:5px;" v-for="order in order_histories" :key="order.transaction.transaksi_id">
 				<br /><br />
 				
-				<b>Order number: {{ order.transaction.nomor_transaksi }} </b>
+
+				<div class="row">
+					<div class="col-md-10">
+						<b>Order number: {{ order.transaction.nomor_transaksi }} </b>
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-success btn-xs" v-if="!hasbeenTransferred(order.progresses)" @click="confirmPayment(order.transaction.transaksi_id, order.transaction.nomor_transaksi)">Confirm payment</button>
+					</div>
+				</div>
 
 				<OrderBreadcrumb :progresses="order.progresses" />
 
@@ -75,7 +83,6 @@
 		},
 		methods: {
 			getOrderHistory: function() {
-
 				const user_data = JSON.parse(localStorage.getItem('user_data'))
 
 				this.$axios.post(`transaction/history`, {
@@ -83,15 +90,76 @@
 				}).then(response => {
 					if (response.data.data != 0) {
 						let result = response.data.data
-						/* this.transactions = result.transactions
-						this.order_progress = result.order_progress
-						this.order_items = result.order_items */
 						this.order_histories = result
 					}
 				}).catch(e => {
 					console.log(e)
 				})
 			},
+			confirmPayment: function(transaction_id, transaction_number) {
+
+				this.$swal({
+					title: "Confirm payment",
+					text: "Have you made the payment?",
+					type: "question",
+					showCancelButton: true,
+					// confirmButtonClass: "btn-danger",
+					// confirmButtonColor: "#3085d6",
+					confirmButtonText: "Yes",
+					cancelButtonText: "No",
+					// cancelButtonColor: "#d33",
+				}).then(isConfirm => {
+					if (isConfirm.value) {
+						this.$swal({
+							// title: "",
+							text: "Processing",
+							allowEscapeKey: false,
+							allowOutsideClick: false,
+							onOpen: () => {
+								this.$swal.showLoading()
+							},
+						})
+						
+						
+
+						this.$axios
+							.get(`transaction/confirm-payment/${transaction_id}`)
+							.then(response => {
+								if (response.data.data == 1) {
+									this.$swal({
+										// title: "",
+										text: "Payment confirmed",
+										type: "success",
+									}).then(() => {
+										window.open(
+											"https://api.whatsapp.com/send?phone=628112288143&text=Halo!%0ASaya%20sudah%20membayar%20untuk%20No%20Transaksi%20" +
+												transaction_number,
+											"_blank"
+										)
+									})
+
+									this.getOrderHistory()
+								}
+							})
+							.catch(e => {
+								console.log(e)
+
+								this.$swal({
+									title: "Oops!",
+									text:
+										"Cannot connect to the server, please try again later",
+									type: "error",
+									onOpen: () => {
+										this.$swal.hideLoading()
+									},
+								})
+							})
+					}
+				})
+			}, 
+			hasbeenTransferred(order_progress) {
+				return order_progress.find((element) => element.keterangan == "TRANSFERRED")
+			}
 		},
 		created() {
 			this.getOrderHistory()
