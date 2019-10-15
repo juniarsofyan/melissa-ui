@@ -132,6 +132,8 @@ export default {
                 title: "Oops!",
                 text: "Please sign in to continue",
                 type: "warning",
+            }).then(() => {
+                this.$store.dispatch("authentication/auth0Login")
             })
         }
     }
