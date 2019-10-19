@@ -87,13 +87,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="button-control">
-                            <nuxt-link
-                                :to="`checkout`"
-                                class="button btn-back-to-shipping"
-                            >BACK TO CHECKOUT</nuxt-link>
-                            <button class="button btn-pay-now">COMPLETE CHECKOUT</button>
-                        </div>
                     </div>
                 </div>
             </div>

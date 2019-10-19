@@ -11,8 +11,8 @@
 						<b>Order number: {{ order.transaction.nomor_transaksi }} </b>
 					</div>
 					<div class="col-md-2">
-						<button class="btn btn-success btn-xs" v-if="!hasbeenTransferred(order.progresses)" @click="confirmPayment(order.transaction.transaksi_id, order.transaction.nomor_transaksi)">Confirm payment</button>
-						<button class="btn btn-danger btn-xs" v-if="!hasShipped(order.progresses)" @click="deleteTransaction(order.transaction.transaksi_id)">Cancel Transaction</button>
+						<button class="btn btn-success" v-if="!hasbeenTransferred(order.progresses)" @click="confirmPayment(order.transaction.transaksi_id, order.transaction.nomor_transaksi)">Confirm payment</button>
+						<button class="btn btn-danger" v-if="!hasShipped(order.progresses)" @click="deleteTransaction(order.transaction.transaksi_id)">Cancel Transaction</button>
 					</div>
 				</div>
 

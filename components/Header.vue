@@ -140,14 +140,20 @@
                                             <ul class="tab-link">
                                                 <nuxt-link to="/profile" tag="li" class="active">
                                                     <a data-toggle="tab" aria-expanded="true" href="#header-tab-login">
-                                                        <input type="button" class="button" value="Profile">
+                                                        <input type="button" class="button btn-xs" value="Profile">
                                                     </a>
                                                 </nuxt-link>
                                                 <li class="active" style="position: absolute;right: 0;">
                                                     <a data-toggle="tab" aria-expanded="true"
-                                                        href="#header-tab-login"><input type="button" class="button"
+                                                        href="#header-tab-login"><input type="button" class="button btn-xs"
                                                             value="Logout" @click="auth0Logout"></a>
                                                 </li>
+                                                <br/>
+                                                <br/>
+
+                                                <nuxt-link to="/order-history" tag="li" class="active">
+                                                    <input type="button" class="button btn-xs" value="Orders">
+                                                </nuxt-link>
                                             </ul>
                                         </div>
                                     </div>
