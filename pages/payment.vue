@@ -225,8 +225,8 @@ export default {
             } else {
 
                 this.$swal({
-                    // title: "",
-                    text: "Processing",
+                    title: "Processing...",
+                    // text: "Processing",
                     allowEscapeKey: false,
                     allowOutsideClick: false,
                     onOpen: () => {
