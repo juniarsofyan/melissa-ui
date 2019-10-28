@@ -106,8 +106,10 @@
                                         <h4 class="title-search">Store Search</h4>
                                         <div class="form-content">
                                             <div class="inner">
-                                                <input type="text" class="input" placeholder="Your search here">
-                                                <button class="btn-search" type="submit">Search</button>
+                                                <input type="text" class="input" placeholder="Your search here" v-model="keyword">
+                                                <nuxt-link :to="`/products/search?keyword=${keyword}`" tag="button" class="btn-search">
+                                                    Searchs
+                                                </nuxt-link>
                                             </div>
                                         </div>
                                     </form>
@@ -220,7 +222,8 @@ export default {
                 name: '',
                 email: '',
                 password: ''
-            }
+            },
+            keyword: "", // this.$route.query.keyword
         }
     },
     computed: {

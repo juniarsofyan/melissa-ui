@@ -19,10 +19,16 @@
                             :product="brightening"
                         />
                     </template>
+                    <template  v-else>
+                        <div class="text-center">
+                            <h4 class="text-muted" style="margin:50px 0px 50px 0px;">Oops!...No products available</h4>
+                        </div>
+                    </template>
                 </ul>
 
                 <!--pagination-->
                 <paginate
+                    v-if="category != 'search'"
                     :v-model="pagination.currentPage"
                     :page-count="pagination.pageCount"
                     :page-range="pagination.pageRange"
@@ -110,14 +116,27 @@ export default {
     },
     methods: {
         getProducts: function() {
+
+            let url = `/products/${this.category}/${this.pagination.offset}/${this.pagination.limit}`
+
+            if (this.category == "search") {
+                const keyword = this.$route.query.keyword
+                
+                if (keyword) {
+                    url = `/products/search/${keyword}`
+                } else {
+                    this.$router.push('/')
+                }
+            }
+
             this.$axios
-                .get(
-                    `/products/${this.category}/${this.pagination.offset}/${this.pagination.limit}`
-                )
+                .get(url)
                 .then((response) => {
                     if (response.data.data != 0) {
                         this.pagination.pageCount = response.data.rowcount / 20
                         this.products = response.data.data
+                    } else {
+                        this.products = null
                     }
                 })
         },

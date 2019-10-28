@@ -6,7 +6,7 @@
                 <div class="col-lg-12">
                     <hr />
                     <div class="tab-details-product" style="margin-bottom:30px;margin-top:0px;">
-                        <ul class="tab-link">
+                        <!-- <ul class="tab-link">
                             <li class="active">
                                 <a data-toggle="tab" aria-expanded="true" href="#profil"><i class="fa fa-user"></i>&nbsp;My Profile</a>
                             </li>
@@ -17,7 +17,7 @@
                                     href="#semua "
                                 ><i class="fa fa-book"></i>&nbsp;Address Book</a>
                             </li>
-                        </ul>
+                        </ul> -->
 
                         <!-- {{ address }} -->
 
