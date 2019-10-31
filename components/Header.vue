@@ -24,9 +24,9 @@
                         </div>
                         <div class="col-lg-4 col-sm-6 col-md-6 col-xs-5 col-ts-12">
                             <div class="logo">
-                                <a href="index.html">
+                                <nuxt-link to="/" tag="a">
                                     <img src="~/assets/images/logo.png" alt="">
-                                </a>
+                                </nuxt-link>
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-12 col-md-12 col-xs-12 col-ts-12">
@@ -135,10 +135,10 @@
                                             </div>
                                         </div>
                                         <div class="header-user-form-tabs" v-else>
-                                            <center>
+                                            <!-- <center>
                                                 <img :src="user_data.picture" style="width: 150px; height: 150px;margin-top:10px;object-fit: cover; border-radius: 50%;padding: 10px;">
                                                   <br>  {{ user_data.name }}
-                                            </center>
+                                            </center> -->
                                             <ul class="tab-link">
                                                 <nuxt-link to="/profile" tag="li" class="active">
                                                     <a data-toggle="tab" aria-expanded="true" href="#header-tab-login">
@@ -194,9 +194,9 @@
                             <nuxt-link to="/products/series" tag="li" class="menu-item">
                                 <a href="#" class="kt-item-title" title="Series">Series</a>
                             </nuxt-link>
-                            <nuxt-link to="/products/promo" tag="li" class="menu-item">
+                            <!-- <nuxt-link to="/products/promo" tag="li" class="menu-item">
                                 <a href="#" class="kt-item-title" title="Promo">Promo</a>
-                            </nuxt-link>
+                            </nuxt-link> -->
                         </ul>
                     </div>
                 </div>

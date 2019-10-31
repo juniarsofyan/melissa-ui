@@ -6,7 +6,8 @@
         >
             <div class="site-main">
                 <!-- Slide Banner -->
-                <SlideBanner />
+                <!-- <SlideBanner /> -->
+                <Banner />
 
                 <!--shop title-->
                 <nuxt-link to="/products/brightening" tag="h3" class="custom_blog_title">
@@ -81,9 +82,11 @@ import axios from 'axios'
 
 export default {
     layout: 'products',
+    middleware: 'check-previous-route',
     components: {
-        SlideBanner: () => import('~/components/SlideBanner'),
-        Product: () => import('~/components/Product')
+        // SlideBanner: () => import('~/components/SlideBanner'),
+        Product: () => import('~/components/Product'),
+        Banner: () => import('~/components/Banner')
     },
     data() {
         return {
@@ -132,6 +135,13 @@ export default {
             if (response.data.data != 0) {
                 this.extracares = response.data.data
             }
+        })
+
+        this.$axios.get(process.env.API_BASE_URL + 'products/product-codes').then((res) => {
+            let urls = res.data.data.map((product) => {
+                return `products/${product.kode_barang}/detail`
+            })
+            console.log(urls)
         })
     }
 }

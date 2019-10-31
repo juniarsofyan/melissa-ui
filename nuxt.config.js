@@ -1,7 +1,39 @@
 /* eslint-disable prettier/prettier */
+import axios from 'axios'
 require('dotenv').config()
 
 export default {
+    generate: {
+        fallback: true,
+        /* routes: [
+            '/products/:code/detail',
+            '/products/brightening',
+            '/products/purify',
+            '/products/decorative',
+            '/products/extra care',
+            '/products/series'
+        ] */
+
+        routes: function () {
+            let products = axios.get(process.env.API_BASE_URL + 'products/product-codes').then((res) => {
+                return res.data.data.map((product) => {
+                    return `products/${product.kode_barang}/detail`
+                })
+            })
+            
+            let categories = [
+                '/products/brightening',
+                '/products/purify',
+                '/products/decorative',
+                '/products/extra care',
+                '/products/series'
+            ]
+
+            return Promise.all([products, categories]).then(values => {
+                return values.join().split(',');
+            })
+        }
+    },
     mode: 'spa',
     /*
      ** Headers of the page
@@ -126,7 +158,9 @@ export default {
         '@/assets/css/jquery.fancybox.css',
         '@/assets/css/jquery.mCustomScrollbar.min.css',
         '@/assets/css/style.css',
-        '@/assets/css/style-custom.css'
+        '@/assets/css/style-custom.css',
+        '@/assets/css/swiper.css',
+        { src: '@/assets/scss/main.scss', lang: 'scss' }
     ],
     /*
      ** Plugins to load before mounting the App
@@ -144,6 +178,10 @@ export default {
         {
             src: '~/plugins/vmodal.js',
             ssr: false
+        },
+        {
+            src: '~/plugins/swiper.js',
+            ssr: true
         }
     ],
     /*
@@ -205,6 +243,38 @@ export default {
         /*
          ** You can extend webpack config here
          */
-        extend(config, ctx) {}
+        extend(config, ctx) {
+            if (ctx.isDev && ctx.client) {
+                config.module.rules.push({
+                    enforce: 'pre',
+                    test: /\.(js|vue)$/,
+                    loader: 'eslint-loader',
+                    exclude: /(node_modules)/
+                })
+        
+                const vueLoader = config.module.rules.find(({loader}) => loader === 'vue-loader')
+                const { options: {loaders} } = vueLoader || { options: {} }
+                if (loaders) {
+                    for (const loader of Object.values(loaders)) {
+                        changeLoaderOptions(Array.isArray(loader) ? loader : [loader])
+                    }
+                }
+                config.module.rules.forEach(rule => changeLoaderOptions(rule.use))
+                // console.log(util.inspect(config.module.rules, { depth: 6 }))
+            }
+        }
+    }
+}
+
+function changeLoaderOptions (loaders) {
+    if (loaders) {
+        for (const loader of loaders) {
+            if (loader.loader === 'sass-loader') {
+                Object.assign(loader.options, {
+                    includePaths: ['./assets'],
+                    // data: '@import "_imports";'
+                })
+            }
+        }
     }
 }

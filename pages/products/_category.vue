@@ -6,7 +6,9 @@
         >
             <div class="site-main">
                 <!-- Slide Banner -->
-                <SlideBanner />
+                <!-- <SlideBanner /> -->
+                <Banner />
+
                 <!--shop title-->
                 <h3 class="custom_blog_title">#{{ productTitle }}</h3>
 
@@ -58,9 +60,10 @@ import axios from 'axios'
 export default {
     layout: 'products',
     components: {
-        SlideBanner: () => import('~/components/SlideBanner'),
+        // SlideBanner: () => import('~/components/SlideBanner'),
         Product: () => import('~/components/Product'),
-        Paginate: () => import('vuejs-paginate')
+        Paginate: () => import('vuejs-paginate'),
+        Banner: () => import('~/components/Banner')
     },
     data() {
         return {
