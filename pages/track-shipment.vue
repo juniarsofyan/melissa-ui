@@ -97,6 +97,7 @@
 <script>
 export default {
     layout: 'products',
+    middleware: ['affiliation'],
     data() {
         return {
             receipt_number: '',

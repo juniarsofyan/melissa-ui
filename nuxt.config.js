@@ -98,7 +98,6 @@ export default {
         color: '#fff'
     },
     router: {
-        middleware: "traffics",
         scrollBehavior: async (to, from, savedPosition) => {
             if (savedPosition) {
                 return savedPosition

@@ -82,7 +82,7 @@ import axios from 'axios'
 
 export default {
     layout: 'products',
-    // middleware: ['traffics'],
+    middleware: ['affiliation'],
     components: {
         Product: () => import('~/components/Product'),
         Banner: () => import('~/components/Banner')

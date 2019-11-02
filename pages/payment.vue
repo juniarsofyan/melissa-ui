@@ -134,8 +134,8 @@
 import { mapGetters, mapActions } from 'vuex'
 	
 export default {
-    middleware: ['traffics'],
     layout: 'products',
+    middleware: ['affiliation', 'authorization'],
 	data() {
 		return {
 			bank: false,

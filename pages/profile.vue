@@ -192,8 +192,8 @@
 import { mapGetters } from 'vuex'
 
 export default {
-    middleware: ['authentication', 'traffics'],
     layout: 'products',
+    middleware: ['authentication', 'affiliation', 'authorization'],
     data() {
         return {
             profile: [],

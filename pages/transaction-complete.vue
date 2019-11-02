@@ -29,6 +29,6 @@
 
 <script>
 export default {
-    middleware: ['traffics']
+    middleware: ['affiliation', 'authorization']
 }
 </script>

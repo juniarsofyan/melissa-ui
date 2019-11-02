@@ -71,8 +71,8 @@
 
 <script>
 	export default {
-    	middleware: ['traffics'],
 		layout: 'products',
+    	middleware: ['affiliation', 'authorization'],
 		components: {
 			OrderBreadcrumb: () => import("@/components/OrderBreadcrumb.vue")
 		},

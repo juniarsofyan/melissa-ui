@@ -59,8 +59,8 @@
     import ongkir from '~/plugins/ongkir'
 
     export default {
-        middleware: ['traffics'],
         layout: 'products',
+        middleware: ['affiliation'],
         data() {
             return {
                 address_form: {

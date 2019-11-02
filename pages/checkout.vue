@@ -255,7 +255,7 @@
     import ongkir from '~/plugins/ongkir'
 
     export default {
-        middleware: ['traffics'],
+        middleware: ['affiliation', 'authorization'],
         layout: 'products',
         data() {
             return {
