@@ -5,15 +5,6 @@ require('dotenv').config()
 export default {
     generate: {
         fallback: true,
-        /* routes: [
-            '/products/:code/detail',
-            '/products/brightening',
-            '/products/purify',
-            '/products/decorative',
-            '/products/extra care',
-            '/products/series'
-        ] */
-
         routes: function () {
             let products = axios.get(process.env.API_BASE_URL + 'products/product-codes').then((res) => {
                 return res.data.data.map((product) => {
@@ -107,6 +98,7 @@ export default {
         color: '#fff'
     },
     router: {
+        middleware: "traffics",
         scrollBehavior: async (to, from, savedPosition) => {
             if (savedPosition) {
                 return savedPosition

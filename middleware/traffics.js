@@ -1,7 +1,12 @@
-export default function ({store, redirect}) { 
-    const userIsAuthorized = store.getters['authentication/userIsAuthorized']
+export default function ({ store, query, redirect }) { 
+    const aff = query.aff
+    const affiliation_code = store.getters['authentication/affiliation_code']
 
-    if (!userIsAuthorized) {
-        redirect("/")
+    if (aff) {
+        store.dispatch('authentication/setAffiliationCode', aff)
+    }
+
+    if (!(aff || affiliation_code)) {
+        redirect("https://bellezkin.com/")
     }
 }

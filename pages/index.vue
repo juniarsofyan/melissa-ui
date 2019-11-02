@@ -82,9 +82,8 @@ import axios from 'axios'
 
 export default {
     layout: 'products',
-    middleware: 'check-previous-route',
+    // middleware: ['traffics'],
     components: {
-        // SlideBanner: () => import('~/components/SlideBanner'),
         Product: () => import('~/components/Product'),
         Banner: () => import('~/components/Banner')
     },
@@ -135,13 +134,6 @@ export default {
             if (response.data.data != 0) {
                 this.extracares = response.data.data
             }
-        })
-
-        this.$axios.get(process.env.API_BASE_URL + 'products/product-codes').then((res) => {
-            let urls = res.data.data.map((product) => {
-                return `products/${product.kode_barang}/detail`
-            })
-            console.log(urls)
         })
     }
 }
