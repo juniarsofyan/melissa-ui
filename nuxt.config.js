@@ -227,13 +227,6 @@ export default {
                     icon : 'delete',
                     type: 'error'
                 }
-            },
-            {
-                name: 'my-error',
-                message: 'Oops...Something went wrong',
-                options: {
-                    type: 'error'
-                }
             }
         ]
     },
