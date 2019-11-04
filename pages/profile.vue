@@ -231,20 +231,48 @@ export default {
     },
     methods: {
         async updateProfile() {
+            this.$swal({
+                title: "Processing...",
+                // text: "Processing",
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                onOpen: () => {
+                    this.$swal.showLoading()
+                },
+            })
+
             await this.$axios.post(`profile/update`, {
                 name: this.profile.name,
                 birthdate: this.profile.birthdate,
                 phone: this.profile.phone,
                 email: this.profile.email
+            }).then(response => {
+                this.$swal({
+                    // title: "",
+                    text: "Profile saved!",
+                    type: "success",
+                })
+
+                if (this.no_address_available) {
+                    this.addNewAddress()
+                } else {
+                    this.updateAddress()
+                }
+
+                this.getProfile()
+
+            }).catch(e => {
+                console.log(e)
+                this.$swal({
+                    // title: "",
+                    text:
+                        "Tidak dapat terhubung ke server, Silahkan coba lagi nanti",
+                    type: "error",
+                    onOpen: () => {
+                        this.$swal.hideLoading()
+                    },
+                })
             })
-
-            if (this.no_address_available) {
-                this.addNewAddress()
-            } else {
-                this.updateAddress()
-            }
-
-            this.getProfile()
         },
         getProfile() {
             this.$axios.post(`profile/get`, {
@@ -253,7 +281,7 @@ export default {
             .then((response) => {
                 
                 this.profile =  {
-                    nik: response.data.data.nik,
+                    // nik: response.data.data.nik,
                     name: response.data.data.nama,
                     birthdate: response.data.data.tgl_lahir,
                     phone: response.data.data.telepon,
