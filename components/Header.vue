@@ -241,6 +241,14 @@ export default {
     },
     methods: {
         removeItem: function (product_code) {
+            let item = this.items.find(product => product.product_code == product_code)
+
+            if (item) {
+                this.$toast.global.cartremove({ 
+                    message: `Removed &nbsp; <b>${item.product_name } (x${item.qty})</b>` 
+                })
+            }
+
             this.$store.dispatch('cart/removeItem', product_code)
         },
         getUserProfile() {
