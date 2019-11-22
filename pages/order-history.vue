@@ -72,7 +72,7 @@
 <script>
 	export default {
 		layout: 'products',
-    	middleware: ['affiliation', 'authorization'],
+    	middleware: ['accesskey', 'authorization'],
 		components: {
 			OrderBreadcrumb: () => import("@/components/OrderBreadcrumb.vue")
 		},

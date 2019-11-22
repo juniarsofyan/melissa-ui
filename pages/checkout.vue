@@ -255,7 +255,7 @@
     import ongkir from '~/plugins/ongkir'
 
     export default {
-        middleware: ['affiliation', 'authorization'],
+        middleware: ['accesskey', 'authorization'],
         layout: 'products',
         data() {
             return {

@@ -29,6 +29,6 @@
 
 <script>
 export default {
-    middleware: ['affiliation', 'authorization']
+    middleware: ['accesskey', 'authorization']
 }
 </script>

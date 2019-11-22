@@ -443,7 +443,7 @@
 
 	export default {
 		layout: 'product',
-		middleware: ['affiliation'],
+		middleware: ['accesskey'],
 		components: {
 			// RelatedProducts: () => import('~/components/RelatedProducts')
 		},

@@ -4,7 +4,7 @@ import axios from 'axios'
 const authentication = {
     namespaced: true,
     state: {
-        affiliation_code: localStorage.getItem('affiliation_code') ? localStorage.getItem('affiliation_code') : false,
+        accesskey: localStorage.getItem('accesskey') ? JSON.parse(localStorage.getItem('accesskey')) : false,
         userIsAuthorized: localStorage.getItem('userIsAuthorized') ? localStorage.getItem('userIsAuthorized') : false,
         auth0: new auth0.WebAuth(
             {
@@ -22,9 +22,9 @@ const authentication = {
         expires_at: localStorage.getItem('expires_at') ? localStorage.getItem('expires_at') : false
     },
     mutations: {
-        setAffiliationCode(state, replacement) {
-            state.affiliation_code = replacement
-            localStorage.setItem('affiliation_code', replacement)
+        setAccessKey(state, replacement) {
+            state.accesskey = replacement
+            localStorage.setItem('accesskey', JSON.stringify(replacement))
         },
         setUserIsAuthenticated(state, replacement) {
             state.userIsAuthorized = replacement
@@ -56,8 +56,8 @@ const authentication = {
         }
     },
     getters: {
-        affiliation_code(state) {
-            return state.affiliation_code
+        accesskey(state) {
+            return state.accesskey
         },
         userIsAuthorized(state) {
             return state.userIsAuthorized
@@ -79,8 +79,8 @@ const authentication = {
         }
     },
     actions: {
-        setAffiliationCode({ commit }, payload) {
-            commit('setAffiliationCode', payload)
+        setAccessKey({ commit }, payload) {
+            commit('setAccessKey', payload)
         },
         auth0Login(context) {
             context.state.auth0.authorize()
@@ -112,7 +112,7 @@ const authentication = {
                     // check local profile, if not available then register
                     axios.post(`${process.env.API_BASE_URL}profile/get`, {
                         email: authResult.idTokenPayload.email,
-                        affiliation_code: state.affiliation_code
+                        accesskey: state.accesskey
                     })
                     .then((response) => {
                         if (response.data.data == "0") {

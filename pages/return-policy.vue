@@ -60,7 +60,7 @@
 
     export default {
         layout: 'products',
-        middleware: ['affiliation'],
+        middleware: ['accesskey'],
         data() {
             return {
                 address_form: {

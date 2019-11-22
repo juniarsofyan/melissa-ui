@@ -114,7 +114,7 @@ import CartItem from '~/components/CartItem.vue'
 
 export default {
     layout: 'products',
-    middleware: ['affiliation'],
+    middleware: ['accesskey'],
     components: {
         CartItem
     },
