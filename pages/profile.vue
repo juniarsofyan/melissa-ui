@@ -193,7 +193,7 @@ import { mapGetters } from 'vuex'
 
 export default {
     layout: 'products',
-    middleware: ['authentication', 'accesskey', 'authorization'],
+    middleware: ['accesskey', 'authorization'],
     data() {
         return {
             profile: [],
@@ -227,7 +227,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters("authentication", ['email'])
+        ...mapGetters('authentication', ['email'])
     },
     methods: {
         async updateProfile() {

@@ -119,7 +119,7 @@ export default {
         CartItem
     },
     computed: {
-        ...mapGetters("authentication", ['userIsAuthorized']),
+        ...mapGetters('authentication', ['userIsAuthorized']),
         items: function () {
             return this.$store.getters['cart/items']
         },
@@ -134,7 +134,7 @@ export default {
                 text: "Please sign in to continue",
                 type: "warning",
             }).then(() => {
-                this.$store.dispatch("authentication/auth0Login")
+                redirect("/login")
             })
         }
     }

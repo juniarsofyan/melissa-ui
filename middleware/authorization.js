@@ -1,7 +1,15 @@
-export default function ({store, redirect}) { 
+export default function ({store, redirect, route}) { 
     const userIsAuthorized = store.getters['authentication/userIsAuthorized']
-
-    if (!userIsAuthorized) {
-        redirect("/")
+    
+    
+    if (route.name != "login") {
+        if (!userIsAuthorized) {
+            redirect("/login")
+        }
+    } else {
+        if (userIsAuthorized) {
+            redirect("/")
+        }
     }
+
 }
