@@ -29,7 +29,7 @@
                                 type="password"
                                 style="width:100%"
                                 class="input-text"
-                                v-model="email"
+                                v-model="password"
                                 id="name"
                                 ref="name"
                             />
@@ -57,23 +57,37 @@ export default {
     middleware: ['authorization'],
     methods: {
         logIn() {
+            this.$swal({
+                title: "Logging In...",
+                // text: "Processing",
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                onOpen: () => {
+                    this.$swal.showLoading()
+                },
+            })
+
             this.$axios.post(`${process.env.API_BASE_URL}auth/login`, {
-                email: this.loginForm.email,
-                password: this.loginForm.password
+                email: this.email,
+                password: this.password
             }).then((response) => {
-                // this.$store.dispatch("profile/updateProfile", {
-                //     member_no: response.data.data.no_member,
-                //     nik: response.data.data.nik,
-                //     name: response.data.data.nama,
-                //     birthdate: response.data.data.tgl_lahir,
-                //     phone: response.data.data.telp,
-                //     email: response.data.data.email
-                // })
+                if (response.data.data != 0) {
+                    this.$swal.close()
+                    this.$store.dispatch('authentication/setAccessKey', response.data.data)
+                    this.$router.push('/')
+                } else {
+                    this.$swal({
+                        title: "Oops!",
+                        text: "Please re-check your email and password",
+                        type: "warning",
+                    })
+                    .then(() => {
+                        this.email = ""
+                        this.password = ""
+                    })
+                }
             });
         },
-    },
-    computed: {
-        ...mapGetters(['userIsAuthorized'])
     }
 }
 </script>

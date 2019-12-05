@@ -65,7 +65,8 @@ const authentication = {
             localStorage.removeItem('userIsAuthorized');
 
             // redirect to auth0 logout to completely log the user out
-            window.location.href = process.env.VUE_APP_AUTH0_CONFIG_DOMAINURL + "/v2/logout?returnTo=" + process.env.VUE_APP_DOMAINURL + "&client_id=" + process.env.VUE_APP_AUTH0_CONFIG_CLIENTID;
+            // window.location.href = process.env.VUE_APP_AUTH0_CONFIG_DOMAINURL + "/v2/logout?returnTo=" + process.env.VUE_APP_DOMAINURL + "&client_id=" + process.env.VUE_APP_AUTH0_CONFIG_CLIENTID;
+            window.location.href = "/login"
         }
     }
 }
