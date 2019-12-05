@@ -251,7 +251,7 @@ export default {
                     cart: this.items,
                     sales_branch_code: this.branch.code,
                     bank: this.bank.bank_name,
-                    shopping_platform: "SHOP",
+                    shopping_platform: "MSHOP",
                     note: "",
 				}
 				
