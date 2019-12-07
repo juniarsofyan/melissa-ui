@@ -11,11 +11,11 @@ export default function ({ app, store, query, redirect }) {
                 if (response.data.data != 0) {
                     store.dispatch('authentication/setAccessKey', response.data.data)
                 } else {
-                    redirect("https://bellezkin.com/")
+                    redirect("/login")
                 }
             })
         } else {
-            redirect("https://bellezkin.com/")
+            redirect("/login")
         }
     }
 }
