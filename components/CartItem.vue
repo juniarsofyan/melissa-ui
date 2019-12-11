@@ -15,8 +15,15 @@
                 tag="a"
                 class="title"
             >{{ item.product_name }}</nuxt-link>
-            <span class="attributes-select attributes-color">{{ item.price | rupiah }}</span>
+            <!-- <span class="attributes-select attributes-color">{{ item.price | rupiah }}</span> -->
             <!-- <span class="attributes-select attributes-size">, XS</span> -->
+            <div class="attributes-select attributes-color" v-if="item.price_discount > 0 && item.price > item.price_discount">
+                <span class="text-muted"><small><del>{{ item.price | rupiah }}</del> <br/></small></span>
+                {{ item.price_discount | rupiah }}
+            </div>
+            <div class="attributes-select attributes-color" v-else>
+                <span>{{ item.price | rupiah }}</span> <br />
+            </div>
         </td>
         <td class="product-quantity" data-title="Quantity">
             <div class="quantity">
@@ -52,7 +59,7 @@
                         </strike>
                     </sub>
                 </span>
-                <p>{{ item.subtotal | rupiah }}</p>
+                <p>{{ item.grand_total | rupiah }}</p>
             </span>
         </td>
         <td class="product-remove">

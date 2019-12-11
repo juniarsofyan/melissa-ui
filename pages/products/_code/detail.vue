@@ -44,8 +44,12 @@
 								Product Code:
 								<a href="#">{{ product.kode_barang }}</a>
 							</div>
-							<div class="price">
-								<span>{{ product.harga | rupiah }}</span>
+							<div class="price" v-if="product.harga_diskon > 0 && product.harga > product.harga_diskon">
+								<span class="text-muted"><small><del>{{ product.harga | rupiah }}</del> <br/></small></span>
+                        		{{ product.harga_diskon | rupiah }}
+							</div>
+							<div class="price" v-else>
+								<span>{{ product.harga | rupiah }}</span> <br />
 							</div>
 							<div class="product-details-description">
 								<p class="desc">{{ product.des_singkat }}</p>
