@@ -74,6 +74,12 @@ export default {
                 if (response.data.data != 0) {
                     this.$swal.close()
                     this.$store.dispatch('authentication/setAccessKey', response.data.data)
+
+                    this.$cookies.set('key', response.data.data.key, {
+                        path: '/',
+                        maxAge: 60 * 60 * 24 * 7
+                    })
+
                     this.$router.push('/')
                 } else {
                     this.$swal({

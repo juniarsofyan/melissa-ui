@@ -345,6 +345,7 @@ export default {
         },
         auth0Logout() {
             this.$store.dispatch('authentication/auth0Logout')
+            this.$cookies.remove('key')
         }
     }
 }

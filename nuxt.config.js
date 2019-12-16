@@ -243,7 +243,8 @@ export default {
         ],
         '@nuxtjs/toast',
         'vue-sweetalert2/nuxt',
-        'nuxt-material-design-icons'
+        'nuxt-material-design-icons',
+        'cookie-universal-nuxt'
         // [
         //     'nuxt-sass-resources-loader',
         //     [
