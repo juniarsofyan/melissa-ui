@@ -19,8 +19,8 @@
                                 style="width:100%"
                                 class="input-text"
                                 v-model="email"
-                                id="name"
-                                ref="name"
+                                id="email"
+                                ref="email"
                             />
                         </p>
                         <p class="col-12">
@@ -30,8 +30,8 @@
                                 style="width:100%"
                                 class="input-text"
                                 v-model="password"
-                                id="name"
-                                ref="name"
+                                id="password"
+                                ref="password"
                             />
                         </p>
                         <button class="button" @click="logIn">Log In</button>
