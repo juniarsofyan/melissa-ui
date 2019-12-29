@@ -29,6 +29,6 @@
 
 <script>
 export default {
-    middleware: ['accesskey', 'authorization']
+    middleware: ['accesskey', 'authorization', 'cartvalidation']
 }
 </script>

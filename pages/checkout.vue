@@ -172,7 +172,9 @@
                                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                     BACK TO MY CART
                             </nuxt-link>
-                            <nuxt-link :to="`payment`" class="button button-payment">PAYMENT</nuxt-link>
+
+                            <button class="button button-payment" v-if="!checkoutDataValidated" @click="warnCheckoutDataCompletion()">PAYMENT</button>
+                            <nuxt-link :to="`payment`" class="button button-payment" v-else>PAYMENT</nuxt-link>
                             
                             <transition name="modal" v-if="showModal">
                                 <div class="modal-mask">
@@ -255,7 +257,7 @@
     import ongkir from '~/plugins/ongkir'
 
     export default {
-        middleware: ['accesskey', 'authorization'],
+        middleware: ['accesskey', 'authorization', 'cartvalidation'],
         layout: 'products',
         data() {
             return {
@@ -421,6 +423,9 @@
                 ]),
             ...mapGetters(
                 'checkout', [
+                    'branch',
+                    'shipping_method',
+                    'courier',
                     'shipping_address',
                     'unique_code',
                     'shipment',
@@ -449,6 +454,17 @@
                 set(value) {
                     this.$store.dispatch('checkout/setShippingMethod', value)
                 }
+            },
+            checkoutDataValidated() {
+                if (!this.branch || !this.shipping_method) {
+                    return false
+                }
+
+                if (this.shipping_method == "EXPEDITION" && (!this.courier || !this.shipment.fee)) {
+                    return false
+                }
+
+                return true
             }
         },
         watch: {
@@ -711,6 +727,13 @@
 
                 return true
             },
+            warnCheckoutDataCompletion() {
+                this.$swal({
+                    title: 'Oops!',
+                    text: 'Please complete checkout data to continue',
+                    type: 'warning'
+                })
+            }
         },
         created() {
             this.checkAvailableBranches()
