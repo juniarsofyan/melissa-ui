@@ -478,9 +478,7 @@
                         etd: "",
                         fee: 0
                     })
-
                     this.$store.dispatch('checkout/setCourier', false)
-
                     this.$store.dispatch('checkout/setDeliveryAddress', false)
                     this.setTotalPayment()
                 } else {
@@ -506,6 +504,15 @@
                 },
                 deep: true
             },
+            branch: function() {
+                this.$store.dispatch('checkout/setCourier', false)
+                this.$store.dispatch('checkout/setShipment', {
+                    etd: "",
+                    fee: 0
+                })
+                this.shipping_method = ""
+                this.setTotalPayment()
+            }
         },
         methods: {
             generateUniqueCode() {
