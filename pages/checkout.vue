@@ -556,7 +556,7 @@
                     })
             },
             getShippingAddresses() {
-                this.$axios.post(`shipping-address/get`, {
+                this.$axios.post(`shipping-address/current`, {
                     email: window.localStorage.getItem('email')
                 })
                 .then((response) => {

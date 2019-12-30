@@ -378,7 +378,7 @@ export default {
                     this.phone = response.data.data.telepon
                     this.province = {
                         province_id : response.data.data.provinsi_id,
-                        province_name: response.data.data.province_nama
+                        province_name: response.data.data.provinsi_nama
                     }
                     this.city = {
                         city_id : response.data.data.kota_id,

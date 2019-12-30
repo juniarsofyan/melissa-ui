@@ -40,16 +40,13 @@
                                                             <!-- Id : {{ address.id }} <br/> -->
                                                             Nama : {{ address.nama }} <br/>
                                                             Telepon : {{ address.telepon }} <br/>
-                                                            <!-- Provinsi_id : {{ address.provinsi_id }} <br/> -->
-                                                            Provinsi_nama : {{ address.provinsi_nama }} <br/>
-                                                            <!-- Kota_id : {{ address.kota_id }} <br/> -->
-                                                            Kota_nama : {{ address.kota_nama }} <br/>
-                                                            <!-- Kecamatan_id : {{ address.kecamatan_id }} <br/> -->
-                                                            Kecamatan_nama : {{ address.kecamatan_nama }} <br/>
+                                                            Provinsi : {{ address.provinsi_nama }} <br/>
+                                                            Kota : {{ address.kota_nama }} <br/>
+                                                            Kecamatan : {{ address.kecamatan_nama }} <br/>
                                                             Alamat : {{ address.alamat }} <br/>
-                                                            Kode_pos : {{ address.kode_pos }} <br/>
+                                                            Kode pos : {{ address.kode_pos }} <br/>
                                                             Is default? : {{ address.is_default }} <br/>
-                                                            <nuxt-link :to="`/profile/addresses/${address.id}/edit`" tag="button">Edit</nuxt-link><br/>
+                                                            <nuxt-link :to="`/profile/addresses/${address.id}/edit`" tag="button">Edit</nuxt-link> 
                                                             <button v-if="address.is_default == 0" @click="setDefaultShippingAddress(address.id)">Set as default</button><br/>
                                                             <br/>
                                                         </div>
