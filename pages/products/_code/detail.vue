@@ -41,17 +41,7 @@
                     <!-- media box -->
                     <div class="details-product single-product-galery">
                         <div class="details-thumd">
-                            <div
-                                class="image-preview-container image-thick-box image_preview_container"
-                            >
-                                <img
-                                    id="img_zoom"
-                                    :data-zoom-image="`${$axios.defaults.baseURL}assets/img/products/${product.pic}.jpg`"
-                                    :src="`${$axios.defaults.baseURL}assets/img/products/${product.pic}.jpg`"
-                                    alt
-                                />
-                            </div>
-                            <div class="product_preview image-small"></div>
+							<img :src="`${$axios.defaults.baseURL}assets/img/products/${product.pic}.jpg`" />
                         </div>
                         <div class="details-infor">
                             <h1 class="product-title">{{ product.nama }}</h1>

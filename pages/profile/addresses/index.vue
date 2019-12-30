@@ -34,7 +34,7 @@
                                                     <nuxt-link :to="`/profile/addresses`">Addresses list</nuxt-link> |
                                                     <nuxt-link :to="`/profile/addresses/add`">Add New addresses</nuxt-link>
                                                     <br/><br/>
-                                                    
+
                                                     <div v-if="shipping_addresses.length > 0">
                                                         <div v-for="address in shipping_addresses" :key="address.id">
                                                             <!-- Id : {{ address.id }} <br/> -->
@@ -50,7 +50,7 @@
                                                             Kode_pos : {{ address.kode_pos }} <br/>
                                                             Is default? : {{ address.is_default }} <br/>
                                                             <nuxt-link :to="`/profile/addresses/${address.id}/edit`" tag="button">Edit</nuxt-link><br/>
-                                                            <button v-if="address.is_default == 0">Set as default</button><br/>
+                                                            <button v-if="address.is_default == 0" @click="setDefaultShippingAddress(address.id)">Set as default</button><br/>
                                                             <br/>
                                                         </div>
                                                     </div>
@@ -99,7 +99,43 @@ export default {
             .catch(e => {
                 console.log(e)
             })
-        }
+        },
+        async setDefaultShippingAddress(id) {
+            this.$swal({
+                // title: "Saving address",
+                text: "Setting as default",
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                onOpen: () => {
+                    this.$swal.showLoading()
+                },
+            })
+
+            await this.$axios.post(`shipping-address/set-default`, {
+                id: id
+            }).then(response => {
+                if (response.data.data == 1) {
+                    this.$swal({
+                        // title: "",
+                        text: "Default shipping address set!",
+                        type: "success",
+                    }).then(() => {
+                        this.getShippingAddresses()
+                    })
+                }
+            })
+            .catch(e => {
+                console.log(e)
+                this.$swal({
+                    title: "Oops..",
+                    text: "Cannot connect to the server, Please try again later",
+                    type: "error",
+                    onOpen: () => {
+                        this.$swal.hideLoading()
+                    },
+                })
+            })
+        },
     },
     created() {
         this.getShippingAddresses()
