@@ -32,7 +32,7 @@
                                                 <div class="shipping-address">
                                                     <nuxt-link :to="`/profile`">My Profile</nuxt-link> |
                                                     <nuxt-link :to="`/profile/addresses`">Addresses list</nuxt-link> |
-                                                    <nuxt-link :to="`/profile/addresses/add`">Add New addresses</nuxt-link>
+                                                    <nuxt-link :to="`/profile/addresses/add`">Add New address</nuxt-link>
                                                     <br/><br/>
 
                                                     <div v-if="shipping_addresses.length > 0">

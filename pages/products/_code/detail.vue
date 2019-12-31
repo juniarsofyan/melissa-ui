@@ -441,7 +441,7 @@
                                             style="padding:10px;padding-bottom: 15px;"
                                             :key="product.kode_barang"
                                         >
-                                            <div
+                                            <nuxt-link tag="div" :to="`/products/${product.kode_barang}/detail`"
                                                 class="product-inner equal-element"
                                                 style="border-radius: 6px;border:none;"
                                             >
@@ -470,7 +470,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </nuxt-link>
                                         </div>
                                     </slick>
                                 </div>
