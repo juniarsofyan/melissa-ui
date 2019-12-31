@@ -75,6 +75,11 @@
                 </div>
             </div>
         </div>
+
+        <nuxt-link tag="a" :to="`/checkout`" class="backtocheckout" v-if="previousRoute == 'checkout'">
+            <i class="pe-7s-angle-left"></i> 
+            <span>Checkout</span>
+        </nuxt-link>
     </div>
 </template>
 
@@ -86,8 +91,14 @@ export default {
     middleware: ['accesskey', 'authorization'],
     data() {
         return {
-            shipping_addresses: []
+            shipping_addresses: [],
+            previousRoute: null
         }
+    },
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.previousRoute = from.name
+        })
     },
     computed: {
         ...mapGetters('authentication', ['user_data']),
@@ -204,3 +215,33 @@ export default {
     }
 }
 </script>
+
+<style>
+.backtocheckout {
+     display: inline;
+     width: 160px;
+     height: 46px;
+     font-size: 40px;
+     /* font-weight: 600; */
+     background: #333;
+     border: 2px solid #f1f1f1;
+     color: #fff;
+     border-radius: 5px;
+     position: fixed;
+     bottom: 50px;
+     left: 25px;
+     text-align: left;
+     line-height: 45px;
+     z-index: 50;
+}
+
+.backtocheckout > span {
+    font-size:20px;
+}
+
+.backtocheckout:hover {
+    background: #fff;
+    color: #333;
+    border-color: #333;
+}
+</style>

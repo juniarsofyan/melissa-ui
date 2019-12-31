@@ -64,41 +64,47 @@
                                     </p>
                                 </div>
                                 <span v-if="shipping_method == 'EXPEDITION'">
-                                    <div class="shipping-address">
-                                        <div class="form-row form-row-first">
-                                            <label class="text">Select Courier</label>
-                                            <!-- class="chosen-select" -->
-                                            <select style="width:100%;" data-placeholder="-- Choose One --" v-model="courier">
-                                                <option value="jne">JNE</option>
-                                                <option value="jnt">JNT</option>
-                                            </select>
-                                            <br />
-                                            <br>
-                                            <!-- <div v-if="shipment.fee">
-                                                <p>  Fee : {{ shipment.fee }} </p>
-                                                <p>  Etd : {{ shipment.etd }} </p>
-                                            </div> -->
+                                    <span v-if="default_shipping_address">
+                                        <div class="shipping-address">
+                                            <div class="form-row form-row-first">
+                                                <label class="text">Select Courier</label>
+                                                <!-- class="chosen-select" -->
+                                                <select style="width:100%;" data-placeholder="-- Choose One --" v-model="courier">
+                                                    <option value="jne">JNE</option>
+                                                    <option value="jnt">JNT</option>
+                                                </select>
+                                                <br />
+                                                <br>
+                                                <!-- <div v-if="shipment.fee">
+                                                    <p>  Fee : {{ shipment.fee }} </p>
+                                                    <p>  Etd : {{ shipment.etd }} </p>
+                                                </div> -->
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="shipping-address">
-                                        <p class="form-row form-row-first" v-if="default_shipping_address">
-                                            <label class="text">
-                                                Deliver to <br/>
-                                                <p>
-                                                    <b>{{ default_shipping_address.nama }}</b> <br />
-                                                    {{ default_shipping_address.alamat }} <br />
-                                                    {{ default_shipping_address.kecamatan_nama }} <br />
-                                                    {{ default_shipping_address.kota_nama }} <br />
-                                                    {{ default_shipping_address.provinsi_nama }} <br />
-                                                    {{ default_shipping_address.kode_pos }}
-                                                    <!-- <br /> <br /> {{ default_shipping_address.telepon }} -->
-                                                </p>
-                                            </label>
-                                        </p>
-                                        <p class="form-row form-row-first" v-else>
-                                            <label class="text">
-                                                <button class="btn-sm" @click="showModal=true">Add shipping address</button>
-                                            </label>
+                                        <div class="shipping-address">
+                                            <p class="form-row form-row-first">
+                                                <span>Deliver to:</span>
+                                                <label class="text">
+                                                    <p>
+                                                        <b>{{ default_shipping_address.nama }}</b> <br />
+                                                        {{ default_shipping_address.alamat }} <br />
+                                                        {{ default_shipping_address.kecamatan_nama }} <br />
+                                                        {{ default_shipping_address.kota_nama }} <br />
+                                                        {{ default_shipping_address.provinsi_nama }} <br />
+                                                        {{ default_shipping_address.kode_pos }}
+                                                        <!-- <br /> <br /> {{ default_shipping_address.telepon }} -->
+                                                    </p>
+                                                </label>
+                                                <nuxt-link :to="`/profile/addresses`">Change address</nuxt-link>
+                                            </p>
+                                        </div>
+                                    </span>
+                                    <div class="shipping-address" v-else>
+                                        <p class="form-row form-row-first" style="font-style:italic;font-weight:bold;">
+                                            <span style="color:red;"> NOTE: </span> <br/>
+                                            You haven't set a default shipping address. <br/>
+                                            Please set a default shipping address <nuxt-link to="/profile/addresses" style="text-decoration:underline;"> <b>here</b> </nuxt-link>.
+                                            <!-- <button class="btn-sm" @click="showModal=true">Add shipping address</button> -->
                                         </p>
                                     </div>
                                 </span>
@@ -464,6 +470,10 @@
                     return false
                 }
 
+                if (this.shipping_method == "EXPEDITION" && this.default_shipping_address == "") {
+                    return false
+                }
+
                 return true
             }
         },
@@ -473,7 +483,6 @@
             },
             shipping_method: function () {
                 if (this.shipping_method == 'IMMEDIATE') {
-
                     this.$store.dispatch('checkout/setShipment', {
                         etd: "",
                         fee: 0
@@ -505,12 +514,20 @@
                 deep: true
             },
             branch: function() {
+                this.shipping_method = ""
                 this.$store.dispatch('checkout/setCourier', false)
                 this.$store.dispatch('checkout/setShipment', {
                     etd: "",
                     fee: 0
                 })
-                this.shipping_method = ""
+                this.setTotalPayment()
+            },
+            default_shipping_address: function() {
+                this.$store.dispatch('checkout/setCourier', false)
+                this.$store.dispatch('checkout/setShipment', {
+                    etd: "",
+                    fee: 0
+                })
                 this.setTotalPayment()
             }
         },
@@ -585,6 +602,12 @@
                             this.$store.dispatch('checkout/setDeliveryAddress', this.default_shipping_address.id)
                         } else {
                             this.$store.dispatch('checkout/setDeliveryAddress', false)
+                            this.$store.dispatch('checkout/setCourier', false)
+                            this.$store.dispatch('checkout/setShipment', {
+                                etd: "",
+                                fee: 0
+                            })
+                            this.setTotalPayment()
                         }
                     })
                     .catch(e => {
