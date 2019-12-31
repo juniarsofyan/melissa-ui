@@ -36,6 +36,13 @@
                                                     <br/><br/>
 
                                                     <div v-if="shipping_addresses.length > 0">
+                                                        <div v-if="!defaultShippingAddressAvailable" class="text-center">
+                                                            <br/>
+                                                            <p style="color:red;font-style:italic;font-weight:bold;">
+                                                                NOTE: You haven't set a default shipping address. Please set a default shipping address below!
+                                                            </p>
+                                                            <br/>
+                                                        </div>
                                                         <div v-for="address in shipping_addresses" :key="address.id">
                                                             <!-- Id : {{ address.id }} <br/> -->
                                                             Nama : {{ address.nama }} <br/>
@@ -45,8 +52,9 @@
                                                             Kecamatan : {{ address.kecamatan_nama }} <br/>
                                                             Alamat : {{ address.alamat }} <br/>
                                                             Kode pos : {{ address.kode_pos }} <br/>
-                                                            Is default? : {{ address.is_default }} <br/>
+                                                            <!-- Is default? : {{ address.is_default }} <br/> -->
                                                             <nuxt-link :to="`/profile/addresses/${address.id}/edit`" tag="button">Edit</nuxt-link> 
+                                                            <button class="btn-danger" @click="deleteShippingAddress(address.id)">Delete</button><br/>
                                                             <button v-if="address.is_default == 0" @click="setDefaultShippingAddress(address.id)">Set as default</button><br/>
                                                             <br/>
                                                         </div>
@@ -82,7 +90,16 @@ export default {
         }
     },
     computed: {
-        ...mapGetters('authentication', ['user_data'])
+        ...mapGetters('authentication', ['user_data']),
+        defaultShippingAddressAvailable: function() {
+            let defaultAddressFound = this.shipping_addresses.find((address) => address.is_default == 1)
+
+            if (defaultAddressFound) {
+                return true
+            }
+
+            return false
+        }
     },
     methods: {
         getShippingAddresses() {
@@ -131,6 +148,54 @@ export default {
                         this.$swal.hideLoading()
                     },
                 })
+            })
+        },
+        async deleteShippingAddress(id) {
+            await this.$swal({
+                title: 'Confirm deletion',
+                text: 'Delete this shipping address?',
+                type: 'question',
+                showCancelButton: true,
+                // confirmButtonClass: "btn-danger",
+                // confirmButtonColor: "#3085d6",
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+                // cancelButtonColor: "#d33",
+            }).then((isConfirm) => {
+                if (isConfirm.value) {
+                    this.$swal({
+                        // title: "Saving address",
+                        text: "Deleting...",
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                        onOpen: () => {
+                            this.$swal.showLoading()
+                        },
+                    })
+
+                    this.$axios.get(`shipping-address/${id}/delete`).then(response => {
+                        if (response.data.data == 1) {
+                            this.$swal({
+                                // title: "",
+                                text: "Shipping address deleted!",
+                                type: "success",
+                            }).then(() => {
+                                this.getShippingAddresses()
+                            })
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e)
+                        this.$swal({
+                            title: "Oops..",
+                            text: "Cannot connect to the server, Please try again later",
+                            type: "error",
+                            onOpen: () => {
+                                this.$swal.hideLoading()
+                            },
+                        })
+                    })
+                }
             })
         },
     },
