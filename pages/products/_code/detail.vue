@@ -49,7 +49,11 @@
                                 Product Code:
                                 <a href="#">{{ product.kode_barang }}</a>
                             </div>
-                            <div class="price">
+                            <div class="price" v-if="product.harga_diskon > 0 && product.harga > product.harga_diskon">
+                                <span class="old-price"><small>{{ product.harga | rupiah }}</small></span><br/>
+                                <span>{{ product.harga_diskon | rupiah }}</span>
+                            </div>
+                            <div class="price" v-else>
                                 <span>{{ product.harga | rupiah }}</span>
                             </div>
                             <div class="product-details-description">
@@ -659,5 +663,9 @@
 <style>
 	.custom_blog_title {
 		text-transform: captialize;
+	}
+	.old-price {
+		text-decoration: line-through;
+		color: grey;
 	}
 </style>
