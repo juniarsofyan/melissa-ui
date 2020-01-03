@@ -3,85 +3,91 @@
     <div class="main-content main-content-checkout">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="tab-details-product" style="margin-bottom:30px;margin-top:0px;">
-                        <!-- <ul class="tab-link">
-                            <li class="active">
-                                <a data-toggle="tab" aria-expanded="true" href="#profil"><i class="fa fa-user"></i>&nbsp;My Profile</a>
-                            </li>
-                            <li>
-                                <a
-                                    data-toggle="tab"
-                                    aria-expanded="true"
-                                    href="#semua "
-                                ><i class="fa fa-book"></i>&nbsp;Address Book</a>
-                            </li>
-                        </ul> -->
-
-                        <!-- {{ address }} -->
 
                         <div class="tab-container">
                             <div id="profil" class="tab-panel active">
-                                <div class="col-md-10 col-md-offset-1">
+                                <div class="col-md-12">
                                     <div class="shipping-address-form-wrapp">
                                         <div
                                             class="shipping-address-form checkout-form"
                                             style="padding: 35px 27px 20px 27px !important; border:0px;"
                                         >
-                                            <div class="col-12">
+                                            <div class="col-md-12">
                                                 <div class="shipping-address">
                                                     <nuxt-link :to="`/profile`">My Profile</nuxt-link> |
                                                     <nuxt-link :to="`/profile/addresses`">Addresses list</nuxt-link> |
                                                     <nuxt-link :to="`/profile/addresses/add`">Add New address</nuxt-link>
                                                     <br/><br/>
-                                                    
-                                                    <p class="col-12">
-                                                        <label class="text">Nama</label>
-                                                        <input
-                                                            type="text"
-                                                            style="width:100%"
-                                                            class="input-text"
-                                                            v-model="profile.name"
-                                                            id="name"
-                                                            ref="name"
-                                                        />
-                                                    </p>
-                                                    <p class="col-12">
-                                                        <label class="text">Tanggal Lahir</label>
-                                                        <input
-                                                            type="date"
-                                                            style="width:100%"
-                                                            class="form-control"
-                                                            v-model="profile.birthdate"
-                                                            id="birthdate"
-                                                            ref="birthdate"
-                                                        />
-                                                    </p>
-                                                    <p class="col-12">
-                                                        <label class="text">Telepon</label>
-                                                        <input
-                                                            type="text"
-                                                            style="width:100%"
-                                                            class="input-text"
-                                                            v-model="profile.phone"
-                                                            id="phone"
-                                                            ref="phone"
-                                                        />
-                                                    </p>
-                                                    <p class="col-12">
-                                                        <label class="text">Email</label>
-                                                        <input
-                                                            type="email"
-                                                            style="width:100%"
-                                                            class="input-text"
-                                                            v-model="profile.email"
-                                                            id="email"
-                                                            ref="email"
-                                                            readonly
-                                                        />
-                                                    </p>
-                                                    
-                                                    <button class="button" @click="updateProfile">Save Profile</button>
+
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="card-profile">
+                                                                <div class="card-img">
+                                                                    <img src="https://source.unsplash.com/random/500x500" alt="">
+                                                                </div>
+                                                                <div class="text-center">
+                                                                    <button class="button">Edit Foto</button>
+                                                                </div>
+                                                                <div class="card-info">
+                                                                    <p>besaran file maximum 10Mb</p>
+                                                                    <p>ekstensi yang diperbolehkan: JPG, PNG, JPEG</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                        
+                                                            <p class="col-12">
+                                                                <label class="text">Nama</label>
+                                                                <input
+                                                                    type="text"
+                                                                    style="width:100%"
+                                                                    class="input-text"
+                                                                    v-model="profile.name"
+                                                                    id="name"
+                                                                    ref="name"
+                                                                />
+                                                            </p>
+                                                            <p class="col-12">
+                                                                <label class="text">Tanggal Lahir</label>
+                                                                <input
+                                                                    type="date"
+                                                                    style="width:100%"
+                                                                    class="form-control"
+                                                                    v-model="profile.birthdate"
+                                                                    id="birthdate"
+                                                                    ref="birthdate"
+                                                                />
+                                                            </p>
+                                                            <p class="col-12">
+                                                                <label class="text">Telepon</label>
+                                                                <input
+                                                                    type="text"
+                                                                    style="width:100%"
+                                                                    class="input-text"
+                                                                    v-model="profile.phone"
+                                                                    id="phone"
+                                                                    ref="phone"
+                                                                />
+                                                            </p>
+                                                            <p class="col-12">
+                                                                <label class="text">Email</label>
+                                                                <input
+                                                                    type="email"
+                                                                    style="width:100%"
+                                                                    class="input-text"
+                                                                    v-model="profile.email"
+                                                                    id="email"
+                                                                    ref="email"
+                                                                    readonly
+                                                                />
+                                                            </p>
+                                                            <div class="text-right" style="margin-top: 2em">
+                                                                <button class="button" @click="updateProfile">Save Profile</button>
+                                                            </div>
+
+                                                        </div>
+                                                        
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -89,8 +95,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
