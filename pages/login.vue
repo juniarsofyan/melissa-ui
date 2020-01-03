@@ -19,8 +19,8 @@
                                 style="width:100%"
                                 class="input-text"
                                 v-model="email"
-                                id="name"
-                                ref="name"
+                                id="email"
+                                ref="email"
                             />
                         </p>
                         <p class="col-12">
@@ -30,8 +30,8 @@
                                 style="width:100%"
                                 class="input-text"
                                 v-model="password"
-                                id="name"
-                                ref="name"
+                                id="password"
+                                ref="password"
                             />
                         </p>
                         <button class="button" @click="logIn">Log In</button>
@@ -74,6 +74,12 @@ export default {
                 if (response.data.data != 0) {
                     this.$swal.close()
                     this.$store.dispatch('authentication/setAccessKey', response.data.data)
+
+                    this.$cookies.set('key', response.data.data.key, {
+                        path: '/',
+                        maxAge: 60 * 60 * 24 * 7
+                    })
+
                     this.$router.push('/')
                 } else {
                     this.$swal({

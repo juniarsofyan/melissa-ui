@@ -21,20 +21,7 @@
                 <div class="row">
                     <div class="main-content-cart main-content">
                         <div class="page-main-content">
-                            <div class="shoppingcart-content">
-                                <!-- <form action="shoppingcart.html" class="cart-form">
-                                    <table class="shop_table">
-                                        <thead>
-                                            <tr>
-                                                <th class="product-remove"></th>
-                                                <th class="product-thumbnail"></th>
-                                                <th class="product-name"></th>
-                                                <th class="product-price"></th>
-                                                <th class="product-quantity"></th>
-                                                <th class="product-subtotal"></th>
-                                            </tr>
-                                        </thead>
-                                <tbody>-->
+                            <div class="shoppingcart-content" v-if="items.length > 0">
                                 <div class="col-md-8 col-sm-12">
                                     <CartItem
                                         v-for="item in items"
@@ -43,7 +30,7 @@
                                     />
                                 </div>
                                 <div class="col-md-4 col-sm-12">
-                                    <div class="coupon">
+                                    <!-- <div class="coupon">
                                         <label class="coupon_code">Coupon Code:</label>
                                         <div class="coupon-wrapp">
                                             <input
@@ -53,7 +40,7 @@
                                             />
                                             <a href="#" class="button"></a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="cart-wrap-summary">
                                         <div class="cart-total-checkout">
                                             <div class="cart-total-item">
@@ -66,17 +53,11 @@
                                                 <div>Grand Total</div>
                                                 <div
                                                     class="cart-total-value"
-                                                >{{ subtotal | rupiah }}</div>
+                                                >{{ grand_total | rupiah }}</div>
                                             </div>
                                         </div>
                                         <div class="control-cart">
-                                            <!-- <nuxt-link
-                                            :to="`/`"
-                                            tag="button"
-                                            class="button btn-continue-shopping"
-                                            >CONTINUE SHOPPING</nuxt-link>-->
-
-                                            <!-- <button
+                                            <button
                                                 v-if="!userIsAuthorized"
                                                 @click="warnSignIn"
                                                 class="button button-checkout btn-cart-to-checkout"
@@ -86,18 +67,16 @@
                                                 :to="`/checkout`"
                                                 tag="button"
                                                 class="button button-checkout btn-cart-to-checkout"
-                                            >CHECKOUT NOW</nuxt-link>-->
-                                            <nuxt-link
-                                                :to="`/checkout`"
-                                                tag="button"
-                                                class="button button-checkout btn-cart-to-checkout"
                                             >CHECKOUT NOW</nuxt-link>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- </tbody>
-                                </table>-->
-                                <!-- </form> -->
+                            </div>
+                            <div class="shoppingcart-content text-center" v-else >
+                                <img src="~/assets/images/svg/empty-cart.svg" style="width:300px;" /><br/><br/>
+                                <b><h3>Oops...</h3></b>
+                                <!-- Belum ada item didalam shopping cart, silahkan tambahkan item terlebih dahulu. -->
+                                You have no items in you shopping cart. Click <nuxt-link to="/" style="color:pink;"> <b>here</b> </nuxt-link> to continue shopping.
                             </div>
                         </div>
                     </div>
@@ -119,18 +98,17 @@ export default {
     },
     computed: {
         ...mapGetters('authentication', ['userIsAuthorized']),
-        items: function() {
-            return this.$store.getters['cart/items']
-        },
-        subtotal: function() {
-            return this.$store.getters['cart/subtotal']
-        }
+        ...mapGetters('cart', [
+            'items',
+            'subtotal',
+            'grand_total'
+        ])
     },
     methods: {
         warnSignIn() {
             this.$swal({
                 title: 'Oops!',
-                text: 'Please sign in to continue',
+                text: 'Please sign in to checkout',
                 type: 'warning'
             }).then(() => {
                 this.$store.dispatch('authentication/auth0Login')
