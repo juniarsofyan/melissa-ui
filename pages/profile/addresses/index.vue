@@ -42,7 +42,7 @@
                                                                     <div class="flex-row first header" role="columnheader">Penerima</div>
                                                                     <div class="flex-row header" role="columnheader">Alamat Pengiriman</div>
                                                                     <div class="flex-row header" role="columnheader">Daerah Pengiriman</div>
-                                                                    <div class="flex-row header" role="columnheader">Actions</div>
+                                                                    <div class="flex-row header text-right" role="columnheader">Actions</div>
                                                                 </div>
                                                                 <div v-for="address in shipping_addresses" :key="address.id" class="flex-table" role="rowgroup">
                                                                     <div class="flex-row first" role="cell">
@@ -63,8 +63,10 @@
                                                                         {{ address.provinsi_nama }}, {{ address.kota_nama }}, {{ address.kecamatan_nama }} {{ address.kode_pos }}
                                                                     </div>
                                                                     <div class="flex-row text-right" role="cell">
-                                                                        <nuxt-link :to="`/profile/addresses/${address.id}/edit`" tag="button">Edit</nuxt-link>
-                                                                        <button v-if="address.is_default == 0">Set as default</button>
+                                                                        <!-- <nuxt-link :to="`/profile/addresses/${address.id}/edit`" tag="button">Edit</nuxt-link> -->
+                                                                        <nuxt-link :to="`/profile/addresses/${address.id}/edit`">Edit</nuxt-link>
+                                                                        <br>
+                                                                        <a href="" v-if="address.is_default == 0">Set as default</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
