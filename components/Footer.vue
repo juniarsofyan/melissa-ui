@@ -63,9 +63,9 @@
                                     <li class="menu-item">
                                         <a href="/return-policy">Return Policy</a>
                                     </li>
-                                    <li class="menu-item">
+                                    <!-- <li class="menu-item">
                                         <b><a href="/track-shipment">#TrackShipment</a></b>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>

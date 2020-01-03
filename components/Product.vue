@@ -8,7 +8,7 @@
             <div class="product-top">
                 <div class="flash">
                     <span class="onnew">
-                        <span class="text">{{ product.promo_caption ? product.promo_caption : "&nbsp;" }}</span>
+                        <span class="text promo-caption">{{ product.promo_caption ? product.promo_caption : "&nbsp;" }}</span>
                     </span>
                 </div>
                 <!-- <div class="yith-wcwl-add-to-wishlist">
@@ -122,4 +122,8 @@ export default {
 </script>
 
 <style>
+.promo-caption {
+    color: red;
+    text-align: right;
+}
 </style>

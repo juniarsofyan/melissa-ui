@@ -32,7 +32,7 @@
                                                 <div class="shipping-address">
                                                     <nuxt-link :to="`/profile`">My Profile</nuxt-link> |
                                                     <nuxt-link :to="`/profile/addresses`">Addresses list</nuxt-link> |
-                                                    <nuxt-link :to="`/profile/addresses/add`">Add New addresses</nuxt-link>
+                                                    <nuxt-link :to="`/profile/addresses/add`">Add New address</nuxt-link>
                                                     <br/><br/>
                                                     
                                                     <p class="col-12">
@@ -148,7 +148,7 @@
                                                     <button
                                                         class="button"
                                                         @click="updateAddress()"
-                                                    >Add Address</button>
+                                                    >Update Address</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -238,8 +238,7 @@ export default {
                     },
                 })
 
-                await this.$axios.post(`shipping-address/add`, {
-                    email: this.user_data.email,
+                await this.$axios.post(`shipping-address/${this.$route.params.id}/update`, {
                     name: this.name,
                     phone: this.phone,
                     province_id: this.province.province_id,
@@ -254,7 +253,7 @@ export default {
                     if (response.data.data == 1) {
                         this.$swal({
                             // title: "",
-                            text: "Address added!",
+                            text: "Address updated!",
                             type: "success",
                         }).then(() => {
                             this.$router.push({
@@ -262,7 +261,6 @@ export default {
                             })
                         })
                     }
-                    
                 })
                 .catch(e => {
                     console.log(e)
@@ -375,24 +373,23 @@ export default {
         getShippingAddress() {
             this.$axios.get(`shipping-address/${this.$route.params.id}/detail`).then(response => {
                 if (response.data.data != 0) {
-                    console.log(response.data.data)
 
-                    this.name = ""
-                    this.phone = ""
+                    this.name = response.data.data.nama
+                    this.phone = response.data.data.telepon
                     this.province = {
-                        province_id : false,
-                        province_name: false
+                        province_id : response.data.data.provinsi_id,
+                        province_name: response.data.data.provinsi_nama
                     }
                     this.city = {
-                        city_id : false,
-                        city_name: false
+                        city_id : response.data.data.kota_id,
+                        city_name: response.data.data.kota_nama
                     }
                     this.subdistrict = {
-                        subdistrict_id : false,
-                        subdistrict_name: false
+                        subdistrict_id : response.data.data.kecamatan_id,
+                        subdistrict_name: response.data.data.kecamatan_nama
                     }
-                    this.address = ""
-                    this.postcode = ""
+                    this.address = response.data.data.alamat
+                    this.postcode = response.data.data.kode_pos
                 }
             })
             .catch(e => {
