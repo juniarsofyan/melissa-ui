@@ -30,9 +30,23 @@
                                         >
                                             <div class="col-12">
                                                 <div class="shipping-address">
-                                                    <nuxt-link :to="`/profile`">My Profile</nuxt-link> |
-                                                    <nuxt-link :to="`/profile/addresses`">Addresses list</nuxt-link> |
-                                                    <nuxt-link :to="`/profile/addresses/add`">Add New address</nuxt-link>
+
+                                                    <div class="tab-base mt-4" id="tab-program">
+                                                        <ul class="nav nav-justified nav-base" id="tab" role="tablist">
+                                                            <li class="nav-item">
+                                                                    <nuxt-link class="nav-link py-3" id="detail-tab" data-toggle="tab"
+                                                                    role="tab" aria-controls="detail" aria-selected="true" :to="`/profile`">My Profile</nuxt-link>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <nuxt-link class="nav-link py-3" id="detail-tab" data-toggle="tab"
+                                                                role="tab" aria-controls="detail" aria-selected="true" :to="`/profile/addresses`">Addresses list</nuxt-link>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <nuxt-link class="nav-link py-3" id="detail-tab" data-toggle="tab"
+                                                                role="tab" aria-controls="detail" aria-selected="true" :to="`/profile/addresses/add`">Add New address</nuxt-link>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                     <br/><br/>
 
                                                     <div v-if="shipping_addresses.length > 0">
