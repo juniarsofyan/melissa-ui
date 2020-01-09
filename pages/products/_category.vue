@@ -91,9 +91,7 @@ export default {
     head() {
         return {
             bodyAttrs: {
-                class: this.dataLoaded
-                    ? 'home-page home page page-id-4 page-template page-template-template-homepage page-template-template-homepage-php'
-                    : ''
+                class: this.dataLoaded ? 'home-page home page page-id-4 page-template page-template-template-homepage page-template-template-homepage-php' : ''
             }
         }
     },
