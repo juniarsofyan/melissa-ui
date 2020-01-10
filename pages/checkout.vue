@@ -29,7 +29,7 @@
                                 <div class="shipping-address">
                                     <h3 class="title-form">Checkout</h3>
                                     <p class="form-row form-row-first">
-                                        <label class="text">Select SPB (Sales Point Branch)</label>
+                                        <label class="text" for="branches">Select SPB (Sales Point Branch)</label>
                                         <!-- class="chosen-select" -->
                                         <select style="width:100%;" data-placeholder="-- Choose SPB --" id="branches"
                                             ref="branches" v-model="branch">
@@ -105,6 +105,14 @@
                                             You haven't set a default shipping address. <br/>
                                             Please set a default shipping address <nuxt-link to="/profile/addresses" style="text-decoration:underline;"> <b>here</b> </nuxt-link>.
                                             <!-- <button class="btn-sm" @click="showModal=true">Add shipping address</button> -->
+                                        </p>
+                                    </div>
+                                </span>
+                                <span v-if="shipping_method == 'IMMEDIATE'">
+                                    <div class="shipping-address">
+                                        <p class="form-row form-row-first">
+                                            <label class="text" for="note">Note</label>
+                                            <textarea name="note" id="note" rows="5" v-model="note"></textarea>
                                         </p>
                                     </div>
                                 </span>
@@ -431,6 +439,7 @@
                 'checkout', [
                     'branch',
                     'shipping_method',
+                    'note',
                     'courier',
                     'shipping_address',
                     'unique_code',
@@ -459,6 +468,14 @@
                 },
                 set(value) {
                     this.$store.dispatch('checkout/setShippingMethod', value)
+                }
+            },
+            note: {
+                get() {
+                    return this.$store.getters['checkout/note']
+                },
+                set(value) {
+                    this.$store.dispatch('checkout/setNote', value)
                 }
             },
             checkoutDataValidated() {
@@ -491,6 +508,7 @@
                     this.$store.dispatch('checkout/setDeliveryAddress', false)
                     this.setTotalPayment()
                 } else {
+                    this.$store.dispatch('checkout/setNote', "")
                     this.getDefaultShippingAddresses()
                 }
             },

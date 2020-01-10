@@ -164,7 +164,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters("checkout", ['total_payment', 'shipping_method', 'courier', 'delivery_address', 'branch', 'shipment', 'unique_code']),
+		...mapGetters("checkout", ['total_payment', 'shipping_method', 'courier', 'delivery_address', 'branch', 'shipment', 'unique_code', 'note']),
         ...mapGetters("cart", ['items', 'subtotal', 'total_weight', 'grand_total', 'count']),
 		transaction_number: function() {
 			let today = new Date()
@@ -254,8 +254,8 @@ export default {
                     sales_branch_code: this.branch.code,
                     bank: this.bank.bank_name,
                     shopping_platform: "MSHOP",
-                    note: "",
-				}
+                    note: this.note
+                }
 				
                 this.$axios.post(`transaction/add`, {
                     transaction: transaction_master,
