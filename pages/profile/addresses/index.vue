@@ -22,7 +22,7 @@
 
                         <div class="tab-container">
                             <div id="profil" class="tab-panel active">
-                                <div class="col-md-10 col-md-offset-1">
+                                <div class="col-md-12">
                                     <div class="shipping-address-form-wrapp">
                                         <div
                                             class="shipping-address-form checkout-form"
@@ -30,36 +30,68 @@
                                         >
                                             <div class="col-12">
                                                 <div class="shipping-address">
-                                                    <nuxt-link :to="`/profile`">My Profile</nuxt-link> |
-                                                    <nuxt-link :to="`/profile/addresses`">Addresses list</nuxt-link> |
-                                                    <nuxt-link :to="`/profile/addresses/add`">Add New address</nuxt-link>
+
+                                                    <div class="tab-base mt-4" id="tab-program">
+                                                        <ul class="nav nav-justified nav-base" id="tab" role="tablist">
+                                                            <li class="nav-item">
+                                                                    <nuxt-link class="nav-link py-3" id="detail-tab" data-toggle="tab"
+                                                                    role="tab" aria-controls="detail" aria-selected="true" :to="`/profile`">My Profile</nuxt-link>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <nuxt-link class="nav-link py-3" id="detail-tab" data-toggle="tab"
+                                                                role="tab" aria-controls="detail" aria-selected="true" :to="`/profile/addresses`">Addresses list</nuxt-link>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <nuxt-link class="nav-link py-3" id="detail-tab" data-toggle="tab"
+                                                                role="tab" aria-controls="detail" aria-selected="true" :to="`/profile/addresses/add`">Add New address</nuxt-link>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                     <br/><br/>
 
                                                     <div v-if="shipping_addresses.length > 0">
-                                                        <div v-if="!defaultShippingAddressAvailable" class="text-center">
-                                                            <br/>
-                                                            <p style="color:red;font-style:italic;font-weight:bold;">
-                                                                NOTE: You haven't set a default shipping address. Please set a default shipping address below!
-                                                            </p>
-                                                            <br/>
-                                                        </div>
-                                                        <div v-for="address in shipping_addresses" :key="address.id">
-                                                            <!-- Id : {{ address.id }} <br/> -->
-                                                            Nama : {{ address.nama }} <br/>
-                                                            Telepon : {{ address.telepon }} <br/>
-                                                            Provinsi : {{ address.provinsi_nama }} <br/>
-                                                            Kota : {{ address.kota_nama }} <br/>
-                                                            Kecamatan : {{ address.kecamatan_nama }} <br/>
-                                                            Alamat : {{ address.alamat }} <br/>
-                                                            Kode pos : {{ address.kode_pos }} <br/>
-                                                            <!-- Is default? : {{ address.is_default }} <br/> -->
-                                                            <nuxt-link :to="`/profile/addresses/${address.id}/edit`" tag="button">Edit</nuxt-link> 
-                                                            <button class="btn-danger" @click="deleteShippingAddress(address.id)">Delete</button><br/>
-                                                            <button v-if="address.is_default == 0" @click="setDefaultShippingAddress(address.id)">Set as default</button><br/>
-                                                            <br/>
+                                                        <div>
+                                                            <div class="table-container" role="table" aria-label="Destinations">
+                                                                <div class="flex-table header" role="rowgroup">
+                                                                    <div class="flex-row first header" role="columnheader">Penerima</div>
+                                                                    <div class="flex-row header" role="columnheader">Alamat Pengiriman</div>
+                                                                    <div class="flex-row header" role="columnheader">Daerah Pengiriman</div>
+                                                                    <div class="flex-row header text-right" role="columnheader">Actions</div>
+                                                                </div>
+                                                                <div v-for="address in shipping_addresses" :key="address.id" class="flex-table" role="rowgroup">
+                                                                    <div class="flex-row first" role="cell">
+                                                                        <div>
+                                                                            <!-- <input type="radio" name="address_default" id=""> -->
+                                                                            <div>
+                                                                                <b>{{ address.nama }}</b>
+                                                                                <div>
+                                                                                    {{ address.telepon }}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flex-row" role="cell">
+                                                                        {{ address.alamat }}, {{ address.kecamatan_nama }}. {{ address.kota_nama }}
+                                                                    </div>
+                                                                    <div class="flex-row" role="cell">
+                                                                        {{ address.provinsi_nama }}, {{ address.kota_nama }}, {{ address.kecamatan_nama }} {{ address.kode_pos }}
+                                                                    </div>
+                                                                    <div class="flex-row text-right" role="cell">
+                                                                        <!-- <nuxt-link :to="`/profile/addresses/${address.id}/edit`" tag="button">Edit</nuxt-link> -->
+                                                                        <nuxt-link :to="`/profile/addresses/${address.id}/edit`">
+                                                                            <feather type="edit" size="1em"></feather>
+                                                                            <b>Edit</b>
+                                                                        </nuxt-link>
+                                                                        <br>
+                                                                        <a href="" v-if="address.is_default == 0">
+                                                                            <b>Set as default</b>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="text-center" v-else>
+                                                    <div v-else class="text-center">
                                                         <img src="~/assets/images/svg/no-addresses.svg" style="width:200px;" /><br/><br/>
                                                             <b><h3>Oops...</h3></b>
                                                             You have no shipping address. Click <nuxt-link to="/profile/addresses/add" style="color:pink;"> <b>here</b> </nuxt-link> to add new.
@@ -112,6 +144,9 @@ export default {
             return false
         }
     },
+    created() {
+        this.getShippingAddresses()
+    },
     methods: {
         getShippingAddresses() {
             this.$axios.post(`shipping-address/all`, {
@@ -124,94 +159,7 @@ export default {
             .catch(e => {
                 console.log(e)
             })
-        },
-        async setDefaultShippingAddress(id) {
-            this.$swal({
-                // title: "Saving address",
-                text: "Setting as default",
-                allowEscapeKey: false,
-                allowOutsideClick: false,
-                onOpen: () => {
-                    this.$swal.showLoading()
-                },
-            })
-
-            await this.$axios.post(`shipping-address/set-default`, {
-                id: id
-            }).then(response => {
-                if (response.data.data == 1) {
-                    this.$swal({
-                        // title: "",
-                        text: "Default shipping address set!",
-                        type: "success",
-                    }).then(() => {
-                        this.getShippingAddresses()
-                    })
-                }
-            })
-            .catch(e => {
-                console.log(e)
-                this.$swal({
-                    title: "Oops..",
-                    text: "Cannot connect to the server, Please try again later",
-                    type: "error",
-                    onOpen: () => {
-                        this.$swal.hideLoading()
-                    },
-                })
-            })
-        },
-        async deleteShippingAddress(id) {
-            await this.$swal({
-                title: 'Confirm deletion',
-                text: 'Delete this shipping address?',
-                type: 'question',
-                showCancelButton: true,
-                // confirmButtonClass: "btn-danger",
-                // confirmButtonColor: "#3085d6",
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No'
-                // cancelButtonColor: "#d33",
-            }).then((isConfirm) => {
-                if (isConfirm.value) {
-                    this.$swal({
-                        // title: "Saving address",
-                        text: "Deleting...",
-                        allowEscapeKey: false,
-                        allowOutsideClick: false,
-                        onOpen: () => {
-                            this.$swal.showLoading()
-                        },
-                    })
-
-                    this.$axios.get(`shipping-address/${id}/delete`).then(response => {
-                        if (response.data.data == 1) {
-                            this.$swal({
-                                // title: "",
-                                text: "Shipping address deleted!",
-                                type: "success",
-                            }).then(() => {
-                                this.getShippingAddresses()
-                            })
-                        }
-                    })
-                    .catch(e => {
-                        console.log(e)
-                        this.$swal({
-                            title: "Oops..",
-                            text: "Cannot connect to the server, Please try again later",
-                            type: "error",
-                            onOpen: () => {
-                                this.$swal.hideLoading()
-                            },
-                        })
-                    })
-                }
-            })
-        },
-    },
-    created() {
-        this.getShippingAddresses()
+        }
     }
 }
 </script>
