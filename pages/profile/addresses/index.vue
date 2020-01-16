@@ -58,6 +58,8 @@
                                                                 </p>
                                                                 <br/>
                                                             </div>
+                                                        </div>
+                                                        <div v-if="!isMobile()">
                                                             <div class="table-container" role="table" aria-label="Destinations">
                                                                 <div class="flex-table header" role="rowgroup">
                                                                     <div class="flex-row first header" role="columnheader">Personal Info</div>
@@ -92,6 +94,30 @@
                                                                             <b>Set as default</b>
                                                                         </a>
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div v-else>
+                                                            <div v-for="address in shipping_addresses" :key="address.id" class="card-ontable" role="rowgroup">
+                                                                <div>
+                                                                    <b>{{ address.nama }}</b>
+                                                                    <div>
+                                                                        {{ address.telepon }}
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                    {{ address.alamat }}, {{ address.kecamatan_nama }}. {{ address.kota_nama }}
+                                                                </div>
+                                                                <div class="action-card-ontable">
+                                                                    <a href="#" v-if="address.is_default == 0" @click.prevent="setDefaultShippingAddress(address.id)" class="button">
+                                                                        <b>Set as default</b>
+                                                                    </a>
+                                                                    <div v-else class="button" style="background-color:#dedede">
+                                                                        <b style="color:#6f6f6f">Now Used</b>
+                                                                    </div>
+                                                                    <nuxt-link :to="`/profile/addresses/${address.id}/edit`" style="align-self: center;">
+                                                                        <feather type="edit" size="1em"></feather>
+                                                                    </nuxt-link>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -153,6 +179,13 @@ export default {
         this.getShippingAddresses()
     },
     methods: {
+        isMobile() {
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true
+            } else {
+                return false
+            }
+        },
         getShippingAddresses() {
             this.$axios.post(`shipping-address/all`, {
                 email: this.user_data.email
