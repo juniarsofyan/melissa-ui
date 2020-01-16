@@ -51,11 +51,18 @@
 
                                                     <div v-if="shipping_addresses.length > 0">
                                                         <div>
+                                                            <div v-if="!defaultShippingAddressAvailable" class="text-center">
+                                                                <br/>
+                                                                <p style="color:red;font-style:italic;font-weight:bold;">
+                                                                    NOTE: You haven't set a default shipping address. Please set a default shipping address below!
+                                                                </p>
+                                                                <br/>
+                                                            </div>
                                                             <div class="table-container" role="table" aria-label="Destinations">
                                                                 <div class="flex-table header" role="rowgroup">
-                                                                    <div class="flex-row first header" role="columnheader">Penerima</div>
-                                                                    <div class="flex-row header" role="columnheader">Alamat Pengiriman</div>
-                                                                    <div class="flex-row header" role="columnheader">Daerah Pengiriman</div>
+                                                                    <div class="flex-row first header" role="columnheader">Personal Info</div>
+                                                                    <div class="flex-row header" role="columnheader">Address</div>
+                                                                    <div class="flex-row header" role="columnheader"></div>
                                                                     <div class="flex-row header text-right" role="columnheader">Actions</div>
                                                                 </div>
                                                                 <div v-for="address in shipping_addresses" :key="address.id" class="flex-table" role="rowgroup">
@@ -71,11 +78,9 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="flex-row" role="cell">
-                                                                        {{ address.alamat }}, {{ address.kecamatan_nama }}. {{ address.kota_nama }}
+                                                                        {{ address.alamat }}, {{ 'Kec. ' + address.kecamatan_nama }}, {{ address.kota_nama }}, {{ address.kode_pos }}, {{ address.provinsi_nama }}
                                                                     </div>
-                                                                    <div class="flex-row" role="cell">
-                                                                        {{ address.provinsi_nama }}, {{ address.kota_nama }}, {{ address.kecamatan_nama }} {{ address.kode_pos }}
-                                                                    </div>
+                                                                    <div class="flex-row" role="cell"> </div>
                                                                     <div class="flex-row text-right" role="cell">
                                                                         <!-- <nuxt-link :to="`/profile/addresses/${address.id}/edit`" tag="button">Edit</nuxt-link> -->
                                                                         <nuxt-link :to="`/profile/addresses/${address.id}/edit`">
@@ -83,7 +88,7 @@
                                                                             <b>Edit</b>
                                                                         </nuxt-link>
                                                                         <br>
-                                                                        <a href="" v-if="address.is_default == 0">
+                                                                        <a href="#" v-if="address.is_default == 0" @click.prevent="setDefaultShippingAddress(address.id)">
                                                                             <b>Set as default</b>
                                                                         </a>
                                                                     </div>
@@ -158,6 +163,90 @@ export default {
             })
             .catch(e => {
                 console.log(e)
+            })
+        },
+        async setDefaultShippingAddress(id) {
+            this.$swal({
+                // title: "Saving address",
+                text: "Setting as default",
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                onOpen: () => {
+                    this.$swal.showLoading()
+                },
+            })
+
+            await this.$axios.post(`shipping-address/set-default`, {
+                id: id
+            }).then(response => {
+                if (response.data.data == 1) {
+                    this.$swal({
+                        // title: "",
+                        text: "Default shipping address set!",
+                        type: "success",
+                    }).then(() => {
+                        this.getShippingAddresses()
+                    })
+                }
+            })
+            .catch(e => {
+                console.log(e)
+                this.$swal({
+                    title: "Oops..",
+                    text: "Cannot connect to the server, Please try again later",
+                    type: "error",
+                    onOpen: () => {
+                        this.$swal.hideLoading()
+                    },
+                })
+            })
+        },
+        async deleteShippingAddress(id) {
+            await this.$swal({
+                title: 'Confirm deletion',
+                text: 'Delete this shipping address?',
+                type: 'question',
+                showCancelButton: true,
+                // confirmButtonClass: "btn-danger",
+                // confirmButtonColor: "#3085d6",
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+                // cancelButtonColor: "#d33",
+            }).then((isConfirm) => {
+                if (isConfirm.value) {
+                    this.$swal({
+                        // title: "Saving address",
+                        text: "Deleting...",
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                        onOpen: () => {
+                            this.$swal.showLoading()
+                        },
+                    })
+
+                    this.$axios.get(`shipping-address/${id}/delete`).then(response => {
+                        if (response.data.data == 1) {
+                            this.$swal({
+                                // title: "",
+                                text: "Shipping address deleted!",
+                                type: "success",
+                            }).then(() => {
+                                this.getShippingAddresses()
+                            })
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e)
+                        this.$swal({
+                            title: "Oops..",
+                            text: "Cannot connect to the server, Please try again later",
+                            type: "error",
+                            onOpen: () => {
+                                this.$swal.hideLoading()
+                            },
+                        })
+                    })
+                }
             })
         }
     }
