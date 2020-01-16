@@ -37,22 +37,7 @@
                                                     <br/><br/>
 
                                                     <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="card-profile">
-                                                                <div class="card-img">
-                                                                    <img src="https://source.unsplash.com/random/500x500" alt="">
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <button class="button">Edit Foto</button>
-                                                                </div>
-                                                                <div class="card-info">
-                                                                    <p>besaran file maximum 10Mb</p>
-                                                                    <p>ekstensi yang diperbolehkan: JPG, PNG, JPEG</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                        
+                                                        <div class="col-md-12">
                                                             <p class="col-12">
                                                                 <label class="text">Nama</label>
                                                                 <input
