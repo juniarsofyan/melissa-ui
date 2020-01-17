@@ -83,7 +83,7 @@
                                                                     readonly
                                                                 />
                                                             </p>
-                                                            <div class="text-right" style="margin-top: 2em">
+                                                            <div class="text-left" style="margin-top: 2em">
                                                                 <button class="button" @click="updateProfile">Save Profile</button>
                                                             </div>
 

@@ -61,11 +61,11 @@
                                                         </div>
                                                         <div v-if="!isMobile()">
                                                             <div class="table-container" role="table" aria-label="Destinations">
-                                                                <div class="flex-table header" role="rowgroup">
-                                                                    <div class="flex-row first header" role="columnheader">Personal Info</div>
-                                                                    <div class="flex-row header" role="columnheader">Address</div>
-                                                                    <div class="flex-row header" role="columnheader"></div>
-                                                                    <div class="flex-row header text-right" role="columnheader">Actions</div>
+                                                                <div class="flex-table header" role="rowgroup" style="background-color:#eee;">
+                                                                    <div class="flex-row first header text-center" role="columnheader">Personal Info</div>
+                                                                    <div class="flex-row header text-center" role="columnheader">Address</div>
+                                                                    <div class="flex-row header text-center" role="columnheader"></div>
+                                                                    <div class="flex-row header text-center" role="columnheader">Actions</div>
                                                                 </div>
                                                                 <div v-for="address in shipping_addresses" :key="address.id" class="flex-table" role="rowgroup">
                                                                     <div class="flex-row first" role="cell">
@@ -86,12 +86,18 @@
                                                                     <div class="flex-row text-right" role="cell">
                                                                         <!-- <nuxt-link :to="`/profile/addresses/${address.id}/edit`" tag="button">Edit</nuxt-link> -->
                                                                         <nuxt-link :to="`/profile/addresses/${address.id}/edit`">
-                                                                            <feather type="edit" size="1em"></feather>
-                                                                            <b>Edit</b>
+                                                                            <feather type="edit" size="1em" stroke="orange"></feather>
+                                                                            Edit
                                                                         </nuxt-link>
-                                                                        <br>
+                                                                        &nbsp;
+                                                                        <a href="#" @click.prevent="deleteShippingAddress(address.id)" style="align-self: center;">
+                                                                            <feather type="trash" size="1em" stroke="red"></feather>
+                                                                            Delete
+                                                                        </a>
+                                                                        &nbsp;
                                                                         <a href="#" v-if="address.is_default == 0" @click.prevent="setDefaultShippingAddress(address.id)">
-                                                                            <b>Set as default</b>
+                                                                            <feather type="check" size="1em" stroke="blue"></feather>
+                                                                            <b>Set default</b>
                                                                         </a>
                                                                     </div>
                                                                 </div>
@@ -110,14 +116,19 @@
                                                                 </div>
                                                                 <div class="action-card-ontable">
                                                                     <a href="#" v-if="address.is_default == 0" @click.prevent="setDefaultShippingAddress(address.id)" class="button">
-                                                                        <b>Set as default</b>
+                                                                        <b>Set default</b>
                                                                     </a>
                                                                     <div v-else class="button" style="background-color:#dedede">
                                                                         <b style="color:#6f6f6f">Now Used</b>
                                                                     </div>
+                                                                    &nbsp;
                                                                     <nuxt-link :to="`/profile/addresses/${address.id}/edit`" style="align-self: center;">
-                                                                        <feather type="edit" size="1em"></feather>
+                                                                        <feather type="edit" size="1em" stroke="orange"></feather>
                                                                     </nuxt-link>
+                                                                    &nbsp;
+                                                                    <a href="#" @click.prevent="deleteShippingAddress(address.id)" style="align-self: center;">
+                                                                        <feather type="trash" size="1em" stroke="red"></feather>
+                                                                    </a><br/>
                                                                 </div>
                                                             </div>
                                                         </div>
