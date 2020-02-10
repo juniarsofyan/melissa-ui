@@ -209,7 +209,15 @@ export default {
 			today = dd + "-" + mm + "-" + yyyy
 
 			return today
-		}
+        },
+        note: {
+            get() {
+                return this.$store.getters['checkout/note']
+            },
+            set(value) {
+                this.$store.dispatch('checkout/setNote', value)
+            }
+        },
 	},
 	created() {
 		// alert(this.courier)
@@ -237,6 +245,8 @@ export default {
                 const user_data = JSON.parse(localStorage.getItem('user_data'))
                 const accesskey = JSON.parse(localStorage.getItem('accesskey'))
 
+                this.checkPromoItemClaimed()
+
                 let transaction_master = {
                     transaction_date: this.current_date,
                     transaction_number: this.transaction_number,
@@ -263,7 +273,6 @@ export default {
                 .then(response => {
                     if (response.data.data == 1) {
                         this.$swal({
-                            // title: "",
                             text: "Transaction saved!",
                             type: "success",
                         }).then(() => {
@@ -280,6 +289,14 @@ export default {
                 .catch(e => {
                     console.log(e)
                 })
+            }
+        },
+        checkPromoItemClaimed() {
+            const promo_item = this.items.filter(product => product.note == "MINIMUM-POINT-GET-DISCOUNT").length > 0
+            if (promo_item) {
+                if (this.note.search("MINIMUM-POINT-GET-DISCOUNT") < 0) {
+                    this.note = "MINIMUM-POINT-GET-DISCOUNT | " + this.note
+                }
             }
         }
 	},

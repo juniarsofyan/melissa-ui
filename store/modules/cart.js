@@ -6,6 +6,10 @@ const cart = {
         items: items ? JSON.parse(items) : []
     },
     mutations: {
+        setItems(state, items) {
+            state.items = items
+            window.localStorage.setItem('items', JSON.stringify(state.items))
+        },
         addItem(state, item) {
             let item_exists = state.items.find((product) => product.product_code == item.kode_barang)
 
@@ -34,7 +38,8 @@ const cart = {
                     unit: item.unit,
                     category: item.jenis,
                     picture: item.pic ? item.pic : '',
-                    note: item.note ? item.note : ''
+                    note: item.note ? item.note : '',
+                    promo: item.promo ? item.promo : 0
                 }
 
                 state.items.push(product)
@@ -44,7 +49,13 @@ const cart = {
         },
         updateQty(state, item) { // state.items.push(item)
 
-            let item_exists = state.items.find((product) => product.product_code == item.product_code)
+            let item_exists = false
+
+            if (item.kode_barang) {
+                item_exists = state.items.find((product) => product.product_code == item.kode_barang)
+            } else {
+                item_exists = state.items.find((product) => product.product_code == item.product_code)
+            }
 
             if (item_exists) {
                 item_exists.qty = parseInt(item.qty)
@@ -134,9 +145,15 @@ const cart = {
             })
 
             return products
+        },
+        grand_total_poin(state) {
+            return state.items.reduce((accumulator, item) => accumulator + parseInt(item.total_poin), 0)
         }
     },
     actions: {
+        setItems({ state, commit}, payload) {
+            commit('setItems', payload)
+        },
         addItem( {state, commit}, payload) {
             commit('addItem', payload)
         },

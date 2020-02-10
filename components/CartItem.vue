@@ -14,7 +14,7 @@
                     tag="a"
                     class="title"
                 >{{ item.product_name }}</nuxt-link>
-                <div class="cart-info-wrap">
+                <div class="cart-info-wrap" v-if="item.note!='MINIMUM-POINT-GET-DISCOUNT'">
                     <div class="flex-cart-item">
                         <div v-if="item.price_discount > 0 && item.price > item.price_discount">
                             <div class="cart-product-price-disc">{{ item.price | rupiah }}</div>
@@ -38,6 +38,26 @@
                                 />
                                 <div class="btn-number qtyplus quantity-plus" @click="addQty">+</div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="product-remove">
+                        <a class="remove" @click="removeItem"></a>
+                    </div>
+                </div>
+                <div class="cart-info-wrap" v-else>
+                    <div class="flex-cart-item">
+                        <div v-if="item.price_discount > 0 && item.price > item.price_discount">
+                            <div class="cart-product-price-disc">{{ item.price | rupiah }}</div>
+                            <div class="cart-product-price">{{ item.price_discount | rupiah }}</div>
+                        </div>
+                        <div v-else>
+                            <div class="cart-product-price">{{ item.price | rupiah }}</div>
+                        </div>
+                        <div class="quantity">
+                            <b>PROMO ITEM</b>
+                        </div>
+                        <div class="quantity">
+                            <b>x{{ qty }}</b>
                         </div>
                     </div>
                     <div class="product-remove">

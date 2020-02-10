@@ -180,7 +180,7 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        </div
                         <div class="button-control">
                             <nuxt-link :to="`/cart`" tag="button" class="button btn-continue-shopping">
                                 <i class="fa fa-arrow-left" aria-hidden="true"></i>

@@ -13,7 +13,7 @@ const checkout = {
     state: {
         branch: branch ? JSON.parse(branch) : [],
         shipping_method: shipping_method ? shipping_method : false,
-        note: note ? note : false,
+        note: note ? note : "",
         shipping_address: shipping_address ? shipping_address : false,
         courier: courier ? courier : false,
         shipment: shipment ? JSON.parse(shipment) : false,
@@ -67,7 +67,7 @@ const checkout = {
 
             state.branch = []
             state.shipping_method = false
-            state.note = false
+            state.note = ""
             state.shipping_address = false
             state.courier = false
             state.shipment = false,
