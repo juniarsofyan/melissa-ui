@@ -40,18 +40,6 @@
                                             :item="item"
                                         />
                                     </div>
-
-                                    <div class="col-md-12 col-sm-12" v-if="number_of_claimed_series > 0">
-                                        <div class="text-center" style="margin-top:50px;">
-                                            <h3>Yeay! You got free for these items:</h3>
-                                        </div>
-                                        <FreeItem
-                                            v-for="item in free_items"
-                                            :key="item.kode_barang"
-                                            :item="item"
-                                            :number_of_claimed_series="number_of_claimed_series"
-                                        />
-                                    </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                     <!-- <div class="coupon">
@@ -116,20 +104,17 @@
 import { mapGetters } from 'vuex'
 import CartItem from '~/components/CartItem.vue'
 import DiscountItem from '~/components/promo-widgets/minimum-point/DiscountItem.vue'
-import FreeItem from '~/components/promo-widgets/minimum-point/FreeItem.vue'
 import minimumpoint from '~/plugins/promos/minimumpoint'
 
 export default {
     layout: 'products',
     components: {
         CartItem,
-        DiscountItem,
-        FreeItem
+        DiscountItem
     },
     data() {
         return {
             showMinimumPromoItems: false,
-            showWGSeriesFreeItems: false,
             discount_items: [
                 {
                     "kode_barang": "01001",
@@ -461,30 +446,6 @@ export default {
                     "pic": "19004",
                     "promo": 1
                 }
-            ],
-            free_items: [
-                {
-                    "kode_barang": "02005",
-                    "nama": "SERUM ANTI FLEK",
-                    "berat": 21,
-                    "poin": 0,
-                    "harga": 0,
-                    "h_hpb": 0,
-                    "diskon": 0,
-                    "harga_diskon": 0,
-                    "qty": 0,
-                    "subtotal": 0,
-                    "grand_total": 0,
-                    "total_weight": 0,
-                    "total_poin": 0,
-                    "image": "02005",
-                    "unit": "PIECES",
-                    "category": "EXTRA CARE",
-                    "picture": "02005",
-                    "note": "ORDER-WG-SERIES-GET-FREE-ITEM",
-                    "pic": "02005",
-                    "promo": 1
-                }
             ]
         }
     },
@@ -503,29 +464,11 @@ export default {
             set(value) {
                 this.$store.dispatch('cart/setItems', value)
             }
-        },
-        // HASIL COUNT CLAIMED FREE ITEMS DISINI DIJADIKAN BATAS MAKSIMAL CLAIM FREE ITEM
-        number_of_claimed_series: function() {
-            const wg_product_codes = ['88015', '88137', '88016', '88018', '88019', '88132', '88062', '88020', '88169', '88097', '88021', '88023', '88170', '88088', '88130', '88138', '88024']
-
-            // return state.items.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
-
-            let count = 0
-            wg_product_codes.forEach((free_item) => {
-                this.items.forEach((cart_item) => {
-                    if (cart_item.product_code == free_item) {
-                        count += cart_item.qty
-                    }
-                })
-            })
-
-            return count
         }
     },
     watch: {
         'items': {
             handler(val) {
-                this.items = val
                 this.checkPromoMinimumPoint()
                 this.checkNoRegularItems()
             },
@@ -593,27 +536,11 @@ export default {
                     this.$store.dispatch('cart/removeItem', cart_item.product_code)
                 })
             }
-        }/* ,
-        // HASIL COUNT CLAIMED FREE ITEMS DISINI DIJADIKAN BATAS MAKSIMAL CLAIM FREE ITEM
-        checkPromoWGSeriesGetFree() {
-            const wg_product_codes = ['88015', '88137', '88016', '88018', '88019', '88132', '88062', '88020', '88169', '88097', '88021', '88023', '88170', '88088', '88130', '88138', '88024']
-
-            // return state.items.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
-
-            let count = 0
-            wg_product_codes.forEach((free_item) => {
-                this.items.forEach((cart_item) => {
-                    if (cart_item.product_code == free_item) {
-                        count += cart_item.qty
-                    }
-                })
-            })
-        } */
+        }
     },
     mounted() {
         this.checkPromoMinimumPoint()
         this.checkNoRegularItems()
-        // this.checkPromoWGSeriesGetFree()
     }
 }
 </script>

@@ -70,23 +70,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
     props: ['item'],
     data() {
         return {
             qty: this.item.qty
-        }
-    },
-    watch: {
-        'items': {
-            handler(val) {
-                // // this.$forceUpdate()
-                // alert('lala')
-                console.log(val)
-            },
-            deep: true
         }
     },
     methods: {
@@ -113,7 +101,6 @@ export default {
         },
         removeItem: function() {
             this.$store.dispatch('cart/removeItem', this.item.product_code)
-            // Window.location.reload()
         }
     }
 }
