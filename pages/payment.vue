@@ -292,10 +292,10 @@ export default {
             }
         },
         checkPromoItemClaimed() {
-            const promo_item = this.items.filter(product => product.note == "MINIMUM-POINT-GET-DISCOUNT").length > 0
+            const promo_item = this.items.filter(product => product.note == "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB").length > 0
             if (promo_item) {
-                if (this.note.search("MINIMUM-POINT-GET-DISCOUNT") < 0) {
-                    this.note = "MINIMUM-POINT-GET-DISCOUNT | " + this.note
+                if (this.note.search("MINIMUM-POINT-GET-DISCOUNT-16-29-FEB") < 0) {
+                    this.note = "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB | " + this.note
                 }
             }
         }

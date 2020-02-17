@@ -32,12 +32,24 @@
                                     </div>
                                     <div class="col-md-12 col-sm-12" v-if="showMinimumPromoItems">
                                         <div class="text-center" style="margin-top:50px;">
-                                            <h3>Yeay! You got promo for these items:</h3>
+                                            <h3>Yeay! You got discount for these items:</h3>
                                         </div>
                                         <DiscountItem
                                             v-for="item in discount_items"
                                             :key="item.kode_barang"
                                             :item="item"
+                                        />
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-12" v-if="number_of_claimed_series > 0">
+                                        <div class="text-center" style="margin-top:50px;">
+                                            <h3>Yeay! You got free for these items:</h3>
+                                        </div>
+                                        <FreeItem
+                                            v-for="item in free_items"
+                                            :key="item.kode_barang"
+                                            :item="item"
+                                            :number_of_claimed_series="number_of_claimed_series"
                                         />
                                     </div>
                                 </div>
@@ -104,104 +116,373 @@
 import { mapGetters } from 'vuex'
 import CartItem from '~/components/CartItem.vue'
 import DiscountItem from '~/components/promo-widgets/minimum-point/DiscountItem.vue'
+import FreeItem from '~/components/promo-widgets/minimum-point/FreeItem.vue'
 import minimumpoint from '~/plugins/promos/minimumpoint'
 
 export default {
     layout: 'products',
     components: {
         CartItem,
-        DiscountItem
+        DiscountItem,
+        FreeItem
     },
     data() {
         return {
             showMinimumPromoItems: false,
+            showWGSeriesFreeItems: false,
             discount_items: [
                 {
-                    "kode_barang": "05004",
-                    "nama": "LIP CREAM BERRY VIOLET",
-                    "berat": 31.5,
+                    "kode_barang": "01001",
+                    "nama": "ACNE GEL",
+                    "berat": 15.75,
                     "poin": 0,
-                    "harga": 134000,
-                    "h_hpb": 44545,
-                    "diskon": 64,
-                    "harga_diskon": 85000,
+                    "harga": 72000,
+                    "h_hpb": 20000,
+                    "diskon": 70,
+                    "harga_diskon": 50000,
                     "qty": 0,
                     "subtotal": 0,
                     "grand_total": 0,
                     "total_weight": 0,
                     "total_poin": 0,
-                    "image": "05004",
+                    "image": "01001",
                     "unit": "PIECES",
                     "category": "EXTRA CARE",
-                    "picture": "05004",
-                    "note": "MINIMUM-POINT-GET-DISCOUNT",
-                    "pic": "05004",
+                    "picture": "01001",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "01001",
                     "promo": 1
                 },
                 {
-                    "kode_barang": "05005",
-                    "nama": "LIP CREAM MAUVE QUINN",
-                    "berat": 31.5,
+                    "kode_barang": "07002",
+                    "nama": "RADIANCE BB CREAM BEIGE",
+                    "berat": 63,
                     "poin": 0,
-                    "harga": 134000,
-                    "h_hpb": 44545,
-                    "diskon": 64,
-                    "harga_diskon": 85000,
+                    "harga": 246000,
+                    "h_hpb": 56364,
+                    "diskon": 75,
+                    "harga_diskon": 184000,
                     "qty": 0,
                     "subtotal": 0,
                     "grand_total": 0,
                     "total_weight": 0,
                     "total_poin": 0,
-                    "image": "05005",
+                    "image": "07002",
                     "unit": "PIECES",
                     "category": "EXTRA CARE",
-                    "picture": "05005",
-                    "note": "MINIMUM-POINT-GET-DISCOUNT",
-                    "pic": "05005",
+                    "picture": "07002",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "07002",
                     "promo": 1
                 },
                 {
-                    "kode_barang": "05007",
-                    "nama": "LIP CREAM PEACH ELORA",
-                    "berat": 31.5,
+                    "kode_barang": "08001",
+                    "nama": "EYE BAG GEL",
+                    "berat": 21,
                     "poin": 0,
-                    "harga": 134000,
-                    "h_hpb": 44545,
-                    "diskon": 64,
-                    "harga_diskon": 85000,
+                    "harga": 91000,
+                    "h_hpb": 29091,
+                    "diskon": 65,
+                    "harga_diskon": 59000,
                     "qty": 0,
                     "subtotal": 0,
                     "grand_total": 0,
                     "total_weight": 0,
                     "total_poin": 0,
-                    "image": "05007",
+                    "image": "08001",
                     "unit": "PIECES",
                     "category": "EXTRA CARE",
-                    "picture": "05007",
-                    "note": "MINIMUM-POINT-GET-DISCOUNT",
-                    "pic": "05007",
+                    "picture": "08001",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "08001",
                     "promo": 1
                 },
                 {
-                    "kode_barang": "05010",
-                    "nama": "LIP CREAM ROSY CIBRINA",
-                    "berat": 31.5,
+                    "kode_barang": "09001",
+                    "nama": "FOOT CREAM",
+                    "berat": 52.5,
                     "poin": 0,
-                    "harga": 134000,
-                    "h_hpb": 44545,
-                    "diskon": 64,
-                    "harga_diskon": 85000,
+                    "harga": 152000,
+                    "h_hpb": 69091,
+                    "diskon": 50,
+                    "harga_diskon": 76000,
                     "qty": 0,
                     "subtotal": 0,
                     "grand_total": 0,
                     "total_weight": 0,
                     "total_poin": 0,
-                    "image": "05010",
+                    "image": "09001",
                     "unit": "PIECES",
                     "category": "EXTRA CARE",
-                    "picture": "05010",
-                    "note": "MINIMUM-POINT-GET-DISCOUNT",
-                    "pic": "05010",
+                    "picture": "09001",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "09001",
+                    "promo": 1
+                },
+                {
+                    "kode_barang": "10001",
+                    "nama": "GOLD MASK",
+                    "berat": 73.5,
+                    "poin": 0,
+                    "harga": 223000,
+                    "h_hpb": 81818,
+                    "diskon": 60,
+                    "harga_diskon": 133000,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "10001",
+                    "unit": "PIECES",
+                    "category": "EXTRA CARE",
+                    "picture": "10001",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "10001",
+                    "promo": 1
+                },
+                {
+                    "kode_barang": "10002",
+                    "nama": "KIWI MASK",
+                    "berat": 73.5,
+                    "poin": 0,
+                    "harga": 186000,
+                    "h_hpb": 68182,
+                    "diskon": 60,
+                    "harga_diskon": 111000,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "10002",
+                    "unit": "PIECES",
+                    "category": "EXTRA CARE",
+                    "picture": "10002",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "10002",
+                    "promo": 1
+                },
+                {
+                    "kode_barang": "10003",
+                    "nama": "APPLE MASK",
+                    "berat": 73.5,
+                    "poin": 0,
+                    "harga": 186000,
+                    "h_hpb": 68182,
+                    "diskon": 60,
+                    "harga_diskon": 111000,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "10003",
+                    "unit": "PIECES",
+                    "category": "EXTRA CARE",
+                    "picture": "10003",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "10003",
+                    "promo": 1
+                },
+                {
+                    "kode_barang": "10004",
+                    "nama": "MINI GOLD MASK",
+                    "berat": 42,
+                    "poin": 0,
+                    "harga": 112000,
+                    "h_hpb": 25455,
+                    "diskon": 75,
+                    "harga_diskon": 84000,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "10004",
+                    "unit": "PIECES",
+                    "category": "EXTRA CARE",
+                    "picture": "10004",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "10004",
+                    "promo": 1
+                },
+                {
+                    "kode_barang": "12002",
+                    "nama": "LIGHTENING NIGHT LOTION",
+                    "berat": 147,
+                    "poin": 0,
+                    "harga": 143000,
+                    "h_hpb": 39091,
+                    "diskon": 70,
+                    "harga_diskon": 100000,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "12002",
+                    "unit": "PIECES",
+                    "category": "WHITENING",
+                    "picture": "12002",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "12002",
+                    "promo": 1
+                },
+                {
+                    "kode_barang": "12003",
+                    "nama": "MINI EXTRA WHITENING LOTION",
+                    "berat": 36.75,
+                    "poin": 0,
+                    "harga": 108000,
+                    "h_hpb": 34545,
+                    "diskon": 65,
+                    "harga_diskon": 70000,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "12003",
+                    "unit": "PIECES",
+                    "category": "WHITENING",
+                    "picture": "12003",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "12003",
+                    "promo": 1
+                },
+                {
+                    "kode_barang": "14001",
+                    "nama": "NATURAL LOOSE POWDER ACNE",
+                    "berat": 68.25,
+                    "poin": 0,
+                    "harga": 138000,
+                    "h_hpb": 44545,
+                    "diskon": 65,
+                    "harga_diskon": 89000,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "14001",
+                    "unit": "PIECES",
+                    "category": "PURIFYING",
+                    "picture": "14001",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "14001",
+                    "promo": 1
+                },
+                {
+                    "kode_barang": "14002",
+                    "nama": "NATURAL LOOSE POWDER NORMAL",
+                    "berat": 68.25,
+                    "poin": 0,
+                    "harga": 123000,
+                    "h_hpb": 40000,
+                    "diskon": 65,
+                    "harga_diskon": 79000,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "14002",
+                    "unit": "PIECES",
+                    "category": "EXTRA CARE",
+                    "picture": "14002",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "14002",
+                    "promo": 1
+                },
+                {
+                    "kode_barang": "15001",
+                    "nama": "NECK CREAM",
+                    "berat": 36.75,
+                    "poin": 0,
+                    "harga": 98000,
+                    "h_hpb": 31818,
+                    "diskon": 65,
+                    "harga_diskon": 63000,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "15001",
+                    "unit": "PIECES",
+                    "category": "EXTRA CARE",
+                    "picture": "15001",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "15001",
+                    "promo": 1
+                },
+                {
+                    "kode_barang": "16006",
+                    "nama": "PURIFYING NIGHT CREAM ACNE MILD",
+                    "berat": 31.5,
+                    "poin": 0,
+                    "harga": 114000,
+                    "h_hpb": 31818,
+                    "diskon": 70,
+                    "harga_diskon": 79000,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "16006",
+                    "unit": "PIECES",
+                    "category": "PURIFYING",
+                    "picture": "16006",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "16006",
+                    "promo": 1
+                },
+                {
+                    "kode_barang": "19004",
+                    "nama": "WHITE NIGHT CREAM FLAWLESS",
+                    "berat": 36.75,
+                    "poin": 0,
+                    "harga": 107000,
+                    "h_hpb": 34545,
+                    "diskon": 65,
+                    "harga_diskon": 69000,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "19004",
+                    "unit": "PIECES",
+                    "category": "WHITENING",
+                    "picture": "19004",
+                    "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
+                    "pic": "19004",
+                    "promo": 1
+                }
+            ],
+            free_items: [
+                {
+                    "kode_barang": "02005",
+                    "nama": "SERUM ANTI FLEK",
+                    "berat": 21,
+                    "poin": 0,
+                    "harga": 0,
+                    "h_hpb": 0,
+                    "diskon": 0,
+                    "harga_diskon": 0,
+                    "qty": 0,
+                    "subtotal": 0,
+                    "grand_total": 0,
+                    "total_weight": 0,
+                    "total_poin": 0,
+                    "image": "02005",
+                    "unit": "PIECES",
+                    "category": "EXTRA CARE",
+                    "picture": "02005",
+                    "note": "ORDER-WG-SERIES-GET-FREE-ITEM",
+                    "pic": "02005",
                     "promo": 1
                 }
             ]
@@ -222,11 +503,29 @@ export default {
             set(value) {
                 this.$store.dispatch('cart/setItems', value)
             }
+        },
+        // HASIL COUNT CLAIMED FREE ITEMS DISINI DIJADIKAN BATAS MAKSIMAL CLAIM FREE ITEM
+        number_of_claimed_series: function() {
+            const wg_product_codes = ['88015', '88137', '88016', '88018', '88019', '88132', '88062', '88020', '88169', '88097', '88021', '88023', '88170', '88088', '88130', '88138', '88024']
+
+            // return state.items.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
+
+            let count = 0
+            wg_product_codes.forEach((free_item) => {
+                this.items.forEach((cart_item) => {
+                    if (cart_item.product_code == free_item) {
+                        count += cart_item.qty
+                    }
+                })
+            })
+
+            return count
         }
     },
     watch: {
         'items': {
             handler(val) {
+                this.items = val
                 this.checkPromoMinimumPoint()
                 this.checkNoRegularItems()
             },
@@ -251,7 +550,7 @@ export default {
             })
         },
         checkPromoMinimumPoint() {
-            if (this.grand_total_poin > 35) {
+            if (this.grand_total_poin >= 50) {
                 const accesskey = JSON.parse(localStorage.getItem('accesskey'))
 
                 let transaction = {
@@ -269,7 +568,7 @@ export default {
         },
         removeClaimedItems() {
             const claimed_items = this.items.filter((value, index, arr) => {
-                return value.note.search("MINIMUM-POINT-GET-DISCOUNT") > -1
+                return value.note.search("MINIMUM-POINT-GET-DISCOUNT-16-29-FEB") > -1
             })
 
             claimed_items.forEach(claimed_item => {
@@ -282,23 +581,39 @@ export default {
         },
         checkNoRegularItems() {
             const normal_items = this.items.filter((value, index, arr) => {
-                return value.note.search("MINIMUM-POINT-GET-DISCOUNT") < 0
+                return value.note.search("MINIMUM-POINT-GET-DISCOUNT-16-29-FEB") < 0
             })
 
             if (normal_items.length < 1) {
                 const claimed_items = this.items.filter((value, index, arr) => {
-                    return value.note.search("MINIMUM-POINT-GET-DISCOUNT") > -1
+                    return value.note.search("MINIMUM-POINT-GET-DISCOUNT-16-29-FEB") > -1
                 })
 
                 claimed_items.forEach(cart_item => {
                     this.$store.dispatch('cart/removeItem', cart_item.product_code)
                 })
             }
-        }
+        }/* ,
+        // HASIL COUNT CLAIMED FREE ITEMS DISINI DIJADIKAN BATAS MAKSIMAL CLAIM FREE ITEM
+        checkPromoWGSeriesGetFree() {
+            const wg_product_codes = ['88015', '88137', '88016', '88018', '88019', '88132', '88062', '88020', '88169', '88097', '88021', '88023', '88170', '88088', '88130', '88138', '88024']
+
+            // return state.items.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
+
+            let count = 0
+            wg_product_codes.forEach((free_item) => {
+                this.items.forEach((cart_item) => {
+                    if (cart_item.product_code == free_item) {
+                        count += cart_item.qty
+                    }
+                })
+            })
+        } */
     },
     mounted() {
         this.checkPromoMinimumPoint()
         this.checkNoRegularItems()
+        // this.checkPromoWGSeriesGetFree()
     }
 }
 </script>

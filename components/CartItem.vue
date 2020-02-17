@@ -14,7 +14,7 @@
                     tag="a"
                     class="title"
                 >{{ item.product_name }}</nuxt-link>
-                <div class="cart-info-wrap" v-if="item.note!='MINIMUM-POINT-GET-DISCOUNT'">
+                <div class="cart-info-wrap" v-if="item.note==''">
                     <div class="flex-cart-item">
                         <div v-if="item.price_discount > 0 && item.price > item.price_discount">
                             <div class="cart-product-price-disc">{{ item.price | rupiah }}</div>
@@ -70,11 +70,23 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
     props: ['item'],
     data() {
         return {
             qty: this.item.qty
+        }
+    },
+    watch: {
+        'items': {
+            handler(val) {
+                // // this.$forceUpdate()
+                // alert('lala')
+                console.log(val)
+            },
+            deep: true
         }
     },
     methods: {
@@ -101,6 +113,7 @@ export default {
         },
         removeItem: function() {
             this.$store.dispatch('cart/removeItem', this.item.product_code)
+            // Window.location.reload()
         }
     }
 }

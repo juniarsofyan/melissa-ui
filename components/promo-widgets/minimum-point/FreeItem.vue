@@ -17,16 +17,9 @@
                 >{{ item.nama }}</nuxt-link>
                 <div class="cart-info-wrap">
                     <div class="flex-cart-item">
-                        <div v-if="item.harga_diskon > 0 && item.harga > item.harga_diskon">
-                            <div style="color:red;font-weight:bold;">{{ item.diskon }}% OFF</div>
-                            <div class="cart-product-price-disc">{{ item.harga | rupiah }}</div>
-                            <div class="cart-product-price">{{ item.harga_diskon | rupiah }}</div>
-                        </div>
-                        <div v-else>
-                            <div class="cart-product-price">{{ item.harga | rupiah }}</div>
-                        </div>
+                        FREE
                         <div class="quantity">
-                            <button class="btn btn-small btn-success" @click="updateQty" :disabled="isclaimed">{{ button_label }}</button>
+                            <button class="btn btn-small btn-success" @click="updateQty" :disabled="isAllClaimed">{{ button_label }}</button>
                         </div>
                     </div>
                     <!-- <div class="product-remove">
@@ -42,18 +35,18 @@
 import { mapGetters } from 'vuex'
 
 export default {
-    props: ['item'],
+    props: ['item', 'number_of_claimed_series'],
     data() {
         return {
             qty: 1,
             button_label: "Claim",
-            isclaimed: false
+            isAllClaimed: false
         }
     },
     watch: {
         'items': {
             handler(val) {
-                this.checkIfClaimed()
+                this.checkIfAllClaimed()
             },
             deep: true
         }
@@ -61,26 +54,43 @@ export default {
     computed: {
         ...mapGetters('cart', [
             'items'
-        ])
+        ]),
+        qty_in_cart: function() {
+            let item_exists = this.items.find((product) => product.product_code == this.item.kode_barang)
+            return item_exists
+        }
     },
     methods: {
         updateQty () {
-            this.item.qty = this.qty
+
+            let free_item_in_cart = this.items.find((product) => product.product_code == this.item.kode_barang)
+            let qty = 1
+
+            if (free_item_in_cart) {
+                qty = qty + free_item_in_cart.qty
+            }
+
+            this.item.qty = qty
             this.$store.dispatch('cart/updateQty', this.item)
+            
         },
-        checkIfClaimed () {
-            const isClaimed = this.items.filter(product => product.product_code == this.item.kode_barang && product.note == "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB").length > 0
-            if (isClaimed) {
-                this.isclaimed = true
-                this.button_label = "Claimed"
-            } else {
-                this.isclaimed = false
-                this.button_label = "Claim"
+        checkIfAllClaimed () {
+            
+            let free_item_in_cart = this.items.find((product) => product.product_code == this.item.kode_barang)
+
+            if (free_item_in_cart) {
+                if (free_item_in_cart.qty >= this.number_of_claimed_series) {
+                    this.isAllClaimed = true
+                    this.button_label = "Claimed"
+                } else {
+                    this.isAllClaimed = false
+                    this.button_label = "Claim"
+                }
             }
         }
     },
     created() {
-        this.checkIfClaimed()
+        this.checkIfAllClaimed()
     }
 }
 </script>
