@@ -182,7 +182,7 @@ export default {
                     "pic": "08001",
                     "promo": 1
                 },
-                {
+                /* {
                     "kode_barang": "09001",
                     "nama": "FOOT CREAM",
                     "berat": 52.5,
@@ -203,7 +203,7 @@ export default {
                     "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
                     "pic": "09001",
                     "promo": 1
-                },
+                }, */
                 {
                     "kode_barang": "10001",
                     "nama": "GOLD MASK",
@@ -226,7 +226,7 @@ export default {
                     "pic": "10001",
                     "promo": 1
                 },
-                {
+                /* {
                     "kode_barang": "10002",
                     "nama": "KIWI MASK",
                     "berat": 73.5,
@@ -247,7 +247,7 @@ export default {
                     "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
                     "pic": "10002",
                     "promo": 1
-                },
+                }, */
                 {
                     "kode_barang": "10003",
                     "nama": "APPLE MASK",
@@ -270,7 +270,7 @@ export default {
                     "pic": "10003",
                     "promo": 1
                 },
-                {
+                /* {
                     "kode_barang": "10004",
                     "nama": "MINI GOLD MASK",
                     "berat": 42,
@@ -291,7 +291,7 @@ export default {
                     "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
                     "pic": "10004",
                     "promo": 1
-                },
+                }, */
                 {
                     "kode_barang": "12002",
                     "nama": "LIGHTENING NIGHT LOTION",
@@ -314,7 +314,7 @@ export default {
                     "pic": "12002",
                     "promo": 1
                 },
-                {
+                /* {
                     "kode_barang": "12003",
                     "nama": "MINI EXTRA WHITENING LOTION",
                     "berat": 36.75,
@@ -335,7 +335,7 @@ export default {
                     "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
                     "pic": "12003",
                     "promo": 1
-                },
+                }, */
                 {
                     "kode_barang": "14001",
                     "nama": "NATURAL LOOSE POWDER ACNE",
@@ -358,7 +358,7 @@ export default {
                     "pic": "14001",
                     "promo": 1
                 },
-                {
+                /* {
                     "kode_barang": "14002",
                     "nama": "NATURAL LOOSE POWDER NORMAL",
                     "berat": 68.25,
@@ -379,8 +379,8 @@ export default {
                     "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
                     "pic": "14002",
                     "promo": 1
-                },
-                {
+                }, */
+                /* {
                     "kode_barang": "15001",
                     "nama": "NECK CREAM",
                     "berat": 36.75,
@@ -401,7 +401,7 @@ export default {
                     "note": "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB",
                     "pic": "15001",
                     "promo": 1
-                },
+                }, */
                 {
                     "kode_barang": "16006",
                     "nama": "PURIFYING NIGHT CREAM ACNE MILD",
@@ -493,7 +493,7 @@ export default {
             })
         },
         checkPromoMinimumPoint() {
-            if (this.grand_total_poin >= 50) {
+            if (this.grand_total_poin >= 20) {
                 const accesskey = JSON.parse(localStorage.getItem('accesskey'))
 
                 let transaction = {
