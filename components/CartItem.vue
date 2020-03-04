@@ -57,7 +57,7 @@
                             <b>PROMO ITEM</b>
                         </div>
                         <div class="quantity">
-                            <b>x{{ qty }}</b>
+                            <b>x{{ item.qty }}</b>
                         </div>
                     </div>
                     <div class="product-remove">
@@ -70,12 +70,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
     props: ['item'],
-    data() {
-        return {
-            qty: this.item.qty
-        }
+    computed: {
+        ...mapGetters('cart', [
+            'items'
+        ]),
+        qty: {
+            get() {
+                return this.item.qty
+            },
+            set(value) {
+                this.item.qty = value
+            }
+        },
     },
     methods: {
         updateQty: function() {
@@ -87,11 +97,13 @@ export default {
         addQty: function() {
             this.qty++
             this.updateQty()
+            this.removeClaimedItems()
         },
         minQty: function() {
             if (this.qty > 1) {
                 this.qty--
                 this.updateQty()
+                this.removeClaimedItems()
             }
         },
         addItem: function() {
@@ -101,6 +113,10 @@ export default {
         },
         removeItem: function() {
             this.$store.dispatch('cart/removeItem', this.item.product_code)
+            this.removeClaimedItems()
+        },
+        removeClaimedItems: function() {
+            this.$emit('removeClaimedItems')
         }
     }
 }

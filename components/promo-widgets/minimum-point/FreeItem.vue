@@ -19,7 +19,7 @@
                     <div class="flex-cart-item">
                         FREE
                         <div class="quantity">
-                            <button class="btn btn-small btn-success" @click="updateQty" :disabled="isAllClaimed">{{ button_label }}</button>
+                            <button class="btn btn-small btn-success" @click="updateQty" :disabled="disabled">{{ button_label }}</button>
                         </div>
                     </div>
                     <!-- <div class="product-remove">
@@ -35,7 +35,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-    props: ['item', 'number_of_claimed_series'],
+    props: ['item', 'number_of_claimed_series', 'disabled'],
     data() {
         return {
             qty: 1,
@@ -46,7 +46,7 @@ export default {
     watch: {
         'items': {
             handler(val) {
-                this.checkIfAllClaimed()
+                // this.checkIfAllClaimed()
             },
             deep: true
         }
@@ -90,7 +90,7 @@ export default {
         }
     },
     created() {
-        this.checkIfAllClaimed()
+        // this.checkIfAllClaimed()
     }
 }
 </script>
