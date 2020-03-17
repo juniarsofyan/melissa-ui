@@ -31,16 +31,16 @@
                                             @removeClaimedItems="removeClaimedItems"
                                         />
                                     </div>
-                                    <div class="col-md-12 col-sm-12" v-if="non_promo_series_count > 0">
+                                    <div class="col-md-12 col-sm-12" v-if="claimed_series_count > 0">
                                         <div class="text-center" style="margin-top:50px;">
-                                            <h3>You got {{ non_promo_series_count - claimed_non_promo_series_count }} free items:</h3>
+                                            <h3>You got {{ claimed_series_count - claimed_promo_count }} free items:</h3>
                                         </div>
                                         <FreeItem
                                             v-for="item in free_items"
                                             :key="item.kode_barang"
                                             :item="item"
                                             :number_of_claimed_series="non_promo_series_count"
-                                            :disabled="claimed_non_promo_series_count >= non_promo_series_count"
+                                            :disabled="claimed_promo_count >= claimed_series_count"
                                         />
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@ export default {
                     "unit" : "PIECES",
                     "category" : "EXTRA CARE",
                     "picture" : "05006",
-                    "note" : "BUY-SERIES-FREE-LIP-CREAM-1-15-MAR",
+                    "note" : "BUY-2-SERIES-GET-FREE-2-LIPCREAM",
                     "pic" : "05006",
                     "promo" : 1
                 },
@@ -159,7 +159,7 @@ export default {
                     "unit" : "PIECES",
                     "category" : "EXTRA CARE",
                     "picture" : "05008",
-                    "note" : "BUY-SERIES-FREE-LIP-CREAM-1-15-MAR",
+                    "note" : "BUY-2-SERIES-GET-FREE-2-LIPCREAM",
                     "pic" : "05008",
                     "promo" : 1
                 },
@@ -181,7 +181,7 @@ export default {
                     "unit" : "PIECES",
                     "category" : "EXTRA CARE",
                     "picture" : "05009",
-                    "note" : "BUY-SERIES-FREE-LIP-CREAM-1-15-MAR",
+                    "note" : "BUY-2-SERIES-GET-FREE-2-LIPCREAM",
                     "pic" : "05009",
                     "promo" : 1
                 }
@@ -217,13 +217,27 @@ export default {
 
             return non_promo_series.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
         },
-        claimed_non_promo_series_count: function() {
+        claimed_promo_count: function() {
 
-            const claimed_non_promo_series = this.items.filter((item) => {
-                return item.note == "BUY-SERIES-FREE-LIP-CREAM-1-15-MAR"
+            const claimed_series = this.items.filter((item) => {
+                return item.note == "BUY-2-SERIES-GET-FREE-2-LIPCREAM"
             })
 
-            return claimed_non_promo_series.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
+            return claimed_series.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
+        },
+        claimed_series_count: function() {
+
+            const claimed_series = this.items.filter((item) => {
+                return item.unit == "SERIES"
+            })
+
+            let claimed_count = claimed_series.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
+
+            if (claimed_count % 2 == 1) {
+                claimed_count -= 1
+            }
+
+            return claimed_count
         }
     },
     watch: {
@@ -271,7 +285,7 @@ export default {
         },
         removeClaimedItems() {
             const claimed_items = this.items.filter((value, index, arr) => {
-                return value.note.search("BUY-SERIES-FREE-LIP-CREAM-1-15-MAR") > -1
+                return value.note.search("BUY-2-SERIES-GET-FREE-2-LIPCREAM") > -1
             })
 
             claimed_items.forEach(claimed_item => {
@@ -284,17 +298,26 @@ export default {
         },
         checkNoRegularItems() {
             const normal_items = this.items.filter((value, index, arr) => {
-                return value.note.search("BUY-SERIES-FREE-LIP-CREAM-1-15-MAR") < 0
+                return value.note.search("BUY-2-SERIES-GET-FREE-2-LIPCREAM") < 0
             })
 
             if (normal_items.length < 1) {
                 const claimed_items = this.items.filter((value, index, arr) => {
-                    return value.note.search("BUY-SERIES-FREE-LIP-CREAM-1-15-MAR") > -1
+                    return value.note.search("BUY-2-SERIES-GET-FREE-2-LIPCREAM") > -1
                 })
 
                 claimed_items.forEach(cart_item => {
                     this.$store.dispatch('cart/removeItem', cart_item.product_code)
                 })
+            }
+        },
+        checkSeriesItems() {
+            const series_items = this.items.filter((value, index, arr) => {
+                return value.unit == 'SERIES'
+            })
+
+            if (series_items.length >= 2) {
+                
             }
         }
     },
