@@ -26,7 +26,7 @@
                             <div class="cart-product-price">{{ item.harga | rupiah }}</div>
                         </div>
                         <div class="quantity">
-                            <button class="btn btn-small btn-success" @click="updateQty" :disabled="isclaimed">{{ button_label }}</button>
+                            <button class="btn btn-small btn-success" @click="updateQty" :disabled="isDisabled">{{ button_label }}</button>
                         </div>
                     </div>
                     <!-- <div class="product-remove">
@@ -42,21 +42,21 @@
 import { mapGetters } from 'vuex'
 
 export default {
-    props: ['item'],
+    props: ['item', 'isDisabled'],
     data() {
         return {
             qty: 1,
-            button_label: "Claim",
-            isclaimed: false
+            button_label: "Claim"/* ,
+            isclaimed: false */
         }
     },
     watch: {
-        'items': {
+        /* 'items': {
             handler(val) {
                 this.checkIfClaimed()
             },
             deep: true
-        }
+        } */
     },
     computed: {
         ...mapGetters('cart', [
@@ -67,20 +67,20 @@ export default {
         updateQty () {
             this.item.qty = this.qty
             this.$store.dispatch('cart/updateQty', this.item)
-        },
+        }/* ,
         checkIfClaimed () {
-            const isClaimed = this.items.filter(product => product.product_code == this.item.kode_barang && product.note == "MINIMUM-POINT-GET-DISCOUNT-16-29-FEB").length > 0
+            const isClaimed = this.items.filter(product => product.product_code == this.item.kode_barang && product.note == "DISCOUNT-PREORDER-ITEMS").length > 0
             if (isClaimed) {
                 this.isclaimed = true
-                this.button_label = "Claimed"
+                // this.button_label = "Claimed"
             } else {
                 this.isclaimed = false
-                this.button_label = "Claim"
+                // this.button_label = "Claim"
             }
-        }
+        } */
     },
     created() {
-        this.checkIfClaimed()
+        // this.checkIfClaimed()
     }
 }
 </script>

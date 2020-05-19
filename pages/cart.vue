@@ -31,16 +31,16 @@
                                             @removeClaimedItems="removeClaimedItems"
                                         />
                                     </div>
-                                    <div class="col-md-12 col-sm-12" v-if="claimed_series_count > 0">
+                                    <div class="col-md-12 col-sm-12" v-if="promo_items_in_cart_count > 0">
                                         <div class="text-center" style="margin-top:50px;">
-                                            <h3>You got {{ claimed_series_count - claimed_promo_count }} free items:</h3>
+                                            <h3>You got {{ promo_items_in_cart_count - number_of_claimed_free_items }} free items:</h3>
                                         </div>
-                                        <FreeItem
-                                            v-for="item in free_items"
-                                            :key="item.kode_barang"
-                                            :item="item"
-                                            :number_of_claimed_series="non_promo_series_count"
-                                            :disabled="claimed_promo_count >= claimed_series_count"
+                                        <FreeItem	
+                                            v-for="item in free_items"	
+                                            :key="item.kode_barang"	
+                                            :item="item"	
+                                            :number_of_claimed_series="number_of_claimed_free_items"	
+                                            :disabled="number_of_claimed_free_items >= promo_items_in_cart_count"
                                         />
                                     </div>
                                 </div>
@@ -107,7 +107,6 @@
 import { mapGetters } from 'vuex'
 import CartItem from '~/components/CartItem.vue'
 import FreeItem from '~/components/promo-widgets/minimum-point/FreeItem.vue'
-import minimumpoint from '~/plugins/promos/minimumpoint'
 
 export default {
     layout: 'products',
@@ -117,13 +116,13 @@ export default {
     },
     data() {
         return {
-            showMinimumPromoItems: false,
-            free_items: [
+            promo_items: ['88015', '88016', '88018', '88019', '88020', '88021', '88023', '88024', '88062', '88088', '88097', '88130', '88132', '88137', '88138', '88169', '88170', '88083'],
+            free_items: [   
                 {
-                    "kode_barang" : "05006",
-                    "nama" : "LIP CREAM NUDE BIANCA",
-                    "berat" : "31.5",
-                    "poin" : 0,
+                    "kode_barang" : "19020",
+                    "nama" : "EXTRA WHITENING",
+                    "berat" : 5,
+                    "poin" : 8,
                     "harga" : 0,
                     "h_hpb" : 0,
                     "diskon" : 0,
@@ -133,56 +132,12 @@ export default {
                     "grand_total" : 0,
                     "total_weight" : 0,
                     "total_poin" : 0,
-                    "image" : "05006",
+                    "image" : "19020",
                     "unit" : "PIECES",
-                    "category" : "EXTRA CARE",
-                    "picture" : "05006",
-                    "note" : "BUY-2-SERIES-GET-FREE-2-LIPCREAM",
-                    "pic" : "05006",
-                    "promo" : 1
-                },
-                {
-                    "kode_barang" : "05008",
-                    "nama" : "LIP CREAM PINK SIENNA",
-                    "berat" : "31.5",
-                    "poin" : 0,
-                    "harga" : 0,
-                    "h_hpb" : 0,
-                    "diskon" : 0,
-                    "harga_diskon" : 0,
-                    "qty" : 0,
-                    "subtotal" : 0,
-                    "grand_total" : 0,
-                    "total_weight" : 0,
-                    "total_poin" : 0,
-                    "image" : "05008",
-                    "unit" : "PIECES",
-                    "category" : "EXTRA CARE",
-                    "picture" : "05008",
-                    "note" : "BUY-2-SERIES-GET-FREE-2-LIPCREAM",
-                    "pic" : "05008",
-                    "promo" : 1
-                },
-                {
-                    "kode_barang" : "05009",
-                    "nama" : "LIP CREAM RED AMORA",
-                    "berat" : "31.5",
-                    "poin" : 0,
-                    "harga" : 0,
-                    "h_hpb" : 0,
-                    "diskon" : 0,
-                    "harga_diskon" : 0,
-                    "qty" : 0,
-                    "subtotal" : 0,
-                    "grand_total" : 0,
-                    "total_weight" : 0,
-                    "total_poin" : 0,
-                    "image" : "05009",
-                    "unit" : "PIECES",
-                    "category" : "EXTRA CARE",
-                    "picture" : "05009",
-                    "note" : "BUY-2-SERIES-GET-FREE-2-LIPCREAM",
-                    "pic" : "05009",
+                    "category" : "WHITENING",
+                    "picture" : "19020",
+                    "note" : "FREE-ITEM",
+                    "pic" : "19020",
                     "promo" : 1
                 }
             ]
@@ -204,56 +159,28 @@ export default {
                 this.$store.dispatch('cart/setItems', value)
             }
         },
-        non_promo_series_count: function() {
-            const promo_series = ['88026', '88113', '88044', '88112', '88059', '88054', '88176', '88058', '88045', '88177']
-
-            const series_items = this.items.filter((item) => {
-                return item.unit == "SERIES"
+        promo_items_in_cart_count: function() {
+            const promo_items_in_cart = this.items.filter((item) => {
+                return item.product_code == this.promo_items.find(element => element == item.product_code);
             })
 
-            let non_promo_series = series_items.filter((item) => {
-                return !promo_series.includes(item.product_code)
-            })
-
-            return non_promo_series.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
+            return promo_items_in_cart.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
         },
-        claimed_promo_count: function() {
+        number_of_claimed_free_items: function() {
 
-            const claimed_series = this.items.filter((item) => {
-                return item.note == "BUY-2-SERIES-GET-FREE-2-LIPCREAM"
+            const claimed = this.items.filter((item) => {
+                return item.note == "FREE-ITEM"
             })
 
-            return claimed_series.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
-        },
-        claimed_series_count: function() {
-
-            const claimed_series = this.items.filter((item) => {
-                return item.unit == "SERIES"
-            })
-
-            let claimed_count = claimed_series.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
-
-            if (claimed_count % 2 == 1) {
-                claimed_count -= 1
-            }
-
-            return claimed_count
+            return claimed.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
         }
     },
     watch: {
         'items': {
             handler(val) {
-                this.checkPromoMinimumPoint()
                 this.checkNoRegularItems()
             },
             deep: true
-        },
-        'showMinimumPromoItems': {
-            handler(val) {
-                if (val==false) {
-                    this.removeClaimedItems()
-                }
-            }
         }
     },
     methods: {
@@ -266,26 +193,9 @@ export default {
                 this.$store.dispatch('authentication/auth0Login')
             })
         },
-        checkPromoMinimumPoint() {
-            if (this.grand_total_poin < 0) {
-                const accesskey = JSON.parse(localStorage.getItem('accesskey'))
-
-                let transaction = {
-                    no_member: accesskey.no_member
-                }
-
-                const get_promo = minimumpoint.check(transaction)
-
-                get_promo.then(function(promoAllowed) {
-                    this.showMinimumPromoItems = promoAllowed
-                }.bind(this))
-            } else {
-                this.showMinimumPromoItems = false
-            }
-        },
         removeClaimedItems() {
             const claimed_items = this.items.filter((value, index, arr) => {
-                return value.note.search("BUY-2-SERIES-GET-FREE-2-LIPCREAM") > -1
+                return value.note.search("FREE-ITEM") > -1
             })
 
             claimed_items.forEach(claimed_item => {
@@ -298,12 +208,12 @@ export default {
         },
         checkNoRegularItems() {
             const normal_items = this.items.filter((value, index, arr) => {
-                return value.note.search("BUY-2-SERIES-GET-FREE-2-LIPCREAM") < 0
+                return value.note.search("FREE-ITEM") < 0
             })
 
             if (normal_items.length < 1) {
                 const claimed_items = this.items.filter((value, index, arr) => {
-                    return value.note.search("BUY-2-SERIES-GET-FREE-2-LIPCREAM") > -1
+                    return value.note.search("FREE-ITEM") > -1
                 })
 
                 claimed_items.forEach(cart_item => {
@@ -311,18 +221,18 @@ export default {
                 })
             }
         },
-        checkSeriesItems() {
-            const series_items = this.items.filter((value, index, arr) => {
-                return value.unit == 'SERIES'
-            })
-
-            if (series_items.length >= 2) {
-                
-            }
+        checkPromoGetFree() {	
+            let count = 0	
+            this.promo_items.forEach((free_item) => {	
+                this.items.forEach((cart_item) => {	
+                    if (cart_item.product_code == free_item) {	
+                        count += cart_item.qty	
+                    }	
+                })	
+            })	
         }
     },
     mounted() {
-        this.checkPromoMinimumPoint()
         this.checkNoRegularItems()
     }
 }
