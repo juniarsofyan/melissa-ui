@@ -26,7 +26,7 @@
                             <div class="cart-product-price">{{ item.harga | rupiah }}</div>
                         </div>
                         <div class="quantity">
-                            <button class="btn btn-small btn-success" @click="updateQty" :disabled="isDisabled">{{ button_label }}</button>
+                            <button class="btn btn-small btn-success" @click="updateQty" :disabled="disabled">{{ button_label }}</button>
                         </div>
                     </div>
                     <!-- <div class="product-remove">
@@ -42,7 +42,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-    props: ['item', 'isDisabled'],
+    props: ['item', 'disabled'],
     data() {
         return {
             qty: 1,
@@ -65,9 +65,18 @@ export default {
     },
     methods: {
         updateQty () {
-            this.item.qty = this.qty
+            this.item.qty = this.newCurrentItemQty()
             this.$store.dispatch('cart/updateQty', this.item)
-        }/* ,
+        },
+        newCurrentItemQty() {
+            const current_item = this.items.find(product => product.product_code == this.item.kode_barang && product.note == "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT")
+            if (current_item) {
+                return current_item.qty + 1
+            }
+
+            return 1
+        }
+        /* ,
         checkIfClaimed () {
             const isClaimed = this.items.filter(product => product.product_code == this.item.kode_barang && product.note == "DISCOUNT-PREORDER-ITEMS").length > 0
             if (isClaimed) {

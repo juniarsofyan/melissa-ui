@@ -33,14 +33,14 @@
                                     </div>
                                     <div class="col-md-12 col-sm-12" v-if="promo_items_in_cart_count > 0">
                                         <div class="text-center" style="margin-top:50px;">
-                                            <h3>You got {{ promo_items_in_cart_count - number_of_claimed_free_items }} free items:</h3>
+                                            <h3>You got {{ promo_items_in_cart_count - number_of_claimed_promo_items }} discounted items:</h3>
                                         </div>
-                                        <FreeItem	
-                                            v-for="item in free_items"	
-                                            :key="item.kode_barang"	
+                                        <DiscountItem
+                                            v-for="item in discount_items"
+                                            :key="item.kode_barang"
                                             :item="item"	
-                                            :number_of_claimed_series="number_of_claimed_free_items"	
-                                            :disabled="number_of_claimed_free_items >= promo_items_in_cart_count"
+                                            :number_of_claimed_series="number_of_claimed_promo_items"	
+                                            :disabled="number_of_claimed_promo_items >= promo_items_in_cart_count"
                                         />
                                     </div>
                                 </div>
@@ -106,39 +106,171 @@
 <script>
 import { mapGetters } from 'vuex'
 import CartItem from '~/components/CartItem.vue'
-import FreeItem from '~/components/promo-widgets/minimum-point/FreeItem.vue'
+import DiscountItem from '~/components/promo-widgets/minimum-point/DiscountItem.vue'
 
 export default {
     layout: 'products',
     components: {
         CartItem,
-        FreeItem
+        DiscountItem
     },
     data() {
         return {
-            promo_items: ['88015', '88016', '88018', '88019', '88020', '88021', '88023', '88024', '88062', '88088', '88097', '88130', '88132', '88137', '88138', '88169', '88170', '88083'],
-            free_items: [   
+            promo_items: ['88026', '88044', '88112', '88059', '88174', '88058', '88045', '88175', '88177', '88069'],
+            discount_items: [   
                 {
-                    "kode_barang" : "19020",
-                    "nama" : "EXTRA WHITENING",
-                    "berat" : 5,
-                    "poin" : 8,
-                    "harga" : 0,
-                    "h_hpb" : 0,
-                    "diskon" : 0,
-                    "harga_diskon" : 0,
+                    "kode_barang" : "05004",
+                    "nama" : "LIP CREAM BERRY VIOLET",
+                    "berat" : 31.5,
+                    "poin" : 9,
+                    "harga" : 249000,
+                    "h_hpb" : 113636,
+                    "diskon" : 50,
+                    "harga_diskon" : 125000,
                     "qty" : 0,
                     "subtotal" : 0,
                     "grand_total" : 0,
                     "total_weight" : 0,
                     "total_poin" : 0,
-                    "image" : "19020",
+                    "image" : "05004",
                     "unit" : "PIECES",
-                    "category" : "WHITENING",
-                    "picture" : "19020",
-                    "note" : "FREE-ITEM",
-                    "pic" : "19020",
-                    "promo" : 1
+                    "category" : "EXTRA CARE",
+                    "picture" : "05004",
+                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
+                    "pic" : "05004",
+                    "promo" : 1 
+                },
+                {
+                    "kode_barang" : "05005",
+                    "nama" : "LIP CREAM MAUVE QUINN",
+                    "berat" : 31.5,
+                    "poin" : 3,
+                    "harga" : 138000,
+                    "h_hpb" : 50909,
+                    "diskon" : 60,
+                    "harga_diskon" : 56000,
+                    "qty" : 0,
+                    "subtotal" : 0,
+                    "grand_total" : 0,
+                    "total_weight" : 0,
+                    "total_poin" : 0,
+                    "image" : "05005",
+                    "unit" : "PIECES",
+                    "category" : "EXTRA CARE",
+                    "picture" : "05005",
+                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
+                    "pic" : "05005",
+                    "promo" : 1 
+                },
+                {
+                    "kode_barang" : "05009",
+                    "nama" : "LIP CREAM RED AMORA",
+                    "berat" : 31.5,
+                    "poin" : 3,
+                    "harga" : 123000,
+                    "h_hpb" : 45455,
+                    "diskon" : 60,
+                    "harga_diskon" : 50000,
+                    "qty" : 0,
+                    "subtotal" : 0,
+                    "grand_total" : 0,
+                    "total_weight" : 0,
+                    "total_poin" : 0,
+                    "image" : "05009",
+                    "unit" : "PIECES",
+                    "category" : "EXTRA CARE",
+                    "picture" : "05009",
+                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
+                    "pic" : "05009",
+                    "promo" : 1 
+                },
+                {
+                    "kode_barang" : "05010",
+                    "nama" : "LIP CREAM ROSY CIBRINA",
+                    "berat" : 31.5,
+                    "poin" : 2,
+                    "harga" : 134000,
+                    "h_hpb" : 30909,
+                    "diskon" : 75,
+                    "harga_diskon" : 34000,
+                    "qty" : 0,
+                    "subtotal" : 0,
+                    "grand_total" : 0,
+                    "total_weight" : 0,
+                    "total_poin" : 0,
+                    "image" : "05010",
+                    "unit" : "PIECES",
+                    "category" : "EXTRA CARE",
+                    "picture" : "05010",
+                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
+                    "pic" : "05010",
+                    "promo" : 1 
+                },
+                {
+                    "kode_barang" : "14001",
+                    "nama" : "NATURAL LOOSE POWDER ACNE",
+                    "berat" : 20,
+                    "poin" : 2,
+                    "harga" : 134000,
+                    "h_hpb" : 30909,
+                    "diskon" : 75,
+                    "harga_diskon" : 34000,
+                    "qty" : 0,
+                    "subtotal" : 0,
+                    "grand_total" : 0,
+                    "total_weight" : 0,
+                    "total_poin" : 0,
+                    "image" : "14001",
+                    "unit" : "PIECES",
+                    "category" : "PURIFY",
+                    "picture" : "14001",
+                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
+                    "pic" : "14001",
+                    "promo" : 1 
+                },
+                {
+                    "kode_barang" : "14002",
+                    "nama" : "NATURAL LOOSE POWDER NORMAL",
+                    "berat" : 20,
+                    "poin" : 2,
+                    "harga" : 134000,
+                    "h_hpb" : 30909,
+                    "diskon" : 75,
+                    "harga_diskon" : 34000,
+                    "qty" : 0,
+                    "subtotal" : 0,
+                    "grand_total" : 0,
+                    "total_weight" : 0,
+                    "total_poin" : 0,
+                    "image" : "14002",
+                    "unit" : "PIECES",
+                    "category" : "PURIFY",
+                    "picture" : "14002",
+                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
+                    "pic" : "14002",
+                    "promo" : 1 
+                },
+                {
+                    "kode_barang" : "19019",
+                    "nama" : "WHITE SERUM",
+                    "berat" : 63,
+                    "poin" : 2,
+                    "harga" : 134000,
+                    "h_hpb" : 30909,
+                    "diskon" : 75,
+                    "harga_diskon" : 34000,
+                    "qty" : 0,
+                    "subtotal" : 0,
+                    "grand_total" : 0,
+                    "total_weight" : 0,
+                    "total_poin" : 0,
+                    "image" : "19019",
+                    "unit" : "PIECES",
+                    "category" : "BRIGHTENING",
+                    "picture" : "19019",
+                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
+                    "pic" : "19019",
+                    "promo" : 1 
                 }
             ]
         }
@@ -166,10 +298,10 @@ export default {
 
             return promo_items_in_cart.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
         },
-        number_of_claimed_free_items: function() {
+        number_of_claimed_promo_items: function() {
 
             const claimed = this.items.filter((item) => {
-                return item.note == "FREE-ITEM"
+                return item.note == "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT"
             })
 
             return claimed.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
@@ -195,7 +327,7 @@ export default {
         },
         removeClaimedItems() {
             const claimed_items = this.items.filter((value, index, arr) => {
-                return value.note.search("FREE-ITEM") > -1
+                return value.note.search("BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT") > -1
             })
 
             claimed_items.forEach(claimed_item => {
@@ -208,28 +340,18 @@ export default {
         },
         checkNoRegularItems() {
             const normal_items = this.items.filter((value, index, arr) => {
-                return value.note.search("FREE-ITEM") < 0
+                return value.note.search("BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT") < 0
             })
 
             if (normal_items.length < 1) {
                 const claimed_items = this.items.filter((value, index, arr) => {
-                    return value.note.search("FREE-ITEM") > -1
+                    return value.note.search("BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT") > -1
                 })
 
                 claimed_items.forEach(cart_item => {
                     this.$store.dispatch('cart/removeItem', cart_item.product_code)
                 })
             }
-        },
-        checkPromoGetFree() {	
-            let count = 0	
-            this.promo_items.forEach((free_item) => {	
-                this.items.forEach((cart_item) => {	
-                    if (cart_item.product_code == free_item) {	
-                        count += cart_item.qty	
-                    }	
-                })	
-            })	
         }
     },
     mounted() {
