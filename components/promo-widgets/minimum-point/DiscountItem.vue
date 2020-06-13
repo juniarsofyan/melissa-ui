@@ -69,7 +69,7 @@ export default {
             this.$store.dispatch('cart/updateQty', this.item)
         },
         newCurrentItemQty() {
-            const current_item = this.items.find(product => product.product_code == this.item.kode_barang && product.note == "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT")
+            const current_item = this.items.find(product => product.product_code == this.item.kode_barang && product.note == "BUY-SERIES-GET-DISCOUNT")
             if (current_item) {
                 return current_item.qty + 1
             }

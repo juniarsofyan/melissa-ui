@@ -116,160 +116,160 @@ export default {
     },
     data() {
         return {
-            promo_items: ['88026', '88044', '88112', '88059', '88174', '88058', '88045', '88175', '88177', '88069'],
+            promo_items: ['SERIES'],
             discount_items: [   
                 {
-                    "kode_barang" : "05004",
-                    "nama" : "LIP CREAM BERRY VIOLET",
+                    "kode_barang" : "17001",
+                    "nama" : "TWO WAY CAKE ACNE",
+                    "berat" : 94.5,
+                    "poin" : 4,
+                    "harga" : 172000,
+                    "h_hpb" : 62727,
+                    "diskon" : 60,
+                    "harga_diskon" : 69000,
+                    "qty" : 0,
+                    "subtotal" : 0,
+                    "grand_total" : 0,
+                    "total_weight" : 0,
+                    "total_poin" : 0,
+                    "image" : "17001",
+                    "unit" : "PIECES",
+                    "category" : "DECORATIVE",
+                    "picture" : "17001",
+                    "note" : "BUY-SERIES-GET-DISCOUNT",
+                    "pic" : "17001",
+                    "promo" : 1 
+                },
+                {
+                    "kode_barang" : "17002",
+                    "nama" : "TWO WAY CAKE NORMAL",
+                    "berat" : 94.5,
+                    "poin" : 3,
+                    "harga" : 158000,
+                    "h_hpb" : 58182,
+                    "diskon" : 60,
+                    "harga_diskon" : 64000,
+                    "qty" : 0,
+                    "subtotal" : 0,
+                    "grand_total" : 0,
+                    "total_weight" : 0,
+                    "total_poin" : 0,
+                    "image" : "17002",
+                    "unit" : "PIECES",
+                    "category" : "DECORATIVE",
+                    "picture" : "17002",
+                    "note" : "BUY-SERIES-GET-DISCOUNT",
+                    "pic" : "17002",
+                    "promo" : 1 
+                },
+                {
+                    "kode_barang" : "05006",
+                    "nama" : "LIP CREAM NUDE BIANCA",
                     "berat" : 31.5,
-                    "poin" : 9,
-                    "harga" : 249000,
-                    "h_hpb" : 113636,
+                    "poin" : 3,
+                    "harga" : 134000,
+                    "h_hpb" : 49091,
+                    "diskon" : 60,
+                    "harga_diskon" : 54000,
+                    "qty" : 0,
+                    "subtotal" : 0,
+                    "grand_total" : 0,
+                    "total_weight" : 0,
+                    "total_poin" : 0,
+                    "image" : "05006",
+                    "unit" : "PIECES",
+                    "category" : "EXTRA CARE",
+                    "picture" : "05006",
+                    "note" : "BUY-SERIES-GET-DISCOUNT",
+                    "pic" : "05006",
+                    "promo" : 1 
+                },
+                {
+                    "kode_barang" : "05007",
+                    "nama" : "LIP CREAM PEACH ELORA",
+                    "berat" : 31.5,
+                    "poin" : 3,
+                    "harga" : 134000,
+                    "h_hpb" : 49091,
+                    "diskon" : 60,
+                    "harga_diskon" : 54000,
+                    "qty" : 0,
+                    "subtotal" : 0,
+                    "grand_total" : 0,
+                    "total_weight" : 0,
+                    "total_poin" : 0,
+                    "image" : "05007",
+                    "unit" : "PIECES",
+                    "category" : "EXTRA CARE",
+                    "picture" : "05007",
+                    "note" : "BUY-SERIES-GET-DISCOUNT",
+                    "pic" : "05007",
+                    "promo" : 1 
+                },
+                {
+                    "kode_barang" : "05008",
+                    "nama" : "LIP CREAM PINK SIENNA",
+                    "berat" : 31.5,
+                    "poin" : 3,
+                    "harga" : 134000,
+                    "h_hpb" : 49091,
+                    "diskon" : 60,
+                    "harga_diskon" : 54000,
+                    "qty" : 0,
+                    "subtotal" : 0,
+                    "grand_total" : 0,
+                    "total_weight" : 0,
+                    "total_poin" : 0,
+                    "image" : "05008",
+                    "unit" : "PIECES",
+                    "category" : "EXTRA CARE",
+                    "picture" : "05008",
+                    "note" : "BUY-SERIES-GET-DISCOUNT",
+                    "pic" : "05008",
+                    "promo" : 1 
+                },
+                {
+                    "kode_barang" : "07004",
+                    "nama" : "CC CREAM SKIN TONE PERPECTOR",
+                    "berat" : 10,
+                    "poin" : 6,
+                    "harga" : 199000,
+                    "h_hpb" : 90909,
                     "diskon" : 50,
-                    "harga_diskon" : 125000,
+                    "harga_diskon" : 100000,
                     "qty" : 0,
                     "subtotal" : 0,
                     "grand_total" : 0,
                     "total_weight" : 0,
                     "total_poin" : 0,
-                    "image" : "05004",
+                    "image" : "07004",
                     "unit" : "PIECES",
                     "category" : "EXTRA CARE",
-                    "picture" : "05004",
-                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
-                    "pic" : "05004",
+                    "picture" : "07004",
+                    "note" : "BUY-SERIES-GET-DISCOUNT",
+                    "pic" : "07004",
                     "promo" : 1 
                 },
                 {
-                    "kode_barang" : "05005",
-                    "nama" : "LIP CREAM MAUVE QUINN",
-                    "berat" : 31.5,
-                    "poin" : 3,
-                    "harga" : 138000,
-                    "h_hpb" : 50909,
-                    "diskon" : 60,
-                    "harga_diskon" : 56000,
-                    "qty" : 0,
-                    "subtotal" : 0,
-                    "grand_total" : 0,
-                    "total_weight" : 0,
-                    "total_poin" : 0,
-                    "image" : "05005",
-                    "unit" : "PIECES",
-                    "category" : "EXTRA CARE",
-                    "picture" : "05005",
-                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
-                    "pic" : "05005",
-                    "promo" : 1 
-                },
-                {
-                    "kode_barang" : "05009",
-                    "nama" : "LIP CREAM RED AMORA",
-                    "berat" : 31.5,
-                    "poin" : 3,
-                    "harga" : 123000,
-                    "h_hpb" : 45455,
-                    "diskon" : 60,
-                    "harga_diskon" : 50000,
-                    "qty" : 0,
-                    "subtotal" : 0,
-                    "grand_total" : 0,
-                    "total_weight" : 0,
-                    "total_poin" : 0,
-                    "image" : "05009",
-                    "unit" : "PIECES",
-                    "category" : "EXTRA CARE",
-                    "picture" : "05009",
-                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
-                    "pic" : "05009",
-                    "promo" : 1 
-                },
-                {
-                    "kode_barang" : "05010",
-                    "nama" : "LIP CREAM ROSY CIBRINA",
-                    "berat" : 31.5,
-                    "poin" : 2,
-                    "harga" : 134000,
-                    "h_hpb" : 30909,
-                    "diskon" : 75,
-                    "harga_diskon" : 34000,
-                    "qty" : 0,
-                    "subtotal" : 0,
-                    "grand_total" : 0,
-                    "total_weight" : 0,
-                    "total_poin" : 0,
-                    "image" : "05010",
-                    "unit" : "PIECES",
-                    "category" : "EXTRA CARE",
-                    "picture" : "05010",
-                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
-                    "pic" : "05010",
-                    "promo" : 1 
-                },
-                {
-                    "kode_barang" : "14001",
-                    "nama" : "NATURAL LOOSE POWDER ACNE",
-                    "berat" : 20,
-                    "poin" : 2,
-                    "harga" : 134000,
-                    "h_hpb" : 30909,
-                    "diskon" : 75,
-                    "harga_diskon" : 34000,
-                    "qty" : 0,
-                    "subtotal" : 0,
-                    "grand_total" : 0,
-                    "total_weight" : 0,
-                    "total_poin" : 0,
-                    "image" : "14001",
-                    "unit" : "PIECES",
-                    "category" : "PURIFY",
-                    "picture" : "14001",
-                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
-                    "pic" : "14001",
-                    "promo" : 1 
-                },
-                {
-                    "kode_barang" : "14002",
-                    "nama" : "NATURAL LOOSE POWDER NORMAL",
-                    "berat" : 20,
-                    "poin" : 2,
-                    "harga" : 134000,
-                    "h_hpb" : 30909,
-                    "diskon" : 75,
-                    "harga_diskon" : 34000,
-                    "qty" : 0,
-                    "subtotal" : 0,
-                    "grand_total" : 0,
-                    "total_weight" : 0,
-                    "total_poin" : 0,
-                    "image" : "14002",
-                    "unit" : "PIECES",
-                    "category" : "PURIFY",
-                    "picture" : "14002",
-                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
-                    "pic" : "14002",
-                    "promo" : 1 
-                },
-                {
-                    "kode_barang" : "19019",
-                    "nama" : "WHITE SERUM",
+                    "kode_barang" : "07002",
+                    "nama" : "RADIANCE BB CREAM BEIGE",
                     "berat" : 63,
-                    "poin" : 2,
-                    "harga" : 134000,
-                    "h_hpb" : 30909,
-                    "diskon" : 75,
-                    "harga_diskon" : 34000,
+                    "poin" : 7,
+                    "harga" : 246000,
+                    "h_hpb" : 111818,
+                    "diskon" : 50,
+                    "harga_diskon" : 123000,
                     "qty" : 0,
                     "subtotal" : 0,
                     "grand_total" : 0,
                     "total_weight" : 0,
                     "total_poin" : 0,
-                    "image" : "19019",
+                    "image" : "07002",
                     "unit" : "PIECES",
-                    "category" : "BRIGHTENING",
-                    "picture" : "19019",
-                    "note" : "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT",
-                    "pic" : "19019",
+                    "category" : "EXTRA CARE",
+                    "picture" : "07002",
+                    "note" : "BUY-SERIES-GET-DISCOUNT",
+                    "pic" : "07002",
                     "promo" : 1 
                 }
             ]
@@ -292,8 +292,14 @@ export default {
             }
         },
         promo_items_in_cart_count: function() {
+
+            // IF PRODUCT CODES ARE DEFINED
+            // const promo_items_in_cart = this.items.filter((item) => {
+            //     return item.product_code == this.promo_items.find(element => element == item.product_code);
+            // })
+
             const promo_items_in_cart = this.items.filter((item) => {
-                return item.product_code == this.promo_items.find(element => element == item.product_code);
+                return item.unit == "SERIES";
             })
 
             return promo_items_in_cart.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
@@ -301,7 +307,7 @@ export default {
         number_of_claimed_promo_items: function() {
 
             const claimed = this.items.filter((item) => {
-                return item.note == "BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT"
+                return item.note == "BUY-SERIES-GET-DISCOUNT"
             })
 
             return claimed.reduce((accumulator, item) => accumulator + parseInt(item.qty), 0)
@@ -327,7 +333,7 @@ export default {
         },
         removeClaimedItems() {
             const claimed_items = this.items.filter((value, index, arr) => {
-                return value.note.search("BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT") > -1
+                return value.note.search("BUY-SERIES-GET-DISCOUNT") > -1
             })
 
             claimed_items.forEach(claimed_item => {
@@ -340,12 +346,12 @@ export default {
         },
         checkNoRegularItems() {
             const normal_items = this.items.filter((value, index, arr) => {
-                return value.note.search("BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT") < 0
+                return value.note.search("BUY-SERIES-GET-DISCOUNT") < 0
             })
 
             if (normal_items.length < 1) {
                 const claimed_items = this.items.filter((value, index, arr) => {
-                    return value.note.search("BUY-WHITENING-PLATINUM-SERIES-GET-DISCOUNT") > -1
+                    return value.note.search("BUY-SERIES-GET-DISCOUNT") > -1
                 })
 
                 claimed_items.forEach(cart_item => {
